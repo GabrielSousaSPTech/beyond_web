@@ -14,7 +14,7 @@ Este repositório é destinado ao projeto do segundo semestre de 2025/1. O objet
 - **Linguagem:** Java, Javascript.
 - **Banco de Dados:** MySQL.
 - **Frameworks e Bibliotecas:** Node.JS, Chart.JS
-
+- **ETL:** Spark.
 
 
 
