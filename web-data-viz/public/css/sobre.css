@@ -1,0 +1,34 @@
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+body {
+    height: 100vh;
+}
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    display: flex;
+    align-self: center;
+    width: 170rem;
+    height: 200px;
+    
+}
+
+#Inicio {
+    background-image: url('../assets/image/fundo\ imagem\ sobre\ nós.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 80%;
+    
+}
