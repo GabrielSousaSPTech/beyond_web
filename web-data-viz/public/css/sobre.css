@@ -29,4 +29,55 @@ section {
     background-repeat: no-repeat;
     width: 100%;
     height: 80%;
+<<<<<<< HEAD
 }
+=======
+    
+}
+
+
+#slogan {
+    font-size: 2rem;
+    font-weight: bold;
+    max-width: 600px;
+    line-height: 1.5;
+    color: #ffff;
+    font-size: 30px;
+}
+
+.slogan-highlight {
+    color: #DADBB1;
+    font-weight: bold;
+}
+
+
+.buttonInicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F4C430;
+    border: none;
+    border-radius: 3rem;
+    padding: 15px 30px;
+    font-size: 1.50rem;
+    cursor: pointer;
+    transition: 0.10s ease-in-out;
+    margin-top: 20px;
+}
+
+
+.buttonInicio:hover {
+    background-color: #e0b020;
+}
+
+
+.buttonInicioInterno {
+    color: black;
+    font-weight: bold;
+}
+
+.corpoInicio {
+    margin: 70px;
+
+}
+>>>>>>> 6342a2d6300e3b5cc9da505fa345e0180811c846
