@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/header.css">
 </head>
 <body>
-    <header>
+    <header id="header">
         <div class="container">
             <div class="navbar">
                 <img src="./assets/image/logoBBA.png" alt="">
@@ -19,11 +19,18 @@
                         <li>Suporte técnico</li>
                 </ul>
                 <div class="servicesNavbar">
-                    <a href=""><img class="iconNavbar" src="./assets/icon/translate.svg" alt=""></a>
-                    <span style="font-size: 25px; color: #fff;">|</span>
+                    <div class="translate-container">
+                        <a href=""><img class="iconNavbar" src="./assets/icon/translate.svg" alt=""></a>
+                        <div class="languages">
+                            <button>PT-BR</button>
+                            <button>EN</button>
+                            <button>ES</button>
+                        </div>
+                    </div>
+                    <span style="font-size: 20px; color: #fff;">|</span>
                     <button class="buttonNavbar">
-                        <img  class="iconNavbar" src="./assets/icon/user.svg" alt="">
-                            Ja sou cliente
+                        <img  class="iconNavbar-user"src="./assets/icon/user.svg" alt="">
+                           <p>Ja sou cliente</p>
                     </button>
                 </div>
             </div>
@@ -60,4 +67,21 @@
 
     </footer>
 </body>
+<script>
+    window.addEventListener('scroll', function() {
+        var header = document.getElementById("header");
+        var div = document.getElementById("Inicio");
+
+        // Verifica a posição do header e da div na tela
+        var headerRect = header.getBoundingClientRect();
+        var divRect = div.getBoundingClientRect();
+        
+        // Se o header estiver saindo da div (topo da div já passou do topo da tela)
+        if (headerRect.top <= divRect.top) {
+            header.classList.remove("mudarCor");  // Altera a cor
+        } else {
+            header.classList.add("mudarCor");  // Restaura a cor
+        }
+    });
+</script>
 </html>

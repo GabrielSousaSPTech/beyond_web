@@ -4,16 +4,28 @@ header {
     position: fixed;
     width: 100%;
     height: fit-content;
-    border: 0.5px solid #ffffffcc;
+    padding: 0px 10px 0px 7px; /* topo, direita, baixo, esquerda */
+    border-width: 0.5px 0px 0.5px 0;
+    border-style: solid;
+    border-color: #ffffffcc;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10rem;
+    height: 8rem;
     font-family: "Plus Jakarta Sans";
+    box-shadow: 2px 2px 5px #00000066;
+    transition: background-color 0.40s ease-in-out;
+    z-index: 10;
 }
-header img{
+
+#header.mudarCor {
+    background-color: #25342F;
+}
+
+header img {
     height: fit-content;
-    width: 20rem;
+    padding-left: 10px;
+    width: 15rem;
     object-fit: cover;
 }
 
@@ -21,7 +33,6 @@ header ul {
    display: flex;
    flex-direction: row;
    gap: 10rem;
-
 }
 
 ul li {
@@ -30,29 +41,84 @@ ul li {
     cursor: pointer;
     list-style: none;
     font-size: 2.4rem;
-    color:#fff;
+    color: #fff;
+}
+ul li:hover {
+    transform: scale(1);
+    color: #F9D99C;
 }
 
 header .container {
     width: 180rem;
-    
 }
 
-.navbar{
+.navbar {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    
 }
 
 .iconNavbar {
-    width: 3.1rem;
+    width: 4.2rem;
+    padding: 3px;
     height: fit-content;
 }
 
-.servicesNavbar{
+.iconNavbar-user{
+    width: 3rem;
+    padding: 3px;
+    height: fit-content;
+}
+
+.translate-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-color: #25342F;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.languages {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: none;
+    background-color: #25342F;
+    padding: 3px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    transition: max-height 0.5s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.servicesNavbar .translate-container:hover .languages {
+    display: block;
+    max-height: 150px;
+}
+
+.languages button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 12px;
+    padding: 10px 10px 10px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.languages button:hover {
+    background-color: #F9D99C;
+}
+
+.servicesNavbar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,9 +129,22 @@ header .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2px;
     background-color: #F9D99C;
-    border-radius: 4rem;
+    border-radius: 2rem;
     height: fit-content;
     padding: 5px;
     border: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #00000066;
+}
+
+.buttonNavbar p {
+    padding: 5px;
+    font-weight: bold;
+}
+.buttonNavbar:hover{
+    color: #fff;
+    background-color: #25342F;
+    transform: translateY(-0.2px);
 }
