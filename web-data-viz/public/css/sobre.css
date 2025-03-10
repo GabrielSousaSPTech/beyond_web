@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,20 +7,23 @@
 html {
     font-size: 62.5%;
 }
+
 body {
     height: 100vh;
 }
+
 section {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .container {
     display: flex;
     align-self: center;
     width: 170rem;
     height: 10vh;
-    
+
 }
 
 #Inicio {
@@ -72,3 +75,94 @@ section {
 
 }
 
+.containerInformacoes {
+    width: 100%;
+    height: 50.1rem;
+    background-color: #3E5744;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.containerFrase {
+    font-size: 3.9rem;
+    font-family: 'Outfit';
+    text-align: center;
+    min-height: 4rem;
+    color: #fff;
+    margin: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.iconLogo {
+    width: 550px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+.boxEmpresa {
+    background-color: #CCD6DF;
+    width: 100%;
+    height: 150rem;
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+}
+
+.cardEmpresa {
+    background: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    bottom: 8rem;
+    width: 33rem;
+    height: 45rem;
+    border-radius: 1rem;
+    padding-inline: 3.2rem;
+   
+}
+
+.headerCard {
+    height: 22.5rem;
+    font-size: 2.9rem;
+    font-family: 'Outfit';
+}
+
+.corpoCard p {
+    font-size: 2.9rem;
+    font-family: 'Outfit';
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+.NossaMotivacao .titulo {
+    margin-top: 30px;
+    font-size: 7.9rem;
+    font-family: 'Outfit';
+    text-align: left;
+    margin: 50px;
+}
+
+.NossaMotivacao img {
+    width: 40rem;
+    margin: 10px;
+
+}
+
+.sloganMotivacao {
+    font-size: 2.9rem;
+    font-family: 'Outfit';
+    text-align: center;
+    flex-grow: 1;
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="PT-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,18 @@
     <link rel="stylesheet" href="./css/sobre.css">
     <link rel="stylesheet" href="./css/header.css">
 </head>
+
 <body>
     <header id="header">
         <div class="container">
             <div class="navbar">
                 <img src="./assets/image/logoBBA.png" alt="">
-               
-                <ul>   
-                        <li>Página Inicial</li>
-                        <li>Sobre nós</li>
-                        <li>Soluções</li>
-                        <li>Suporte técnico</li>
+
+                <ul>
+                    <li>Página Inicial</li>
+                    <li>Sobre nós</li>
+                    <li>Soluções</li>
+                    <li>Suporte técnico</li>
                 </ul>
                 <div class="servicesNavbar">
                     <div class="translate-container">
@@ -30,8 +32,8 @@
                     </div>
                     <span style="font-size: 20px; color: #fff;">|</span>
                     <button class="buttonNavbar">
-                        <img  class="iconNavbar-user"src="./assets/icon/user.svg" alt="">
-                           <p>Ja sou cliente</p>
+                        <img class="iconNavbar-user" src="./assets/icon/user.svg" alt="">
+                        <p>Ja sou cliente</p>
                     </button>
                 </div>
             </div>
@@ -41,7 +43,8 @@
     <section id="Inicio">
         <div class="container">
             <div class="corpoInicio">
-                <h1 id="slogan">Analisamos dados turísticos para atrair mais visitantes estrangeiros ao <span style="color: #DADBB1;">Brasil.</span></h1>
+                <h1 id="slogan">Analisamos dados turísticos para atrair mais visitantes estrangeiros ao <span
+                        style="color: #DADBB1;">Brasil.</span></h1>
                 <button class="buttonInicio">
                     <img class="iconNavbar" src="./assets/icon/seta.png" alt="">
                     <span class="buttonInicioInterno">
@@ -52,73 +55,99 @@
         </div>
     </section>
 
+
     <section>
+
         <div class="containerInformacoes">
-            <div class="boxBeneficios">
-                <div class="cardBeneficios">
+            <div class="containerFrase">
+                <p>
+                    “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
+                </p>
+                <img class="iconLogo" src="./assets/icon/logo.png">
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="boxEmpresa">
+            <div class="cardContainer">
+                <div class="cardEmpresa">
                     <div class="headerCard">
-                        <img class="iconCard" src="./assets/icon/iconPata.png" alt="">
-                        <h3>Pionerismo</h3>
+                        <img class="iconCard" src="./assets/icon/missao.png" alt="">
+                        <h3>Missão</h3>
                     </div>
                     <div class="corpoCard">
                         <p>
-                            “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
+                            “Lorem Ipsum is simply dummy text of the printing and typesetting industry.“
                         </p>
                     </div>
                 </div>
-                <div class="cardBeneficios">
+                <div class="cardEmpresa">
                     <div class="headerCard">
-                        <img class="iconCard" src="./assets/icon/iconMetodoInteligente.png" alt="">
-                        <h3>Metodo Inteligente</h3>
+                        <img class="iconCard" src="./assets/icon/visao.png" alt="">
+                        <h3>Visão</h3>
                     </div>
                     <div class="corpoCard">
                         <p>
-                            “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
+                            “Lorem Ipsum is simply dummy text of the printing and typesetting industry.“
                         </p>
                     </div>
                 </div>
-                <div class="cardBeneficios">
+                <div class="cardEmpresa">
                     <div class="headerCard">
-                        <img class="iconCard" src="./assets/icon/iconMercado.png" alt="">
-                        <h3>Experiencia de mercado</h3>
+                        <img class="iconCard" src="./assets/icon/valores.png" alt="">
+                        <h3>Valores</h3>
                     </div>
                     <div class="corpoCard">
                         <p>
-                            “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
+                            “Lorem Ipsum is simply dummy text of the printing and typesetting industry.“
                         </p>
                     </div>
                 </div>
             </div>
-            <img class="setaDescer" src="./assets/icon/seta descer.svg" alt="">
+        
+            <div class="NossaMotivacao">
+                <p class="titulo">Nossa Motivação</p>
+                <img src="./assets/image/nathalia-segato-kRp6iTk_emE-unsplash.png" alt="">
+                <img src="./assets/image/honorio-lENnHBUfPoU-unsplash 1.png" alt="">
+                <img src="./assets/image/medium-shot-women-wearing-vacation-outfits 1.png" alt="">
+                <p class="sloganMotivacao">“Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “</p>
+            </div>
         </div>
         
+
+        <!-- <img class="setaDescer" src="./assets/icon/seta descer.svg" alt=""> -->
+
+       
+
     </section>
 
 
     <section>
-        <div class="container"></div>
+      
+           
         
+
     </section>
-    <section>
-        <div class="container"></div>
-        
-    </section>
+
+
     <footer>
         <div class="container"></div>
 
-    </footer> 
+    </footer>
 </body>
 
 <script>
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         var header = document.getElementById("header");
         var div = document.getElementById("Inicio");
 
-        
+
         var headerRect = header.getBoundingClientRect();
         var divRect = div.getBoundingClientRect();
-        
-        
+
+
         if (headerRect.top <= divRect.top) {
             header.classList.remove("mudarCor");
         } else {
@@ -126,4 +155,5 @@
         }
     });
 </script>
+
 </html>
