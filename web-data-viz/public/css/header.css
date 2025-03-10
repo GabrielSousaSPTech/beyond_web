@@ -4,7 +4,7 @@ header {
     position: fixed;
     width: 100%;
     height: fit-content;
-    padding: 0px 10px 0px 7px; /* topo, direita, baixo, esquerda */
+    
     border-width: 0.5px 0px 0.5px 0;
     border-style: solid;
     border-color: #ffffffcc;
