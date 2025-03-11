@@ -57,7 +57,7 @@ header .container {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: 99%;
 }
 
 .iconNavbar {
@@ -140,11 +140,11 @@ header .container {
 }
 
 .buttonNavbar p {
-    padding: 5px;
+    padding: 2px;
     font-weight: bold;
 }
 .buttonNavbar:hover{
     color: #fff;
-    background-color: #25342F;
+    background-color: #528763;
     transform: translateY(-0.2px);
 }
