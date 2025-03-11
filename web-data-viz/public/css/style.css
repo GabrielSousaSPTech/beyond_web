@@ -97,6 +97,7 @@ section {
 
 .corpoInicio {
     display: flex;
+    width: 70%;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
