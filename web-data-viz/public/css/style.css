@@ -29,6 +29,8 @@ section {
 
 #Inicio {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     position: relative;
     background-image: url('../assets/image/Entrada.png');
@@ -310,32 +312,23 @@ section {
     padding: 1rem;
 }
 
-#contato .container {
+#contato .container{
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    gap: 2rem;
-}
+    align-content: center;
+    justify-content: space-evenly;
 
-#contato .container .boxContato{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    gap: 2rem;
 }
 
 #contato .iconContato{
-    width: 50%;
+    width: 10%;
     height: 10rem;
 }
 
-#contato .boxContato p {
+#contato .container p {
     color: white;
     font-size: 3rem;
-    width: 120rem;
     font-family: 'Outfit';
-    white-space: nowrap; /* Impede a quebra de linha */
+    white-space: nowrap;
     overflow: hidden;
 }
