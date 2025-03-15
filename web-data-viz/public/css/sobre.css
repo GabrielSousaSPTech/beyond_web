@@ -106,7 +106,7 @@ section {
 
 
 .boxEmpresa {
-    background-color: #CCD6DF;
+    background-color: #EAEAEA;
     width: 100%;
     height: 150rem;
 }
@@ -144,24 +144,56 @@ section {
     flex-grow: 1;
 }
 
-
-.NossaMotivacao .titulo {
-    margin-top: 30px;
-    font-size: 7.9rem;
-    font-family: 'Outfit';
-    text-align: left;
+.NossaMotivacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     margin: 50px;
 }
 
-.NossaMotivacao img {
-    width: 40rem;
-    margin: 10px;
+.NossaMotivacao .titulo {
+    font-size: 8rem;
+    font-family: 'Outfit', sans-serif;
+    text-align: left;
+    width: 100%;
+    padding: 4rem;
+    
+}
 
+.imagens-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.imagem-grande {
+    width: 50rem;
+    flex-shrink: 0;
+}
+
+.imagens-menores-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagens-menores {
+    display: flex;
+    gap: 15px;
+}
+
+.imagens-menores img {
+    width: 60rem;
 }
 
 .sloganMotivacao {
-    font-size: 2.9rem;
-    font-family: 'Outfit';
+    font-size: 4.5rem;
+    font-family: 'Outfit', sans-serif;
     text-align: center;
-    flex-grow: 1;
+    margin-top: 20px;
+    max-width: 80%;
 }
+
