@@ -120,4 +120,14 @@
         align-items: center;
     }
     
+
+    .cardBeneficios {
+        margin-left: 0;
+    }
+
+    .iconCard {
+        left: 2rem;
+        
+     }
+    
 }

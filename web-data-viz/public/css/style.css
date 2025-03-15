@@ -125,7 +125,7 @@ section {
 }
 
 .cardBeneficios {
- 
+    margin-left: 5rem;
     background-color: #fff;
     width: 33rem;
     height: 30rem;
@@ -167,7 +167,7 @@ section {
  .iconCard {
     position: absolute;
     top: 1.5rem;
-    left: 2rem;
+    left: 7rem;
     width: 4rem;
  }
 

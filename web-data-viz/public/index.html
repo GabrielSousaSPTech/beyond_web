@@ -234,18 +234,32 @@
         <div class="container">
             <h2>Você Sabia?</h2>
             <div class="boxCardCuriosidade">
-                <div class="cardCuriosidade">
-                    <p>No Brasil, 96% do PIB do turismo vem do mercado interno, enquanto apenas 4% é gerado por turistas estrangeiros.</p>
-                </div>
-                <div class="cardCuriosidade">
-                    <p>
-                        Mesmo com a Copa do Mundo de 2014 e as Olimpíadas de 2016, o turismo estrangeiro no Brasil não teve um crescimento significativo.
-                    </p>
-                </div>
-                <div class="cardCuriosidade">
-                    <p>
-                        Devido à sazonalidade, hotéis e agências ficam ociosos por 8 meses do ano, com apenas 4 meses de alta temporada.
-                    </p>
+                <div class="swiper">
+                    
+                    <div class="swiper-wrapper">
+                        
+                        <div class="swiper-slide">
+                            <div class="cardCuriosidade">
+                                <p>No Brasil, 96% do PIB do turismo vem do mercado interno, enquanto apenas 4% é gerado por turistas estrangeiros.</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+
+                            <div class="cardCuriosidade">
+                                <p>
+                                    Mesmo com a Copa do Mundo de 2014 e as Olimpíadas de 2016, o turismo estrangeiro no Brasil não teve um crescimento significativo.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+
+                            <div class="cardCuriosidade">
+                                <p>
+                                    Devido à sazonalidade, hotéis e agências ficam ociosos por 8 meses do ano, com apenas 4 meses de alta temporada.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -342,12 +356,33 @@
 <script>
  var swiper = new Swiper(".swiper", {
     slidesPerView: 3,
-    padding: 10,
+    padding: 15,
     loop: true,
     pagination: {
         el: '.swiper-pagination',
         clickable: true,
     },
+
+    breakpoints: {
+    0: {
+      slidesPerView: 1,
+      navigation: false
+    },
+    900: {
+      slidesPerView: 2,
+      spaceBetween: 20
+    },
+    1000: {
+      slidesPerView: 2,
+      spaceBetween: 120
+    },
+    1400: {
+      slidesPerView: 3,
+      allowSlidePrev: false,
+      allowSlideNext: false,
+      
+    }
+  },
 
   });
 </script>
