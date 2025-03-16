@@ -15,10 +15,11 @@
             <div class="navbar">
                 <img src="./assets/image/logoBBA.png" alt="">
                 <ul>   
-                        <li>Página Inicial</li>
-                        <li>Sobre nós</li>
-                        <li>Soluções</li>
-                        <li>Suporte técnico</li>
+                    <a href="#Inicio"><li>Inicio</li></a>
+                    <a href="#quemSomos"><li>Quem Somos?</li></a>
+                    <a href="#NossosServicos"><li>Nossos Serviços</li></a>
+                    <a href="#voceSabia"><li>Curiosidade</li></a>
+                    
                 </ul>
                 <div class="servicesNavbar">
                     <div class="translate-container">
@@ -38,6 +39,38 @@
             </div>
         </div>
     </header>
+    
+    <div class="cabecalhoSideBar">
+        <img id="logoSidebar" src="./assets/image/logoBBA.png" alt="">
+        <img id="menuHamburger" src="./assets/icon/menuHamburger.svg" alt="">    
+</div>
+<div class="fundoSidebar">
+    <div class="sidebar">
+        <div class="servicesNavbar">
+            <div class="translate-container">
+                <a href=""><img class="iconNavbar" src="./assets/icon/translate.svg" alt=""></a>
+                <div class="languages">
+                    <button>PT-BR</button>
+                    <button>EN</button>
+                    <button>ES</button>
+                </div>
+            </div>
+            <span style="font-size: 20px; color: #fff;">|</span>
+            <button class="buttonNavbar">
+                <img class="iconNavbar-user" src="./assets/icon/user.svg" alt="">
+                <p>Já sou cliente</p>
+            </button>
+        </div>
+        <ul>
+            <a href="#Inicio"><li>Inicio</li></a>
+                <a href="#quemSomos"><li>Quem Somos?</li></a>
+                <a href="#NossosServicos"><li>Nossos Serviços</li></a>
+                <a href="#voceSabia"><li>Curiosidade</li></a>
+        </ul>
+
+</div>
+
+    </div>
     <section id="Inicio">
         <div class="container">
             <div class="corpoInicio">
@@ -98,74 +131,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="cardBeneficios">
-                            <div class="headerCard" id="textHeight">
-                                <img class="iconCard" src="./assets/icon/iconMercado.png" alt="">
-                                <h3>Experiencia de mercado</h3>
-                            </div>
-                            <div class="corpoCard">
-                                <p>
-                                    “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="cardBeneficios">
-                            <div class="headerCard" id="textHeight">
-                                <img class="iconCard" src="./assets/icon/iconMercado.png" alt="">
-                                <h3>Experiencia de mercado</h3>
-                            </div>
-                            <div class="corpoCard">
-                                <p>
-                                    “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="cardBeneficios">
-                            <div class="headerCard" id="textHeight">
-                                <img class="iconCard" src="./assets/icon/iconMercado.png" alt="">
-                                <h3>Experiencia de mercado</h3>
-                            </div>
-                            <div class="corpoCard">
-                                <p>
-                                    “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="cardBeneficios">
-                            <div class="headerCard" id="textHeight">
-                                <img class="iconCard" src="./assets/icon/iconMercado.png" alt="">
-                                <h3>Experiencia de mercado</h3>
-                            </div>
-                            <div class="corpoCard">
-                                <p>
-                                    “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="cardBeneficios">
-                            <div class="headerCard" id="textHeight">
-                                <img class="iconCard" src="./assets/icon/iconMercado.png" alt="">
-                                <h3>Experiencia de mercado</h3>
-                            </div>
-                            <div class="corpoCard">
-                                <p>
-                                    “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
-            <img class="setaDescer" src="./assets/icon/seta descer.svg" alt="descer">
+        
         </div>
         </div>
     </section>
@@ -178,12 +147,15 @@
                     <p>
                         “Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been “
                     </p>
-                    <div class="buttonInicio">
-                        <span>Saiba mais</span>
-                        <div class="buttonInicioInterno">
-                            <img class="iconNavbar" src="./assets/icon/seta.png" alt="">
-                        </div>
-                    </div>  
+                    <a href="./sobre.html">
+
+                        <div class="buttonInicio">
+                            <span>Saiba mais</span>
+                            <div class="buttonInicioInterno">
+                                <img class="iconNavbar" src="./assets/icon/seta.png" alt="">
+                            </div>
+                        </div>  
+                    </a>
                 </span>
             </button>
                 </div>
@@ -234,7 +206,7 @@
         <div class="container">
             <h2>Você Sabia?</h2>
             <div class="boxCardCuriosidade">
-                <div class="swiper">
+                <div class="swiper-voceSabia">
                     
                     <div class="swiper-wrapper">
                         
@@ -385,21 +357,110 @@
   },
 
   });
+
+  var swiperVoceSabia = new Swiper(".swiper-voceSabia", {
+    slidesPerView: 3,
+    padding: 15,
+    loop: true,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+
+    breakpoints: {
+    0: {
+      slidesPerView: 1,
+      navigation: false
+    },
+    900: {
+      slidesPerView: 2,
+      spaceBetween: 20
+    },
+    1000: {
+      slidesPerView: 2,
+      spaceBetween: 120
+    },
+    1400: {
+      slidesPerView: 3,
+      allowSlidePrev: false,
+      allowSlideNext: false,
+      
+    }
+  },
+
+  });
 </script>
+
+<script>
+    
+
+const menuHamburger = document.getElementById('menuHamburger');
+const fundoSidebar = document.querySelector('.fundoSidebar');
+const sidebar = document.querySelector('.sidebar');
+const linksNavegacao = document.querySelectorAll('.sidebar ul a');
+
+if (sidebar.style.display === undefined || sidebar.style.display === '') {
+        sidebar.style.display = 'none'; // Define como 'none' por padrão
+    }
+
+function abrirSidebar() {
+    fundoSidebar.style.display = 'block';
+    sidebar.style.display = 'block';
+    sidebar.style.transform = 'translateX(0)'; 
+}
+
+
+function fecharSidebar() {
+    fundoSidebar.style.display = 'none';
+    sidebar.style.display = 'none';
+
+    sidebar.style.transform = 'translateX(-100%)'; 
+}
+
+
+menuHamburger.addEventListener('click', function(event) {
+    event.stopPropagation(); 
+
+    if (sidebar.style.display == 'none') {
+        abrirSidebar();
+    } else {
+        fecharSidebar();
+    }
+});
+
+
+fundoSidebar.addEventListener('click', function() {
+    fecharSidebar();
+});
+
+
+sidebar.addEventListener('click', function(event) {
+    event.stopPropagation();
+});
+
+linksNavegacao.forEach(link => {
+    link.addEventListener('click', function() {
+        fecharSidebar();
+    });
+});
+
+</script>
+</script>
+
 <script>
     window.addEventListener('scroll', function() {
         var header = document.getElementById("header");
         var div = document.getElementById("Inicio");
 
-        // Verifica a posição do header e da div na tela
+  
         var headerRect = header.getBoundingClientRect();
         var divRect = div.getBoundingClientRect();
         
-        // Se o header estiver saindo da div (topo da div já passou do topo da tela)
+ 
         if (headerRect.top <= divRect.top) {
-            header.classList.remove("mudarCor");  // Altera a cor
+            header.classList.remove("mudarCor"); 
         } else {
-            header.classList.add("mudarCor");  // Restaura a cor
+            header.classList.add("mudarCor");  
         }
     });
 </script>

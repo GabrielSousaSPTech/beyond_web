@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     
+
 }
 
 html {
@@ -13,6 +14,9 @@ html {
     overflow-x: hidden;
     background-color: #EAEAEA;
 }
+:target{
+    scroll-margin-top: 140px; 
+  }
 body {
     height: 100vh;
 }
@@ -39,6 +43,10 @@ section {
     width: 100vw;
     height: 100rem;
     
+}
+
+#Inicio .container {
+    min-height: 40rem !important;
 }
 
 #slogan {
@@ -98,7 +106,6 @@ section {
 .corpoInicio {
     display: flex;
     width: 70%;
-    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     gap: 4rem;
@@ -135,7 +142,7 @@ section {
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8); */
 }
 
-.swiper {
+.swiper, .swiper-voceSabia {
     width: 90%;
     overflow-x: hidden;
   }
@@ -170,6 +177,8 @@ section {
     left: 7rem;
     width: 4rem;
  }
+
+
 
  .setaDescer {
     position: absolute;
@@ -293,18 +302,20 @@ section {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    width: 90% !important;
 }
 
 .boxCardCuriosidade {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    padding: 2rem;
+    width: 100%;
 }
 
 .cardCuriosidade {
     width: 40rem;
-    min-height: 30rem;
+    min-height: 35rem;
+    
     border-radius: 1rem;
     background-color: #FDD9A2;
     padding: 3rem;

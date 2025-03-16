@@ -4,7 +4,6 @@ header {
     position: fixed;
     width: 100%;
     height: fit-content;
-    
     border-width: 0.5px 0px 0.5px 0;
     border-style: solid;
     border-color: #ffffffcc;
@@ -60,6 +59,17 @@ header .container {
     width: 99%;
 }
 
+
+
+a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+a:visited, a:active, a:focus {
+    color: inherit; 
+    outline: none; 
+}
 .iconNavbar {
     width: 4.2rem;
     padding: 3px;
@@ -147,4 +157,78 @@ header .container {
     color: #fff;
     background-color: #528763;
     transform: translateY(-0.2px);
+}
+
+.fundoSidebar, .sidebar, .cabecalhoSideBar {
+    display: none;
+}
+
+
+
+
+
+@media(max-width: 1000px) {
+    header  {
+        display: none;
+    }
+
+    .fundoSidebar {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        background-color: #0000004b;
+        position: fixed;
+        bottom: 0;
+        z-index: 90;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .sidebar {
+        display: none;
+        padding-top: 15rem;
+        position: fixed;
+        bottom: 0;
+        z-index: 100;
+        width: 20rem;
+        height: 100%;
+        background-color: #25342F;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+    }
+
+    .sidebar ul {
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    
+    .cabecalhoSideBar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        padding-inline: 2rem;
+        height: fit-content;
+        background-color: #25342F;
+        z-index: 150;
+        
+    }
+
+    .cabecalhoSideBar img{
+  
+        width: 6rem;
+        min-height: 10rem;
+        height: fit-content;
+
+        object-fit: contain;
+
+    }
+
+    #logoSidebar {
+        width: 14rem;
+        
+    }
 }
