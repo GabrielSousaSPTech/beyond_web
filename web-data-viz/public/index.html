@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brasil Beyond Analytics - Início</title>
+    <title>Brasil Beyond Analythics - Início</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/responsive.css">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <span style="font-size: 20px; color: #fff;">|</span>
-                    <button class="buttonNavbar">
+                    <button class="buttonNavbar" onclick="window.location.href = 'login.html'">
                         <img class="iconNavbar-user" src="./assets/icon/user.svg" alt="">
                         <p>Já sou cliente</p>
                     </button>
@@ -57,51 +57,14 @@
         <img id="logoSidebar" src="./assets/image/logoBBA.png" alt="">
         <img id="menuHamburger" src="./assets/icon/menuHamburger.svg" alt="">
     </div>
-    <div class="fundoSidebar">
-        <div class="sidebar">
-            <div class="servicesNavbar">
-                <div class="translate-container">
-                    <a href=""><img class="iconNavbar" src="./assets/icon/translate.svg" alt=""></a>
-                    <div class="languages">
-                        <button>PT-BR</button>
-                        <button>EN</button>
-                        <button>ES</button>
-                    </div>
-                </div>
-                <span style="font-size: 20px; color: #fff;">|</span>
-                <button class="buttonNavbar">
-                    <img class="iconNavbar-user" src="./assets/icon/user.svg" alt="">
-                    <p>Já sou cliente</p>
-                </button>
-            </div>
-            <ul>
-                <a href="#Inicio">
-                    <li>Inicio</li>
-                </a>
-                <a href="#quemSomos">
-                    <li>Quem Somos?</li>
-                </a>
-                <a href="#NossosServicos">
-                    <li>Nossos Serviços</li>
-                </a>
-                <a href="#voceSabia">
-                    <li>Curiosidade</li>
-                </a>
-                <a href="#contato">
-                    <li>Contato</li>
-                </a>
-            </ul>
 
-        </div>
-
-    </div>
     <section id="Inicio">
         <div class="container">
             <div class="corpoInicio">
                 <h1 id="slogan">Analisamos dados turísticos para atrair mais visitantes estrangeiros ao <span
                         style="color: #DADBB1;">Brasil.</span></h1>
                 <div class="buttonInicio">
-                    <span>se tornar cliente</span>
+                    <span onclick="window.location.href = 'cadastro.html'">Desejo ser cliente<span>
                     <div class="buttonInicioInterno">
                         <img class="iconNavbar" src="./assets/icon/seta.png" alt="">
                     </div>
@@ -498,5 +461,4 @@
         }
     });
 </script>
-
 </html>

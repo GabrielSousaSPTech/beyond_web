@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+ 
+    
     
     <title>Login | Beyond Analythics</title>
 
 </head>
 
 <body>
+
     <div class="container">
 
         <div class="esquerda">
 
-            <button>Cadastre-se</button>
+            <button onclick="window.location.href = 'cadastro.html'">Cadastre-se</button>
 
         </div>
 
@@ -22,7 +26,7 @@
 
             <div class="barra-superior">
                 
-                <img src="assets/image.png" alt="Logo" class="logo-imagem">
+                <img src="assets/image.png" alt="Logo" class="logo-imagem" onclick="window.location.href = 'index.html'">
 
             </div>
 
@@ -34,15 +38,16 @@
 
                 <input type="password" placeholder="Senha" class="campo-input">
 
-                <button class="botao-login">Entrar</button>
+                <button onclick="" class="botao-login">Entrar</button>
 
-                <p class="esqueceu-senha">Esqueceu sua senha?</p>
+                <a href="recuperacaoSenha.html"><p class="esqueceu-senha">Esqueceu sua senha?</p></a>
 
             </div>            
             
         </div>
 
     </div>
+
 </body>
 
 </html>
