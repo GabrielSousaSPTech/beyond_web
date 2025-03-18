@@ -16,7 +16,9 @@ Este repositório é destinado ao projeto do segundo semestre de 2025/1. O objet
 - **Frameworks e Bibliotecas:** Node.JS, Chart.JS
 - **ETL:** Apache POI, Apache Spark.
 
-
+##  📁 Repositórios Relacionados
+  - **Beyond_log**: Repositório que armazena o registro de logs do projeto
+      **Link:** https://github.com/GabrielSousaSPTech/beyond_log.git 
 
 
 ## 📞 Contato
