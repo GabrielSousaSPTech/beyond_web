@@ -42,7 +42,6 @@ section {
     background-repeat: no-repeat;
     width: 100vw;
     height: 100rem;
-    
 }
 
 #Inicio .container {
@@ -68,7 +67,7 @@ section {
     border: none;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
     font-family: 'Plus Jakarta Sans';
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
     position: relative;
@@ -173,8 +172,6 @@ section {
     width: 4rem;
  }
 
-
-
  .setaDescer {
     position: absolute;
     width: 2.5rem;
@@ -209,6 +206,7 @@ section {
     padding: 2rem;
     gap: 10rem;
  }
+ 
  .boxTexto {
     text-align: center;
     display: flex;
