@@ -191,6 +191,11 @@ a:visited, a:active, a:focus {
         background-color: #25342F;
         transition: transform 0.3s ease-in-out;
         transform: translateX(-100%);
+        padding-inline: 2rem;
+    }
+    
+    .servicesNavbar {
+        gap: 1rem;
     }
 
     .sidebar ul {
