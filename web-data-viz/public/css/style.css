@@ -128,11 +128,10 @@ section {
     justify-content: center;
     align-items: center;
     width: 85%;
-    
+    margin: auto;
 }
 
 .cardBeneficios {
-    margin-left: 5rem;
     background-color: #fff;
     width: 33rem;
     height: 30rem;
@@ -148,6 +147,7 @@ section {
 
 .swiper .swiper-slide{
     width: fit-content !important;
+    margin: auto;
 }
 
  .headerCard {
@@ -155,6 +155,7 @@ section {
     align-items: center;
     justify-content: center;
     height: 7.5rem;
+    position: relative;
  }
 
 #textHeight{
@@ -172,7 +173,7 @@ section {
  .iconCard {
     position: absolute;
     top: 1.5rem;
-    left: 7rem;
+    left: 1.1rem;
     width: 4rem;
  }
 
