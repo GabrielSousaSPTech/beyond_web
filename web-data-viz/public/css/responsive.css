@@ -141,10 +141,8 @@
      }
 
      .cardCuriosidade {
-        width: 35rem;
-        min-height: 40rem;
-        
-        border-radius: 0;
+        width: 30rem;
+        min-height: 32rem;
 
         box-shadow: none;
     }
@@ -154,7 +152,4 @@
         border-radius: 0;
 
     }
-
-    
-    
 }
