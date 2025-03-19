@@ -29,7 +29,7 @@ body {
 .esquerda {
     width: 100%;
     height: 30vh; /* Mantida a altura */
-    background: url('../assets/image1.png') no-repeat center center/cover;
+    background: url('../assets/BGcadastro.png') no-repeat center center/cover;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -37,13 +37,9 @@ body {
 }
 
 .esquerda button {
-<<<<<<< HEAD
-    background-color: #3E5744;
-=======
     width: 40%; /* Ajustado para 60% */
     padding: 1.5vh; /* Mantido */
     background-color: #818B6B;
->>>>>>> 0dffcc204a026a5512ff331d9e1506562e8bc86f
     color: black;
     border: none;
     border-radius: 0.8vw; /* Mantido */
@@ -66,13 +62,8 @@ body {
 
 .barra-superior {
     width: 100%;
-<<<<<<< HEAD
-    height: 10vh;
-    background-color: #3E5744;
-=======
     height: 8vh; /* Mantida a altura */
     background-color: #818B6B;
->>>>>>> 0dffcc204a026a5512ff331d9e1506562e8bc86f
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,7 +79,7 @@ body {
 
 .container-formulario {
     margin-top: 10vh; /* Mantida a margem */
-    width: 85%; /* Mantida a largura */
+    width: 100%; /* Mantida a largura */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,19 +105,13 @@ body {
 }
 
 .botao-login {
-<<<<<<< HEAD
-    width: 50%;
-    padding: 2vh;
-    background-color: #3E5744;
-=======
     width: 60%; /* Mantido */
     padding: 1.5vh; /* Mantido */
     background-color: #818B6B;
->>>>>>> 0dffcc204a026a5512ff331d9e1506562e8bc86f
     color: black;
     border: none;
     border-radius: 0.8vw; /* Mantido */
-    font-size: 1vw; /* Mantido */
+    font-size: 1.8vw; /* Mantido */
     cursor: pointer;
     margin-top: 4vh; /* Mantido */
 }
@@ -159,4 +144,22 @@ body {
 
 button {
     font-weight: bolder;
+}
+
+.formulario-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.campo-input {
+    width: 48%; /* Cada campo ocupa metade da linha */
+    height: 2.5vw;
+    padding: 1.5vh;
+    margin: 1vh 0;
+    background-color: #BEBABA;
+    border: none;
+    border-radius: 0.8vw;
+    font-size: 1vw;
 }
