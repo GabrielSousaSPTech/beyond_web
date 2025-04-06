@@ -129,6 +129,26 @@ section.section-hero .container {
 }
 
 
+.container-boxQuemSomos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem;
+}
+
+.QuemSomosTexto {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 107rem;
+    height: fit-content;
+    padding: 2rem;
+    gap: 10rem;
+}
+
+.boxTexto h2 {
+
+}
 
 
 

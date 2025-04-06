@@ -15,7 +15,10 @@ header {
     box-shadow: 2px 2px 5px #00000066;
     transition: background-color 0.40s ease-in-out;
     z-index: 10;
-    background-color: #3A4C41;
+}
+
+#header.mudarCor {
+    background-color: #25342F;
 }
 
 .header-logo img {
