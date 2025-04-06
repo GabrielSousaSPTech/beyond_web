@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+header {
+    position: fixed;
+    width: 100%;
+    height: fit-content;
+    border-width: 0.5px 0px 0.5px 0;
+    border-style: solid;
+    border-color: #ffffffcc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8rem;
+    box-shadow: 2px 2px 5px #00000066;
+    transition: background-color 0.40s ease-in-out;
+    z-index: 10;
+    background-color: #3A4C41;
+}
+
+.header-logo img {
+    width: 12rem;
+    height: 6.8rem;
+}
+
+header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .navbar-left{
+    display: flex;
+    gap: 10rem;
+}
+
+.navbar .navbar-left ul {
+    display: flex;
+    align-items: center;
+    gap: 4.8rem;
+}
+
+.navbar .navbar-left ul li {
+    font-size: 2.4rem;
+    color: #ffff;
+    font-weight: bold;
+    transition: color .3s ease-in-out;
+    
+}
+
+.navbar .navbar-left ul li:hover {
+    color:#F9D99C;
+}
+
+.navbar-btn-contato {
+    background-color: #F9D99C;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-radius: 2.4rem;
+    padding: 0 1.5rem;
+    font-size: 1.8rem;
+    gap: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.navbar-btn-contato:hover {
+    background-color: #528763;
+    color: #ffff;
+}
+
+.navbar-btn-contato .icon-btn-user {
+    width: 2.1rem;
+    height: 2.1rem;
+}

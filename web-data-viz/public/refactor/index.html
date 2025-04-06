@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/utilidades/icons/favicon.png"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div class="container">
+        <div class="navbar">
+          <div class="navbar-left">
+            <a href="index.html" class="header-logo">
+              <img src="../assets/utilidades/imgs/logo.png" alt="" />
+            </a>
+            <ul>
+              <a href="#quemSomos">
+                <li>Quem Somos?</li>
+              </a>
+              <a href="#NossosServicos">
+                <li>Nossos Serviços</li>
+              </a>
+              <a href="#voceSabia">
+                <li>Curiosidade</li>
+              </a>
+              <a href="#contato">
+                <li>Contato</li>
+              </a>
+            </ul>
+          </div>
+          <button
+            class="navbar-btn-contato"
+            onclick="window.location.href = 'login.html'"
+          >
+            <img
+              class="icon-btn-user"
+              src="../assets/utilidades/icons/header_user.svg"
+            />
+            <p>Já sou cliente</p>
+          </button>
+        </div>
+      </div>
+    </header>
+    <section class="section-hero">
+      <div class="container">
+        <div class="slogan-wrapper">
+          <h1 class="slogan-text">
+            Analisamos dados turísticos para atrair mais visitantes estrangeiros
+            ao <span style="color: #dadbb1">Brasil.</span>
+          </h1>
+          <div class="btn-desejo">
+            <span onclick="window.location.href = 'cadastro.html'"
+              >Desejo ser cliente</span
+            >
+            <div class="img-btn-desejo">
+              <img
+                class="iconNavbar"
+                src="../assets/utilidades/icons/button_seta.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-beneficios">
+        <div class="container">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="cardBeneficios">
+                      <div class="headerCard">
+                        <img
+                          class="iconCard"
+                          src="../assets/index/icons/index_vantagens_pioneirismo.png"
+                          alt=""
+                        />
+                        <h3>Pioneirismo</h3>
+                      </div>
+                      <div class="corpoCard">
+                        <p>
+                          Um horizonte de oportunidades no mercado de turismo
+                          internacional dentro do território nacional
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="cardBeneficios">
+                      <div class="headerCard" id="textHeight">
+                        <img
+                          class="iconCard"
+                          src="../assets/index/icons/index_vantagens_metodo.png"
+                          alt=""
+                        />
+                        <h3>Método Inteligente</h3>
+                      </div>
+                      <div class="corpoCard">
+                        <p>
+                          Análise de mais de 40 anos de hábitos e tendências, para
+                          mapear o comportamento dos turistas estrangeiros
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="cardBeneficios">
+                      <div class="headerCard" id="textHeight">
+                        <img
+                          class="iconCard"
+                          src="../assets/index/icons/index_vantagens_mercado.png"
+                          alt=""
+                        />
+                        <h3 class="mercado">Experiencia de mercado</h3>
+                      </div>
+                      <div class="corpoCard">
+                        <p>
+                          Foco no segmento que não para de crescer e movimenta mais
+                          de 7 bilhões de dólares por ano
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </section>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".swiper", {
+        slidesPerView: 3,
+        loop: true,
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+                navigation: false
+            },
+            900: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            1000: {
+                slidesPerView: 2,
+                spaceBetween: 120,
+                navigation: false
+            },
+            1400: {
+                slidesPerView: 3,
+                allowSlidePrev: false,
+                allowSlideNext: false,
+                navigation: false
+
+            }
+        },
+
+        });
+        var swiperVoceSabia = new Swiper(".swiper-voceSabia", {
+        slidesPerView: 3,
+        loop: true,
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+                navigation: true,
+            },
+            900: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            1000: {
+                slidesPerView: 2,
+                spaceBetween: 120,
+                navigation: false,
+            },
+            1400: {
+                slidesPerView: 3,
+                allowSlidePrev: false,
+                allowSlideNext: false,
+                navigation: false,
+            }
+        },
+
+    });
+</script>
+</html>
