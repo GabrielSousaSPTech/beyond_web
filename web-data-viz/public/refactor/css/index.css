@@ -29,7 +29,7 @@ section.section-hero .container {
     margin: 2rem;
 }
 
-.btn-desejo {
+.btn-arrow {
     background-color: #F9D99C;
     border-radius: 2.4rem;
     height: 5rem;
@@ -43,7 +43,7 @@ section.section-hero .container {
     box-shadow: inset 0px 4px 10px rgba(30, 30, 25, 0.4);
 }
 
-.btn-desejo .img-btn-desejo {
+.btn-arrow .img-btn-arrow {
     background-color: white;
     height: 100%;
     width: 100%;
@@ -60,7 +60,7 @@ section.section-hero .container {
     animation: btn-cover-out 0.6s ease forwards;
 }
 
-.btn-desejo:hover .img-btn-desejo {
+.btn-arrow:hover .img-btn-arrow {
     animation: btn-cover-in 0.6s ease forwards;
 }
 
@@ -124,10 +124,15 @@ section.section-hero .container {
 }
 
 .swiper-slide {
-    max-width: 37rem;
+    max-width: 42rem;
     margin: 0 auto;
 }
 
+#section-quemSomos .container {
+    display: flex;
+    padding: 5rem 1.5rem;
+    align-items: center;
+}
 
 .container-boxQuemSomos {
     display: flex;
@@ -140,18 +145,166 @@ section.section-hero .container {
     display: flex;
     align-items: center;
     justify-content: start;
-    width: 107rem;
     height: fit-content;
-    padding: 2rem;
+    padding-right: 4rem;
     gap: 10rem;
 }
 
-.boxTexto h2 {
-
+.boxTexto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 
+.boxTexto h2 {
+    font-size: 5rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 
+.QuemSomosTexto .boxTexto p {
+    font-size: 3rem;
+    margin: 3rem 0;
+    text-align: center;
+    width: 43rem;
+    font-family: "Outfit";
+}
+
+.QuemSomosImagem {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+}
+
+.QuemSomosImagem img:first-child {
+    width: 41.6rem;
+    height: 40.4rem;
+}
+
+.btn-saiba-mais {
+    color: #000000;
+    font-family: "Plus Jakarta Sans";
+}
+
+.boxTexto .img-btn-arrow {
+    background-color: #3E5744;
+}
+
+#NossosServicos .container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    margin-bottom: 2rem;
+}
+
+#NossosServicos {
+position: relative;
+}
+
+.headerNossosServicos{
+    text-align: center;
+}
+
+.headerNossosServicos h4 {
+    font-family: "Plus Jakarta Sans";
+    color: #528763;
+    font-size: 3.2rem;
+}
+
+.headerNossosServicos h2 {
+    font-size: 6.2rem;
+    font-family: "Plus Jakarta Sans";
+}
+
+.boxCardNossoServico {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 70rem;
+    align-items: center;
+}
+
+.cardNossoServico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #EAEAEA;
+    width: 38.5rem;
+    height: fit-content;
+    margin: 3rem 0;
+    font-family: 'Outfit';
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: bold;
+    gap: 1rem;
+}
+
+.imgAviao {
+    position: absolute;
+    right: 0;
+    top: 2.5rem;
+    
+}
+
+.top, .bottom {
+    display: flex;
+    gap: 2.5rem;
+}
+
+#voceSabia {
+    padding: 4rem;
+    background-color: #EAEAEA;
+}
+
+#voceSabia h2 {
+    padding: 0 8rem;
+    font-size: 5rem;
+}
+
+#voceSabia .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+}
+
+.boxCardCuriosidade {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.cardCuriosidade {
+    display: flex;
+    align-items: center;
+    width: 30rem;
+    height: 28rem;
+    border-radius: 1rem;
+    background-color: #FDD9A2;
+    padding: 3rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+}
+
+.cardCuriosidade p {
+    font-family: 'Outfit';
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+.swiper-voceSabia{
+    width: 100%
+}
+
+.swiper-slide {
+    max-width: 30rem;
+    margin: 0 auto;
+}
 
 
 
