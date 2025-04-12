@@ -127,3 +127,34 @@ footer input:nth-last-child(2) {
     color: white;
     font-family: "Outfit";
 }
+
+@media screen and (max-width:480px) {
+
+    .section-contact .container {
+        flex-direction: column-reverse;
+        gap: 5rem;
+    }
+
+    .container .contact-text .logo {
+        gap: 3rem;
+        width: 20rem;
+    }
+
+    .container .contact-text .logo p {
+        font-size: 2rem;
+        width: 22rem;
+    }
+
+    .container .contact-text .info .contact-form {
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .container .contact-form{
+        flex-direction: column;
+    }
+
+}

@@ -134,6 +134,8 @@
               </div>
             </div>
           </div>
+          <div class="swiper-beneficios-button-next .swiper-btn" style="display: none;"></div>
+          <div class="swiper-beneficios-button-prev .swiper-btn" style="display: none;"></div>
         </div>
       </div>
     </section>
@@ -172,7 +174,7 @@
         </div>
       </div>
     </section>
-    <section id="NossosServicos">
+    <section id="section-nossosServicos">
       <div class="container">
         <div class="headerNossosServicos">
           <h4>Nossos Serviços</h4>
@@ -265,6 +267,8 @@
                           </div>
                       </div>
                   </div>
+                  <div class="swiper-voceSabia-button-next .swiper-btn" style="display: none;"></div>
+                  <div class="swiper-voceSabia-button-prev .swiper-btn" style="display: none;"></div>
               </div>
           </div>
       </div>
@@ -333,54 +337,39 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     var swiper = new Swiper(".swiper", {
-      slidesPerView: 3,
-      loop: true,
+      spaceBetween: 20,
+
       breakpoints: {
         0: {
           slidesPerView: 1,
-          navigation: false,
+          navigation: {
+            nextEl: 'swiper-beneficios-button-next',
+            prevEl: 'swiper-beneficios-button-prev',
+          }
         },
-        900: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        1000: {
-          slidesPerView: 2,
-          spaceBetween: 120,
-          navigation: false,
-        },
-        1400: {
+        480: {
+          enable: false,
           slidesPerView: 3,
-          allowSlidePrev: false,
-          allowSlideNext: false,
-          navigation: false,
-        },
-      },
+          navigator: false,
+        }
+      }
     });
     var swiperVoceSabia = new Swiper(".swiper-voceSabia", {
-      slidesPerView: 3,
-      loop: true,
+      spaceBetween: 20,
       breakpoints: {
         0: {
           slidesPerView: 1,
-          navigation: true,
+          navigation: {
+            nextEl: '.swiper-voceSabia-button-next',
+            prevEl: '.swiper-voceSabia-button-prev',
+          }
         },
-        900: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        1000: {
-          slidesPerView: 2,
-          spaceBetween: 120,
-          navigation: false,
-        },
-        1400: {
+        480: {
+          enable: false,
           slidesPerView: 3,
-          allowSlidePrev: false,
-          allowSlideNext: false,
-          navigation: false,
-        },
-      },
+          navigator: false,
+        }
+      }
     });
   </script>
 </html>

@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
+:root {
+    --swiper-navigation-sides-offset: 0px;
+}
+
 section.section-hero {
     background-image: url("../../assets/index/imgs/index_hero_background.png");
     background-size: cover;
@@ -124,11 +128,8 @@ section.section-hero .container {
 }
 
 .swiper-wrapper .swiper-slide {
-    max-width: 37rem;
-}
-
-.swiper-slide:nth-last-of-type(2){
-    margin: 0 3rem;
+    display: flex;
+    justify-content: center;
 }
 
 #section-quemSomos .container {
@@ -196,14 +197,14 @@ section.section-hero .container {
     background-color: #3E5744;
 }
 
-#NossosServicos .container {
+#section-nossosServicos .container {
     display: flex;
     flex-direction: column;
     gap: 5rem;
     margin-bottom: 2rem;
 }
 
-#NossosServicos {
+#section-nossosServicos {
 position: relative;
 }
 
@@ -228,6 +229,10 @@ position: relative;
     gap: 2rem;
     width: 70rem;
     align-items: center;
+}
+
+.swiper-voceSabia {
+    width: 100%;
 }
 
 .cardNossoServico {
@@ -291,7 +296,6 @@ position: relative;
     background-color: #FDD9A2;
     padding: 3rem;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    margin: 0 auto;
 }
 
 .cardCuriosidade p {
@@ -300,14 +304,7 @@ position: relative;
     text-align: center;
 }
 
-.swiper-voceSabia{
-    width: 100%
-}
 
-.swiper-voceSabia .swiper-slide {
-    max-width: 30rem;
-    margin: 0 auto;
-}
 
 @media screen and (max-width:480px ) {
     
@@ -318,10 +315,6 @@ position: relative;
     .section-hero .container{
         height: 100%;
         align-items: center;
-    }
-    
-    .swiper-wrapper .swiper-slide {
-        max-width: 30rem;
     }
 
     .cardBeneficios {
@@ -361,7 +354,23 @@ position: relative;
         font-size: 3rem;
     }
 
-    .headerNossosServicos .top {
-        
+    #section-nossosServicos .boxCardNossoServico .text .top,
+    #section-nossosServicos .boxCardNossoServico .text .bottom {
+
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .boxCardNossoServico {
+        width: initial;
+    }
+
+    .cardNossoServico {
+        margin: 1rem 0;
+    }
+
+    #voceSabia .container h2 {
+        font-size: 3rem;
+        padding: 0 5rem;
     }
 }
