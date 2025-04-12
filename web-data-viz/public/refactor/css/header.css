@@ -54,3 +54,24 @@ header .navbar {
     color:#F9D99C;
 }
 
+@media screen and (max-width: 480px) {
+    .navbar ul {
+        display: none;  
+    }
+    
+    header {
+        width: 100vw;
+    }
+
+    header .btn-yellow {
+        height: 4.2rem;
+        padding: 0 1rem;
+        font-size: 1.4rem;
+    }
+
+    .header-logo {
+        width: 11rem;
+    }
+
+    
+}

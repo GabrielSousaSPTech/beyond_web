@@ -118,14 +118,17 @@ section.section-hero .container {
 .cardBeneficios {
     background-color: #ffff;
     border-radius: 1rem;
-    padding: 1.6rem 3.6rem 4.4rem 3.6rem;
+    padding: 1.6rem 3.6rem 3rem 3.6rem;
     max-width: 37rem;
-    height: 24rem;
+    height: 30rem;
 }
 
-.swiper-slide {
-    max-width: 42rem;
-    margin: 0 auto;
+.swiper-wrapper .swiper-slide {
+    max-width: 37rem;
+}
+
+.swiper-slide:nth-last-of-type(2){
+    margin: 0 3rem;
 }
 
 #section-quemSomos .container {
@@ -301,11 +304,64 @@ position: relative;
     width: 100%
 }
 
-.swiper-slide {
+.swiper-voceSabia .swiper-slide {
     max-width: 30rem;
     margin: 0 auto;
 }
 
+@media screen and (max-width:480px ) {
+    
+    .section-hero .slogan-wrapper{
+       margin-top: 0;
+    }
 
+    .section-hero .container{
+        height: 100%;
+        align-items: center;
+    }
+    
+    .swiper-wrapper .swiper-slide {
+        max-width: 30rem;
+    }
 
+    .cardBeneficios {
+        max-width: 30rem;
+    }
 
+    .container .QuemSomosImagem {
+        display: none; 
+    }
+
+    .container .QuemSomosTexto, .container .QuemSomosTexto .boxTexto {
+        width: 100%;
+    }
+
+    .container .QuemSomosTexto {
+        padding: 0;
+    }
+
+    .container .QuemSomosTexto .boxTexto p{
+        font-size: 2.5rem;
+        width: 100%;
+    }
+
+    .container .QuemSomosTexto .boxTexto h2 {
+        font-size: 3rem;
+    }
+
+    .iconAviao {
+        display: none;
+    }
+
+    .headerNossosServicos h4 {
+        font-size: 2rem;
+    }
+
+    .headerNossosServicos h2 {
+        font-size: 3rem;
+    }
+
+    .headerNossosServicos .top {
+        
+    }
+}
