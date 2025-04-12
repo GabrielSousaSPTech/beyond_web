@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/cadastro.css">
     <link rel="icon" type="image/png" href="assets/.png">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-   
-    
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+
+
     <title>Login | Beyond Analythics</title>
 
 </head>
@@ -20,39 +23,236 @@
         <div class="direita">
 
             <div class="barra-superior">
-                
+
                 <img src="assets/image.png" alt="Logo" class="logo-imagem" onclick="window.location.href ='index.html'">
 
             </div>
 
             <div class="container-formulario">
                 <h1 class="titulo-login">Registre-se</h1>
-                
+
                 <div class="formulario-grid">
-                    <input type="text" placeholder="Nome Completo" class="campo-input">
+                    <input id="nome_input" type="text" placeholder="Nome Completo" class="campo-input">
                     <input type="email" placeholder="Email" class="campo-input">
                     <input type="tel" placeholder="Número de Telefone" class="campo-input">
                     <input type="date" placeholder="Data de Nascimento" class="campo-input">
                     <input type="password" placeholder="Senha" class="campo-input">
                     <input type="password" placeholder="Confirme a Senha" class="campo-input">
                 </div>
-            
+
                 <button class="botao-login">Registrar</button>
             </div>
-                        
-            
+
+
         </div>
 
-        
+
         <div class="esquerda">
 
-            <button onclick = "window.location.href='login.html'">Entrar</button>
+            <button onclick="window.location.href='login.html'">Entrar</button>
 
         </div>
-
 
     </div>
 
 </body>
 
 </html>
+
+<script>
+
+    //olho
+
+    function mudarOlhoConfirmacao() {
+        var confirmacaoSenha = document.getElementById('confirmacao_senha_input');
+        var confirmacaoOlho = document.getElementById('confirmacao_senha_olho');
+
+        if (confirmacaoSenha.type == 'password') {
+            confirmacaoSenha.type = 'text'
+            confirmacaoOlho.classList.remove('fa-eye-slash')
+            confirmacaoOlho.classList.add('fa-eye')
+        } else {
+            confirmacaoSenha.type = 'password'
+            confirmacaoOlho.classList.remove('fa-eye')
+            confirmacaoOlho.classList.add('fa-eye-slash')
+        }
+    }
+
+    function mudarOlho() {
+        var senha = document.getElementById('senha_input');
+        var olho = document.getElementById('senha_olho');
+
+        if (senha.type == 'password') {
+            senha.type = 'text'
+            olho.classList.remove('fa-eye-slash')
+            olho.classList.add('fa-eye')
+        } else {
+            senha.type = 'password'
+            olho.classList.remove('fa-eye')
+            olho.classList.add('fa-eye-slash')
+        }
+
+    }
+
+    // Array para armazenar empresas cadastradas para validação de código de ativação 
+    let listaEmpresasCadastradas = [];
+
+    function cadastrar() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = nome_input.value;
+        var nomeArtisticoVar = nome_artistico_input.value;
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+        var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+        // Verificando se há algum campo em branco
+        if (
+            nomeVar == "" ||
+            nomeArtisticoVar == "" ||
+            emailVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == ""
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "Mensagem de erro para todos os campos em branco";
+
+            finalizarAguardar();
+            return false;
+        } else {
+            setInterval(sumirMensagem, 5000);
+        }
+
+        // Validar o campo Nome do formulário
+        if (
+            nomeVar.length <= 1
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "Seu nome deve ter mais de 1 caracter.";
+
+            finalizarAguardar();
+            return false;
+        } else if (
+            // Validar o campo CPF do formulário 
+            nomeArtisticoVar.length <= 1
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "Seu nome artítisco deve ter mais de 1 caracter.";
+
+            finalizarAguardar();
+            return false;
+        } else if (
+            // Validar campo email do formulário
+            emailVar.indexOf("@") == -1
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "O e-mail deve conter '@'.";
+
+            finalizarAguardar();
+            return false;
+        } else if (
+            // Validar o campo Senha do formulário
+            senhaVar.length < 8
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "Senha deve ter no mínimo 8 dígitos";
+
+            finalizarAguardar();
+            return false;
+        } else if (
+            // Validar o campo Senha do formulário
+            senhaVar.search(/[A-Z]/g) == -1
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "Senha deve ter no mínimo uma letra maiúscula";
+
+            finalizarAguardar();
+            return false;
+        } else if (
+            // Validar o campo Senha do formulário
+            senhaVar.search(/[a-z]/g) == -1
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "Senha deve ter no mínimo uma letra minúscula";
+
+            finalizarAguardar();
+            return false;
+        } else if (
+            // Validar o campo Senha do formulário
+            senhaVar.search(/[!@#$%^&*)(+=._-]/g) == -1
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "Senha deve ter no mínimo um caracter especial";
+
+            finalizarAguardar();
+            return false;
+        } else if (
+            // Validar campo confirmação de Senha do formulário
+            confirmacaoSenhaVar != senhaVar
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "A senhas devem ser iguais.";
+
+            finalizarAguardar();
+            return false;
+        } else {
+            setInterval(sumirMensagem, 5000);
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                nArtisticoServer: nomeArtisticoVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+                    limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
+</script>
