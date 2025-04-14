@@ -74,3 +74,35 @@
         left: -105%;
     }
 }
+
+.btn-green {
+    background-color: #3E5744;
+    font-family: "Outfit";
+    font-size: 2rem;
+    color: white;
+    padding: 1.4rem 4.4rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.btn-green:hover {
+    color: #F9D99C;
+}
+
+.btn-white {
+    background-color: white;
+    font-family: "Outfit";
+    font-size: 1.4rem;
+    color: #3E5744;
+    padding: 1.6rem 2.75rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+    border: 2px solid white;
+
+}
+
+.btn-white:hover {
+    border: 2px solid #3E5744;
+}

@@ -1,0 +1,20 @@
+body {
+    height: 100vh;
+}
+
+.section-login {
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    max-width: initial;
+}
+
+.section-login .right-img {
+    background-image: url("../../assets/cadastro/imgs/cadastro_background.png");
+    width: 50%;
+}
