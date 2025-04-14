@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sobre.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
 </head>
 <body>
     <header id="header">
@@ -70,7 +74,7 @@
                 <img src="../assets/utilidades/imgs/logo.png">
             </div>
             <div class="bottom">
-                <div class="swiper">
+                <div class="swiper swiper-valores">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="cardValores">
@@ -112,6 +116,8 @@
                             </div>
                         </div>
                     </div>
+                    <div class="swiper-button-next swiper-btn-valores-1" style="display: none"></div>
+                    <div class="swiper-button-prev swiper-btn-valores-2" style="display: none"></div>
                 </div>
                 </div>
             </div>
@@ -135,72 +141,122 @@
       <section class="section-team">
         <div class="container">
             <h2>Nossa equipe</h2>
-            <div class="grid">
-                <div class="top">
-                    <div class="card-team">
-                        <div class="title">
-                            <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png"> 
-                            <h3>Andrei</h3>
-                        </div>
-                        <p>PO | Backend</p>
-                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbarkpost-assets.s3.amazonaws.com%2Fwp-content%2Fuploads%2F2013%2F11%2FplainDoge.jpg&f=1&nofb=1&ipt=fb1867eafaf38291326b8fad97b22e7150b752340e48f94d8fd27f46e52f1eaf&ipo=images">
-                        <div class="right">
-                        </div>
-                    </div>
-                    <div class="card-team">
-                        <div class="title">
-                            <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png"> 
-                            <h3>Andrei</h3>
-                        </div>
-                        <p>PO | Backend</p>
-                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbarkpost-assets.s3.amazonaws.com%2Fwp-content%2Fuploads%2F2013%2F11%2FplainDoge.jpg&f=1&nofb=1&ipt=fb1867eafaf38291326b8fad97b22e7150b752340e48f94d8fd27f46e52f1eaf&ipo=images">
-                        <div class="right">
-                        </div>
-                    </div>
-                    <div class="card-team">
-                        <div class="title">
-                            <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png"> 
-                            <h3>Andrei</h3>
-                        </div>
-                        <p>PO | Backend</p>
-                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbarkpost-assets.s3.amazonaws.com%2Fwp-content%2Fuploads%2F2013%2F11%2FplainDoge.jpg&f=1&nofb=1&ipt=fb1867eafaf38291326b8fad97b22e7150b752340e48f94d8fd27f46e52f1eaf&ipo=images">
-                        <div class="right">
-                        </div>
-                    </div>
-                </div>
-                <div class="bottom">
-                    <div class="card-team">
-                        <div class="title">
-                            <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png"> 
-                            <h3>Andrei</h3>
-                        </div>
-                        <p>PO | Backend</p>
-                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbarkpost-assets.s3.amazonaws.com%2Fwp-content%2Fuploads%2F2013%2F11%2FplainDoge.jpg&f=1&nofb=1&ipt=fb1867eafaf38291326b8fad97b22e7150b752340e48f94d8fd27f46e52f1eaf&ipo=images">
-                        <div class="right">
-                        </div>
-                    </div>
-                    <div class="card-team">
-                        <div class="title">
-                            <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png"> 
-                            <h3>Andrei</h3>
-                        </div>
-                        <p>PO | Backend</p>
-                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbarkpost-assets.s3.amazonaws.com%2Fwp-content%2Fuploads%2F2013%2F11%2FplainDoge.jpg&f=1&nofb=1&ipt=fb1867eafaf38291326b8fad97b22e7150b752340e48f94d8fd27f46e52f1eaf&ipo=images">
-                        <div class="right">
-                        </div>
-                    </div>
-                    <div class="card-team">
-                        <div class="title">
-                            <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png"> 
-                            <h3>Andrei</h3>
-                        </div>
-                        <p>PO | Backend</p>
-                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbarkpost-assets.s3.amazonaws.com%2Fwp-content%2Fuploads%2F2013%2F11%2FplainDoge.jpg&f=1&nofb=1&ipt=fb1867eafaf38291326b8fad97b22e7150b752340e48f94d8fd27f46e52f1eaf&ipo=images">
-                        <div class="right">
-                        </div>
-                    </div>
-                </div>
+            <div style="position: relative; height: 4px; display: flex; align-items: center;">
+                <div class="swiper-button-next swiper-btn-team-1"></div>
+                <div class="swiper-button-prev swiper-btn-team-2"></div>
             </div>
+
+            <div class="swiper swiper-team">
+                <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+        <div style="position: relative; display: flex; align-items: center; margin-bottom: 5rem;">
+            <div class="swiper-pagination"></div>
         </div>
       </section>
       <footer>
@@ -264,4 +320,47 @@
       </footer>
 </body>
 <script src="js/header.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+var swiper = new Swiper(".swiper-valores", {
+    spaceBetween: 20,
+
+    breakpoints: {
+            0: {
+                slidesPerView: 1,
+                navigation: true,
+                navigation: {
+                    nextEl: '.swiper-btn-valores-1',
+                    prevEl: '.swiper-btn-valores-2',
+            },
+            },
+            480: {
+                slidesPerView: 3,
+                navigation: true,
+
+            },
+            
+        },
+});
+var swiper = new Swiper(".swiper-team", {
+    spaceBetween: 20,
+    navigation: {
+                    nextEl: '.swiper-btn-team-1',
+                    prevEl: '.swiper-btn-team-2',
+            },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            480: {
+                slidesPerView: 3,
+            },
+            
+        },
+});
+</script>
 </html>

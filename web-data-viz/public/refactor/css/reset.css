@@ -25,3 +25,9 @@ html {
     padding: 0 1.5rem;
 }
 
+@media screen and (max-width: 480px){
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: initial !important;
+    }
+}

@@ -124,12 +124,26 @@ section.section-hero .container {
     border-radius: 1rem;
     padding: 1.6rem 3.6rem 3rem 3.6rem;
     max-width: 37rem;
-    height: 30rem;
+    height: 26rem;
 }
 
 .swiper-wrapper .swiper-slide {
     display: flex;
     justify-content: center;
+}
+
+.swiper-voceSabia .swiper-wrapper {
+    height: 30.1rem;
+}
+
+.swiper .swiper-btn-beneficios-1,
+.swiper .swiper-btn-beneficios-2 {
+    color: #F9D99C;
+}
+
+.swiper .swiper-btn-voceSabia-1,
+.swiper .swiper-btn-voceSabia-2 {
+    color: #528763;
 }
 
 #section-quemSomos .container {
@@ -264,7 +278,7 @@ position: relative;
 }
 
 #voceSabia {
-    padding: 4rem;
+    padding: 4rem 0;
     background-color: #EAEAEA;
 }
 

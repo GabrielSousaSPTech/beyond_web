@@ -134,8 +134,8 @@
               </div>
             </div>
           </div>
-          <div class="swiper-beneficios-button-next .swiper-btn" style="display: none;"></div>
-          <div class="swiper-beneficios-button-prev .swiper-btn" style="display: none;"></div>
+          <div class="swiper-button-next swiper-btn-beneficios-1" style="display: none;"></div>
+          <div class="swiper-button-prev swiper-btn-beneficios-2" style="display: none;"></div>
         </div>
       </div>
     </section>
@@ -237,40 +237,38 @@
     <section id="voceSabia">
       <div class="container">
           <h2>Você Sabia?</h2>
-          <div class="boxCardCuriosidade">
-              <div class="swiper-voceSabia">
-                  <div class="swiper-wrapper">
+          <div class="swiper swiper-voceSabia">
+            <div class="swiper-wrapper">
 
-                      <div class="swiper-slide">
-                          <div class="cardCuriosidade">
-                              <p>No Brasil, 96% do PIB do turismo vem do mercado interno, enquanto apenas 4% é gerado
-                                  por turistas estrangeiros.</p>
-                          </div>
-                      </div>
-                      <div class="swiper-slide">
+                <div class="swiper-slide">
+                    <div class="cardCuriosidade">
+                        <p>No Brasil, 96% do PIB do turismo vem do mercado interno, enquanto apenas 4% é gerado
+                            por turistas estrangeiros.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
 
-                          <div class="cardCuriosidade">
-                              <p>
-                                  A Copa do Mundo de 2014 e as Olimpíadas de 2016, impulsionaram o turismo estrangeiro
-                                  dentro do
-                                  Brasil de forma significativa.
-                              </p>
-                          </div>
-                      </div>
-                      <div class="swiper-slide">
+                    <div class="cardCuriosidade">
+                        <p>
+                            A Copa do Mundo de 2014 e as Olimpíadas de 2016, impulsionaram o turismo estrangeiro
+                            dentro do
+                            Brasil de forma significativa.
+                        </p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
 
-                          <div class="cardCuriosidade">
-                              <p>
-                                  Devido à sazonalidade, hotéis e agências ficam ociosos por 8 meses do ano, com
-                                  apenas 4 meses de alta temporada.
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="swiper-voceSabia-button-next .swiper-btn" style="display: none;"></div>
-                  <div class="swiper-voceSabia-button-prev .swiper-btn" style="display: none;"></div>
-              </div>
-          </div>
+                    <div class="cardCuriosidade">
+                        <p>
+                            Devido à sazonalidade, hotéis e agências ficam ociosos por 8 meses do ano, com
+                            apenas 4 meses de alta temporada.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next swiper-btn-voceSabia-1" style="display: none;"></div>
+            <div class="swiper-button-prev swiper-btn-voceSabia-2" style="display: none;"></div>
+        </div>
       </div>
   </section>
   <footer>
@@ -343,8 +341,8 @@
         0: {
           slidesPerView: 1,
           navigation: {
-            nextEl: 'swiper-beneficios-button-next',
-            prevEl: 'swiper-beneficios-button-prev',
+            nextEl: '.swiper-btn-beneficios-1',
+            prevEl: '.swiper-btn-beneficios-2',
           }
         },
         480: {
@@ -360,8 +358,8 @@
         0: {
           slidesPerView: 1,
           navigation: {
-            nextEl: '.swiper-voceSabia-button-next',
-            prevEl: '.swiper-voceSabia-button-prev',
+            nextEl: '.swiper-btn-voceSabia-1',
+            prevEl: '.swiper-btn-voceSabia-2',
           }
         },
         480: {
