@@ -14,9 +14,11 @@ body {
     max-width: initial;
 }
 
-.section-login .right-img {
+.section-login .left-img {
     background-image: url("../../assets/login/imgs/login_background.png");
     width: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .section-login .login-page {
@@ -32,8 +34,13 @@ body {
     justify-content: center;
 }
 
-.section-login .login-page img {
+.section-login .login-page .logo {
     height: 10.8rem;
+    width: 30rem;
+    background-image: url("../../assets/utilidades/imgs/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .section-login .login-wrapper {
@@ -112,4 +119,23 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2.6rem;
+}
+
+
+@media screen and (max-width: 480px){
+    .section-login .left-img {
+        display: none;
+    }
+
+    .section-login .login-page {
+        width: 100%;
+    }
+
+    .section-login .login-page .title {
+        font-size: 3.8rem;
+    }
+
+    .section-login .login-page .login-wrapper {
+        padding: 0 2rem;
+    }
 }

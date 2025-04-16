@@ -100,6 +100,7 @@
     cursor: pointer;
     transition: border-color 0.3s ease-in-out;
     border: 2px solid white;
+    text-align: center;
 
 }
 
