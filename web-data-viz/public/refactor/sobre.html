@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/utilidades/icons/favicon.png"
+    />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sobre.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+          <div class="navbar">
+            <a href="index.html" class="header-logo">
+                <img src="../assets/utilidades/imgs/logo.png" alt="" />
+              </a>
+              <ul>
+                <a href="#Valores">
+                    <li>Valores</li>
+                </a>
+                <a href="#Motivacao">
+                    <li>Motivação</li>
+                </a>
+                <a href="#Equipe">
+                    <li>Nossa equipe</li>
+                </a>
+            </ul>
+            <button class="btn-yellow" onclick="window.location.href = 'login.html'">
+                <img
+                class="icon-btn-user"
+                src="../assets/utilidades/icons/header_user.svg"
+                />
+                <p>Já sou cliente</p>
+            </button>
+        </div>
+      </header>
+      <section class="section-hero" id="section-hero-id">
+        <div class="container">
+            <div class="slogan-wrapper">
+              <h1 class="slogan-text">
+                Analisamos dados turísticos para atrair mais visitantes estrangeiros
+                ao <span style="color: #dadbb1">Brasil.</span>
+              </h1>
+              <div class="btn-arrow-yellow">
+                <span onclick="window.location.href = 'cadastro.html'"
+                  >Desejo ser cliente</span
+                >
+                <div class="img-btn-arrow">
+                  <img
+                    class="iconNavbar"
+                    src="../assets/utilidades/icons/button_seta.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <section class="section-valores" id="Valores">
+        <div class="container">
+            <div class="top">
+                <div class="text">
+                    <h2>Analisamos mais de 40 anos de dados coletados pelo ministério do turismo, para traçar o perfil,
+                        hábitos e tendências dos turistas estrangeiros que visitam o Brasil</h2>
+                    <hr>
+                </div>
+                <img src="../assets/utilidades/imgs/logo.png">
+            </div>
+            <div class="bottom">
+                <div class="swiper swiper-valores">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="cardValores">
+                                <div class="headerCard">
+                                    <img class="iconCard" src="../assets/sobre/icons/sobre_missao.png" alt="">
+                                    <h3>Missão</h3>
+                                </div>
+                                <div class="corpoCard">
+                                    <p>
+                                        Fomentar o turismo estrangeiro dentro do território nacional
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="cardValores">
+                                <div class="headerCard" id="textHeight">
+                                    <img class="iconCard" src="../assets/sobre/icons/sobre_visao.png" alt="">
+                                    <h3>Visão</h3>
+                                </div>
+                                <div class="corpoCard">
+                                    <p>
+                                        Explorar novos mercados e novas oportunidades de negócio
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="cardValores">
+                                <div class="headerCard" id="textHeight">
+                                    <img class="iconCard" src="../assets/sobre/icons/sobre_valores.png" alt="">
+                                    <h3>Valores</h3>
+                                </div>
+                                <div class="corpoCard">
+                                    <p>
+                                        Orgulho de ser Brasileiro! Brasil o melhor destino!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next swiper-btn-valores-1" style="display: none"></div>
+                    <div class="swiper-button-prev swiper-btn-valores-2" style="display: none"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+      </section>
+      <section class="section-motivacao" id="Motivacao">
+        <div class="container">
+            <h2>Nossa Motivação</h2>
+            <div class="imgs">
+                <img src="../assets/sobre/imgs/sobre_motivacao_left.png" class="imgs-left">
+                <div class="imgs-right">
+                    <div class="top">
+                        <img src="../assets/sobre/imgs/sobre_motivacao_center.png">
+                        <img src="../assets/sobre/imgs/sobre_motivacao_right.png">
+                    </div>
+                    <p>Oferecer uma experiência inesquecível aos nossos visitantes, e assim espalhar nossa brasilidade pelos quatro cantos do mundo.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+      <section class="section-team" id="Equipe">
+        <div class="container">
+            <h2>Nossa equipe</h2>
+            <div style="position: relative; height: 4px; display: flex; align-items: center;">
+                <div class="swiper-button-next swiper-btn-team-1"></div>
+                <div class="swiper-button-prev swiper-btn-team-2"></div>
+            </div>
+
+            <div class="swiper swiper-team">
+                <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card-team">
+                                <div class="card-img">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F98%2F35%2Fdb%2F9835db3c92ef4ed52315995b2a60988b.jpg&f=1&nofb=1&ipt=2007f08654fc3b96a5dc2f212100df02ef45d8eb2d9523f14377aa18e9913998" class="card-img-person">
+                                    <a href="" class="card-img-linkedin"><img src="../assets/sobre/icons/sobre_linkdin.svg"></a>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-info-text">
+                                        <h4>Andrei Scafi</h4>
+                                        <p>PO | Backend</p>
+                                    </div>
+                                    <div class="card-info-company">
+                                        <img src="../assets/sobre/icons/company_icon/sobre_icon_safra.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+        <div style="position: relative; display: flex; align-items: center; margin-bottom: 5rem;">
+            <div class="swiper-pagination"></div>
+        </div>
+      </section>
+      <footer>
+        <section class="section-banner">
+            <div class="container">
+                <div class="banner">
+                    <div class="banner-text">
+                        <img src="../assets/footer/icons/footer_mensagem.svg" alt="">
+                        <p>Beyond Analytics, analisando dados turísticos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-contact">
+            <div class="container">
+                <div class="contact-text">
+                    <div class="logo">
+                        <p>Transformando dados em estratégias para fortalecer o turismo internacional no Brasil.</p>
+                        <img src="../assets/utilidades/imgs/logo.png" alt="">
+                    </div>
+                    <div class="info">
+                        <div class="info-way">
+                            <div class="img-wrapper">
+                                <img src="../assets/footer/icons/footer_telefone.png">
+                            </div>
+                            <div class="text">
+                                <h4>Telefone</h4>
+                                <p><b>(11)</b> 9 9515-7270</p>
+                            </div>
+                        </div>
+                        <div class="info-way">
+                            <div class="img-wrapper">
+                                <img src="../assets/footer/icons/footer_email.png">
+                            </div>
+                            <div class="text">
+                                <h4>Email</h4>
+                                <p>beyondanalythics@outlook.com</p>
+                            </div>
+                        </div>
+                        <div class="info-way">
+                            <div class="img-wrapper">
+                                <img src="../assets/footer/icons/footer_enderco.png">
+                            </div>
+                            <div class="text">
+                                <h4>Endereço</h4>
+                                <p>Rua Haddock Lobo , 595, Cerqueira César - São Paulo, SP</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Como podemos ajudar?</h3>
+                    <input type="text" placeholder="Nome">
+                    <input type="tel" name="" id="" placeholder="Telefone">
+                    <input type="email" placeholder="Email">
+                    <input name="" id="" placeholder="Mensagem"></input>
+                    <button class="btn-yellow">Enviar</button>
+                </div>
+            </div>
+        </section>
+      </footer>
+</body>
+<script src="js/header.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+var swiper = new Swiper(".swiper-valores", {
+    spaceBetween: 20,
+
+    breakpoints: {
+            0: {
+                slidesPerView: 1,
+                navigation: true,
+                navigation: {
+                    nextEl: '.swiper-btn-valores-1',
+                    prevEl: '.swiper-btn-valores-2',
+            },
+            },
+            480: {
+                slidesPerView: 3,
+                navigation: true,
+
+            },
+            
+        },
+});
+var swiper = new Swiper(".swiper-team", {
+    spaceBetween: 20,
+    navigation: {
+                    nextEl: '.swiper-btn-team-1',
+                    prevEl: '.swiper-btn-team-2',
+            },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            480: {
+                slidesPerView: 3,
+            },
+            
+        },
+});
+</script>
+</html>

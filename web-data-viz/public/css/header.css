@@ -58,6 +58,7 @@ header .container {
     align-items: center;
     justify-content: space-between;
     width: 99%;
+    align-items: center;
 }
 
 a {

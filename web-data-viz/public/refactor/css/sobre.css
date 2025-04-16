@@ -1,0 +1,346 @@
+section.section-hero {
+    background-image: url("../../assets/sobre/imgs/sobre_hero_background.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 60rem;
+    padding-top: 8rem;
+}
+section.section-hero .container {
+    display: flex;
+    justify-content: center;
+}
+
+.slogan-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16.4rem;
+    max-width: 78rem;
+}
+
+.slogan-wrapper .slogan-text {
+    font-size: 3.2rem;
+    color: #ffff;
+    text-align: center;
+    margin: 2rem;
+}
+
+/* section-valores */
+
+.section-valores {
+    background-color: #3E5744;
+}
+
+.section-valores .container {
+    padding-top: 6.3rem;
+}
+
+.section-valores .top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4.7rem;
+}
+
+.section-valores .top .text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+.section-valores .top .text h2{
+    color: white;
+    font-family: "Outfit";
+    font-size: 3.6rem;
+    font-weight: 400;
+    height: 18rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-valores .top .text hr {
+    width: 72%;
+    border-bottom: 1px solid white;
+}
+
+.section-valores .top img {
+    width: 45rem;
+}
+
+.section-valores .bottom .swiper-wrapper {
+    display: flex;
+}
+
+.cardValores {
+    background: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 30rem;
+    height: 30rem;
+    border-radius: 1rem;
+    padding-inline: 3.2rem;
+    position: absolute;
+    z-index: 2;
+}
+.section-valores .bottom {
+    height: 20rem;
+    position: relative;
+}
+
+.swiper-wrapper .swiper-slide {
+    margin: 0 auto;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.bottom .swiper {
+    height: 31rem;
+    width: 100%;
+    overflow-y: hidden;
+    position: absolute;
+}
+
+.swiper-wrapper {
+    height: inherit;
+}
+
+.headerCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: rem;
+}
+
+.headerCard h3 {
+    font-size: 3.1rem;
+    font-family: 'Outfit';
+    text-align: center;
+    width: 55%;
+}
+
+.iconCard {
+    width: 5rem;
+}
+
+.corpoCard p {
+    padding: 15px 0px 0px 0px;
+    font-size: 2.6rem;
+    font-family: 'Outfit';
+    text-align: center;
+}
+
+/* section-motivacao */
+
+.section-motivacao {
+    background-color: #f8f8f8;
+}
+
+.section-motivacao .container {
+    padding-top: 14.7rem;
+    padding-bottom: 7.4rem;
+}
+
+.section-motivacao h2 {
+    font-size: 6rem;
+    margin-bottom: 5.2rem;
+}
+
+.section-motivacao .imgs, .section-motivacao .imgs-right .top {
+    display: flex;
+}
+.section-motivacao .imgs {
+    align-items: flex-start;
+}
+
+.imgs-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-motivacao .imgs-left {
+    width: 32.4rem;
+    margin-right: 2.6rem;
+}
+
+.section-motivacao .imgs-right .top {
+    gap: 1.6rem;
+    margin-bottom: 1.9rem;
+}
+
+.section-motivacao .imgs-right .top img {
+    width: 43rem;
+}
+
+.section-motivacao .imgs-right p {
+    font-size: 4rem;
+    text-align: center;
+    font-family: "Outfit";
+}
+
+/* section-team */
+.section-team .container {
+    padding-top: 5.9rem;
+}
+
+.section-team h2 {
+    font-size: 6rem;
+    margin-bottom: 5.2rem;
+}
+.section-team .top, .section-team .bottom {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.swiper-team {
+    margin-bottom: 5rem;
+    height: 30rem;
+}
+
+.card-team {
+    display: flex;
+    align-items: center;
+    gap: 3.8rem;
+    background-color: #f8f8f8;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 40rem;
+    max-height: 29rem;
+}
+
+.card-team .card-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+}
+
+.card-team .card-img .card-img-person {
+    max-width: 13.6rem;
+    max-height: 13.6rem;
+    border-radius: 50%;
+}
+
+.card-team .card-info {
+    text-align: center;
+}
+
+.card-team .card-info h4 {
+    font-size: 2.7rem;
+}
+
+.card-team .card-info p {
+    font-size: 2rem;
+}
+
+.card-team .card-info h4,
+.card-team .card-info p {
+    line-height: 150%;
+    letter-spacing: -3%;
+}
+
+.swiper-arrows {
+    position: relative;
+}
+
+.section-team .swiper-btn-team-1,
+.section-team .swiper-btn-team-2 {
+    top: -30px;
+    color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 12.6rem;
+    height: 2rem;
+}
+
+.section-team .swiper-btn-team-1::after,
+.section-team .swiper-btn-team-2::after {
+    content: '';
+}
+
+.section-team .swiper-btn-team-1{
+    background-image: url("../../assets/sobre/icons/sobre_team_seta_right.png");
+}
+
+.section-team .swiper-btn-team-2 {
+    background-image: url("../../assets/sobre/icons/sobre_team_seta_left.png");
+    right: 180px;
+    left: auto;
+}
+
+.swiper-btn-valores-1,
+.swiper-btn-valores-2 {
+    --swiper-navigation-sides-offset: 0;
+    color: #F9D99C !important;
+}
+
+.section-team .swiper .swiper-pagination {
+    top: -30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-team .swiper-pagination-bullet-active {
+    background-color: #3E5744 !important;
+    --swiper-pagination-bullet-size: 10px;
+}
+
+
+@media screen and (max-width: 480px){
+    .section-hero .slogan-wrapper {
+        margin-top: 0;
+    }
+
+    .section-hero .container {
+        align-items: center;
+        height: 100%;
+    }
+
+    .section-valores .top .text h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        height: initial;
+    }
+
+    .section-valores .top img{
+        width:16rem;
+    }
+
+    .section-motivacao .imgs {
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+
+    .section-motivacao .imgs .top {
+        display: none;
+    }
+
+    .section-motivacao .imgs-right p {
+        margin-bottom: 2rem;
+    }
+
+    .section-motivacao .imgs .imgs-left{
+        margin: 0;
+    }
+
+    .section-motivacao h2 {
+        text-align: center;
+    }
+
+    .section-team .swiper-btn-team-1,
+    .section-team .swiper-btn-team-2 {
+        width: 8rem;
+        top: -5px;
+    }
+
+    .section-team .swiper-btn-team-2 {
+        right: 120px;
+    }
+}

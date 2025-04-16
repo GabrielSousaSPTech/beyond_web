@@ -113,8 +113,7 @@
                 </div>
             </div>
         </div>
-        <div class="containerInformacoes">
-
+        <div class="containerInformacoes container">
             <div class="boxBeneficios">
                 <div class="swiper">
 
@@ -123,7 +122,7 @@
                         <div class="swiper-slide">
                             <div class="cardBeneficios">
                                 <div class="headerCard">
-                                    <img class="iconCard" src="./assets/icon/iconPata.png" alt="">
+                                    <img class="iconCard" src="./assets/icon/index_vantagens_pioneirismo.png" alt="">
                                     <h3>Pioneirismo</h3>
                                 </div>
                                 <div class="corpoCard">
@@ -365,58 +364,13 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
     var swiper = new Swiper(".swiper", {
+        spaceBetween: 20,
         slidesPerView: 3,
-        loop: true,
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-                navigation: false
-            },
-            900: {
-                slidesPerView: 2,
-                spaceBetween: 20
-            },
-            1000: {
-                slidesPerView: 2,
-                spaceBetween: 120,
-                navigation: false
-            },
-            1400: {
-                slidesPerView: 3,
-                allowSlidePrev: false,
-                allowSlideNext: false,
-                navigation: false
-
-            }
-        },
-
         });
+
         var swiperVoceSabia = new Swiper(".swiper-voceSabia", {
         slidesPerView: 3,
-        loop: true,
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-                navigation: true,
-            },
-            900: {
-                slidesPerView: 2,
-                spaceBetween: 20
-            },
-            1000: {
-                slidesPerView: 2,
-                spaceBetween: 120,
-                navigation: false,
-            },
-            1400: {
-                slidesPerView: 3,
-                allowSlidePrev: false,
-                allowSlideNext: false,
-                navigation: false,
-            }
-        },
-
-    });
+        });
 </script>
 
 <script>
