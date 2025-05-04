@@ -1,5 +1,5 @@
 header {
-    background-color: yellow;
+    background-color: var(--light-green);
     height: 8rem;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
 }
