@@ -4,7 +4,7 @@
 }
 
 section.section-hero {
-    background-image: url("../../assets/index/imgs/index_hero_background.png");
+    background-image: url("../assets/index/imgs/index_hero_background.png");
     background-size: cover;
     background-repeat: no-repeat;
     height: 60rem;

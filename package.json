@@ -6,17 +6,12 @@
   "scripts": {
     "start": "npm run build && node app.js",
     "build": "ng build --configuration production",
-    "dev": "nodemon --exec node app.js"
+    "dev": "concurrently \"ng build --watch\" \"nodemon app.js\""
   },
   "author": "Feito pelos desenvolvedores @ São Paulo Tech School / Bandtec Digital School",
   "license": "MIT",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.17.1",
-    "mysql2": "^3.9.4",
-    "nodemon": "^2.0.7",
-    "path": "^0.12.7",
+    "@angular/animations": "^19.2.9",
     "@angular/cdk": "^19.2.14",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
@@ -25,6 +20,12 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.17.1",
+    "mysql2": "^3.9.4",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -34,6 +35,7 @@
     "@angular/cli": "^19.2.9",
     "@angular/compiler-cli": "^19.2.0",
     "@types/jasmine": "~5.1.0",
+    "concurrently": "^9.1.2",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

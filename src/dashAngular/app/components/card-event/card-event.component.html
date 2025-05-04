@@ -1,6 +1,6 @@
 <div class="card-event-wrapper">
     @for (event of eventList(); track $index) {
-        <div class="card-event" id="{{event.id+'_id_card_event'}}">
+        <div class="card-event" id="{{event.id+'_id_card_event'}}" [@itemAnim]>
             <span class="color-bar" [style.backgroundColor]="event.cor"></span>
             <div class="internal">
                 <div class="text">
@@ -16,7 +16,7 @@
                         <button class="icon-edit btn-icon">
                             <img src="assets/card-event/icon-edit.svg" alt="">
                         </button>
-                        <button class="icon-trash btn-icon">
+                        <button class="icon-trash btn-icon" (click)="deleteEvent(event.id)">
                             <img src="assets/cards/icon-trash.svg" alt="">
                         </button>
                     </div>

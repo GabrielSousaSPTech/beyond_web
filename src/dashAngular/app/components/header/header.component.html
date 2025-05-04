@@ -6,7 +6,7 @@
       <button class="btn-notification">
         <img src="assets/header/notification-icon.svg" class="notification-icon" />
       </button>
-      <button class="user" (click)="togglePopup()" >
+      <button class="user" (click)="togglePopup()" (mouseleave)="togglePopup()">
         <img src="{{userImg()}}" class="user-img" />
         <div class="container-username-function">
           <p class="username">{{username()}}</p>

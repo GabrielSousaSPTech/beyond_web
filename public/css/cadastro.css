@@ -15,7 +15,7 @@ body {
 }
 
 .section-login .right-img {
-    background-image: url("../../assets/cadastro/imgs/cadastro_background.png");
+    background-image: url("../assets/cadastro/imgs/cadastro_background.png");
     width: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,7 +38,7 @@ body {
 .section-login .sign-page .logo {
     height: 10.8rem;
     width: 30rem;
-    background-image: url("../../assets/utilidades/imgs/logo.png");
+    background-image: url("../assets/utilidades/imgs/logo.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
