@@ -1,0 +1,56 @@
+.card-notification-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+}
+
+.card-notification {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    padding: 1.6rem 1.8rem;
+}
+
+.card-notification:hover {
+    background-color: var(--light-green);
+}
+
+.card-notification:hover .options {
+    display: flex;
+}
+
+.card-notification:hover .date {
+    display: none;
+}
+
+.status {
+    border-radius: 100%;
+    background-color: blueviolet;
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1rem;
+}
+
+.text {
+    min-width: 16rem;
+    margin-right: 1rem;
+}
+
+.options {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    width: 5rem;
+    cursor: pointer;
+}
+
+.options:hover {
+    scale: 1.2;
+}
+
+.date-and-options {
+    width: 5rem;
+}

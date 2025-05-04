@@ -1,0 +1,81 @@
+.Painel-de-controle-historico {
+    padding-bottom: 1rem;
+}
+
+.kpis{
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    background-color: #EDF2F1;
+    padding: 2rem;
+    
+}
+
+.kpis-cards {
+    display: flex;
+    gap: 2.5rem;
+   
+}
+
+.filtros {
+    width: 50rem;
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+
+.group-A {
+    display: flex;
+    gap: 3rem;
+}
+
+.group-B {
+    display: flex;
+    gap: 3rem;
+}
+
+.filter-group {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter-group #select-option {
+    width: 20rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    border-color: black;
+    border: solid 0.5px;
+}
+
+.grafico-card {
+    margin: 4rem;
+    height: 40rem;
+    border-color: black;
+    border: solid 0.5px;
+    border-radius: 1rem;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.grafico-card h2 {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    background-color: #3E5744;
+    border-radius: 1rem 1rem 0 0;
+    height: 3.4rem;
+    color: #FFFFFF;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    font-size: 1.4rem;
+}

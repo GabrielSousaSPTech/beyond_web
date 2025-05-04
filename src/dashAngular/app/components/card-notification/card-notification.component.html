@@ -1,0 +1,18 @@
+<div class="card-notification-wrapper">
+    @for (notification of notificationList(); track $index) {
+        <div class="card-notification">
+            <div class="status"></div>
+            <div class="text">
+                <h2 class="notification-title">{{notification.titulo}}</h2>
+                <p class="notification-desc">{{notification.descricao}}</p>
+            </div>
+            <div class="date-and-options">
+                <div class="date">
+                    <p class="date-ddmmyyyy">{{getDateObject(notification.data) | date: 'dd-MM-yyyy'}}</p>
+                    <p class="date-time">{{getDateObject(notification.data) | date: 'shortTime'}}</p>
+                </div>
+                <button class="options"><img src="assets/cards/icon-trash.svg"></button>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,70 @@
+.pup-up {
+  position: absolute;
+  top: 7.5rem;
+  right: 2rem;
+  width: 30rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-top: 40rem;
+}
+  
+  .card-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    background-color: #ECF0F6;
+    border-radius: 1rem;
+  }
+  
+  .card-perfil img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin: 1rem 0 2rem;
+    background-color: #ffffff;
+  }
+  
+  .card-perfil h1 {
+    font-size: 1.5rem;
+    color: #333333;
+    margin: 1rem 0;
+  }
+  
+  .card-perfil h2 {
+    font-size: 1.7rem;
+    color: #333333;
+  }
+
+  .campos-pup-up .campo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .campos-pup-up {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .campos-pup-up img {
+    width: 3rem;
+    height: 2.2rem;
+  }
+  
+  .campos-pup-up h1,
+  .campos-pup-up h2 {
+    font-size: 1.5rem;
+    color: #333333;
+    display: flex;
+    align-items: center;
+  }
+  
+  .campos-pup-up:hover h2 {
+ 
+    color: red;
+  }

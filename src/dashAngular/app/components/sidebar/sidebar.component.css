@@ -1,0 +1,91 @@
+.sidebar {
+    position: fixed;
+    top: 8rem;
+    left: 0;
+    height: 100%;
+    width: 2;
+    background-color: var(--lake-green);
+    display: flex;
+    justify-content: center;
+    width: 9rem;
+}
+
+.sidebar .top {
+    margin-top: 3rem;
+    margin-bottom: 10rem;
+}
+
+nav, ul {
+    width: 100%;
+}
+
+ul {
+    display: flex;
+    gap: 7.2rem;
+    flex-direction: column;
+}
+
+li {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+li svg {
+    margin: 0.8rem 0;
+}
+
+.active-route,
+li:hover {
+    background-color: white;
+}
+
+.active-route #icon-color.stroke,
+li:hover #icon-color.stroke
+{
+    stroke: var(--navy-blue)
+}
+
+.active-route #icon-color.fill,
+li:hover #icon-color.fill
+{
+    fill: var(--navy-blue);
+}
+
+.icon {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+#icon-color.fill {
+    fill: white;
+    transition: fill 0.3s ease-in-out;
+}
+
+#icon-color.stroke {
+    stroke: white;
+    transition: stroke 0.3s ease-in-out;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.options p {
+    padding: 1rem 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #1C274C;
+    width: 100%;
+    text-align: center;
+}
+
+.options p:hover {
+    background-color: var(--light-green);
+}

@@ -1,0 +1,141 @@
+body {
+    height: 100vh;
+}
+
+.section-login {
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    max-width: initial;
+}
+
+.section-login .left-img {
+    background-image: url("../assets/login/imgs/login_background.png");
+    width: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.section-login .login-page {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+
+.section-login .login-page header {
+    background-color: #3E5744;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.section-login .login-page .logo {
+    height: 10.8rem;
+    width: 30rem;
+    background-image: url("../assets/utilidades/imgs/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section-login .login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ECF0F6;
+    height: 100%;
+}
+
+.section-login .login-wrapper .title {
+    font-size: 6.8rem;
+    margin-bottom: 6.2rem;
+    margin-top: 5.6rem
+}
+
+.section-login .login-wrapper .form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 46rem;
+}
+
+.section-login .login-wrapper .form .input-wrapper {
+    font-size: 2.2rem;
+    max-width: 46rem;
+    width: 100%;
+    position: relative;
+}
+
+.section-login .login-wrapper .form .input-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 2.5%;
+    width: 95%;
+    border-bottom: 2px solid rgb(172, 172, 172);
+}
+
+.section-login .login-wrapper .form .input-wrapper:first-child {
+    margin-bottom: 4rem;
+}
+
+
+.section-login .login-wrapper .form .input-wrapper p {
+    margin-bottom: 1.2rem;
+    margin-left: 1.3rem;
+}
+
+.section-login .login-wrapper .form .input-wrapper input {
+    height: 6rem;
+    max-width: 46rem;
+    width: 100%;
+    border-radius: 1.5rem;
+    padding-left: 1rem;
+    font-size: 1.8rem;
+}
+
+.section-login .login-wrapper .password-forget {
+    align-self: self-end;
+    margin-top: 2.6rem;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 3.2rem;
+    transition: color 0.3s ease-in-out;
+}
+
+
+.section-login .login-wrapper .password-forget:hover {
+    color: #3E5744;
+}
+
+.btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.6rem;
+}
+
+
+@media screen and (max-width: 480px){
+    .section-login .left-img {
+        display: none;
+    }
+
+    .section-login .login-page {
+        width: 100%;
+    }
+
+    .section-login .login-page .title {
+        font-size: 3.8rem;
+    }
+
+    .section-login .login-page .login-wrapper {
+        padding: 0 2rem;
+    }
+}

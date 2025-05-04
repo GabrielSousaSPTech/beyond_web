@@ -1,0 +1,38 @@
+:root {
+    --orinico: #F9D99C;
+    --natu-green: #DADBB1;
+    --light-green: #DCE8E0;
+    --lake-green: #3E5744;
+    --sead-green: #3A4C41;
+    --link-green: #1C2529;
+    --light-gray: #ECF0F6;
+    
+    --navy-blue: #1C274C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    font-family: 'Outfit';
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.container {
+    width: 100%;
+    max-width: 124.6rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}

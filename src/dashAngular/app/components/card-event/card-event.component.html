@@ -1,0 +1,27 @@
+<div class="card-event-wrapper">
+    @for (event of eventList(); track $index) {
+        <div class="card-event" id="{{event.id+'_id_card_event'}}">
+            <span class="color-bar" [style.backgroundColor]="event.cor"></span>
+            <div class="internal">
+                <div class="text">
+                    <h2 class="card-name">{{event.name}}</h2>
+                    <p class="card-description">{{event.descricao}}</p>
+                </div>
+                <div class="date-and-options">
+                    <div class="top">
+                        <div class="dot-status"></div>
+                        <span class="date-end">{{event.dataTermino}}</span>
+                    </div>
+                    <div class="buttons">
+                        <button class="icon-edit btn-icon">
+                            <img src="assets/card-event/icon-edit.svg" alt="">
+                        </button>
+                        <button class="icon-trash btn-icon">
+                            <img src="assets/cards/icon-trash.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
