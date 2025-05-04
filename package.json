@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node app.js",
     "build": "ng build --configuration production",
-    "dev": "concurrently \"ng build --watch\" \"nodemon app.js\""
+    "dev": "concurrently \"ng build --watch\" \"nodemon app.js\"",
+    "stop": "npx kill-port 3333 80"
   },
   "author": "Feito pelos desenvolvedores @ São Paulo Tech School / Bandtec Digital School",
   "license": "MIT",
@@ -42,6 +43,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "kill-port": "^2.0.1",
     "typescript": "~5.7.2"
   }
 }
