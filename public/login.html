@@ -44,3 +44,46 @@
     </section>
 </body>
 </html>
+
+<script>
+    function autenticar() {
+        var emailVar = input_emailUsuario.value;
+        var senhaVar = input_senhaUsuario.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            mensagem_erro.innerHTML = "(Preencha todos os campos)";
+            return false;
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    //sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    //sessionStorage.EMPRESA_USUARIO = json.empresa;
+                    console.log(json.idUsuario)
+                    window.location = "index.html";
+                });
+            } else {
+                resposta.text().then(texto => {
+                    mensagem_erro.innerHTML = texto;
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+        });
+
+        return false;
+        
+    }
+</script>
