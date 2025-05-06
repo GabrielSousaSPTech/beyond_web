@@ -15,17 +15,12 @@ var HOST_APP = process.env.APP_HOST;
 
 var app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public"))); 
-
-var usuarioRouter = require("./src/routes/usuarios");
-app.use("/usuarios", usuarioRouter);
-
 var indexRouter = require("./src/routes/index");
 //var dashRouter = require("./src/routes/dashboard")
 
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/dashboard', express.static(path.join(__dirname, '/public/dashboard/browser')));
 
