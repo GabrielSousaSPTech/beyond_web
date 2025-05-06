@@ -11,7 +11,7 @@
                     <p class="date-ddmmyyyy">{{getDateObject(notification.data) | date: 'dd-MM-yyyy'}}</p>
                     <p class="date-time">{{getDateObject(notification.data) | date: 'shortTime'}}</p>
                 </div>
-                <button class="options"><img src="assets/cards/icon-trash.svg" (click)="deleteNotification(notification.id)"></button>
+                <button class="options"><img src="/assets/cards/icon-trash.svg"></button>
             </div>
         </div>
     }

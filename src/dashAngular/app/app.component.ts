@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { PainelDeControleHistoricoComponent } from "./painel-de-controle-historico/painel-de-controle-historico.component";
+
 
 @Component({
   selector: 'app-root',
@@ -10,5 +12,5 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+
 }

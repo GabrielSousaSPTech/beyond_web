@@ -9,9 +9,6 @@
     display: flex;
     border-radius: 0.8rem;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
-    transition: all 300ms ease-out;
-    transform-origin: top;
-  will-change: transform, opacity, height;
 }
 
 .card-event:hover .buttons {
@@ -25,7 +22,6 @@
 
 .text {
     max-width: 24.8rem;
-    min-width: 17rem;
     margin-right: 2.3rem;
     margin-left: 1.7rem;
     display: flex;
@@ -43,10 +39,6 @@
 .card-description {
     color: #737373;
     font-size: 2rem;
-}
-
-.date-and-options {
-
 }
 
 .top {
@@ -90,3 +82,84 @@
 .btn-icon:hover {
     scale: 1.05;
 }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-size: 1.6rem;
+    color: var(--lake-green);
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    font-size: 1.6rem;
+    border-radius: 0.8rem;
+    padding: 1.2rem 1.6rem;
+    border: 2px solid var(--lake-green);
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border: 2px solid var(--navy-blue);
+}
+
+.form-group input[type="color"] {
+    padding: 0;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    border-radius: 100%;
+    outline: none;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 10rem;
+}
+
+[modal-footer] {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+[modal-footer] .btn-cancel {
+    background-color: rgb(216, 32, 75);
+    color: white;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+[modal-footer] .btn-cancel:hover {
+    background-color: rgb(216, 32, 75, 0.8);
+}
+
+[modal-footer] .btn-save:disabled {
+    background-color: rgb(88, 88, 88);
+    cursor: not-allowed;
+}
+
+[modal-footer] .btn-save {
+    background-color: var(--sead-green);
+    color: white;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+[modal-footer] .btn-save:hover:not(:disabled) {
+    background-color: var(--sead-green, 0.8);
+}
+

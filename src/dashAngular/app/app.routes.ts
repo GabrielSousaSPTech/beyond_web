@@ -14,7 +14,7 @@ export const routes: Routes = [
         path: 'tendencias',
         pathMatch: 'full',
         loadComponent() {
-            return import("./tendencias/tendencias.component").then(
+            return import("./painel-de-controle-tendencias/tendencias.component").then(
                 m => m.TendenciasComponent
             )
         },
@@ -44,6 +44,15 @@ export const routes: Routes = [
         loadComponent() {
             return import('./configuracoes-perfil/configuracoes-perfil.component').then(
                 m => m.ConfiguracoesPerfilComponent
+            );
+        },
+    },
+    {
+        path: 'heatmap',
+        pathMatch: 'full',
+        loadComponent() {
+            return import('./heatmap/heatmap.component').then(
+                m => m.HeatmapComponent
             );
         },
     }

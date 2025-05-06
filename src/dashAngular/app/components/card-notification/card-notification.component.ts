@@ -23,8 +23,4 @@ export class CardNotificationComponent implements OnInit {
     }
     return null
   }
-
-  deleteNotification(id: number): void {
-    this.notificationList.update(list => list.filter(notification => notification.id !== id));
-  }
 }

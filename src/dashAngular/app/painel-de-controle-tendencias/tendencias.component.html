@@ -1,0 +1,39 @@
+<div class="Painel-de-controle-tendencias">
+    <div class="kpis-cards">
+        <app-card-kpi titulo="Total de turistas" conteudoKpi="3.264.765"></app-card-kpi>
+        <app-card-kpi titulo="Varição por ano" conteudoKpi="+8,62%"></app-card-kpi>
+        <app-card-kpi titulo="Varição por mês" conteudoKpi="+14,80%"></app-card-kpi>
+    </div>
+    <div class="filtro">
+        <div class="header-filtro">
+            <div class="filtro-icon">
+                <img id="icon-filtro" src="assets/card-filtro/icon-filtro.svg">
+                <h1>Filtro:</h1>
+            </div>
+            <input id="nome-filtro" type="text" placeholder="Nome do filtro">
+            <div class="icons-header">
+                <div id="favoritar"><img src="assets/card-filtro/icon-estrela.png" onclick="favoritar()"></div>
+                <div id="excluir"><img src="assets/card-filtro/icon-lixeira.svg" onclick="excluir()"></div>
+                <div id="expandir"><img src="assets/card-filtro/icon-expandir.svg" onclick="mostrarFiltrosSalvos()">
+                </div>
+            </div>
+        </div>
+        <app-input-filter></app-input-filter>
+    </div>
+</div>
+<div class="graficos-card">
+    <div class="grafico1">
+        <h2>Ranking de Origens dos Turistas</h2>
+        <div class="chart-placeholder">
+            <!-- espaço para colocar o gráfico -->
+            <app-bar-chart-all></app-bar-chart-all>
+        </div>
+    </div>
+    <div class="grafico2">
+        <h2>Fluxo Turístico Mensal</h2>
+        <div class="chart-placeholder">
+            <!-- espaço para colocar o gráfico -->
+            <app-combo-chart-all></app-combo-chart-all>
+        </div>
+    </div>
+</div>

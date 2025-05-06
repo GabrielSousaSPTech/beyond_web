@@ -1,23 +1,109 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, input, OnInit, Signal, signal } from '@angular/core';
 import { userEvent } from '../../models/user-event.type';
 import { CardEventService } from '../../services/card-event/card-event.service';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { BaseModalComponent } from "../base-modal/base-modal.component";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ContentSectionComponent } from '../../shared/content-section/content-section.component';
+import { Subject, takeUntil } from 'rxjs';
+
+//
 @Component({
   selector: 'app-card-event',
-  imports: [],
+  imports: [BaseModalComponent, ReactiveFormsModule, ContentSectionComponent],
   templateUrl: './card-event.component.html',
   styleUrl: './card-event.component.css'
 })
-export class CardEventComponent implements OnInit {
-  cardEventService = inject(CardEventService) // tras o evento
-  eventList = signal<Array<userEvent>>([]); // propiedade que agrupa e guarda eventos em array
+export class CardEventComponent {
+  private destroy$ = new Subject<void>();
+  private cardEventService = inject(CardEventService)
+  protected eventList = this.cardEventService.getUserEvents;
+  protected currentEvent = signal<userEvent | null>(null);
 
-  ngOnInit():void {
-    this.eventList.set(this.cardEventService.getUserEvents()) // tras o array de eventos
+  protected openModal = signal(false);
+  protected isEditing = signal(false);
+
+  eventForm: FormGroup;
+
+  constructor(private fb: FormBuilder){
+    this.eventForm = this.fb.group({
+      name: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20)
+      ]],
+      descricao: [''],
+      cor: ['#000000', [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(7)
+      ]],
+      dataInicio: ['', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10)]],
+      dataTermino: ['', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10)]],
+    });
+    
+    this.cardEventService.triggerAddEvent$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.addEvent();
+      });
   }
 
-  deleteEvent(id: number): void {
-      this.eventList.update(list => list.filter(event => event.id !== id));
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
+  editEvent(eventEdit: userEvent): void {
+    this.isEditing.set(true);
+    this.openModal.set(true);
+    this.currentEvent.set(eventEdit);
+    this.eventForm.patchValue({
+      name: eventEdit.name,
+      descricao: eventEdit.descricao,
+      cor: eventEdit.cor || '#000000',
+      dataInicio: eventEdit.dataInicio,
+      dataTermino: eventEdit.dataTermino
+    })
+    console.log(this.eventForm.get('cor')?.value);
+  }
+
+
+  closeModal(): void {
+    this.openModal.set(false);
+  }
+
+  saveEvent(): void {
+    if (this.eventForm.valid) {
+      const eventData = this.eventForm.value;
+      const newEvent: userEvent = {
+        id: this.isEditing() ? this.currentEvent()?.id! : this.eventList().length,
+        name: eventData.name,
+        descricao: eventData.descricao,
+        cor: eventData.cor,
+        dataInicio: eventData.dataInicio,
+        dataTermino: eventData.dataTermino
+      };
+
+      if (this.isEditing()) {
+        this.cardEventService.editEvent(newEvent, this.currentEvent()?.id!);
+      } else {
+        this.cardEventService.addEvent(newEvent);
+      }
+
+      this.closeModal();
+    }
+  }
+
+  addEvent(): void {
+    this.isEditing.set(false);
+    this.openModal.set(true);
+    this.currentEvent.set(null);
+    this.eventForm.reset();
+  }
 }

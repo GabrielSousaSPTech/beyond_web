@@ -24,3 +24,11 @@ h2 {
     overflow-y: scroll;
     max-height: calc(80vh - 8rem);
 }
+
+.btn-event {
+    background-color: #288AE3;
+    border-radius: 3.1rem;
+    color: white;
+    font-size: 1rem;
+    padding: 1rem;
+}

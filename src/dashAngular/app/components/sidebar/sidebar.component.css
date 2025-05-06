@@ -1,5 +1,5 @@
 .sidebar {
-    position: fixed;
+    position: absolute;
     top: 8rem;
     left: 0;
     height: 100%;
@@ -8,11 +8,14 @@
     display: flex;
     justify-content: center;
     width: 9rem;
+    box-shadow: 2px 1px 10px 2px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
 }
 
 .sidebar .top {
     margin-top: 3rem;
-    margin-bottom: 10rem;
+    margin-bottom: 7rem;
 }
 
 nav, ul {
@@ -21,7 +24,7 @@ nav, ul {
 
 ul {
     display: flex;
-    gap: 7.2rem;
+    gap: 6rem;
     flex-direction: column;
 }
 
@@ -33,6 +36,19 @@ li {
     transition: background-color 0.3s ease-in-out;
 }
 
+.icon-text {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.icon-text .nav-text {
+    display: none;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: white;
+}
+
 li svg {
     margin: 0.8rem 0;
 }
@@ -40,6 +56,11 @@ li svg {
 .active-route,
 li:hover {
     background-color: white;
+}
+.active-route .nav-text,
+li:hover .nav-text {
+    color: var(--navy-blue);
+    transition: all 0.3s ease-in-out;
 }
 
 .active-route #icon-color.stroke,
@@ -78,14 +99,30 @@ li:hover #icon-color.fill
 }
 
 .options p {
+    position: relative;
     padding: 1rem 0;
     font-size: 1.4rem;
     font-weight: bold;
     color: #1C274C;
     width: 100%;
     text-align: center;
+    transition: all 0.3s ease-in-out;
 }
 
 .options p:hover {
     background-color: var(--light-green);
+}
+
+.options p:hover::after {
+    content: "";
+    position: absolute;
+    top: -0.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fff;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
 }

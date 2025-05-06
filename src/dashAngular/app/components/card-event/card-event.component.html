@@ -1,6 +1,6 @@
 <div class="card-event-wrapper">
     @for (event of eventList(); track $index) {
-        <div class="card-event" id="{{event.id+'_id_card_event'}}" [@itemAnim]>
+        <div class="card-event" id="{{event.id+'_id_card_event'}}">
             <span class="color-bar" [style.backgroundColor]="event.cor"></span>
             <div class="internal">
                 <div class="text">
@@ -13,11 +13,11 @@
                         <span class="date-end">{{event.dataTermino}}</span>
                     </div>
                     <div class="buttons">
-                        <button class="icon-edit btn-icon">
-                            <img src="assets/card-event/icon-edit.svg" alt="">
+                        <button class="icon-edit btn-icon" (click)="editEvent(event)">
+                            <img src="/assets/card-event/icon-edit.svg" alt="">
                         </button>
-                        <button class="icon-trash btn-icon" (click)="deleteEvent(event.id)">
-                            <img src="assets/cards/icon-trash.svg" alt="">
+                        <button class="icon-trash btn-icon">
+                            <img src="/assets/cards/icon-trash.svg" alt="">
                         </button>
                     </div>
                 </div>
@@ -25,3 +25,44 @@
         </div>
     }
 </div>
+<app-base-modal 
+  [isOpen]="openModal()" 
+  [title]="isEditing() ? 'Editar Evento' : 'Criar evento'"
+  (closeModal)="closeModal()">
+  <div modal-body>
+    <form [formGroup]="eventForm">
+      <div class="form-group">
+        <label for="titulo">Título do evento</label>
+        <input id="titulo" formControlName="name" type="text">
+      </div>
+    
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" formControlName="descricao"></textarea>
+      </div>
+    
+      <div class="form-group">
+        <label for="cor">Cor da etiqueta</label>
+        <input id="cor" formControlName="cor" type="color">
+      </div>
+    
+      <div class="form-group">
+        <label for="dataInicio">Data Início</label>
+        <input id="dataInicio" formControlName="dataInicio" type="date">
+      </div>
+    
+      <div class="form-group">
+        <label for="dataTermino">Data Término</label>
+        <input id="dataTermino" formControlName="dataTermino" type="date">
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button type="button" (click)="closeModal()" class="btn-cancel">Cancelar</button>
+    <button type="submit" (click)="saveEvent()" [disabled]="eventForm.invalid" class="btn-save">
+      {{ isEditing() ? 'Salvar' : 'Criar evento!' }}
+    </button>
+  </div>
+
+</app-base-modal>

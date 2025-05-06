@@ -1,7 +1,8 @@
 <div class="content-section-wrapper">
   <div class="section-header">
-    <img src="{{ iconUrl }}"/> 
-    <h2>{{ title }}</h2> 
+   @if(iconUrl){<img src="{{ iconUrl }}"/>} 
+    <h2>{{ title }}</h2>
+    @if(btnEvent != ''){<button class="btn-event" (click)="btnAddEvent()">+ Evento</button>}
   </div>
   <div class="cards-wrapper" [style]="cardPaddingStyle">
     <ng-content></ng-content>
