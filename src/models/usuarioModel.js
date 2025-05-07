@@ -17,7 +17,7 @@ function cadastrar(email, senha, empresa, nome, telefone) {
         VALUES (?, ?, ?, ?, ?);
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql [empresa, nome, email, senha, telefone]);
+    return database.executar(instrucaoSql, [empresa, nome, email, senha, telefone]);
 }
 
 function confirmarCodigo(codigo) {
