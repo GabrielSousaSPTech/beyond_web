@@ -55,9 +55,6 @@
   var sliderIndex = 0;
 
   function sliderNext() {
-
-    console.log(sliderIndex);
-
     if (sliderIndex == 0) {
       codigoEmpresa = document.getElementById("input_codeCompany").value;
       console.log(codigoEmpresa);
@@ -103,7 +100,6 @@
         .getElementById("input_telefone")
         .value.trim()
         .replace(/\s/g, "");
-      console.log(nomeVar, telefoneVar);
 
       if (nomeVar == "" || nomeVar == undefined || nomeVar.length < 2) {
         document.getElementById("mensagem_erro").innerHTML =
@@ -156,7 +152,6 @@
       confirmacaoSenhaVar = document.getElementById(
         "input_confirmacaoSenha"
       ).value;
-      console.log(emailVar, confirmacaoEmailVar, senhaVar, confirmacaoSenhaVar);
 
       if (
         emailVar == "" ||
@@ -208,7 +203,6 @@
 
   function sliderBack() {
     sliderIndex -= 1;
-    console.log("ue" + sliderIndex);
     if (sliderIndex < 0) {
       sliderIndex = 0;
     } else {
@@ -220,16 +214,6 @@
     if (sliderIndex != 3) {
       return false;
     }
-
-    console.log(
-      codigoEmpresa,
-      telefoneVar,
-      nomeVar,
-      emailVar,
-      confirmacaoEmailVar,
-      senhaVar,
-      confirmacaoSenhaVar
-    );
 
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -252,7 +236,7 @@
           }, 2000);
         } else {
           resposta.text().then((texto) => {
-            console.log = texto;
+            console.log(texto);
           });
         }
       })
