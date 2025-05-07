@@ -58,10 +58,11 @@ function cadastrar(req, res) {
     } else {
         usuarioModel.confirmarCodigo(codigo)
             .then(function (resultadoCodigo) {
+                console.log("AJUDA: "+resultadoCodigo[0]);
                 if (resultadoCodigo.length == 0) {
                     res.status(403).send("Código inválido!");
                 } else if (resultadoCodigo.length == 1) {
-                    usuarioModel.cadastrar(email, senha, resultadoCodigo, nome, telefone)
+                    usuarioModel.cadastrar(`${email}`, `${senha}`, resultadoCodigo[0].ID_EMPRESA, `${nome}`, `${telefone}`)
                         .then(
                             function (resultado) {
                                 res.json(resultado);
