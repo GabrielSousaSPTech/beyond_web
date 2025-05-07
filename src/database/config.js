@@ -16,8 +16,9 @@ function executar(instrucao) {
         return Promise.reject("AMBIENTE NÃO CONFIGURADO EM .env");
     }
 
+    console.log("Config: "+mySqlConfig+"==============================")
+
     return new Promise(function (resolve, reject) {
-        console.log("Config: "+mySqlConfig+"==============================")
         var conexao = mysql.createConnection(mySqlConfig);
         conexao.connect();
         conexao.query(instrucao, function (erro, resultados) {
