@@ -58,7 +58,7 @@ function cadastrar(req, res) {
     } else {
         usuarioModel.confirmarCodigo(codigo)
             .then(function (resultadoCodigo) {
-                console.log(resultadoCodigo);
+                console.log("AJUDA: "+resultadoCodigo);
                 if (resultadoCodigo.length == 0) {
                     res.status(403).send("Código inválido!");
                 } else if (resultadoCodigo.length == 1) {
