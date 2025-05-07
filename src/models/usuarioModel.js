@@ -14,10 +14,10 @@ function cadastrar(email, senha, empresa, nome, telefone) {
     
     var instrucaoSql = `
         INSERT INTO TB_FUNCIONARIO (FK_EMPRESA, NOME, EMAIL, SENHA, TEL) 
-        VALUES (?, ?, ?, ?, ?);
+        VALUES (${empresa}, ${nome}, ${email}, ${senha}, ${telefone});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql, [empresa, nome, email, senha, telefone]);
+    return database.executar(instrucaoSql);
 }
 
 function confirmarCodigo(codigo) {
