@@ -1,74 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="icon" type="image/x-icon" href="assets/utilidades/icons/favicon.png" />
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/cadastro.css">
-</head>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="assets/utilidades/icons/favicon.png"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/cadastro.css" />
+  </head>
 
-<body>
+  <body>
     <section class="section-login">
-        <div class="container">
-
-            <div class="sign-page">
-                <header>
-                    <a href="index.html" class="logo"></a>
-                </header>
-                <div class="login-wrapper" id="form_cadastro">
-                    <h1 class="title">Cadastre-se</h1>
-                    <span id="mensagem_erro"></span>
-                    <div class="form">
-                        <div class="input-wrapper">
-                            <p>Codigo empresa</p>
-                            <input id="input_codeCompany" type="text">
-                        </div>
-                    </div>
-                    <div class="btn-wrapper">
-                        <button onclick="sliderNext()" class="btn-green"> > </button>
-                        <a class="btn-white" href="login.html">Já tem conta?<strong>Entre</strong></a>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="sign-page">
+          <header>
+            <a href="index.html" class="logo"></a>
+          </header>
+          <div class="login-wrapper" id="form_cadastro">
+            <h1 class="title">Cadastre-se</h1>
+            <span id="mensagem_erro"></span>
+            <div class="form">
+              <div class="input-wrapper">
+                <p>Codigo empresa</p>
+                <input id="input_codeCompany" type="text" />
+              </div>
             </div>
-            <div class="right-img"></div>
+            <div class="btn-wrapper">
+              <button onclick="sliderNext()" class="btn-green">></button>
+              <a class="btn-white" href="login.html"
+                >Já tem conta?<strong>Entre</strong></a
+              >
+            </div>
+          </div>
         </div>
+        <div class="right-img"></div>
+      </div>
     </section>
-</body>
-
+  </body>
 </html>
 <script>
-    var codigoEmpresa;
-    var telefoneVar;
-    var nomeVar;
-    var emailVar;
-    var confirmacaoEmailVar;
-    var senhaVar;
-    var confirmacaoSenhaVar;
-    var oldHTML = [];
-    var sliderIndex = 0;
+  var codigoEmpresa;
+  var telefoneVar;
+  var nomeVar;
+  var emailVar;
+  var confirmacaoEmailVar;
+  var senhaVar;
+  var confirmacaoSenhaVar;
+  var oldHTML = [];
+  var sliderIndex = 0;
 
-    function sliderNext() {
-        console.log(sliderIndex);
-
-        if(sliderIndex == 0){
-            codigoEmpresa = document.getElementById("input_codeCompany").value;
-            console.log(codigoEmpresa);
-            console.log(codigoEmpresa !== "", codigoEmpresa !== undefined , codigoEmpresa.length > 5)
-            if(codigoEmpresa == "" || codigoEmpresa == undefined){
-                document.getElementById("mensagem_erro").innerHTML = "Preencha o campo codigo empresa";
-                return false;
-            }else if(codigoEmpresa.length < 6){
-                document.getElementById("mensagem_erro").innerHTML = "Codigo empresa deve conter no mínimo 6 caracteres";
-                return false;
-            }
-            sliderIndex+=1;
-                oldHTML.push(form_cadastro.innerHTML);
+  function sliderNext() {
     
-                form_cadastro.innerHTML = `
+    console.log(sliderIndex);
+
+    if (sliderIndex == 0) {
+      codigoEmpresa = document.getElementById("input_codeCompany").value;
+      console.log(codigoEmpresa);
+      console.log(
+        codigoEmpresa !== "",
+        codigoEmpresa !== undefined,
+        codigoEmpresa.length > 5
+      );
+      if (codigoEmpresa == "" || codigoEmpresa == undefined) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo codigo empresa";
+        return false;
+      } else if (codigoEmpresa.length < 6) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Codigo empresa deve conter no mínimo 6 caracteres";
+        return false;
+      }
+      sliderIndex += 1;
+      oldHTML.push(form_cadastro.innerHTML);
+
+      form_cadastro.innerHTML = `
                     <h1 class="title">Cadastre-se</h1>
                     <span id="mensagem_erro"></span>
                     <div class="form">
@@ -85,23 +95,32 @@
                         <button onclick="sliderBack()" class="btn-green"> < </button>
                         <button onclick="sliderNext()" class="btn-green"> > </button>
                     </div>`;
-            return;
-        }
-        if(sliderIndex == 1){
-            nomeVar = document.getElementById("input_nome").value;
-            telefoneVar = document.getElementById("input_telefone").value.trim().replace(/\s/g, "");
-            console.log(nomeVar, telefoneVar);
+      return;
+    }
+    if (sliderIndex == 1) {
+      nomeVar = document.getElementById("input_nome").value;
+      telefoneVar = document
+        .getElementById("input_telefone")
+        .value.trim()
+        .replace(/\s/g, "");
+      console.log(nomeVar, telefoneVar);
 
-            if(nomeVar == "" || nomeVar == undefined || nomeVar.length < 2){
-                document.getElementById("mensagem_erro").innerHTML = "Preencha o campo nome";
-                return false;
-            }else if(telefoneVar == "" || telefoneVar == undefined || telefoneVar.length < 11){
-                document.getElementById("mensagem_erro").innerHTML = "Preencha o campo telefone";
-                return false;
-            }
-            sliderIndex+=1;
-            oldHTML.push(form_cadastro.innerHTML);
-            form_cadastro.innerHTML = `
+      if (nomeVar == "" || nomeVar == undefined || nomeVar.length < 2) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo nome";
+        return false;
+      } else if (
+        telefoneVar == "" ||
+        telefoneVar == undefined ||
+        telefoneVar.length < 11
+      ) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo telefone";
+        return false;
+      }
+      sliderIndex += 1;
+      oldHTML.push(form_cadastro.innerHTML);
+      form_cadastro.innerHTML = `
                 <h1 class="title">Cadastre-se</h1>
                 <span id="mensagem_erro"></span>
                 <div class="form">
@@ -126,86 +145,121 @@
                     <button onclick="sliderBack()" class="btn-green"> < </button>
                     <button onclick="sliderNext()" class="btn-green"> Cadastrar-se </button>
                 </div>`;
-                return;
-            }
-            if(sliderIndex == 2){
-                emailVar = document.getElementById("input_email").value;
-                confirmacaoEmailVar = document.getElementById("input_confirmacaoEmail").value;
-                senhaVar = document.getElementById("input_senha").value;
-                confirmacaoSenhaVar = document.getElementById("input_confirmacaoSenha").value;
-                console.log(emailVar, confirmacaoEmailVar, senhaVar, confirmacaoSenhaVar);
-
-                if(emailVar == "" || emailVar == undefined || emailVar.indexOf('@') == -1){
-                    document.getElementById("mensagem_erro").innerHTML = "Preencha o campo email";
-                    return false;
-                }else if(confirmacaoEmailVar == "" || confirmacaoEmailVar == undefined || confirmacaoEmailVar.indexOf('@') == -1){
-                    document.getElementById("mensagem_erro").innerHTML = "Preencha o campo confirmação de email";
-                    return false;
-                }else if(senhaVar == "" || senhaVar == undefined || senhaVar.length < 6){
-                    document.getElementById("mensagem_erro").innerHTML = "Preencha o campo senha";
-                    return false;
-                }else if(confirmacaoSenhaVar == "" || confirmacaoSenhaVar == undefined || confirmacaoSenhaVar.length < 6){
-                    document.getElementById("mensagem_erro").innerHTML = "Preencha o campo confirmação de senha";
-                    return false;
-                }else if(emailVar != confirmacaoEmailVar){
-                    document.getElementById("mensagem_erro").innerHTML = "E-mails não coincidem";
-                    return false;
-                }else if(senhaVar != confirmacaoSenhaVar){
-                    document.getElementById("mensagem_erro").innerHTML = "Senhas não coincidem";
-                    return false;
-                }
-
-                sliderIndex+=1;
-                oldHTML.push(form_cadastro.innerHTML);
-                cadastrar()
-            }
+      return;
     }
+    if (sliderIndex == 2) {
+      emailVar = document.getElementById("input_email").value;
+      confirmacaoEmailVar = document.getElementById(
+        "input_confirmacaoEmail"
+      ).value;
+      senhaVar = document.getElementById("input_senha").value;
+      confirmacaoSenhaVar = document.getElementById(
+        "input_confirmacaoSenha"
+      ).value;
+      console.log(emailVar, confirmacaoEmailVar, senhaVar, confirmacaoSenhaVar);
 
-    function sliderBack() {
-        sliderIndex-= 1;
-        console.log("ue"+sliderIndex);
-        if(sliderIndex < 0){
-            sliderIndex = 0;
-        }else{
-            form_cadastro.innerHTML = oldHTML.pop();
-        }
-    }
-
-    function cadastrar() {
-        if(sliderIndex != 3) {
-            return false;
-        }
-
-        console.log(codigoEmpresa, telefoneVar, nomeVar,emailVar,confirmacaoEmailVar,senhaVar,confirmacaoSenhaVar)
-
-
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar,
-                empresaCodeServer: codigoEmpresa,
-                telefoneServer: telefoneVar
-            })
-        }).then(function (resposta) {
-            if (resposta.ok) {
-               console.log = "Cadastro realizado com sucesso!";
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, 2000);
-            } else {
-                resposta.text().then(texto => {
-                   console.log = texto;
-                });
-            }
-        }).catch(function (erro) {
-            console.log(erro);
-        });
-
+      if (
+        emailVar == "" ||
+        emailVar == undefined ||
+        emailVar.indexOf("@") == -1
+      ) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo email";
         return false;
+      } else if (
+        confirmacaoEmailVar == "" ||
+        confirmacaoEmailVar == undefined ||
+        confirmacaoEmailVar.indexOf("@") == -1
+      ) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo confirmação de email";
+        return false;
+      } else if (
+        senhaVar == "" ||
+        senhaVar == undefined ||
+        senhaVar.length < 6
+      ) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo senha";
+        return false;
+      } else if (
+        confirmacaoSenhaVar == "" ||
+        confirmacaoSenhaVar == undefined ||
+        confirmacaoSenhaVar.length < 6
+      ) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo confirmação de senha";
+        return false;
+      } else if (emailVar != confirmacaoEmailVar) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "E-mails não coincidem";
+        return false;
+      } else if (senhaVar != confirmacaoSenhaVar) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Senhas não coincidem";
+        return false;
+      }
+
+      sliderIndex += 1;
+      oldHTML.push(form_cadastro.innerHTML);
+      cadastrar();
     }
+  }
+
+  function sliderBack() {
+    sliderIndex -= 1;
+    console.log("ue" + sliderIndex);
+    if (sliderIndex < 0) {
+      sliderIndex = 0;
+    } else {
+      form_cadastro.innerHTML = oldHTML.pop();
+    }
+  }
+
+  function cadastrar() {
+    if (sliderIndex != 3) {
+      return false;
+    }
+
+    console.log(
+      codigoEmpresa,
+      telefoneVar,
+      nomeVar,
+      emailVar,
+      confirmacaoEmailVar,
+      senhaVar,
+      confirmacaoSenhaVar
+    );
+
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        empresaCodeServer: codigoEmpresa,
+        telefoneServer: telefoneVar,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          console.log = "Cadastro realizado com sucesso!";
+          setTimeout(() => {
+            window.location = "login.html";
+          }, 2000);
+        } else {
+          resposta.text().then((texto) => {
+            console.log = texto;
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+
+    return false;
+  }
 </script>

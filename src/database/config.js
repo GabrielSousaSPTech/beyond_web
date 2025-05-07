@@ -17,6 +17,7 @@ function executar(instrucao) {
     }
 
     return new Promise(function (resolve, reject) {
+        console.log(mySqlConfig)
         var conexao = mysql.createConnection(mySqlConfig);
         conexao.connect();
         conexao.query(instrucao, function (erro, resultados) {
