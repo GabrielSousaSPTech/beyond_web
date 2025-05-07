@@ -10,10 +10,18 @@ require("dotenv").config({ path: caminho_env });
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
+
+var usuarioRouter = require("./src/routes/usuarios")
+var indexRouter = require("./src/routes/index");
+
+var app = express();
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
 
-var app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     console.log('Request Headers:', req.headers);
@@ -21,27 +29,17 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public"))); 
 
-var usuarioRouter = require("./src/routes/usuarios");
-app.use("/usuarios", usuarioRouter);
-
-var indexRouter = require("./src/routes/index");
-//var dashRouter = require("./src/routes/dashboard")
-
-
-
 app.use('/dashboard', express.static(path.join(__dirname, '/public/dashboard/browser')));
-
 app.get('/dashboard/*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/dashboard/browser/index.html'));
 });
 
 app.use(cors());
-
+app.use("/usuarios", usuarioRouter);
 app.use("/", indexRouter);
+
 
 app.listen(PORTA_APP, function () {
     console.log(`
