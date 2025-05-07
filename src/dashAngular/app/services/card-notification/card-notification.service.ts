@@ -7,6 +7,6 @@ import { userNotification } from '../../models/user-notification.type';
 export class CardNotificationService {
 
   getUserNotifications(){
-    return [{id: 0, data:"2025-12-27 12:00:00", titulo: "a", descricao: "a"}] as userNotification[];
+    return [{id: 0, data:"2025-12-27 12:00:00", titulo: "Relatorio mensal criado", descricao: "Chegadas de turistas europeus em São Paulo"}] as userNotification[];
   }
 }
