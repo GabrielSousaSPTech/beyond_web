@@ -24,18 +24,19 @@
                 <div class="login-wrapper">
                     <h1 class="title">Entrar</h1>
                     <div class="form">
-                        <div class="input-wrapper">
+                        <span id="mensagem_erro"></span>
+                        <div class="input-wrapper" id="wrapper-email">
                             <p>Email</p>
-                            <input type="email">
+                            <input id="input_emailUsuario" type="email">
                         </div>
                         <div class="input-wrapper">
                             <p>Senha</p>
-                            <input type="text">
+                            <input id="input_senhaUsuario" type="text">
                         </div>
                         <button class="password-forget">Esqueceu sua senha?</button>
                     </div>
                     <div class="btn-wrapper">
-                        <a class="btn-green" href="/dashboard/">Entre na sua conta</a>
+                        <a class="btn-green" onclick="autenticar()">Entre na sua conta</a>
                         <a class="btn-white" href="cadastro.html">É novo por aqui? <strong>Cadastre-se</strong></a>
                     </div>
                 </div>
@@ -44,3 +45,48 @@
     </section>
 </body>
 </html>
+
+<script>
+    function autenticar() {
+        var emailVar = input_emailUsuario.value;
+        var senhaVar = input_senhaUsuario.value;
+
+        if(emailVar == "" || senhaVar == "") {
+            mensagem_erro.innerHTML = "Preencha todos os campos!";
+            return false;
+        }
+
+        mensagem_erro.innerHTML = "";
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.EMPRESA_USUARIO = json.empresa;
+                    console.log(json.idUsuario)
+                    window.location = "/dashboard/";
+                });
+            } else {
+                resposta.text().then(texto => {
+                    mensagem_erro.innerHTML = texto;
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+        });
+
+        return false;
+        
+    }
+</script>

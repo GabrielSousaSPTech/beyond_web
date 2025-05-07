@@ -63,6 +63,7 @@ body {
     flex-direction: column;
     width: 100%;
     max-width: 46rem;
+    gap: 2.6rem;
 }
 
 .section-login .login-wrapper .form .input-wrapper {
@@ -121,6 +122,11 @@ body {
     gap: 2.6rem;
 }
 
+#mensagem_erro {
+    color: #FF0000;
+    font-size: 2rem;
+    height: 2.5rem;
+}
 
 @media screen and (max-width: 480px){
     .section-login .left-img {
