@@ -14,6 +14,12 @@ var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
 
 var app = express();
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    console.log('Request Headers:', req.headers);
+    console.log('Request Body:', req.body);
+    next();
+  });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
