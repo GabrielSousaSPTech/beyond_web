@@ -245,6 +245,11 @@ section.section-hero .container {
     letter-spacing: -3%;
 }
 
+.card-team .card-img {
+    width: 25rem;
+    border-radius: 30rem;
+}
+
 .swiper-arrows {
     position: relative;
 }
