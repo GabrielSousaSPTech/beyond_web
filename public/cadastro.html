@@ -88,8 +88,8 @@
             return;
         }
         if(sliderIndex == 1){
-            var nomeVar = document.getElementById("input_nome").value;
-            var telefoneVar = document.getElementById("input_telefone").value.trim().replace(/\s/g, "");
+            nomeVar = document.getElementById("input_nome").value;
+            telefoneVar = document.getElementById("input_telefone").value.trim().replace(/\s/g, "");
             console.log(nomeVar, telefoneVar);
 
             if(nomeVar == "" || nomeVar == undefined || nomeVar.length < 2){
@@ -129,10 +129,10 @@
                 return;
             }
             if(sliderIndex == 2){
-                var emailVar = document.getElementById("input_email").value;
-                var confirmacaoEmailVar = document.getElementById("input_confirmacaoEmail").value;
-                var senhaVar = document.getElementById("input_senha").value;
-                var confirmacaoSenhaVar = document.getElementById("input_confirmacaoSenha").value;
+                emailVar = document.getElementById("input_email").value;
+                confirmacaoEmailVar = document.getElementById("input_confirmacaoEmail").value;
+                senhaVar = document.getElementById("input_senha").value;
+                confirmacaoSenhaVar = document.getElementById("input_confirmacaoSenha").value;
                 console.log(emailVar, confirmacaoEmailVar, senhaVar, confirmacaoSenhaVar);
 
                 if(emailVar == "" || emailVar == undefined || emailVar.indexOf('@') == -1){
@@ -175,6 +175,8 @@
         if(sliderIndex != 3) {
             return false;
         }
+
+        console.log(codigoEmpresa, telefoneVar, nomeVar,emailVar,confirmacaoEmailVar,senhaVar,confirmacaoSenhaVar)
 
 
         fetch("/usuarios/cadastrar", {
