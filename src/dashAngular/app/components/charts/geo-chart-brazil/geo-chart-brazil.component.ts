@@ -45,7 +45,7 @@ export class GeoChartBrazilComponent {
       region: 'BR', // Define a região como Brasil.
       resolution: 'provinces', // Mostra estados em vez de países.
       colorAxis: { colors: ['#aec7e8', '#1f77b4'] }, // Define as cores do gradiente.
-      'width': 800,
+      'width': 595,
       'height': 800
     };
 

@@ -11,10 +11,11 @@ import { PupUpComponent } from '../pup-up/pup-up.component';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  userImg   = signal("/assets/header/user-img-template.svg")
+  userImg   = signal("assets/header/user-img-template.svg")
   username  = signal("Username")
   userFunction = signal("User function")
   isPopupVisible = signal(false);
+  private hasMouseEntered = signal(false);
 
   constructor(public headerTitleService: HeaderTitleService) { }
 
@@ -29,5 +30,18 @@ export class HeaderComponent {
   sair() {
     this.isPopupVisible.set(false);
     console.log('Usuário saiu.');
+  }
+
+  mouseEntered() {
+    console.log('Mouse entered');
+    this.hasMouseEntered.set(true);
+  }
+
+  mouseLeft() {
+    if(this.hasMouseEntered()) {
+      console.log('Mouse left');
+      this.togglePopup();
+      this.hasMouseEntered.set(false);
+    }
   }
 }

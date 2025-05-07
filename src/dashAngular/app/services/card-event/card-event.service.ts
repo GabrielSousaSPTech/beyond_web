@@ -6,46 +6,23 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CardEventService {
-  private eventList: Array<userEvent> = [{
-    id: 0,
-    name: "titulo",
-    descricao: "opa",
-    cor: "#AAAAAA",
-    dataInicio: "01/01/0001",
-    dataTermino: "22/02/2026",
-  },
-  {
+  private eventList: Array<userEvent> = [
+    {
+      id: 0,
+      name: "Festas de São João",
+      descricao: "todo mês de junho",
+      cor: "#AAAAAA",
+      dataInicio: "2025-06-01",
+      dataTermino: "2025-06-30",
+    },
+    {
     id: 1,
-    name: "titulo",
-    descricao: "opa",
-    cor: "#312312",
-    dataInicio: "01/01/0001",
-    dataTermino: "02/01/0001",
-  },
-  {
-    id: 2,
-    name: "titulo",
-    descricao: "opa",
+    name: "Festival Folclórico de Parintins",
+    descricao: "Festa do Boi-Bumbá",
     cor: "#AAAAAA",
-    dataInicio: "01/01/0001",
-    dataTermino: "02/01/0001",
-  },
-  {
-    id: 3,
-    name: "titulo",
-    descricao: "opa",
-    cor: "#312312",
-    dataInicio: "01/01/0001",
-    dataTermino: "02/01/0001",
-  },
-  {
-    id: 4,
-    name: "titulo",
-    descricao: "opa",
-    cor: "#AAAAAA",
-    dataInicio: "01/01/0001",
-    dataTermino: "02/01/0001",
-  }]
+    dataInicio: "2025-06-29",
+    dataTermino: "2025-06-29",
+  },]
 
   getUserEvents = signal(this.eventList);
   private triggerAddEvent = new Subject<void>();
@@ -63,9 +40,14 @@ export class CardEventService {
     this.getUserEvents.set([...this.eventList]);
   }
 
+  deleteEvent(id: number): void {
+    console.log("deleteEvent", id)
+    this.eventList = this.eventList.filter((event) => event.id !== id);
+    this.getUserEvents.set([...this.eventList]);
+  }
+
   triggerOpenAddEvent(): void {
     console.log("triggerOpenAddEvent")
     this.triggerAddEvent.next();
   }
-
 }

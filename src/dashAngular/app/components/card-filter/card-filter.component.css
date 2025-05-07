@@ -46,6 +46,12 @@
     cursor: pointer;
 }
 
+.filter-anchor-icon {
+  height: 1.8rem;
+  width: 1.8rem;
+  max-width: initial;
+}
+
 .cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;

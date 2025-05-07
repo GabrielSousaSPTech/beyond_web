@@ -10,14 +10,14 @@
                 <div class="date-and-options">
                     <div class="top">
                         <div class="dot-status"></div>
-                        <span class="date-end">{{event.dataTermino}}</span>
+                        <span class="date-end">{{getDateObject(event.dataTermino) | date: "dd/MM/yyyy"}}</span>
                     </div>
                     <div class="buttons">
                         <button class="icon-edit btn-icon" (click)="editEvent(event)">
-                            <img src="/assets/card-event/icon-edit.svg" alt="">
+                            <img src="assets/card-event/icon-edit.svg" alt="">
                         </button>
                         <button class="icon-trash btn-icon">
-                            <img src="/assets/cards/icon-trash.svg" alt="">
+                            <img src="assets/cards/icon-trash.svg" (click)="deleteEvent(event)">
                         </button>
                     </div>
                 </div>

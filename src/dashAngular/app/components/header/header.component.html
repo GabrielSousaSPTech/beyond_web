@@ -1,19 +1,19 @@
 <header>
   <nav>
-    <img src="/assets/header/logo.svg" alt="" class="logo" />
+    <img src="assets/header/logo.svg" alt="" class="logo" />
     <p class="site-title">{{headerTitleService.headerTitle()}}</p>
     <div class="right-side">
       <button class="btn-notification">
-        <img src="/assets/header/notification-icon.svg" class="notification-icon" />
+        <img src="assets/header/notification-icon.svg" class="notification-icon" />
       </button>
-      <button class="user" (click)="togglePopup()" (mouseleave)="togglePopup()" >
+      <button class="user" (click)="togglePopup()">
         <img src="{{userImg()}}" class="user-img" />
         <div class="container-username-function">
           <p class="username">{{username()}}</p>
         </div>
-        <img src="/assets/header/arrow-user.svg" class="arrow-icon" />
+        <img src="assets/header/arrow-user.svg" class="arrow-icon" />
         @if (isPopupVisible()) {
-          <app-pup-up (configuracoesClicado)="navegarParaConfiguracoes()" (sairClicado)="sair()"></app-pup-up>
+          <app-pup-up (configuracoesClicado)="navegarParaConfiguracoes()" (sairClicado)="sair()" (mouseenter)="mouseEntered()" (mouseleave)="mouseLeft()"></app-pup-up>
         }
       </button>
     </div>

@@ -2,7 +2,7 @@
   <div class="section-header">
    @if(iconUrl){<img src="{{ iconUrl }}"/>} 
     <h2>{{ title }}</h2>
-    @if(btnEvent != ''){<button class="btn-event" (click)="btnAddEvent()">+ Evento</button>}
+    @if(btnEvent != ''){<button class="btn-event" (click)="btnAddEvent()">+ Novo</button>}
   </div>
   <div class="cards-wrapper" [style]="cardPaddingStyle">
     <ng-content></ng-content>

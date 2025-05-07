@@ -1,7 +1,7 @@
 <div cdkDropList (cdkDropListDropped)="drop($event)" class="card-filter-wrapper">
     @for (filter of filterList(); track $index) {
         <div class="card-filter" cdkDrag>
-            <img src="/assets/card-filter/icon-filter.svg" class="filter-icon">
+            <img src="assets/card-filter/icon-filter.svg" class="filter-icon">
             <h2 class="filter-name">{{filter.nome}}</h2>
             <ul class="filter-text">
                 @for (filterOption of getValidFilterOptions(filter); track $index) {
@@ -9,7 +9,7 @@
                 }
             </ul>
             <a class="filter-anchor">
-                <img src="/assets/card-filter/icon-anchor.svg" class="filter-anchor-icon">
+                <img src="assets/card-filter/icon-anchor.svg" class="filter-anchor-icon">
             </a>
         </div>
     }

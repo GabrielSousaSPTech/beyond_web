@@ -13,21 +13,21 @@ export class CardUserService {
       id: 0,
       name: "Cláudio Frizzarini",
       tipoAcesso: "Administrador",
-      foto: "/src/assets/organizacao/icon-user.svg",
+      foto: "/srcassets/organizacao/icon-user.svg",
       anoInicio: "Desde 2025",
     },
     {
       id: 0,
       name: "Fernanda Caramico",
       tipoAcesso: "Colaborador",
-      foto: "/src/assets/organizacao/icon-user.svg",
+      foto: "/srcassets/organizacao/icon-user.svg",
       anoInicio: "Desde 2025",
     },
     {
       id: 0,
       name: "Gislayno Monteiro",
       tipoAcesso: "Colaborador",
-      foto: "/src/assets/organizacao/icon-user.svg",
+      foto: "/srcassets/organizacao/icon-user.svg",
       anoInicio: "Desde 2025",
     }]
   }

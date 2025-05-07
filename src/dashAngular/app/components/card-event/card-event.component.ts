@@ -3,13 +3,12 @@ import { userEvent } from '../../models/user-event.type';
 import { CardEventService } from '../../services/card-event/card-event.service';
 import { BaseModalComponent } from "../base-modal/base-modal.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ContentSectionComponent } from '../../shared/content-section/content-section.component';
 import { Subject, takeUntil } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
-//
 @Component({
   selector: 'app-card-event',
-  imports: [BaseModalComponent, ReactiveFormsModule, ContentSectionComponent],
+  imports: [BaseModalComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './card-event.component.html',
   styleUrl: './card-event.component.css'
 })
@@ -29,14 +28,10 @@ export class CardEventComponent {
       name: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(20)
+        Validators.maxLength(40)
       ]],
       descricao: [''],
-      cor: ['#000000', [
-        Validators.required,
-        Validators.minLength(7),
-        Validators.maxLength(7)
-      ]],
+      cor: ['#000000'],
       dataInicio: ['', [
         Validators.required,
         Validators.minLength(10),
@@ -105,5 +100,20 @@ export class CardEventComponent {
     this.openModal.set(true);
     this.currentEvent.set(null);
     this.eventForm.reset();
+  }
+
+  deleteEvent(event: userEvent): void {
+    this.cardEventService.deleteEvent(event.id);
+  }
+
+  getDateObject(date: string | null): Date | null{
+    console.log("getDateObject", date);
+    if(date){
+      console.log("Date is not null")
+      console.log("Date", new Date(date))
+      return new Date(date);
+    }
+    console.log("Date is null")
+    return null
   }
 }
