@@ -62,7 +62,7 @@ function cadastrar(req, res) {
                 if (resultadoCodigo.length == 0) {
                     res.status(403).send("Código inválido!");
                 } else if (resultadoCodigo.length == 1) {
-                    usuarioModel.cadastrar(email, senha, resultadoCodigo[0].ID_EMPRESA, nome, telefone)
+                    usuarioModel.cadastrar(`${email}`, `${senha}`, resultadoCodigo[0].ID_EMPRESA, `${nome}`, `${telefone}`)
                         .then(
                             function (resultado) {
                                 res.json(resultado);
