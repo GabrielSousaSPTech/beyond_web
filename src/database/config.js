@@ -9,7 +9,7 @@ var mySqlConfig = {
     port: process.env.DB_PORT
 };
 
-function executar(instrucao) {
+function executar(instrucao, parans) {
     console.log(`Config: ${mySqlConfig.host}${mySqlConfig.database}${mySqlConfig.user}${mySqlConfig.password}${mySqlConfig.port}     \n\n\n`);
 
     if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
@@ -20,7 +20,7 @@ function executar(instrucao) {
     return new Promise(function (resolve, reject) {
         var conexao = mysql.createConnection(mySqlConfig);
         conexao.connect();
-        conexao.query(instrucao, function (erro, resultados) {
+        conexao.query(instrucao, parans, function (erro, resultados) {
             conexao.end();
             if (erro) {
                 reject(erro);
