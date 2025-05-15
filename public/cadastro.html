@@ -43,6 +43,7 @@
     </section>
   </body>
 </html>
+<script src="https://unpkg.com/imask"></script>
 <script>
   var codigoEmpresa;
   var telefoneVar;
@@ -54,15 +55,13 @@
   var oldHTML = [];
   var sliderIndex = 0;
 
+  var telefoneMask;
+  var emailMask;
+  var emailConfirmacaoMask;
+
   function sliderNext() {
     if (sliderIndex == 0) {
-      codigoEmpresa = document.getElementById("input_codeCompany").value;
-      console.log(codigoEmpresa);
-      console.log(
-        codigoEmpresa !== "",
-        codigoEmpresa !== undefined,
-        codigoEmpresa.length > 5
-      );
+      codigoEmpresa = document.getElementById("input_codeCompany").value.trim();
       if (codigoEmpresa == "" || codigoEmpresa == undefined) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo codigo empresa";
@@ -85,34 +84,46 @@
                         </div>
                         <div class="input-wrapper">
                             <p>Telefone</p>
-                            <input id="input_telefone" type="text">
+                            <input id="input_telefone" type="text" placeholder="(xx) xxxxx-xxxx">
                         </div>
                     </div>
                     <div class="btn-wrapper" style="flex-direction: row; justify-content: space-between;">
                         <button onclick="sliderBack()" class="btn-green"> < </button>
                         <button onclick="sliderNext()" class="btn-green"> > </button>
                     </div>`;
+      var telefone = document.getElementById("input_telefone");
+      var maskOptions = {
+        mask: [
+          "(00) 0000-0000",
+          "(00) 00000-0000",
+        ]
+      };
+      telefoneMask = IMask(telefone, maskOptions);
       return;
     }
     if (sliderIndex == 1) {
-      nomeVar = document.getElementById("input_nome").value;
-      telefoneVar = document
-        .getElementById("input_telefone")
-        .value.trim()
-        .replace(/\s/g, "");
+      nomeVar = document.getElementById("input_nome").value.trim();
 
-      if (nomeVar == "" || nomeVar == undefined || nomeVar.length < 2) {
+      telefoneVar = telefoneMask.unmaskedValue;
+
+      if (nomeVar == "" || nomeVar == undefined) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo nome";
-        return false;
-      } else if (
+        return;
+      } if (
         telefoneVar == "" ||
-        telefoneVar == undefined ||
-        telefoneVar.length < 11
+        telefoneVar == undefined
+        
       ) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo telefone";
-        return false;
+        return;
+      }
+
+      if(telefoneVar.length < 11){
+        document.getElementById("mensagem_erro").innerHTML =
+          "Telefone deve conter no mínimo 11 dígitos";
+        return;
       }
       sliderIndex += 1;
       oldHTML.push(form_cadastro.innerHTML);
@@ -144,55 +155,69 @@
       return;
     }
     if (sliderIndex == 2) {
-      emailVar = document.getElementById("input_email").value;
-      confirmacaoEmailVar = document.getElementById(
-        "input_confirmacaoEmail"
-      ).value;
-      senhaVar = document.getElementById("input_senha").value;
-      confirmacaoSenhaVar = document.getElementById(
-        "input_confirmacaoSenha"
-      ).value;
+      emailVar = document.getElementById("input_email").value.trim();
+      confirmacaoEmailVar = document.getElementById("input_confirmacaoEmail").value.trim();
+      senhaVar = document.getElementById("input_senha").value.trim();
+      confirmacaoSenhaVar = document.getElementById("input_confirmacaoSenha").value.trim();
 
       if (
         emailVar == "" ||
-        emailVar == undefined ||
-        emailVar.indexOf("@") == -1
+        emailVar == undefined
       ) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo email";
-        return false;
-      } else if (
+        return;
+      }
+
+      if(emailVar.indexOf("@") == -1){
+        document.getElementById("mensagem_erro").innerHTML =
+          "Email inválido";
+        return;
+      }
+      
+      if (
         confirmacaoEmailVar == "" ||
-        confirmacaoEmailVar == undefined ||
-        confirmacaoEmailVar.indexOf("@") == -1
+        confirmacaoEmailVar == undefined
       ) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo confirmação de email";
         return false;
-      } else if (
+      }
+
+       if (
         senhaVar == "" ||
-        senhaVar == undefined ||
-        senhaVar.length < 6
+        senhaVar == undefined
       ) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo senha";
-        return false;
-      } else if (
+        return;
+      }
+
+      if(senhaVar.length < 6) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Senha deve conter no mínimo 6 caracteres";
+        return;
+      }
+
+      if (
         confirmacaoSenhaVar == "" ||
-        confirmacaoSenhaVar == undefined ||
-        confirmacaoSenhaVar.length < 6
+        confirmacaoSenhaVar == undefined
       ) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo confirmação de senha";
-        return false;
-      } else if (emailVar != confirmacaoEmailVar) {
+        return;
+      }
+      
+      if (emailVar != confirmacaoEmailVar) {
         document.getElementById("mensagem_erro").innerHTML =
           "E-mails não coincidem";
-        return false;
-      } else if (senhaVar != confirmacaoSenhaVar) {
+        return;
+      }
+      
+      if (senhaVar != confirmacaoSenhaVar) {
         document.getElementById("mensagem_erro").innerHTML =
           "Senhas não coincidem";
-        return false;
+        return;
       }
 
       sliderIndex += 1;
@@ -230,7 +255,6 @@
     })
       .then(function (resposta) {
         if (resposta.ok) {
-          console.log("Cadastro realizado com sucesso!");
           setTimeout(() => {
             window.location = "login.html";
           }, 2000);
