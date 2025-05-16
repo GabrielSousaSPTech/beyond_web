@@ -28,8 +28,9 @@ function insertFiltro(req, res){
     const fk_continente = req.body.fk_continente
     const fk_pais = req.body.fk_pais
     const fk_via = req.body.fk_via
+    const fk_federacao_brasil = req.body.fk_federacao_brasil
 
-    filtroModel.insertFiltro(fkEmpresa, nome, data_chegada, fk_continente, fk_pais, fk_via).then(function(resultado){
+    filtroModel.insertFiltro(fkEmpresa, nome, data_chegada, fk_continente, fk_pais, fk_via,fk_federacao_brasil).then(function(resultado){
         res.status(201).json(resultado);
     }).catch(function (erro){
         res.status(500).json(erro.sqlMessage)
@@ -44,8 +45,8 @@ function updateFiltro(req, res){
     const fk_continente = req.body.fk_continente
     const fk_pais = req.body.fk_pais
     const fk_via = req.body.fk_via
-
-    filtroModel.updateFiltro(idFiltro, nome, data_chegada, fk_continente, fk_pais, fk_via).then(function(resultado){
+    const fk_federacao_brasil = req.body.fk_federacao_brasil
+    filtroModel.updateFiltro(idFiltro, nome, data_chegada, fk_continente, fk_pais, fk_via, fk_federacao_brasil).then(function(resultado){
         res.status(201).json(resultado);
     }).catch(function (erro){
         res.status(500).json(erro.sqlMessage)

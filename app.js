@@ -15,6 +15,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var indexRouter = require("./src/routes/index");
 var eventoRouter = require("./src/routes/evento");
 var filtroRouter = require("./src/routes/filtro");
+var baseDadosRouter = require("./src/routes/baseDados");
 var app = express();
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
@@ -34,7 +35,7 @@ app.use("/eventos", eventoRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/", indexRouter);
 app.use("/filtro", filtroRouter);
-
+app.use("/basedados", baseDadosRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
