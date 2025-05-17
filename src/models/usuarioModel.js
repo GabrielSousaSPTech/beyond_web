@@ -44,13 +44,13 @@ function getByIdUsuario(idFuncionario){
 
 function updateUsuario(idFuncionario, nome, email, senha, tel){
     var instrucaoSql = `UPDATE TB_FUNCIONARIO
-                        SET FK_EMPRESA = ?,
+                        SET
                         NOME = ?,
                         EMAIL = ?,
                         SENHA = ?,
                         TEL = ?
                         WHERE ID_FUNC = ?`
-    return database.executar(instrucaoSql, [idFuncionario, nome, email, senha, tel])
+    return database.executar(instrucaoSql, [nome, email, senha, tel, idFuncionario])
 }
 
 function deleteUsuario(idFuncionario){
