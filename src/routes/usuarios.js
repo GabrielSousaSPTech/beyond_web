@@ -13,4 +13,23 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/all/:fkEmpresa", function (req, res) {
+    
+    usuarioController.getUsuario(req, res);
+});
+
+router.get("/:idFuncionario", function (req, res) {
+    
+    usuarioController.getByIdUsuario(req, res);
+});
+
+router.put("/edit/:idFuncionario", function (req, res) {
+    usuarioController.updateUsuario(req, res);
+});
+
+router.delete("/delete/:idFuncionario", function (req, res) {
+ 
+    usuarioController.deleteUsuario(req, res);
+});
+
 module.exports = router;
