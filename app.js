@@ -16,6 +16,7 @@ var indexRouter = require("./src/routes/index");
 var eventoRouter = require("./src/routes/evento");
 var filtroRouter = require("./src/routes/filtro");
 var baseDadosRouter = require("./src/routes/baseDados");
+var appDashboardRouter = require("./src/routes/appDashboard");
 var app = express();
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
@@ -24,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, "public"))); 
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/dashboard', express.static(path.join(__dirname, '/public/dashboard/browser')));
 app.get('/dashboard/*', (req, res) => {
@@ -36,6 +37,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/", indexRouter);
 app.use("/filtro", filtroRouter);
 app.use("/basedados", baseDadosRouter);
+app.use("/appDashboard", appDashboardRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
