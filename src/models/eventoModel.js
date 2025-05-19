@@ -2,11 +2,11 @@ var database = require("../database/config")
 
 function getEventos(fkEmpresa){
     var instrucaoSql = `SELECT 
-                            ID_EVENTOS
-                            NOME
-                            DESCRICAO
-                            COR
-                            DATA_INICIO
+                            ID_EVENTOS,
+                            NOME,
+                            DESCRICAO,
+                            COR,
+                            DATA_INICIO,
                             DATA_TERMINO
                         FROM TB_EVENTOS
                         WHERE FK_EMPRESA = ?;`
@@ -16,10 +16,10 @@ function getEventos(fkEmpresa){
 
 function getByIdEvento(idEvento){
     var instrucaoSql = `SELECT 
-                            NOME
-                            DESCRICAO
-                            COR
-                            DATA_INICIO
+                            NOME,
+                            DESCRICAO,
+                            COR,
+                            DATA_INICIO,
                             DATA_TERMINO
                         FROM TB_EVENTOS 
                         WHERE ID_EVENTOS = ?`
