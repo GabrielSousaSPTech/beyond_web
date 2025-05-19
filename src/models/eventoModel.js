@@ -1,38 +1,52 @@
 var database = require("../database/config")
 
 function getEventos(fkEmpresa){
-    var instrucaoSql = `SELECT * FROM TB_EVENTOS
-                         WHERE FK_EMPRESA = ?;`
+    var instrucaoSql = `SELECT 
+                            ID_EVENTOS
+                            NOME
+                            DESCRICAO
+                            COR
+                            DATA_INICIO
+                            DATA_TERMINO
+                        FROM TB_EVENTOS
+                        WHERE FK_EMPRESA = ?;`
 
     return database.executar(instrucaoSql, [fkEmpresa])
 }
 
 function getByIdEvento(idEvento){
-    var instrucaoSql = `SELECT * FROM TB_EVENTOS WHERE ID_EVENTOS = ?`
+    var instrucaoSql = `SELECT 
+                            NOME
+                            DESCRICAO
+                            COR
+                            DATA_INICIO
+                            DATA_TERMINO
+                        FROM TB_EVENTOS 
+                        WHERE ID_EVENTOS = ?`
 
     return database.executar(instrucaoSql, [ idEvento])
 }
 
-function insertEvento(fkEmpresa, nome, data_inicio, data_termino, descricao) {
+function insertEvento(fkEmpresa, nome, data_inicio, data_termino, descricao, cor) {
     var instrucaoSql = `INSERT INTO TB_EVENTOS
-                         VALUES(default,?,?,?,?,?);`
+                         VALUES(default,?,?,?,?,?,?);`
 
-    return database.executar(instrucaoSql, [fkEmpresa,nome, data_inicio, data_termino, descricao])
+    return database.executar(instrucaoSql, [fkEmpresa,nome, data_inicio, data_termino, descricao, cor])
 }
 
-function updateEvento(idEvento, fkEmpresa,nome, data_inicio, data_termino, descricao){
+function updateEvento(idEvento, nome, data_inicio, data_termino, descricao, cor){
     var instrucaoSql = `UPDATE TB_EVENTOS 
-                            SET NOME = ?, DATA_INICIO = ?, DATA_TERMINO = ?, DESCRICAO = ? 
-                        WHERE FK_EMPRESA = ? AND ID_EVENTOS = ?;`
+                            SET NOME = ?, DATA_INICIO = ?, DATA_TERMINO = ?, DESCRICAO = ?, COR = ? 
+                        WHERE ID_EVENTOS = ?;`
 
-    return database.executar(instrucaoSql, [nome, data_inicio, data_termino, descricao, fkEmpresa, idEvento])
+    return database.executar(instrucaoSql, [nome, data_inicio, data_termino, descricao,cor, idEvento])
                         
 }
 
-function deleteEvento(fkEmpresa, idEvento){
-    var instrucaoSql = `DELETE FROM TB_EVENTOS WHERE FK_EMPRESA =? AND ID_EVENTOS = ?;`
+function deleteEvento(idEvento){
+    var instrucaoSql = `DELETE FROM TB_EVENTOS WHERE ID_EVENTOS = ?;`
 
-    return database.executar(instrucaoSql, [fkEmpresa, idEvento])
+    return database.executar(instrucaoSql, [idEvento])
 }
 
 module.exports = {

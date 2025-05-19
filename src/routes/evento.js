@@ -13,11 +13,11 @@ router.post("/create", function(req, res){
     eventoController.insertEvento(req, res);
 })
 
-router.put("/edit", function(req, res){
+router.put("/edit/:idEvento", function(req, res){
     eventoController.updateEvento(req, res);
 })
 
-router.delete("/delete/:fkEmpresa/:idEvento", function(req, res){
+router.delete("/delete/:idEvento", function(req, res){
     eventoController.deleteEvento(req, res);
 })
 

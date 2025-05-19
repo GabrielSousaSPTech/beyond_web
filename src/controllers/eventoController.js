@@ -28,8 +28,8 @@ function insertEvento(req, res){
     const data_inicio = req.body.data_inicio;
     const data_termino = req.body.data_termino;
     const descricao = req.body.descricao;
-
-    eventoModel.insertEvento(fkEmpresa, nome, data_inicio, data_termino, descricao).then( function(resultado){
+    const cor = req.body.cor;
+    eventoModel.insertEvento(fkEmpresa, nome, data_inicio, data_termino, descricao, cor).then( function(resultado){
         res.status(201).json(resultado);
     }).catch( function (erro){
         res.status(500).json(erro.sqlMessage);
@@ -37,14 +37,14 @@ function insertEvento(req, res){
 }
 
 function updateEvento(req,res){
-    const idEvento = req.body.idEvento;
-    const fkEmpresa = req.body.fkEmpresa;
+    const idEvento = req.params.idEvento;
     const nome = req.body.nome;
     const data_inicio = req.body.data_inicio;
     const data_termino = req.body.data_termino;
     const descricao = req.body.descricao;
+    const cor = req.body.cor;
 
-    eventoModel.updateEvento(idEvento, fkEmpresa, nome, data_inicio, data_termino, descricao).then( function(resultado){
+    eventoModel.updateEvento(idEvento, nome, data_inicio, data_termino, descricao, cor).then( function(resultado){
         res.status(201).json(resultado);
     }).catch( function (erro){
         res.status(500).json(erro.sqlMessage);
@@ -53,9 +53,9 @@ function updateEvento(req,res){
 
 function deleteEvento(req, res){
     const idEvento = req.params.idEvento;
-    const fkEmpresa = req.params.fkEmpresa;
+    
 
-    eventoModel.deleteEvento(fkEmpresa, idEvento).then( function(resultado){
+    eventoModel.deleteEvento(idEvento).then( function(resultado){
         res.status(201).json(resultado)
     }).catch( function (erro){
         res.status(500).json(erro.sqlMessage);
