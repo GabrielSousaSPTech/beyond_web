@@ -11,8 +11,9 @@ var express = require("express");
 var cors = require("cors");
 var path = require("path");
 
-var usuarioRouter = require("./src/routes/usuarios")
+var usuarioRouter = require("./src/routes/usuarios");
 var indexRouter = require("./src/routes/index");
+var eventoRouter = require("./src/routes/evento");
 
 var app = express();
 var PORTA_APP = process.env.APP_PORT;
@@ -22,13 +23,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-    console.log('Request Headers:', req.headers);
-    console.log('Request Body:', req.body);
-    next();
-  });
-
 app.use(express.static(path.join(__dirname, "public"))); 
 
 app.use('/dashboard', express.static(path.join(__dirname, '/public/dashboard/browser')));
@@ -36,9 +30,10 @@ app.get('/dashboard/*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/dashboard/browser/index.html'));
 });
 
-app.use(cors());
+app.use("/eventos", eventoRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/", indexRouter);
+
 
 
 app.listen(PORTA_APP, function () {

@@ -1,0 +1,11 @@
+<div class="content-section-wrapper">
+  <div class="section-header">
+   @if(iconUrl){<img class="icon" src="{{ iconUrl }}"/>} 
+    <h2>{{ title }}</h2>
+    @if(btnEvent){<button class="btn-event" (click)="buttonClick()">+ Novo</button>}
+  </div>
+  <div class="cards-wrapper" [class]="paddingClass" [style]="cardMaxWidthStyle">
+    <ng-content></ng-content>
+  </div>
+</div>
+

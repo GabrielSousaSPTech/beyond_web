@@ -1,0 +1,28 @@
+<section class="organizacao">
+<div class="invite-organizacao">
+    <div class="container-codigo">
+        <h1>Código da organização:</h1>
+        <h2 id="codigo-empresa">#*****</h2>
+        <img src="assets/icons/actions/icon-copy.svg" alt="icon-copiar">
+    </div>
+    <div class="email">
+        <img src="assets/icons/actions/icon-email.svg">
+        <form class="campo-email">
+            <input type="text" placeholder="Encaminhar para..">
+            <button id="btnEnviar" type="button" onclick="enviarEmail()">Enviar</button>
+        </form>
+    </div>
+    <button id="btnSolicitacoes" type="button" onclick="verSolicitacoes()">
+        <img src="assets/icons/actions/icon-solicitacoes.svg">
+        Solicitações</button>
+</div>
+<div class="cards">
+    <app-content-section title="Usuários cadastrados">
+        <p class="qtd-users">N° de membros: 3</p>
+        <app-card-user></app-card-user>
+    </app-content-section>
+    <app-content-section iconUrl="assets/icons/misc/icon-atividade.svg" title="Ultimas atividades" padding="none" [maxWidth]="'52rem'">
+        <app-card-atividades></app-card-atividades>
+    </app-content-section>
+</div>
+</section>
