@@ -7,7 +7,7 @@ function insertFiltro(fkEmpresa, nome, data_chegada, fk_continente, fk_pais, fk_
 
 function getFiltro(fkEmpresa){
     var instrusaoSql = `SELECT 
-                            ID_FILTRO
+                            ID_FILTRO,
                             NOME,
                             DATA_CHEGADA,
                             FK_CONTINENTE,
