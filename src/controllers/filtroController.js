@@ -39,7 +39,7 @@ function insertFiltro(req, res){
 
 function updateFiltro(req, res){
     
-    const idFiltro = req.body.idFiltro
+    const idFiltro = req.params.idFiltro
     const nome = req.body.nome
     const data_chegada = req.body.data_chegada
     const fk_continente = req.body.fk_continente
