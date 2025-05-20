@@ -71,9 +71,9 @@
             if (resposta.ok) {
                 resposta.json().then(json => {
                     console.log(json);
-                    sessionStorage.NOME_USUARIO = json.NOME;
-                    sessionStorage.ID_USUARIO = json.ID_USUARIO;
-                    sessionStorage.EMPRESA_USUARIO = json.ID_EMPRESA;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.EMPRESA_USUARIO = json.empresa;
                     window.location = "/dashboard";
                 });
             } else {

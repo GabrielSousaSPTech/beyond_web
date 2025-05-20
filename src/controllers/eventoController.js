@@ -2,8 +2,9 @@ var eventoModel = require("../models/eventoModel");
 
 function getEvento(req, res){
     const id = req.params.fkEmpresa
-    
+
         eventoModel.getEventos(id).then( function(resultado){
+            console.log("ue"+resultado);
             res.status(201).json(resultado)
         }).catch( function(erro){
             res.status(500).json(erro.sqlMessage);

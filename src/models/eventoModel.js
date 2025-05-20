@@ -1,15 +1,7 @@
 var database = require("../database/config")
 
 function getEventos(fkEmpresa){
-    var instrucaoSql = `SELECT 
-                            ID_EVENTOS,
-                            NOME,
-                            DESCRICAO,
-                            COR,
-                            DATA_INICIO,
-                            DATA_TERMINO,
-                        FROM TB_EVENTOS
-                        WHERE FK_EMPRESA = ?;`
+    var instrucaoSql = `SELECT ID_EVENTOS, NOME, DESCRICAO, COR, DATA_INICIO, DATA_TERMINO FROM TB_EVENTOS WHERE FK_EMPRESA = ?;`
 
     return database.executar(instrucaoSql, [fkEmpresa])
 }
