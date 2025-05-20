@@ -7,9 +7,9 @@
     "types": []
   },
   "files": [
-    "src/dashAngular/main.ts"
+    "project/main.ts",
   ],
   "include": [
-    "src/dashAngular/**/*.d.ts"
+    "project/**/*.d.ts",
   ]
 }

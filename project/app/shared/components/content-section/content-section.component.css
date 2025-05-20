@@ -1,0 +1,58 @@
+.content-section-wrapper {
+    background-color: var(--light-gray);
+    border-radius: 0.9rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #BEC3CB;
+}
+
+h2 {
+    color: #002332;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.cards-wrapper {
+    padding: 1.7rem 3.5rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: calc(80vh - 8rem);
+    min-width: 30rem;
+}
+
+.padding-none {
+    padding: 0;
+}
+
+.padding-small {
+    padding: 1rem;
+}
+  
+.padding-medium {
+    padding: 2rem;
+}
+  
+.padding-large {
+    padding: 3rem;
+}
+
+.btn-event {
+    background-color: #288AE3;
+    border-radius: 3.1rem;
+    color: white;
+    font-size: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.icon {
+    width: 3rem;
+    height: 3rem;
+}

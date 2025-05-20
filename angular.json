@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {},
       "root": "",
-      "sourceRoot": "src/dashAngular",
+      "sourceRoot": "project",
       "prefix": "app",
       "architect": {
         "build": {
@@ -15,8 +15,8 @@
           "options": {
             "baseHref": "/dashboard/",
             "outputPath": "public/dashboard",
-            "index": "src/dashAngular/index.html",
-            "browser": "src/dashAngular/main.ts",
+            "index": "project/index.html",
+            "browser": "project/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -27,10 +27,10 @@
                 "input": "public/assets/utilidades/icons",
                 "output": "/assets/icons"
               },
-              "src/dashAngular/assets"
+              "project/assets"
             ],
             "styles": [
-              "src/dashAngular/styles.css"
+              "project/styles.css"
             ],
             "scripts": []
           },

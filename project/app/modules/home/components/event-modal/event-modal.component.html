@@ -1,0 +1,40 @@
+<app-base-modal 
+  [isOpen]="openModal()"
+  [title]="isEditing() ? 'Editar Evento' : 'Criar evento'"
+  (closeModal)="closeModal()">
+  <div modal-body>
+    <form [formGroup]="eventForm">
+      <div class="form-group">
+        <label for="titulo">Título do evento</label>
+        <input id="titulo" formControlName="name" type="text">
+      </div>
+    
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" formControlName="descricao"></textarea>
+      </div>
+    
+      <div class="form-group">
+        <label for="cor">Cor da etiqueta</label>
+        <input id="cor" formControlName="cor" type="color">
+      </div>
+    
+      <div class="form-group">
+        <label for="dataInicio">Data Início</label>
+        <input id="dataInicio" formControlName="dataInicio" type="date">
+      </div>
+    
+      <div class="form-group">
+        <label for="dataTermino">Data Término</label>
+        <input id="dataTermino" formControlName="dataTermino" type="date">
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button type="button" (click)="closeModal()" class="btn-cancel">Cancelar</button>
+    <button type="submit" (click)="saveEvent()" [disabled]="eventForm.invalid" class="btn-save">
+      {{ isEditing() ? 'Salvar' : 'Criar evento!' }}
+    </button>
+  </div>
+</app-base-modal>
