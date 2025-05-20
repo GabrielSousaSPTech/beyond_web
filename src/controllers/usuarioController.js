@@ -15,14 +15,13 @@ function autenticar(req, res) {
             .then(function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+                console.log(resultadoAutenticar[0].email);
 
                 if (resultadoAutenticar.length == 1) {
                     res.json({
-                        email: resultadoAutenticar[0].email,
-                        nome: resultadoAutenticar[0].nome,
-                        idUsuario: resultadoAutenticar[0].idUsuario,
-                        empresa: resultadoAutenticar[0].empresa,
-                        telefone: resultadoAutenticar[0].telefone
+                        NOME: resultadoAutenticar[0].NOME,
+                        ID_USUARIO: resultadoAutenticar[0].ID_FUNC,
+                        ID_EMPRESA: resultadoAutenticar[0].FK_EMPRESA,
                     });
                 } else if (resultadoAutenticar.length == 0) {
                     // Se não encontrar, retorna erro

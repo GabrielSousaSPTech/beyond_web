@@ -9,7 +9,7 @@
     ]
   },
   "include": [
-    "src/dashAngular/**/*.spec.ts",
-    "src/dashAngular/**/*.d.ts"
+    "project/**/*.spec.ts",
+    "project/**/*.d.ts",
   ]
 }

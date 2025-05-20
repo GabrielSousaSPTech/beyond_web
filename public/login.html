@@ -70,12 +70,11 @@
         }).then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(json => {
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.idUsuario;
-                    sessionStorage.EMPRESA_USUARIO = json.empresa;
-                    console.log(json.idUsuario)
-                    window.location = "/dashboard/";
+                    console.log(json);
+                    sessionStorage.NOME_USUARIO = json.NOME;
+                    sessionStorage.ID_USUARIO = json.ID_USUARIO;
+                    sessionStorage.EMPRESA_USUARIO = json.ID_EMPRESA;
+                    window.location = "/dashboard";
                 });
             } else {
                 resposta.text().then(texto => {
