@@ -44,10 +44,6 @@ function updateEvento(req,res){
     const descricao = req.body.descricao;
     const cor = req.body.cor;
 
-    console.log(req.params)
-
-    console.log(idEvento, nome, data_inicio, data_termino, descricao, cor);
-
     eventoModel.updateEvento(idEvento, nome, data_inicio, data_termino, descricao, cor).then( function(resultado){
         res.status(201).json(resultado);
     }).catch( function (erro){

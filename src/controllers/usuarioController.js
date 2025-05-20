@@ -19,9 +19,15 @@ function autenticar(req, res) {
 
                 if (resultadoAutenticar.length == 1) {
                     res.json({
-                        NOME: resultadoAutenticar[0].NOME,
-                        ID_USUARIO: resultadoAutenticar[0].ID_FUNC,
-                        ID_EMPRESA: resultadoAutenticar[0].FK_EMPRESA,
+                        email: resultadoAutenticar[0].EMAIL,
+                        nome: resultadoAutenticar[0].NOME,
+                        idUsuario: resultadoAutenticar[0].ID_FUNC,
+                        empresa: resultadoAutenticar[0].FK_EMPRESA,
+                        foto: resultadoAutenticar[0].FOTO,
+                        tipo: resultadoAutenticar[0].TIPO,
+                        cargo: resultadoAutenticar[0].CARGO,
+                        cpf: resultadoAutenticar[0].CPF
+                        
                     });
                 } else if (resultadoAutenticar.length == 0) {
                     // Se não encontrar, retorna erro
