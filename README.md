@@ -11,7 +11,7 @@ Este repositório é destinado ao projeto do segundo semestre de 2025/1. O objet
 - Alertas e notificações para eventos críticos 🔔
 
 ## 🛠️ Tecnologias Utilizadas
-- **Linguagens:** Java, Javascript.
+- **Linguagens:** Java, Javascript, Typescript.
 - **Banco de Dados:** MySQL.
 - **Frameworks e Bibliotecas:** Node.JS, Angular 19, Google charts
 - **ETL:** Apache POI.
