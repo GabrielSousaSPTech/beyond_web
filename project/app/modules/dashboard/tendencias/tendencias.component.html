@@ -23,10 +23,10 @@
 </div>
 <div class="graficos-card">
     <div class="grafico1">
-        <h2>Ranking de Origens dos Turistas</h2>
+        <h2>{{"Ranking de Origens dos Turistas "+anoVariacao()}}</h2>
         <div class="chart-placeholder">
             <!-- espaço para colocar o gráfico -->
-            <app-bar-chart-all></app-bar-chart-all>
+            <app-bar-chart-all [chartData]="barChartPais$"></app-bar-chart-all>
         </div>
     </div>
     <div class="grafico2">

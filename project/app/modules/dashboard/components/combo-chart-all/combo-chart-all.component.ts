@@ -15,7 +15,6 @@ export class ComboChartAllComponent {
     google.charts.load('current', { 'packages': ['corechart'] });
 
     this.chartData.subscribe(data => {
-      console.log('Data received in ComboChartAllComponent:', data);
       google.charts.setOnLoadCallback(() => {
         this.drawChart(data);
       });

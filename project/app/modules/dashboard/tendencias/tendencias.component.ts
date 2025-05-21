@@ -98,6 +98,8 @@ export class TendenciasComponent implements OnInit {
 
   barChartAll$ = this.dataService.getBarChartAll().pipe(this.headerMaker);
 
+  barChartPais$ = this.dataService.getBarChartPais().pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
+
   ngOnInit(): void {
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
   }

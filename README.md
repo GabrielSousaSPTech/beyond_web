@@ -13,12 +13,12 @@ Este repositório é destinado ao projeto do segundo semestre de 2025/1. O objet
 ## 🛠️ Tecnologias Utilizadas
 - **Linguagens:** Java, Javascript.
 - **Banco de Dados:** MySQL.
-- **Frameworks e Bibliotecas:** Node.JS, Chart.JS
-- **ETL:** Apache POI, Apache Spark.
+- **Frameworks e Bibliotecas:** Node.JS, Angular 19, Google charts
+- **ETL:** Apache POI.
 
 ##  📁 Repositórios Relacionados
   - **Beyond_log**: Repositório que armazena o registro de logs do projeto
-      **Link:** https://github.com/GabrielSousaSPTech/beyond_log.git 
+      **Link:** https://github.com/GabrielSousaSPTech/beyond_ETL.git 
 
 
 ## 📞 Contato
