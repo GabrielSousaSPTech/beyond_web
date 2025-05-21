@@ -17,7 +17,7 @@ export class ContentSectionComponent {
   @Input() btnEvent: boolean = false;
   @Output() btnEventClick = new EventEmitter<void>();
 
-  cardEventService = inject(CardEventService);
+  cardEventService: CardEventService | null = null;
 
   buttonClick(){
     this.btnEventClick.emit();
@@ -29,5 +29,11 @@ export class ContentSectionComponent {
 
   get cardMaxWidthStyle() {
     return `max-width: ${this.maxWidth};`;
+  }
+
+  constructor() {
+    if(this.btnEvent){
+        this.cardEventService = inject(CardEventService);
+    }
   }
 }

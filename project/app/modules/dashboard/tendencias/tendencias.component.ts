@@ -1,23 +1,91 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { HeaderTitleService } from '../../../core/services/header-title/header-title.service';
 import { ComboChartAllComponent } from "../components/combo-chart-all/combo-chart-all.component";
 import { BarChartAllComponent } from "../components/bar-chart-all/bar-chart-all.component";
-import { GeoChartWorldComponent } from "../components/geo-chart-world/geo-chart-world.component";
-import { GeoChartBrazilComponent } from "../components/geo-chart-brazil/geo-chart-brazil.component";
 import { CardKpiComponent } from "../components/card-kpi/card-kpi.component";
 import { InputFilterComponent } from "../components/input-filter/input-filter.component";
+import { DataService } from '../services/data.service';
+import { AsyncPipe } from '@angular/common';
+import { lastValueFrom, map, startWith, tap } from 'rxjs';
+import { BarChartAll } from '../../../shared/models/bar-chart-all.type';
 
 @Component({
   selector: 'app-tendencias',
-  imports: [ComboChartAllComponent, BarChartAllComponent, CardKpiComponent, InputFilterComponent],
+  imports: [ComboChartAllComponent, BarChartAllComponent, CardKpiComponent, InputFilterComponent, AsyncPipe],
   templateUrl: './tendencias.component.html',
-  styleUrl: './tendencias.component.css'
+  styleUrl: './tendencias.component.css',
+  providers: [DataService]
 })
-export class TendenciasComponent {
+export class TendenciasComponent implements OnInit {
+  dataService = inject(DataService);
   constructor(public headerTitleService: HeaderTitleService) { }
 
-  ngOnInit(): void {
-    this.headerTitleService.setTitle('Painel de controle');
+  protected readonly anoVariacao = signal<number>(0);
 
+  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno().pipe(
+    tap(data => this.anoVariacao.set(data[0]?.ano)),
+    map(data => data[0]?.variacao_percentual ? `${data[0].variacao_percentual}%` : '0.00%'),
+  );
+
+  kpiTotal$ = this.dataService.getKpiTotal().pipe(
+    map(data => data[0]?.TOTAL_CHEGADAS ? data[0].TOTAL_CHEGADAS.toString() : '0'),
+  );
+
+  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes().pipe(
+    map(data => data[0]?.variacao_percentual ? `${data[0].variacao_percentual}%` : '0.00%'),
+  );
+
+  private headerMaker = map((data: BarChartAll[]) => {
+    const distinctMonths = [...new Set(data.map(item => item.MES))].sort((a, b) => a - b);
+    const continents = [...new Set(data.map(item => item.CONTINENTE))];
+
+    const headerRow = [
+      "Month",
+      ...continents,
+      "TOTAL"
+    ];
+
+    const months = [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+    ];
+
+    const monthRows = distinctMonths.map(month => {
+      const row: (string | number)[] = [months[month-1]];
+      continents.forEach(continent => {
+        const continentData = data.find(item => 
+          item.MES === month && item.CONTINENTE === continent
+        );
+        row.push(continentData ? Number(continentData.TOTAL_CHEGADAS) : 0);
+      });
+      
+      const monthlyTotal = data.find(item => item.MES === month)?.TOTAL_MENSAL || 0;
+      row.push(Number(monthlyTotal));
+      
+      return row;
+    });
+    
+    return [
+      headerRow,
+      ...monthRows
+    ];
+});
+
+  barChartAll$ = this.dataService.getBarChartAll().pipe(this.headerMaker);
+
+
+
+  ngOnInit(): void {
+    this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
   }
 }

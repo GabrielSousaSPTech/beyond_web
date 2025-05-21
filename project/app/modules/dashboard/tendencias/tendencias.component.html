@@ -1,8 +1,8 @@
 <div class="Painel-de-controle-tendencias">
     <div class="kpis-cards">
-        <app-card-kpi titulo="Total de turistas" conteudoKpi="3.264.765"></app-card-kpi>
-        <app-card-kpi titulo="Varição por ano" conteudoKpi="+8,62%"></app-card-kpi>
-        <app-card-kpi titulo="Varição por mês" conteudoKpi="+14,80%"></app-card-kpi>
+        <app-card-kpi [titulo]="`Total de turistas ${anoVariacao()}`" [conteudoKpi]="kpiTotal$"></app-card-kpi>
+        <app-card-kpi [titulo]="`Variação ${anoVariacao()-1} - ${anoVariacao()}`" [conteudoKpi]="kpiVariacaoAno$"></app-card-kpi>
+        <app-card-kpi [titulo]="'Varição por mês '+ anoVariacao()"[conteudoKpi]="kpiVariacaoMes$"></app-card-kpi>
     </div>
     <div class="filtro">
         <div class="header-filtro">
@@ -30,10 +30,10 @@
         </div>
     </div>
     <div class="grafico2">
-        <h2>Fluxo Turístico Mensal</h2>
+        <h2>{{"Fluxo Turístico Mensal "+anoVariacao()}}</h2>
         <div class="chart-placeholder">
             <!-- espaço para colocar o gráfico -->
-            <app-combo-chart-all></app-combo-chart-all>
+            <app-combo-chart-all [chartData]="barChartAll$"></app-combo-chart-all>
         </div>
     </div>
 </div>

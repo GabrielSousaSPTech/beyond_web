@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { Observable } from 'rxjs';
 declare var google: any;
 
 @Component({
@@ -9,18 +10,15 @@ declare var google: any;
   styleUrl: './bar-chart-all.component.css'
 })
 export class BarChartAllComponent {
-
   ngOnInit(): void {
-    // Load the Visualization API and the corechart package.
+ 
     google.charts.load('current', { 'packages': ['corechart'] });
 
-    // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(this.drawChart);
   }
 
   drawChart() {
 
-    // Create the data table.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
     data.addColumn('number', 'Chegadas');
@@ -32,10 +30,8 @@ export class BarChartAllComponent {
       ['Uruguai', 210915],
     ]);
 
-    // Set chart options
+
     var options = {
-      /* 'title': 'Turistas por País', */
-      /* 'width': 800, */
       'height': 500,
       legend: { position: 'top' },
       chartArea: {
@@ -46,7 +42,7 @@ export class BarChartAllComponent {
       }
     };
 
-    // Instantiate and draw the Bar Chart
+
     var barChart = new google.visualization.BarChart(document.getElementById('chart_div_Bar'));
     barChart.draw(data, options);
 
