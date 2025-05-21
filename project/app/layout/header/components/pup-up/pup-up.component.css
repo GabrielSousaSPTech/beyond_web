@@ -7,6 +7,7 @@
   border-radius: 1rem;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
+  z-index: 1000;
 }
   
   .card-perfil {
@@ -62,8 +63,12 @@
     display: flex;
     align-items: center;
   }
+
+  .campo:hover {
+    cursor: pointer;
+  }
   
-  .campos-pup-up:hover h2 {
+  .campos-pup-up .exit:hover h2 {
  
     color: red;
   }

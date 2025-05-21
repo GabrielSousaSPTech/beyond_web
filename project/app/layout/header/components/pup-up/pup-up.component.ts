@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, signal, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../../../core/services/user/user.service';
 
 
 @Component({
@@ -10,5 +11,13 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./pup-up.component.css']
 })
 export class PupUpComponent {
-  
+
+  private userService = inject(UserService);
+  username = this.userService.userName();
+
+  logOut(){
+    sessionStorage.clear();
+    window.location.href = '/';
+  }
+
 }

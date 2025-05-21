@@ -19,12 +19,16 @@ export class SidebarComponent {
     const sidebarWidth = sidebar.offsetWidth;
     let expandedWidth: number;
     if (sidebarWidth === 90) {
+      const arrow = document.querySelector('.bi-arrow-right') as HTMLElement;
+      arrow.classList.remove('bi-arrow-right');
+      arrow.classList.add('bi-arrow-left');
       expandedWidth = 160;
       this.cliked = true;
-      console.log(this.cliked);
     } else {
+      const arrow = document.querySelector('.bi-arrow-left') as HTMLElement;
+      arrow.classList.remove('bi-arrow-left');
+      arrow.classList.add('bi-arrow-right');
       this.cliked = false;
-      console.log(this.cliked);
       expandedWidth = 90;
     }
     
@@ -34,11 +38,11 @@ export class SidebarComponent {
     navTextElements.forEach(element => {
       element.style.display = sidebar.offsetWidth === 90 ? 'initial' : 'none';
     });
+
     this.clearLeaveTimeout();
   }
 
   sidebarOut(){
-    console.log("SideBarOut: "+this.cliked);
     if (this.cliked) {
       this.expandSidebar();
     }
