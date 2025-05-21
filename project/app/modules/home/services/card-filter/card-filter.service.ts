@@ -9,11 +9,8 @@ export class CardFilterService {
 
   getUserFilters(){
     return [{
-      id: 0, nome: "Paises altos", pais: "Brasil", ano: 2077, continente: "America", viaChegada: "Avião", desembarque: "GRU"
+      id: 0, nome: "Turistas Franceses", pais: "França", ano: 2024, continente: "Europa", viaChegada: "Avião", desembarque: "GRU"
     },
-    {
-      id: 1, nome: "Paises altos", pais: "", ano: 2025, continente: "America", viaChegada: "Avião", desembarque: "GRU"
-    }
   ] as userFilter[]
   }
 }
