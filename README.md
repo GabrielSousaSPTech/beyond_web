@@ -5,10 +5,10 @@
 Este repositório é destinado ao projeto do segundo semestre de 2025/1. O objetivo deste projeto é desenvolver uma solução eficiente de monitoramento de dados para auxiliar o cliente na tomada de decisões.
 
 ## 🚀 Funcionalidades
-- Coleta de dados em tempo real 📡
+- Coleta de dados governamentais 
 - Análise e processamento de informações 📈
 - Painel intuitivo para visualização dos dados 📊
-- Alertas e notificações para eventos críticos 🔔
+- Alertas e notificações 🔔
 
 ## 🛠️ Tecnologias Utilizadas
 - **Linguagens:** Java, Javascript, Typescript.
