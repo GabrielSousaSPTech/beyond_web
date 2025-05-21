@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, input, OnInit } from '@angular/core';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { Observable } from 'rxjs';
 declare var google: any;
@@ -9,36 +9,36 @@ declare var google: any;
   templateUrl: './bar-chart-all.component.html',
   styleUrl: './bar-chart-all.component.css'
 })
-export class BarChartAllComponent {
+export class BarChartAllComponent implements OnInit {
+  @Input() chartData!: Observable<any>;
   ngOnInit(): void {
  
     google.charts.load('current', { 'packages': ['corechart'] });
 
-    google.charts.setOnLoadCallback(this.drawChart);
+    this.chartData.subscribe(data => {
+      google.charts.setOnLoadCallback(() => {
+        this.drawChart(data);
+      });
+    });
   }
 
-  drawChart() {
+  drawChart(chartData: string[][]) {
+    console.log(chartData);
 
     var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Topping');
+    data.addColumn('string', 'Países');
     data.addColumn('number', 'Chegadas');
-    data.addRows([
-      ['Argentina', 1132872],
-      ['Estados Unidos', 298021],
-      ['Chile', 294485],
-      ['Paraguai', 243479],
-      ['Uruguai', 210915],
-    ]);
+    data.addRows(chartData);
 
 
     var options = {
-      'height': 500,
+      'height': 5000,
       legend: { position: 'top' },
       chartArea: {
-        height: '90%',
+        height: '98%',
         width: '100%',
-        left: 100,
-        right: 100
+        left: 120,
+        right: 10
       }
     };
 

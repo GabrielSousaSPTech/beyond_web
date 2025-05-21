@@ -14,7 +14,7 @@ export class PainelDeControleHistoricoComponent implements OnInit {
   constructor(public headerTitleService: HeaderTitleService) { }
 
   ngOnInit(): void {
-    this.headerTitleService.setTitle('Painel de controle');
+    this.headerTitleService.setTitle('Histórico de Chegadas de Turistas');
   }
 
 }
