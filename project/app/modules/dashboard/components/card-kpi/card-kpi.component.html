@@ -1,8 +1,12 @@
 <div class="card-kpi">
     <div class="title">
-        <h3>  {{titulo}}</h3>
+        <h3>{{titulo}}</h3>
     </div>
     <p class="kpi-value">
-        {{conteudoKpi}}
+        @if(conteudoKpi | async; as value){
+            {{value}}
+        } @else {
+            <span class="loading">Carregando...</span>
+        }
     </p>
   </div>

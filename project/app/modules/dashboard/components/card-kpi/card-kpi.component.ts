@@ -1,12 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, Input} from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card-kpi',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './card-kpi.component.html',
   styleUrl: './card-kpi.component.css'
 })
-export class CardKpiComponent {
-  @Input() conteudoKpi:string = '';
-  @Input() titulo:string = '';
+export class CardKpiComponent{
+  @Input() conteudoKpi!: Observable<String>;
+  @Input() titulo: string = '';
 }
+
