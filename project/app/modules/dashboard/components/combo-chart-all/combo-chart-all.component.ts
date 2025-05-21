@@ -34,10 +34,17 @@ export class ComboChartAllComponent {
       'height': 500,
       legend: { position: 'top' },
       chartArea: {
-        height: '90%',
+        height: '76%',
         width: '100%',
-        left: 100,
-        right: 30
+        left: 90,
+        right: 10
+      },
+      hAxis: {
+        slantedText: true,
+        slantedTextAngle: 45,
+        textStyle: {
+          fontSize: 14
+        }
       }
     };
 
