@@ -20,11 +20,24 @@ export class TendenciasComponent implements OnInit {
   dataService = inject(DataService);
   constructor(public headerTitleService: HeaderTitleService) { }
 
+  mes = signal<string>(this.getMesNome(new Date().getMonth() + 1));
+
   protected readonly anoVariacao = signal<number>(0);
+
+
+  getMesNome(mes: number): string {
+    const meses = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    return meses[mes - 1];
+  }
 
   kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno().pipe(
     tap(data => this.anoVariacao.set(data[0]?.ano)),
-    map(data => data[0]?.variacao_percentual ? `${data[0].variacao_percentual}%` : '0.00%'),
+    map(data => data[0]?.variacao_percentual ? 
+      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`) 
+      : '0.00%'),
   );
 
   kpiTotal$ = this.dataService.getKpiTotal().pipe(
@@ -32,7 +45,9 @@ export class TendenciasComponent implements OnInit {
   );
 
   kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes().pipe(
-    map(data => data[0]?.variacao_percentual ? `${data[0].variacao_percentual}%` : '0.00%'),
+    map(data => data[0]?.variacao_percentual ? 
+      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
+        : '0.00%'),
   );
 
   private headerMaker = map((data: BarChartAll[]) => {
@@ -82,8 +97,6 @@ export class TendenciasComponent implements OnInit {
 });
 
   barChartAll$ = this.dataService.getBarChartAll().pipe(this.headerMaker);
-
-
 
   ngOnInit(): void {
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');

@@ -20,6 +20,6 @@ export class HomeComponent implements OnInit{
   constructor(public headerTitleService: HeaderTitleService) { }
 
   ngOnInit(): void {
-    this.headerTitleService.setTitle('Sua Página');
+    this.headerTitleService.setTitle('Pagina Principal');
   }
 }

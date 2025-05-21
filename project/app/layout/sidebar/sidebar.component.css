@@ -47,18 +47,28 @@ li {
     font-size: 1.4rem;
     font-weight: 500;
     color: white;
+    max-width: 7rem;
 }
 
 li svg {
     margin: 0.8rem 0;
 }
 
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 .active-route,
-li:hover {
+li:hover,
+.top:hover {
     background-color: white;
 }
 .active-route .nav-text,
-li:hover .nav-text {
+li:hover .nav-text,
+.top:hover i.bi {
     color: var(--navy-blue);
     transition: all 0.3s ease-in-out;
 }
@@ -125,4 +135,9 @@ li:hover #icon-color.fill
     border-right: 10px solid transparent;
     border-top: 10px solid #fff;
     filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+i.bi {
+    color: white;
+    font-size: 4rem;
 }

@@ -14,6 +14,6 @@ export class OrganizacaoComponent implements OnInit{
   constructor(public headerTitleService: HeaderTitleService) { }
     
       ngOnInit(): void {
-        this.headerTitleService.setTitle('Organização');
+        this.headerTitleService.setTitle('Controle de Acesso');
       }
 }

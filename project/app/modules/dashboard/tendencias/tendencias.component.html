@@ -2,7 +2,7 @@
     <div class="kpis-cards">
         <app-card-kpi [titulo]="`Total de turistas ${anoVariacao()}`" [conteudoKpi]="kpiTotal$"></app-card-kpi>
         <app-card-kpi [titulo]="`Variação ${anoVariacao()-1} - ${anoVariacao()}`" [conteudoKpi]="kpiVariacaoAno$"></app-card-kpi>
-        <app-card-kpi [titulo]="'Varição por mês '+ anoVariacao()"[conteudoKpi]="kpiVariacaoMes$"></app-card-kpi>
+        <app-card-kpi [titulo]="`Varição ${mes()} ${anoVariacao()-1} - ${anoVariacao()}`"[conteudoKpi]="kpiVariacaoMes$"></app-card-kpi>
     </div>
     <div class="filtro">
         <div class="header-filtro">
