@@ -1,16 +1,23 @@
-<div cdkDropList (cdkDropListDropped)="drop($event)" class="card-filter-wrapper">
+@if(!isLoading()){
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="card-filter-wrapper">
     @for (filter of filterList(); track $index) {
         <div class="card-filter" cdkDrag>
             <img src="assets/icons/actions/icon-filterCard-grab.svg" class="filter-icon">
-            <h2 class="filter-name">{{filter.nome}}</h2>
-            <ul class="filter-text">
-                @for (filterOption of getValidFilterOptions(filter); track $index) {
-                    <li>● {{filterOption.value}}</li>
-                }
-            </ul>
+            <div class="wrapper">
+                <h2 class="filter-name">{{filter.NOME}}</h2>
+                <ul class="filter-text">
+                    @for (filterOption of getFilterTransformedValues(filter); track $index) {
+                        <li>● {{filterOption}}</li>
+                    }
+                </ul>
+            </div>
             <a class="filter-anchor">
-                <img src="assets/icons/actions/icon-filterCard-anchor.svg" class="filter-anchor-icon">
+                <img routerLink="/tendencias" src="assets/icons/actions/icon-filterCard-anchor.svg" class="filter-anchor-icon" (click)="useFilter(filter.ID_FILTRO)">
             </a>
         </div>
     }
 </div>
+} @else {
+    <app-loader></app-loader>
+}
+

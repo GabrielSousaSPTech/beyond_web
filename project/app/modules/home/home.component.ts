@@ -6,13 +6,16 @@ import { CardFilterComponent } from "./components/card-filter/card-filter.compon
 import { CardNotificationComponent } from './components/card-notification/card-notification.component';
 import { EventModalComponent } from "./components/event-modal/event-modal.component";
 import { CardEventService } from './services/card-event/card-event.service';
+import { UserFiltersService } from '../../core/services/user-filters/user-filters.service';
+import { DatePipe } from '@angular/common';
+import { BasicDataService } from '../../core/services/basicData/basicData.service';
 
 @Component({
   selector: 'app-home',
   imports: [ContentSectionComponent, CardEventComponent, CardFilterComponent, CardNotificationComponent, EventModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers: [CardEventService]
+  providers: [CardEventService, UserFiltersService, DatePipe, BasicDataService]
 })
 
 export class HomeComponent implements OnInit{
