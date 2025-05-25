@@ -24,12 +24,15 @@ export class ComboChartAllComponent {
   drawChart(graphData: string[][]) {
     var data = google.visualization.arrayToDataTable(graphData);
 
+    const totalSeries: number = graphData[0].length - 2;
+    console.log("Total series: " + totalSeries)
+
     var options = {
       /* title: 'Entrada de Turistas Mensal por País', */
       /*   vAxis: { title: 'Chegadas' },
         hAxis: { title: 'Meses' }, */
       seriesType: 'bars',
-      series: { 8: { type: 'line' } },
+      series: { [totalSeries]: { type: 'line' } },
       'height': 500,
       legend: { position: 'top' },
       chartArea: {
