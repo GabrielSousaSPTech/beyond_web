@@ -6,12 +6,12 @@ import { CardKpiComponent } from "../components/card-kpi/card-kpi.component";
 import { InputFilterComponent } from "../components/input-filter/input-filter.component";
 import { DataService } from '../services/data.service';
 import { AsyncPipe } from '@angular/common';
-import { lastValueFrom, map, startWith, tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { BarChartAll } from '../../../shared/models/bar-chart-all.type';
 
 @Component({
   selector: 'app-tendencias',
-  imports: [ComboChartAllComponent, BarChartAllComponent, CardKpiComponent, InputFilterComponent, AsyncPipe],
+  imports: [ComboChartAllComponent, BarChartAllComponent, CardKpiComponent, InputFilterComponent],
   templateUrl: './tendencias.component.html',
   styleUrl: './tendencias.component.css',
   providers: [DataService]
@@ -24,6 +24,8 @@ export class TendenciasComponent implements OnInit {
 
   protected readonly anoVariacao = signal<number>(0);
 
+  private filter = sessionStorage.getItem('filter') ? JSON.parse(sessionStorage.getItem('filter')!) : '';
+
 
   getMesNome(mes: number): string {
     const meses = [
@@ -33,21 +35,18 @@ export class TendenciasComponent implements OnInit {
     return meses[mes - 1];
   }
 
-  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(
+  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno(this.filter).pipe(
     tap(data => this.anoVariacao.set(data[0]?.ano)),
     map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
   );
 
-  kpiTotal$ = this.dataService.getKpiTotal("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(
-    map(data => {
-      const total = data[0]?.TOTAL_CHEGADAS ?? 0;
-      return new Intl.NumberFormat('pt-BR').format(total);
-    }),
+  kpiTotal$ = this.dataService.getKpiTotal(this.filter).pipe(
+    map(data => data[0]?.TOTAL_CHEGADAS ? data[0].TOTAL_CHEGADAS.toString() : '0'),
   );
 
-  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(
+  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes(this.filter).pipe(
     map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
@@ -99,11 +98,12 @@ export class TendenciasComponent implements OnInit {
     ];
   });
 
-  barChartAll$ = this.dataService.getBarChartAll("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(this.headerMaker);
+  barChartAll$ = this.dataService.getBarChartAll(this.filter).pipe(this.headerMaker);
 
-  barChartPais$ = this.dataService.getBarChartPais("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
+  barChartPais$ = this.dataService.getBarChartPais(this.filter).pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
 
   ngOnInit(): void {
+    console.log("filtro:", this.filter)
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
   }
 }

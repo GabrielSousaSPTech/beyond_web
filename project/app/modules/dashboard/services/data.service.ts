@@ -7,6 +7,7 @@ import { KpiTotal } from '../../../shared/models/kpi-total.type';
 import { KpiVariacaoAno } from '../../../shared/models/kpi-variacao-ano.type';
 import { KpiVariacaoMes } from '../../../shared/models/kpi-variacao-mes.type';
 import { catchError, Observable, throwError } from 'rxjs';
+import { userFilter } from '../../../shared/models/user-filter.type';
 
 @Injectable()
 export class DataService {
@@ -19,71 +20,51 @@ export class DataService {
     return throwError(() => new Error('Something went wrong; please try again later.'));
   }
 
-  public getBarChartAll(filtro?: string): Observable<BarChartAll[]> {
-    let url = `${this.baseUrl}/graficoTendenciasPrincipal`;
+  private formatFilter(filter: userFilter): Record<string, any> {
+    return {
+      DATA_CHEGADA: filter.DATA_CHEGADA || null,
+      FK_CONTINENTE: filter.FK_CONTINENTE || null,
+      FK_PAIS: filter.FK_PAIS || null,
+      FK_VIA: filter.FK_VIA || null,
+      FK_FEDERACAO: filter.FK_FEDERACAO || null,
+    };
+  }
 
-    if (filtro) {
-      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
+  private makeRequest<T>(endpoint: string, filter?: userFilter | string): Observable<T[]> {
+    const url = `${this.baseUrl}/${endpoint}`;
+
+    if (filter && filter !== '') {
+      const formattedFilter = this.formatFilter(filter as userFilter);
+      return this.http.get<T[]>(url, { params: formattedFilter })
+        .pipe(catchError(this.handleError));
     }
 
-    return this.http.get<BarChartAll[]>(url)
+    return this.http.get<T[]>(url)
       .pipe(catchError(this.handleError));
   }
 
-  public getBarChartUF(filtro?: string): Observable<BarChartUF[]> {
-    let url = `${this.baseUrl}/graficoTendenciasUF`;
-
-    if (filtro) {
-      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
-    }
-
-    return this.http.get<BarChartUF[]>(url)
-      .pipe(catchError(this.handleError));
+  public getBarChartAll(filter?: userFilter | string): Observable<BarChartAll[]> {
+    return this.makeRequest<BarChartAll>('graficoTendenciasPrincipal', filter);
   }
 
-
-  public getBarChartPais(filtro?: string) {
-    let url = `${this.baseUrl}/graficoTendenciasPais`;
-
-    if (filtro) {
-      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
-    }
-
-    console.log("Essa é a url do angular: " + url);
-
-    return this.http.get<BarChartPais[]>(url)
-      .pipe(catchError(this.handleError));
+  public getBarChartUF(filter?: userFilter | string): Observable<BarChartUF[]> {
+    return this.makeRequest<BarChartUF>('graficoTendenciasUF', filter);
   }
 
-
-  public getKpiTotal(filtro?: string) {
-    let url = `${this.baseUrl}/kpiTotal`;
-
-    if (filtro) {
-      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
-    }
-    return this.http.get<KpiTotal[]>(url)
-      .pipe(catchError(this.handleError));
+  public getBarChartPais(filter?: userFilter | string): Observable<BarChartPais[]> {
+    return this.makeRequest<BarChartPais>('graficoTendenciasPais', filter);
   }
 
-  public getKpiVariacaoAno(filtro?: string) {
-    let url = `${this.baseUrl}/kpiVariacaoAno`;
-
-    if (filtro) {
-      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
-    }
-    return this.http.get<KpiVariacaoAno[]>(url)
-      .pipe(catchError(this.handleError));
+  public getKpiTotal(filter?: userFilter | string): Observable<KpiTotal[]> {
+    return this.makeRequest<KpiTotal>('kpiTotal', filter);
   }
 
-  public getKpiVariacaoMes(filtro?: string) {
-    let url = `${this.baseUrl}/kpiVariacaoMes`;
+  public getKpiVariacaoAno(filter?: userFilter | string): Observable<KpiVariacaoAno[]> {
+    return this.makeRequest<KpiVariacaoAno>('kpiVariacaoAno', filter);
+  }
 
-    if (filtro) {
-      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
-    }
-    return this.http.get<KpiVariacaoMes[]>(url)
-      .pipe(catchError(this.handleError));
+  public getKpiVariacaoMes(filter?: userFilter | string): Observable<KpiVariacaoMes[]> {
+    return this.makeRequest<KpiVariacaoMes>('kpiVariacaoMes', filter);
   }
 }
 

@@ -3,7 +3,7 @@
         <app-content-section iconUrl="assets/icons/misc/icon-calendar.svg" title="Eventos" [btnEvent]="true" (btnEventClick)="eventService.addEvent()">
             <app-card-event #cardEvent></app-card-event>
         </app-content-section>
-        <app-content-section iconUrl="assets/icons/misc/icon-filtro.svg" title="Filtros">
+        <app-content-section iconUrl="assets/icons/misc/icon-filtro.svg" title="Filtros" [maxWidth]="'70rem'">
             <app-card-filter></app-card-filter>
         </app-content-section>
     </div> 
