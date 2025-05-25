@@ -33,21 +33,24 @@ export class TendenciasComponent implements OnInit {
     return meses[mes - 1];
   }
 
-  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno().pipe(
+  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno("YEAR(bd.DATA_CHEGADA)=2023").pipe(
     tap(data => this.anoVariacao.set(data[0]?.ano)),
-    map(data => data[0]?.variacao_percentual ? 
-      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`) 
+    map(data => data[0]?.variacao_percentual ?
+      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
   );
 
-  kpiTotal$ = this.dataService.getKpiTotal().pipe(
-    map(data => data[0]?.TOTAL_CHEGADAS ? data[0].TOTAL_CHEGADAS.toString() : '0'),
+  kpiTotal$ = this.dataService.getKpiTotal("c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA'").pipe(
+    map(data => {
+      const total = data[0]?.TOTAL_CHEGADAS ?? 0;
+      return new Intl.NumberFormat('pt-BR').format(total);
+    }),
   );
 
-  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes().pipe(
-    map(data => data[0]?.variacao_percentual ? 
+  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes("YEAR(bd.DATA_CHEGADA)=2023").pipe(
+    map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
-        : '0.00%'),
+      : '0.00%'),
   );
 
   private headerMaker = map((data: BarChartAll[]) => {
@@ -76,29 +79,29 @@ export class TendenciasComponent implements OnInit {
     ];
 
     const monthRows = distinctMonths.map(month => {
-      const row: (string | number)[] = [months[month-1]];
+      const row: (string | number)[] = [months[month - 1]];
       continents.forEach(continent => {
-        const continentData = data.find(item => 
+        const continentData = data.find(item =>
           item.MES === month && item.CONTINENTE === continent
         );
         row.push(continentData ? Number(continentData.TOTAL_CHEGADAS) : 0);
       });
-      
+
       const monthlyTotal = data.find(item => item.MES === month)?.TOTAL_MENSAL || 0;
       row.push(Number(monthlyTotal));
-      
+
       return row;
     });
-    
+
     return [
       headerRow,
       ...monthRows
     ];
-});
+  });
 
-  barChartAll$ = this.dataService.getBarChartAll().pipe(this.headerMaker);
+  barChartAll$ = this.dataService.getBarChartAll("c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA'").pipe(this.headerMaker);
 
-  barChartPais$ = this.dataService.getBarChartPais().pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
+  barChartPais$ = this.dataService.getBarChartPais("c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA'").pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
 
   ngOnInit(): void {
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');

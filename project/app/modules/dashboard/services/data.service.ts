@@ -19,34 +19,71 @@ export class DataService {
     return throwError(() => new Error('Something went wrong; please try again later.'));
   }
 
-  public getBarChartAll(): Observable<BarChartAll[]> {
-    return this.http.get<BarChartAll[]>(`${this.baseUrl}/graficoTendenciasPrincipal`)
-    .pipe(catchError(this.handleError));
+  public getBarChartAll(filtro?: string): Observable<BarChartAll[]> {
+    let url = `${this.baseUrl}/graficoTendenciasPrincipal`;
+
+    if (filtro) {
+      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
+    }
+
+    return this.http.get<BarChartAll[]>(url)
+      .pipe(catchError(this.handleError));
   }
 
-  public getBarChartUF(): Observable<BarChartUF[]> {
-    return this.http.get<BarChartUF[]>(`${this.baseUrl}/graficoTendenciasUF`)
-    .pipe(catchError(this.handleError));
+  public getBarChartUF(filtro?: string): Observable<BarChartUF[]> {
+    let url = `${this.baseUrl}/graficoTendenciasUF`;
+
+    if (filtro) {
+      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
+    }
+
+    return this.http.get<BarChartUF[]>(url)
+      .pipe(catchError(this.handleError));
   }
 
-  public getBarChartPais() {
-    return this.http.get<BarChartPais[]>(`${this.baseUrl}/graficoTendenciasPais`)
-    .pipe(catchError(this.handleError));
+
+  public getBarChartPais(filtro?: string) {
+    let url = `${this.baseUrl}/graficoTendenciasPais`;
+
+    if (filtro) {
+      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
+    }
+
+    console.log("Essa é a url do angular: " + url);
+
+    return this.http.get<BarChartPais[]>(url)
+      .pipe(catchError(this.handleError));
   }
 
-  public getKpiTotal() {
-    return this.http.get<KpiTotal[]>(`${this.baseUrl}/kpiTotal`)
-    .pipe(catchError(this.handleError));
+
+  public getKpiTotal(filtro?: string) {
+    let url = `${this.baseUrl}/kpiTotal`;
+
+    if (filtro) {
+      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
+    }
+    return this.http.get<KpiTotal[]>(url)
+      .pipe(catchError(this.handleError));
   }
 
-  public getKpiVariacaoAno() {
-    return this.http.get<KpiVariacaoAno[]>(`${this.baseUrl}/kpiVariacaoAno`)
-    .pipe(catchError(this.handleError));
+  public getKpiVariacaoAno(filtro?: string) {
+    let url = `${this.baseUrl}/kpiVariacaoAno`;
+
+    if (filtro) {
+      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
+    }
+    return this.http.get<KpiVariacaoAno[]>(url)
+      .pipe(catchError(this.handleError));
   }
 
-  public getKpiVariacaoMes() {
-    return this.http.get<KpiVariacaoMes[]>(`${this.baseUrl}/kpiVariacaoMes`)
-    .pipe(catchError(this.handleError));
+  public getKpiVariacaoMes(filtro?: string) {
+    let url = `${this.baseUrl}/kpiVariacaoMes`;
+
+    if (filtro) {
+      url += `?filtro=${encodeURIComponent(filtro)}`; // Adiciona o filtro à URL
+    }
+    return this.http.get<KpiVariacaoMes[]>(url)
+      .pipe(catchError(this.handleError));
   }
 }
 
