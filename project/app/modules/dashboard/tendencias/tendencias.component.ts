@@ -37,8 +37,8 @@ export class TendenciasComponent implements OnInit {
 
   kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno(this.filter).pipe(
     tap(data => this.anoVariacao.set(data[0]?.ano)),
-    map(data => data[0]?.variacao_percentual ? 
-      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`) 
+    map(data => data[0]?.variacao_percentual ?
+      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
   );
 
@@ -47,9 +47,9 @@ export class TendenciasComponent implements OnInit {
   );
 
   kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes(this.filter).pipe(
-    map(data => data[0]?.variacao_percentual ? 
+    map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
-        : '0.00%'),
+      : '0.00%'),
   );
 
   private headerMaker = map((data: BarChartAll[]) => {
@@ -78,32 +78,32 @@ export class TendenciasComponent implements OnInit {
     ];
 
     const monthRows = distinctMonths.map(month => {
-      const row: (string | number)[] = [months[month-1]];
+      const row: (string | number)[] = [months[month - 1]];
       continents.forEach(continent => {
-        const continentData = data.find(item => 
+        const continentData = data.find(item =>
           item.MES === month && item.CONTINENTE === continent
         );
         row.push(continentData ? Number(continentData.TOTAL_CHEGADAS) : 0);
       });
-      
+
       const monthlyTotal = data.find(item => item.MES === month)?.TOTAL_MENSAL || 0;
       row.push(Number(monthlyTotal));
-      
+
       return row;
     });
-    
+
     return [
       headerRow,
       ...monthRows
     ];
-});
+  });
 
   barChartAll$ = this.dataService.getBarChartAll(this.filter).pipe(this.headerMaker);
 
   barChartPais$ = this.dataService.getBarChartPais(this.filter).pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
 
   ngOnInit(): void {
-    console.log("filtro:",this.filter)
+    console.log("filtro:", this.filter)
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
   }
 }

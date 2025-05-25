@@ -28,43 +28,43 @@ export class DataService {
       FK_VIA: filter.FK_VIA || null,
       FK_FEDERACAO: filter.FK_FEDERACAO || null,
     };
-}
+  }
 
-private makeRequest<T>(endpoint: string, filter?: userFilter | string): Observable<T[]> {
-  const url = `${this.baseUrl}/${endpoint}`;
-  
-  if (filter && filter !== '') {
-    const formattedFilter = this.formatFilter(filter as userFilter);
-    return this.http.get<T[]>(url, { params: formattedFilter })
+  private makeRequest<T>(endpoint: string, filter?: userFilter | string): Observable<T[]> {
+    const url = `${this.baseUrl}/${endpoint}`;
+
+    if (filter && filter !== '') {
+      const formattedFilter = this.formatFilter(filter as userFilter);
+      return this.http.get<T[]>(url, { params: formattedFilter })
+        .pipe(catchError(this.handleError));
+    }
+
+    return this.http.get<T[]>(url)
       .pipe(catchError(this.handleError));
   }
-  
-  return this.http.get<T[]>(url)
-    .pipe(catchError(this.handleError));
-}
 
-public getBarChartAll(filter?: userFilter | string): Observable<BarChartAll[]> {
-  return this.makeRequest<BarChartAll>('graficoTendenciasPrincipal', filter);
-}
+  public getBarChartAll(filter?: userFilter | string): Observable<BarChartAll[]> {
+    return this.makeRequest<BarChartAll>('graficoTendenciasPrincipal', filter);
+  }
 
-public getBarChartUF(filter?: userFilter | string): Observable<BarChartUF[]> {
-  return this.makeRequest<BarChartUF>('graficoTendenciasUF', filter);
-}
+  public getBarChartUF(filter?: userFilter | string): Observable<BarChartUF[]> {
+    return this.makeRequest<BarChartUF>('graficoTendenciasUF', filter);
+  }
 
-public getBarChartPais(filter?: userFilter | string): Observable<BarChartPais[]> {
-  return this.makeRequest<BarChartPais>('graficoTendenciasPais', filter);
-}
+  public getBarChartPais(filter?: userFilter | string): Observable<BarChartPais[]> {
+    return this.makeRequest<BarChartPais>('graficoTendenciasPais', filter);
+  }
 
-public getKpiTotal(filter?: userFilter | string): Observable<KpiTotal[]> {
-  return this.makeRequest<KpiTotal>('kpiTotal', filter);
-}
+  public getKpiTotal(filter?: userFilter | string): Observable<KpiTotal[]> {
+    return this.makeRequest<KpiTotal>('kpiTotal', filter);
+  }
 
-public getKpiVariacaoAno(filter?: userFilter | string): Observable<KpiVariacaoAno[]> {
-  return this.makeRequest<KpiVariacaoAno>('kpiVariacaoAno', filter);
-}
+  public getKpiVariacaoAno(filter?: userFilter | string): Observable<KpiVariacaoAno[]> {
+    return this.makeRequest<KpiVariacaoAno>('kpiVariacaoAno', filter);
+  }
 
-public getKpiVariacaoMes(filter?: userFilter | string): Observable<KpiVariacaoMes[]> {
-  return this.makeRequest<KpiVariacaoMes>('kpiVariacaoMes', filter);
-}
+  public getKpiVariacaoMes(filter?: userFilter | string): Observable<KpiVariacaoMes[]> {
+    return this.makeRequest<KpiVariacaoMes>('kpiVariacaoMes', filter);
+  }
 }
 

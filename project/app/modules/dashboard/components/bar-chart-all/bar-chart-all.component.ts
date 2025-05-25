@@ -12,7 +12,7 @@ declare var google: any;
 export class BarChartAllComponent implements OnInit {
   @Input() chartData!: Observable<any>;
   ngOnInit(): void {
- 
+
     google.charts.load('current', { 'packages': ['corechart'] });
 
     this.chartData.subscribe(data => {
@@ -32,13 +32,13 @@ export class BarChartAllComponent implements OnInit {
 
 
     var options = {
-      'height': 5000,
+      height: 500,
       legend: { position: 'top' },
       chartArea: {
         height: '98%',
         width: '100%',
-        left: 120,
-        right: 10
+        left: 150,
+        right: 0,
       }
     };
 
