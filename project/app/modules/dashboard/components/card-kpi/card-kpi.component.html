@@ -6,7 +6,7 @@
         @if(conteudoKpi | async; as value){
             {{value}}
         } @else {
-            <span class="loading">Carregando...</span>
+            <app-loader></app-loader>
         }
     </p>
   </div>
