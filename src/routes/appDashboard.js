@@ -4,35 +4,27 @@ var router = express.Router();
 var appDashboardController = require("../controllers/appDashboardController");
 
 router.get("/graficoTendenciasPrincipal", function (req, res) {
-    console.log(req.query)
     appDashboardController.getBarChartAll(req, res);
 });
 
-router.get("/graficoTendenciasUF/:filtro?", function (req, res) {
-    const filtro = req.params.filtro || '';
-    appDashboardController.getBarChartUF(req, res, filtro);
+router.get("/graficoTendenciasUF", function (req, res) {
+    appDashboardController.getBarChartUF(req, res);
 });
 
-router.get("/graficoTendenciasPais/:filtro?", function (req, res) {
-    const filtro = req.params.filtro || ''; // Obtém o filtro da URL (ex: /graficoTendenciasPais/c.NOME='EUROPA')
-    console.log(`Esse é a urlrecebida: ${filtro}`)
-    appDashboardController.getBarChartPais(req, res, filtro);
+router.get("/graficoTendenciasPais", function (req, res) {
+    appDashboardController.getBarChartPais(req, res);
 });
 
-router.get("/kpiTotal/:filtro?", function (req, res) {
-    const filtro = req.params.filtro || '';
-    appDashboardController.getKpiTotal(req, res, filtro);
+router.get("/kpiTotal", function (req, res) {
+    appDashboardController.getKpiTotal(req, res);
 });
 
-router.get("/kpiVariacaoAno/:filtro?", function (req, res) {
-    const filtro = req.params.filtro || '';
-    console.log("routes variação ano: " + filtro)
-    appDashboardController.getKpiVariacaoAno(req, res, filtro);
+router.get("/kpiVariacaoAno", function (req, res) {
+    appDashboardController.getKpiVariacaoAno(req, res);
 });
 
-router.get("/kpiVariacaoMes/:filtro?", function (req, res) {
-    const filtro = req.params.filtro || '';
-    appDashboardController.getKpiVariacaoMes(req, res, filtro);
+router.get("/kpiVariacaoMes", function (req, res) {
+    appDashboardController.getKpiVariacaoMes(req, res);
 });
 
 module.exports = router;
