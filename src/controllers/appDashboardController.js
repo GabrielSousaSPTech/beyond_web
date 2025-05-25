@@ -1,8 +1,7 @@
 var appDashboardModel = require("../models/appDashboardModel")
 
-function getBarChartAll(req, res, filtro) {
-    console.log("Controller grafico principal: " + req.query.filtro)
-    appDashboardModel.getBarChartAll(req.query.filtro).then(function (resultado) {
+function getBarChartAll(req, res) {
+    appDashboardModel.getBarChartAll(req.query).then(function (resultado) {
         res.status(200).json(resultado)
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage)

@@ -4,16 +4,18 @@ function getBarChartAll(filtro) {
 
     console.log("esse é o filtro gráfico principal: " + filtro)
 
-    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) = 2024'; // Condição fixa
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
-    if (filtro) {
-        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            whereClause = `WHERE ${filtro}`;
-        } else {
-            whereClause += ` AND ${filtro}`;
-        }
+    let filterOption = "";
 
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+    console.log(valoresFilter)
+    for (let i = 1; i < valoresFilter.length; i++) {
+
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
+
+
     var instrucaoSql = `
     SELECT 
     YEAR(bd.DATA_CHEGADA) AS ANO,
@@ -31,15 +33,18 @@ function getBarChartAll(filtro) {
         PAIS p ON bd.FK_PAIS = p.ID_PAIS
     JOIN 
         VIA v ON bd.FK_VIA = v.ID_VIA
-    ${whereClause} 
+    ${yearClause} 
+    ${filterOption}
     GROUP BY 
         YEAR(bd.DATA_CHEGADA),
-        MONTH(bd.DATA_CHEGADA),
+    MONTH(bd.DATA_CHEGADA),
         c.NOME
-    ORDER BY 
-        ANO, MES, CONTINENTE;
-        `
-
+    ORDER BY
+    ANO, MES, CONTINENTE;
+    `
+    console.log(yearClause)
+    console.log(filterOption)
+    console.log(instrucaoSql)
     return database.executar(instrucaoSql)
 }
 
@@ -48,51 +53,15 @@ function getBarChartUF(filtro) {
 
     if (filtro) {
         if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            whereClause = `WHERE ${filtro}`;
+            whereClause = `WHERE ${filtro} `;
         } else {
-            whereClause += ` AND ${filtro}`;
+            whereClause += ` AND ${filtro} `;
         }
 
     }
     var instrucaoSql = `
-    SELECT 
+    SELECT
     fb.NOME AS FEDERACAO_BRASIL,
-    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
-    FROM 
-        TB_BASE_DADOS bd
-    JOIN 
-        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
-    JOIN 
-        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
-    JOIN 
-        PAIS p ON bd.FK_PAIS = p.ID_PAIS
-    JOIN 
-        VIA v ON bd.FK_VIA = v.ID_VIA
-    ${whereClause} 
-    GROUP BY 
-        fb.NOME
-    ORDER BY 
-        TOTAL_CHEGADAS DESC;
-        `
-
-    return database.executar(instrucaoSql)
-}
-
-function getBarChartPais(filtro) {
-    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) = 2024'; // Condição fixa
-
-    if (filtro) {
-        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            whereClause = `WHERE ${filtro}`;
-        } else {
-            whereClause += ` AND ${filtro}`;
-        }
-
-    }
-
-    const instrucaoSql = `
-    SELECT 
-        p.NOME_PAIS AS PAIS,
         SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
     FROM 
         TB_BASE_DADOS bd
@@ -105,32 +74,31 @@ function getBarChartPais(filtro) {
     JOIN 
         VIA v ON bd.FK_VIA = v.ID_VIA
     ${whereClause} 
-    GROUP BY 
-        p.NOME_PAIS
+    GROUP BY
+    fb.NOME
     ORDER BY 
-        TOTAL_CHEGADAS DESC 
-    LIMIT 30;`;
+        TOTAL_CHEGADAS DESC;
+    `
 
-    console.log("Query gerada:", instrucaoSql); // Verifique no console se o filtro está sendo incluído
-
-    return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql)
 }
 
-function getKpiTotal(filtro) {
+function getBarChartPais(filtro) {
     let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) = 2024'; // Condição fixa
 
     if (filtro) {
         if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            whereClause = `WHERE ${filtro}`;
+            whereClause = `WHERE ${filtro} `;
         } else {
-            whereClause += ` AND ${filtro}`;
+            whereClause += ` AND ${filtro} `;
         }
 
     }
 
-    var instrucaoSql = `
-  SELECT 
-    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+    const instrucaoSql = `
+    SELECT
+    p.NOME_PAIS AS PAIS,
+        SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
     FROM 
         TB_BASE_DADOS bd
     JOIN 
@@ -142,7 +110,44 @@ function getKpiTotal(filtro) {
     JOIN 
         VIA v ON bd.FK_VIA = v.ID_VIA
     ${whereClause} 
-        `
+    GROUP BY
+    p.NOME_PAIS
+    ORDER BY 
+        TOTAL_CHEGADAS DESC 
+    LIMIT 30; `;
+
+    console.log("Query gerada:", instrucaoSql); // Verifique no console se o filtro está sendo incluído
+
+    return database.executar(instrucaoSql);
+}
+
+function getKpiTotal(filtro) {
+    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) = 2024'; // Condição fixa
+
+    if (filtro) {
+        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
+            whereClause = `WHERE ${filtro} `;
+        } else {
+            whereClause += ` AND ${filtro} `;
+        }
+
+    }
+
+    var instrucaoSql = `
+    SELECT
+    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+    FROM 
+        TB_BASE_DADOS bd
+    JOIN 
+        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
+    JOIN 
+        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+    JOIN 
+        PAIS p ON bd.FK_PAIS = p.ID_PAIS
+    JOIN 
+        VIA v ON bd.FK_VIA = v.ID_VIA
+    ${whereClause}
+    `
 
     return database.executar(instrucaoSql)
 }
@@ -159,29 +164,29 @@ function getKpiVariacaoAno(filtro) {
             const match = filtro.match(regex);
             const anoOriginal = parseInt(match[1], 10);
             const anoAnterior = anoOriginal - 1;
-            const novaParte = `YEAR(bd.DATA_CHEGADA) IN (${anoAnterior}, ${anoOriginal})`;
+            const novaParte = `YEAR(bd.DATA_CHEGADA) IN(${anoAnterior}, ${anoOriginal})`;
             const filtroRefeito = filtro.replace(regex, novaParte);
 
-            whereClause = `WHERE ${filtroRefeito}`;
+            whereClause = `WHERE ${filtroRefeito} `;
         } else {
-            whereClause += ` AND ${filtro}`;
+            whereClause += ` AND ${filtro} `;
         }
 
     }
     var instrucaoSql = `
-        SELECT 
-            ano,
-            total_chegadas,
-            LAG(total_chegadas) OVER (ORDER BY ano) AS total_ano_anterior,
+    SELECT
+    ano,
+        total_chegadas,
+        LAG(total_chegadas) OVER(ORDER BY ano) AS total_ano_anterior,
             ROUND(
-                    100.0 * (total_chegadas - LAG(total_chegadas) OVER (ORDER BY ano)) / 
-                    NULLIF(LAG(total_chegadas) OVER (ORDER BY ano), 0), 
-                    2
+                100.0 * (total_chegadas - LAG(total_chegadas) OVER(ORDER BY ano)) /
+            NULLIF(LAG(total_chegadas) OVER(ORDER BY ano), 0),
+            2
                 ) AS variacao_percentual
-        FROM (
-                SELECT 
+    FROM(
+        SELECT 
                     YEAR(bd.DATA_CHEGADA) AS ano,
-                    SUM(bd.CHEGADAS) AS total_chegadas
+        SUM(bd.CHEGADAS) AS total_chegadas
                 FROM 
                     TB_BASE_DADOS bd
                 JOIN 
@@ -195,9 +200,9 @@ function getKpiVariacaoAno(filtro) {
                 ${whereClause} 
                 GROUP BY 
                     YEAR(bd.DATA_CHEGADA)
-            ) AS totais_anual
+    ) AS totais_anual
                 ORDER BY ano DESC LIMIT 1;
-        `
+    `
 
     console.log("sql variação ano: " + instrucaoSql)
 
@@ -216,13 +221,13 @@ function getKpiVariacaoMes(filtro) {
             const match = filtro.match(regex);
             const anoOriginal = parseInt(match[1], 10);
             const anoAnterior = anoOriginal - 1;
-            const novaParte = `YEAR(bd.DATA_CHEGADA) IN (${anoAnterior}, ${anoOriginal})`;
+            const novaParte = `YEAR(bd.DATA_CHEGADA) IN(${anoAnterior}, ${anoOriginal})`;
             const filtroRefeito = filtro.replace(regex, novaParte);
 
-            whereClause = `WHERE ${filtroRefeito}`;
-            whereClause2 = `WHERE ano = ${anoOriginal}`
+            whereClause = `WHERE ${filtroRefeito} `;
+            whereClause2 = `WHERE ano = ${anoOriginal} `
         } else {
-            whereClause += ` AND ${filtro}`;
+            whereClause += ` AND ${filtro} `;
         }
 
     }

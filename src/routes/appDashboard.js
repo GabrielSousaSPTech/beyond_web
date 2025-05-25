@@ -3,10 +3,9 @@ var router = express.Router();
 
 var appDashboardController = require("../controllers/appDashboardController");
 
-router.get("/graficoTendenciasPrincipal/:filtro?", function (req, res) {
-    const filtro = req.params.filtro || '';
-    console.log("routes principal: " + filtro)
-    appDashboardController.getBarChartAll(req, res, filtro);
+router.get("/graficoTendenciasPrincipal", function (req, res) {
+    console.log(req.query)
+    appDashboardController.getBarChartAll(req, res);
 });
 
 router.get("/graficoTendenciasUF/:filtro?", function (req, res) {
