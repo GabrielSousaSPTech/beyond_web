@@ -33,21 +33,21 @@ export class TendenciasComponent implements OnInit {
     return meses[mes - 1];
   }
 
-  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno("YEAR(bd.DATA_CHEGADA)=2023").pipe(
+  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(
     tap(data => this.anoVariacao.set(data[0]?.ano)),
     map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
   );
 
-  kpiTotal$ = this.dataService.getKpiTotal("c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA'").pipe(
+  kpiTotal$ = this.dataService.getKpiTotal("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(
     map(data => {
       const total = data[0]?.TOTAL_CHEGADAS ?? 0;
       return new Intl.NumberFormat('pt-BR').format(total);
     }),
   );
 
-  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes("YEAR(bd.DATA_CHEGADA)=2023").pipe(
+  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(
     map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
@@ -99,9 +99,9 @@ export class TendenciasComponent implements OnInit {
     ];
   });
 
-  barChartAll$ = this.dataService.getBarChartAll("c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA'").pipe(this.headerMaker);
+  barChartAll$ = this.dataService.getBarChartAll("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(this.headerMaker);
 
-  barChartPais$ = this.dataService.getBarChartPais("c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA'").pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
+  barChartPais$ = this.dataService.getBarChartPais("YEAR(bd.DATA_CHEGADA)=2023 AND (c.NOME='AMERICA DO NORTE' OR c.NOME='EUROPA')").pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
 
   ngOnInit(): void {
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
