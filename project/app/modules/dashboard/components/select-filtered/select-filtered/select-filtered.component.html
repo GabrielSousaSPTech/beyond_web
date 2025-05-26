@@ -1,0 +1,23 @@
+<div class="search-container" (clickOutside)="clickedOutside()">
+    <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar" (click)="clearSearchTerm()">
+      <input 
+        type="text" 
+        (input)="filterOptions()"
+        (click)="showAllOptions()"
+        [placeholder]="placeHolder"
+        class="search-input"
+        [(ngModel)]="searchTerm"
+      />
+      @if(showDropdown() && filteredOptions.length > 0){
+        <div class="dropdown">
+            @for (option of filteredOptions; track option){
+                <div 
+                class="dropdown-item"
+                (click)="selectOption(option)"
+                >
+                {{ option }}
+                </div>
+            }
+        </div>
+      }
+    </div>

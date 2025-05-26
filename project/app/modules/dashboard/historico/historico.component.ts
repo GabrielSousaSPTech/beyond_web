@@ -7,10 +7,10 @@ import { LineChartComponent } from "../components/line-chart/line-chart.componen
 @Component({
   selector: 'app-painel-de-controle-historico',
   imports: [CommonModule, CardKpiComponent, LineChartComponent],
-  templateUrl: './painel-de-controle-historico.component.html',
-  styleUrl: './painel-de-controle-historico.component.css'
+  templateUrl: './historico.component.html',
+  styleUrl: './historico.component.css'
 })
-export class PainelDeControleHistoricoComponent implements OnInit {
+export class HistoricoComponent implements OnInit {
   constructor(public headerTitleService: HeaderTitleService) { }
 
   ngOnInit(): void {

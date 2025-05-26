@@ -1,40 +1,11 @@
 <div class="campos-filtro">
-    <div class="grupoA">
-        <div class="input-filtro">
-            <input type="text" id="campoTexto1" placeholder="Continente">
-            <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar"
-                onclick="document.getElementById('campoTexto1').value = ''">
-        </div>
-        <div class="input-filtro">
-            <select id="campoTexto2" placeholder="Via de chegada">
-                <option value="">Via de chegada</option>
-                <option value="1">Avião</option>
-                <option value="2">Navio</option>
-            </select>
-            <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar"
-                onclick="document.getElementById('campoTexto2').value = ''">
-        </div>
-        <div class="input-filtro">
-            <input type="number" id="campoTexto3" placeholder="Ano">
-            <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar"
-                onclick="document.getElementById('campoTexto3').value = ''">
-        </div>
+    <div class="grupo">
+        <app-select-filtered [inputData]="this.basicDataService.continentes$" [placeHolder]="'Continentes'" [searchTerm]="this.filterContinente"></app-select-filtered>
+        <app-select-filtered [inputData]="this.basicDataService.vias$" [placeHolder]="'Vias'" [searchTerm]="this.filterVia" ></app-select-filtered>
+        <app-select-filtered [inputData]="this.basicDataService.anos$" [placeHolder]="'Ano'" [searchTerm]="this.filterAno"></app-select-filtered>
     </div>
-    <div class="grupoB">
-        <div class="input-filtro">
-            <input type="text" id="campoTexto4" placeholder="País">
-            <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar"
-                onclick="document.getElementById('campoTexto4').value = ''">
-        </div>
-        <div class="input-filtro">
-            <input type="text" id="campoTexto5" placeholder="Desembarque">
-            <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar"
-                onclick="document.getElementById('campoTexto5').value = ''">
-        </div>
-        <div class="input-filtro">
-            <input type="text" id="campoTexto6" placeholder="Mês">
-            <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar"
-                onclick="document.getElementById('campoTexto6').value = ''">
-        </div>
-    </div>
+    <div class="grupo">
+        <app-select-filtered [inputData]="this.basicDataService.paises$" [placeHolder]="'Paises'" [searchTerm]="this.filterPais"></app-select-filtered>
+        <app-select-filtered [inputData]="this.basicDataService.federacoesBrasil$" [placeHolder]="'Chegadas'" [searchTerm]="this.filterFederacoes"></app-select-filtered>
+        <app-select-filtered [inputData]="this.meses$" [placeHolder]="'Mes'" [searchTerm]="this.filterMes"></app-select-filtered>
 </div>

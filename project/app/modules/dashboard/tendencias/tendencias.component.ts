@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { HeaderTitleService } from '../../../core/services/header-title/header-title.service';
 import { ComboChartAllComponent } from "../components/combo-chart-all/combo-chart-all.component";
 import { BarChartAllComponent } from "../components/bar-chart-all/bar-chart-all.component";
@@ -8,17 +8,21 @@ import { DataService } from '../services/data.service';
 import { AsyncPipe } from '@angular/common';
 import { map, tap } from 'rxjs';
 import { BarChartAll } from '../../../shared/models/bar-chart-all.type';
+import { BasicDataService } from '../../../core/services/basicData/basicData.service';
+import { userFilter } from '../../../shared/models/user-filter.type';
 
 @Component({
   selector: 'app-tendencias',
   imports: [ComboChartAllComponent, BarChartAllComponent, CardKpiComponent, InputFilterComponent],
   templateUrl: './tendencias.component.html',
   styleUrl: './tendencias.component.css',
-  providers: [DataService]
+  providers: [DataService, BasicDataService]
 })
 export class TendenciasComponent implements OnInit {
   dataService = inject(DataService);
   constructor(public headerTitleService: HeaderTitleService) { }
+
+  protected filterName: WritableSignal<string> = signal('');
 
   mes = signal<string>(this.getMesNome(new Date().getMonth() + 1));
 
@@ -103,7 +107,10 @@ export class TendenciasComponent implements OnInit {
   barChartPais$ = this.dataService.getBarChartPais(this.filter).pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
 
   ngOnInit(): void {
-    console.log("filtro:", this.filter)
+    if(sessionStorage.getItem('filter')) {
+      console.log("Filtro2: ",(JSON.parse(sessionStorage.getItem('filter')!) as userFilter).NOME), 
+      this.filterName.set((JSON.parse(sessionStorage.getItem('filter')!) as userFilter).NOME)
+    }
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
   }
 }

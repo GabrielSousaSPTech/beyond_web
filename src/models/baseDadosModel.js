@@ -34,9 +34,17 @@ function getFederacaoBrasil() {
     return database.executar(instrucaoSql);
 }
 
+function getAnos() {
+    var instrucaoSql = `
+        select year(DATA_CHEGADA) as ano from TB_BASE_DADOS group by ano;
+    `;
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     getPais,
     getContinente,
     getFederacaoBrasil,
-    getVia
+    getVia,
+    getAnos
 }

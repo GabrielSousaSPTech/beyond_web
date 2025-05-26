@@ -10,7 +10,7 @@
                 <img id="icon-filtro" class="icon" src="assets/icons/misc/icon-filtro.svg">
                 <h1>Filtro:</h1>
             </div>
-            <input id="nome-filtro" type="text" placeholder="Nome do filtro">
+            <input id="nome-filtro" type="text" placeholder="Nome do filtro" [value]="filterName()">
             <div class="icons-header">
                 <div id="favoritar"><img class="icon" src="assets/icons/actions/icon-star.svg" onclick="favoritar()"></div>
                 <div id="excluir"><img class="icon" src="assets/icons/actions/icon-trash.svg" onclick="excluir()"></div>
