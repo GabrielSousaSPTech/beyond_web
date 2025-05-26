@@ -2,14 +2,13 @@ var database = require("../database/config")
 
 function getBarChartAll(filtro) {
 
-    console.log("esse é o filtro gráfico principal: " + filtro)
 
-    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
     let filterOption = "";
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
-    console.log(valoresFilter)
+
     for (let i = 1; i < valoresFilter.length; i++) {
 
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
@@ -42,22 +41,20 @@ function getBarChartAll(filtro) {
     ORDER BY
     ANO, MES, CONTINENTE;
     `
-    console.log(yearClause)
-    console.log(filterOption)
-    console.log(instrucaoSql)
+
     return database.executar(instrucaoSql)
 }
 
 function getBarChartUF(filtro) {
-    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) = 2024'; // Condição fixa
+    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
-    if (filtro) {
-        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            whereClause = `WHERE ${filtro} `;
-        } else {
-            whereClause += ` AND ${filtro} `;
-        }
+    let filterOption = "";
 
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 1; i < valoresFilter.length; i++) {
+
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
     var instrucaoSql = `
     SELECT
@@ -73,7 +70,8 @@ function getBarChartUF(filtro) {
         PAIS p ON bd.FK_PAIS = p.ID_PAIS
     JOIN 
         VIA v ON bd.FK_VIA = v.ID_VIA
-    ${whereClause} 
+    ${yearClause} 
+    ${filterOption}
     GROUP BY
     fb.NOME
     ORDER BY 
@@ -84,15 +82,15 @@ function getBarChartUF(filtro) {
 }
 
 function getBarChartPais(filtro) {
-    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) = 2024'; // Condição fixa
+    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
-    if (filtro) {
-        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            whereClause = `WHERE ${filtro} `;
-        } else {
-            whereClause += ` AND ${filtro} `;
-        }
+    let filterOption = "";
 
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 1; i < valoresFilter.length; i++) {
+
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
     const instrucaoSql = `
@@ -109,7 +107,8 @@ function getBarChartPais(filtro) {
         PAIS p ON bd.FK_PAIS = p.ID_PAIS
     JOIN 
         VIA v ON bd.FK_VIA = v.ID_VIA
-    ${whereClause} 
+    ${yearClause} 
+    ${filterOption}
     GROUP BY
     p.NOME_PAIS
     ORDER BY 
@@ -122,15 +121,15 @@ function getBarChartPais(filtro) {
 }
 
 function getKpiTotal(filtro) {
-    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) = 2024'; // Condição fixa
+    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
-    if (filtro) {
-        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            whereClause = `WHERE ${filtro} `;
-        } else {
-            whereClause += ` AND ${filtro} `;
-        }
+    let filterOption = "";
 
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 1; i < valoresFilter.length; i++) {
+
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
     var instrucaoSql = `
@@ -146,7 +145,8 @@ function getKpiTotal(filtro) {
         PAIS p ON bd.FK_PAIS = p.ID_PAIS
     JOIN 
         VIA v ON bd.FK_VIA = v.ID_VIA
-    ${whereClause}
+    ${yearClause} 
+    ${filterOption}
     `
 
     return database.executar(instrucaoSql)
@@ -154,25 +154,20 @@ function getKpiTotal(filtro) {
 
 function getKpiVariacaoAno(filtro) {
 
-    console.log("filtro variação ano: " + filtro)
+    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? `WHERE YEAR(bd.DATA_CHEGADA) IN (${new Date().getFullYear() - 2}, ${new Date().getFullYear() - 1})` : `WHERE YEAR(bd.DATA_CHEGADA) IN (${Number(filtro.DATA_CHEGADA.substring(0, 4)) - 1}, ${Number(filtro.DATA_CHEGADA.substring(0, 4))})`;
 
-    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) IN (2023, 2024)'; // Condição fixa
+    console.log();
 
-    if (filtro) {
-        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            const regex = /YEAR\(bd\.DATA_CHEGADA\)=(\d{4})/;
-            const match = filtro.match(regex);
-            const anoOriginal = parseInt(match[1], 10);
-            const anoAnterior = anoOriginal - 1;
-            const novaParte = `YEAR(bd.DATA_CHEGADA) IN(${anoAnterior}, ${anoOriginal})`;
-            const filtroRefeito = filtro.replace(regex, novaParte);
+    let filterOption = "";
 
-            whereClause = `WHERE ${filtroRefeito} `;
-        } else {
-            whereClause += ` AND ${filtro} `;
-        }
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
+    for (let i = 1; i < valoresFilter.length; i++) {
+
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
+
+
     var instrucaoSql = `
     SELECT
     ano,
@@ -197,7 +192,8 @@ function getKpiVariacaoAno(filtro) {
                     PAIS p ON bd.FK_PAIS = p.ID_PAIS
                 JOIN 
                     VIA v ON bd.FK_VIA = v.ID_VIA
-                ${whereClause} 
+                 ${yearClause} 
+                 ${filterOption}
                 GROUP BY 
                     YEAR(bd.DATA_CHEGADA)
     ) AS totais_anual
@@ -210,29 +206,22 @@ function getKpiVariacaoAno(filtro) {
 }
 
 function getKpiVariacaoMes(filtro) {
-    console.log("filtro variação mês: " + filtro)
+    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? `WHERE YEAR(bd.DATA_CHEGADA) IN (${new Date().getFullYear() - 2}, ${new Date().getFullYear() - 1})` : `WHERE YEAR(bd.DATA_CHEGADA) IN (${Number(filtro.DATA_CHEGADA.substring(0, 4)) - 1}, ${Number(filtro.DATA_CHEGADA.substring(0, 4))})`;
 
-    let whereClause = 'WHERE YEAR(bd.DATA_CHEGADA) IN (2023, 2024)';
-    let whereClause2 = 'WHERE ano = 2024';
+    let yearClause2 = filtro || filtro.DATA_CHEGADA == 'null' ? `WHERE ano = ${new Date().getFullYear() - 1}` : `WHERE ano = ${filtro.DATA_CHEGADA.substring(0, 4)}`;
 
-    if (filtro) {
-        if (filtro.includes("YEAR(bd.DATA_CHEGADA)")) {
-            const regex = /YEAR\(bd\.DATA_CHEGADA\)=(\d{4})/;
-            const match = filtro.match(regex);
-            const anoOriginal = parseInt(match[1], 10);
-            const anoAnterior = anoOriginal - 1;
-            const novaParte = `YEAR(bd.DATA_CHEGADA) IN(${anoAnterior}, ${anoOriginal})`;
-            const filtroRefeito = filtro.replace(regex, novaParte);
+    console.log();
 
-            whereClause = `WHERE ${filtroRefeito} `;
-            whereClause2 = `WHERE ano = ${anoOriginal} `
-        } else {
-            whereClause += ` AND ${filtro} `;
-        }
+    let filterOption = "";
 
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 1; i < valoresFilter.length; i++) {
+
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
-    whereClause += ` AND MONTH(DATA_CHEGADA) = MONTH(CURDATE())-- Mês atual`
+
 
     var instrucaoSql = `
     SELECT
@@ -263,11 +252,12 @@ function getKpiVariacaoMes(filtro) {
                 PAIS p ON bd.FK_PAIS = p.ID_PAIS
             JOIN 
                 VIA v ON bd.FK_VIA = v.ID_VIA
-            ${whereClause} 
+            ${yearClause} 
+            ${filterOption} AND MONTH(DATA_CHEGADA) = MONTH(CURDATE())-- Mês atual
             GROUP BY 
                 YEAR(DATA_CHEGADA), MONTH(DATA_CHEGADA)
     ) AS dados
-        ${whereClause2} 
+        ${yearClause2} 
         ORDER BY ano;
     `
     console.log("sql variação mês: " + instrucaoSql)
