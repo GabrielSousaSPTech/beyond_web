@@ -22,10 +22,13 @@ export class ComboChartAllComponent {
   }
 
   drawChart(graphData: string[][]) {
+    if (!graphData || graphData.length === 0) {
+      console.error('No data available to draw the chart.');
+      return;
+    }
     var data = google.visualization.arrayToDataTable(graphData);
 
     const totalSeries: number = graphData[0].length - 2;
-    console.log("Total series: " + totalSeries)
 
     var options = {
       /* title: 'Entrada de Turistas Mensal por País', */

@@ -11,11 +11,6 @@ export class BasicDataService {
   private federacoesBrasilSubject = new BehaviorSubject<FederacaoBrasil[]>([]);
   private anosSubject = new BehaviorSubject<Object[]>([])
 
-  private paisCache = new Map<number, Pais>();
-  private continenteCache = new Map<number, Continente>();
-  private viaCache = new Map<number, Via>();
-  private federacaoCache = new Map<number, FederacaoBrasil>();
-
   paises$ = this.paisesSubject.asObservable();
   continentes$ = this.continentesSubject.asObservable();
   vias$ = this.viasSubject.asObservable();
@@ -44,10 +39,6 @@ export class BasicDataService {
       this.federacoesBrasilSubject.next(federacoes);
       this.anosSubject.next(anos);
 
-      paises.forEach(pais => this.paisCache.set(pais.id, pais));
-      continentes.forEach(continente => this.continenteCache.set(continente.id, continente));
-      vias.forEach(via => this.viaCache.set(via.id, via));
-      federacoes.forEach(federacao => this.federacaoCache.set(federacao.id, federacao));
       this.isLoaded = true;
     } catch (error) {
       console.error('Erro ao carregar dados básicos:', error);
@@ -55,18 +46,34 @@ export class BasicDataService {
   }
 
   getPaisById(id: number): Pais | undefined {
-    return this.paisCache.get(id) ?? this.paisesSubject.value.find(pais => pais.id === id);
+    return this.paisesSubject.value.find(pais => pais.id === id);
   }
 
   getContinenteById(id: number): Continente | undefined {
-    return this.continenteCache.get(id) ?? this.continentesSubject.value.find(continente => continente.id === id);
+    return this.continentesSubject.value.find(continente => continente.id === id);
   }
 
   getViaById(id: number): Via | undefined {
-    return this.viaCache.get(id) ?? this.viasSubject.value.find(via => via.id === id);
+    return this.viasSubject.value.find(via => via.id === id);
   }
 
   getFederacaoBrasilById(id: number): FederacaoBrasil | undefined {
-    return this.federacaoCache.get(id) ?? this.federacoesBrasilSubject.value.find(federacao => federacao.id === id);
+    return this.federacoesBrasilSubject.value.find(federacao => federacao.id === id);
+  }
+
+  getPaisByName(name: string): Pais | undefined {
+    return this.paisesSubject.value.find(pais => pais.nome.toLowerCase() === name.toLowerCase());
+  }
+
+  getContinenteByName(name: string): Continente | undefined {
+    return this.continentesSubject.value.find(continente => continente.nome.toLowerCase() === name.toLowerCase());
+  }
+
+  getViaByName(name: string): Via | undefined {
+    return this.viasSubject.value.find(via => via.tipo.toLowerCase() === name.toLowerCase());
+  }
+
+  getFederacaoBrasilByName(name: string): FederacaoBrasil | undefined {
+    return this.federacoesBrasilSubject.value.find(federacao => federacao.nome.toLowerCase() === name.toLowerCase());
   }
 }

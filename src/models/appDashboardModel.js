@@ -2,6 +2,8 @@ var database = require("../database/config")
 
 function getBarChartAll(filtro) {
 
+    console.log("Filtro recebido bar all:", filtro);
+
 
     let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
@@ -9,8 +11,10 @@ function getBarChartAll(filtro) {
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
-    for (let i = 1; i < valoresFilter.length; i++) {
-
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+            continue;
+        }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
@@ -52,10 +56,13 @@ function getBarChartUF(filtro) {
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
-    for (let i = 1; i < valoresFilter.length; i++) {
-
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+            continue;
+        }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
+
     var instrucaoSql = `
     SELECT
     fb.NOME AS FEDERACAO_BRASIL,
@@ -88,8 +95,10 @@ function getBarChartPais(filtro) {
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
-    for (let i = 1; i < valoresFilter.length; i++) {
-
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+            continue;
+        }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
@@ -115,8 +124,6 @@ function getBarChartPais(filtro) {
         TOTAL_CHEGADAS DESC 
     LIMIT 30; `;
 
-    console.log("Query gerada:", instrucaoSql); // Verifique no console se o filtro está sendo incluído
-
     return database.executar(instrucaoSql);
 }
 
@@ -127,8 +134,10 @@ function getKpiTotal(filtro) {
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
-    for (let i = 1; i < valoresFilter.length; i++) {
-
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+            continue;
+        }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
@@ -162,8 +171,10 @@ function getKpiVariacaoAno(filtro) {
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
-    for (let i = 1; i < valoresFilter.length; i++) {
-
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+            continue;
+        }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
@@ -200,8 +211,6 @@ function getKpiVariacaoAno(filtro) {
                 ORDER BY ano DESC LIMIT 1;
     `
 
-    console.log("sql variação ano: " + instrucaoSql)
-
     return database.executar(instrucaoSql)
 }
 
@@ -210,18 +219,17 @@ function getKpiVariacaoMes(filtro) {
 
     let yearClause2 = filtro || filtro.DATA_CHEGADA == 'null' ? `WHERE ano = ${new Date().getFullYear() - 1}` : `WHERE ano = ${filtro.DATA_CHEGADA.substring(0, 4)}`;
 
-    console.log();
 
     let filterOption = "";
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
-    for (let i = 1; i < valoresFilter.length; i++) {
-
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+            continue;
+        }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
-
-
 
     var instrucaoSql = `
     SELECT
@@ -260,7 +268,6 @@ function getKpiVariacaoMes(filtro) {
         ${yearClause2} 
         ORDER BY ano;
     `
-    console.log("sql variação mês: " + instrucaoSql)
 
     return database.executar(instrucaoSql)
 }

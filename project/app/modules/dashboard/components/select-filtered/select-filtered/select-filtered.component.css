@@ -62,7 +62,6 @@
   transform: translateY(-0.5rem);
 }
 
-
 .btn-limpar {
   position: absolute;
   top: 50%;
@@ -75,7 +74,7 @@
   z-index: 2;
 }
 
-.search-input:hover .btn-limpar {
+.search-container:hover .btn-limpar {
   opacity: 1;
   transform: translateY(-1.2rem);
 }

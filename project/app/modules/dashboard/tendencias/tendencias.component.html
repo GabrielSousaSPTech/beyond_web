@@ -12,13 +12,13 @@
             </div>
             <input id="nome-filtro" type="text" placeholder="Nome do filtro" [value]="filterName()">
             <div class="icons-header">
-                <div id="favoritar"><img class="icon" src="assets/icons/actions/icon-star.svg" onclick="favoritar()"></div>
-                <div id="excluir"><img class="icon" src="assets/icons/actions/icon-trash.svg" onclick="excluir()"></div>
-                <div id="expandir"><img class="icon" src="assets/icons/actions/icon-filter-popup.svg" onclick="mostrarFiltrosSalvos()">
+                <div id="favoritar"><img class="icon" src="assets/icons/actions/icon-star.svg" ></div>
+                <div id="excluir"><img class="icon" src="assets/icons/actions/icon-trash.svg" (click)="excluir()"></div>
+                <div id="expandir"><img class="icon" src="assets/icons/actions/icon-filter-popup.svg">
                 </div>
             </div>
         </div>
-        <app-input-filter></app-input-filter>
+        <app-input-filter #inputFilter (filterChange)="onFilterChange()"></app-input-filter>
     </div>
 </div>
 <div class="graficos-card">

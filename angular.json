@@ -30,7 +30,6 @@
               "project/assets"
             ],
             "styles": [
-              "project/custom-theme.scss",
               "project/styles.css"
             ],
             "scripts": []

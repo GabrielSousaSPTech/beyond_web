@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -17,21 +17,25 @@ export class SelectFilteredComponent implements OnInit {
   protected selectedOption: string | null = null;
   @Input() placeHolder: string = ""
 
+  @Output() valueChange = new EventEmitter<string>();
+
   @Input() inputData!: Observable<any[]>;
   private savedData: string[] = [];
   protected filteredOptions: string[] = [];
 
   ngOnInit() {
     this.inputData.subscribe(data => {
-      console.log(data, this.inputData)
       this.savedData = data.map(d => d.nome || d.tipo || d.ano || d.mes);
       this.filteredOptions = [...this.savedData];
     });
+
+    if (this.searchTerm) {
+        this.selectedOption = this.searchTerm;
+    }
   }
 
   filterOptions() {
-    if(this.searchTerm) this.searchTerm = '';
-    if (!this.searchTerm!.trim()) {
+    if (!this.searchTerm?.trim()) {
       this.filteredOptions = [...this.savedData];
       this.showDropdown.set(false);
     } else {
@@ -46,6 +50,7 @@ export class SelectFilteredComponent implements OnInit {
     this.selectedOption = option;
     this.searchTerm = option;
     this.showDropdown.set(false);
+    this.valueChange.emit(option);
   }
 
   showAllOptions() {
@@ -62,5 +67,6 @@ export class SelectFilteredComponent implements OnInit {
     this.selectedOption = null;
     this.filteredOptions = [...this.savedData];
     this.showDropdown.set(false);
+    this.valueChange.emit('');
   }
  }

@@ -48,7 +48,7 @@ export class CardFilterComponent {
       CONTINENTE: filter.FK_CONTINENTE ? this.basicDataService.getContinenteById(filter.FK_CONTINENTE)?.nome : undefined,
       PAIS: filter.FK_PAIS ? this.basicDataService.getPaisById(filter.FK_PAIS)?.nome : undefined,
       VIA: filter.FK_VIA ? this.basicDataService.getViaById(filter.FK_VIA)?.tipo : undefined,
-      FEDERACAO: filter.FK_FEDERACAO ? this.basicDataService.getFederacaoBrasilById(filter.FK_FEDERACAO)?.nome : undefined,
+      FEDERACAO: filter.FK_FEDERACAO_BRASIL ? this.basicDataService.getFederacaoBrasilById(filter.FK_FEDERACAO_BRASIL)?.nome : undefined,
     };
     return Object.values(transformedFilter).filter((value) => value !== undefined && value !== null);
   }

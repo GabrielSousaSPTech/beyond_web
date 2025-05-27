@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { HeaderTitleService } from '../../../core/services/header-title/header-title.service';
 import { ComboChartAllComponent } from "../components/combo-chart-all/combo-chart-all.component";
 import { BarChartAllComponent } from "../components/bar-chart-all/bar-chart-all.component";
@@ -22,6 +22,8 @@ export class TendenciasComponent implements OnInit {
   dataService = inject(DataService);
   constructor(public headerTitleService: HeaderTitleService) { }
 
+  @ViewChild('inputFilter') inputFilter!: InputFilterComponent;
+
   protected filterName: WritableSignal<string> = signal('');
 
   mes = signal<string>(this.getMesNome(new Date().getMonth() + 1));
@@ -30,6 +32,24 @@ export class TendenciasComponent implements OnInit {
 
   private filter = sessionStorage.getItem('filter') ? JSON.parse(sessionStorage.getItem('filter')!) : '';
 
+  onFilterChange(){
+    if(sessionStorage.getItem('filter') && Object.keys(JSON.parse(sessionStorage.getItem('filter')!)).length > 0) {
+      this.dataService.updateFilter(JSON.parse(sessionStorage.getItem('filter')!) as userFilter);
+    } else {
+      this.dataService.updateFilter({} as userFilter);
+    }
+    
+  }
+
+  excluir(){
+    sessionStorage.setItem('filter', JSON.stringify({} as userFilter));
+    this.dataService.updateFilter({} as userFilter);
+    this.filterName.set('');
+    this.mes.set(this.getMesNome(new Date().getMonth() + 1));
+    this.anoVariacao.set(new Date().getFullYear());
+    this.inputFilter.resetFilters();
+    this.onFilterChange();
+  }
 
   getMesNome(mes: number): string {
     const meses = [
@@ -39,18 +59,18 @@ export class TendenciasComponent implements OnInit {
     return meses[mes - 1];
   }
 
-  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno(this.filter).pipe(
+  kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno().pipe(
     tap(data => this.anoVariacao.set(data[0]?.ano)),
     map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
   );
 
-  kpiTotal$ = this.dataService.getKpiTotal(this.filter).pipe(
+  kpiTotal$ = this.dataService.getKpiTotal().pipe(
     map(data => data[0]?.TOTAL_CHEGADAS ? data[0].TOTAL_CHEGADAS.toString() : '0'),
   );
 
-  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes(this.filter).pipe(
+  kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes().pipe(
     map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
       : '0.00%'),
@@ -102,13 +122,13 @@ export class TendenciasComponent implements OnInit {
     ];
   });
 
-  barChartAll$ = this.dataService.getBarChartAll(this.filter).pipe(this.headerMaker);
+  barChartAll$ = this.dataService.getBarChartAll().pipe(this.headerMaker);
 
-  barChartPais$ = this.dataService.getBarChartPais(this.filter).pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
+  barChartPais$ = this.dataService.getBarChartPais().pipe(map(data => data.map(item => [item.PAIS, Number(item.TOTAL_CHEGADAS)])));
 
   ngOnInit(): void {
     if(sessionStorage.getItem('filter')) {
-      console.log("Filtro2: ",(JSON.parse(sessionStorage.getItem('filter')!) as userFilter).NOME), 
+      this.dataService.updateFilter(JSON.parse(sessionStorage.getItem('filter')!) as userFilter);
       this.filterName.set((JSON.parse(sessionStorage.getItem('filter')!) as userFilter).NOME)
     }
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');

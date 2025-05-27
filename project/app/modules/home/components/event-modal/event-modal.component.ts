@@ -66,7 +66,6 @@ export class EventModalComponent {
     saveEvent(): void {
       if (this.eventForm.valid) {
         const eventData = this.eventForm.value;
-        console.log('Event data:', eventData.id_eventos);
         const newEvent: userEvent = {
           ID_EVENTOS: eventData.id_eventos,
           NOME: eventData.name,
@@ -75,7 +74,6 @@ export class EventModalComponent {
           DATA_INICIO: eventData.dataInicio,
           DATA_TERMINO: eventData.dataTermino
         };
-        console.log('New event:', newEvent);
   
         if (this.isEditing()) {
           this.cardEventService.updateEvent(newEvent);
