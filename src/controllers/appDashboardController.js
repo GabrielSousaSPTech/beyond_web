@@ -48,11 +48,20 @@ function getKpiVariacaoMes(req, res) {
     });
 }
 
+function getGraficoHistorico(req, res) {
+    appDashboardModel.getGraficoHistorico(req.query).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     getBarChartAll,
     getBarChartUF,
     getBarChartPais,
     getKpiTotal,
     getKpiVariacaoAno,
-    getKpiVariacaoMes
+    getKpiVariacaoMes,
+    getGraficoHistorico
 }

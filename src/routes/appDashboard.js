@@ -27,4 +27,8 @@ router.get("/kpiVariacaoMes", function (req, res) {
     appDashboardController.getKpiVariacaoMes(req, res);
 });
 
+router.get("/graficoHistorico", function (req, res) {
+    appDashboardController.getGraficoHistorico(req, res);
+});
+
 module.exports = router;

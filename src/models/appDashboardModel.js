@@ -280,11 +280,56 @@ function getKpiVariacaoMes(filtro) {
     return database.executar(instrucaoSql)
 }
 
+function getGraficoHistorico(filtro) {
+
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+
+    let filterOption = "";
+
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+            continue;
+        }
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
+    }
+
+    var instrucaoSql = `
+    SELECT 
+    YEAR(bd.DATA_CHEGADA) AS ANO,
+    MONTH(bd.DATA_CHEGADA) AS MES,
+    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+    FROM 
+        TB_BASE_DADOS bd
+    JOIN 
+        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
+    JOIN 
+        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+    JOIN 
+        PAIS p ON bd.FK_PAIS = p.ID_PAIS
+    JOIN 
+        VIA v ON bd.FK_VIA = v.ID_VIA
+    ${yearClause}
+    ${filterOption} 
+    GROUP BY 
+        YEAR(bd.DATA_CHEGADA),
+        MONTH(bd.DATA_CHEGADA),
+        c.NOME
+    ORDER BY 
+        ANO, MES;
+        `
+
+    return database.executar(instrucaoSql)
+}
+
+
 module.exports = {
     getBarChartAll,
     getBarChartUF,
     getBarChartPais,
     getKpiTotal,
     getKpiVariacaoAno,
-    getKpiVariacaoMes
+    getKpiVariacaoMes,
+    getGraficoHistorico
 }
