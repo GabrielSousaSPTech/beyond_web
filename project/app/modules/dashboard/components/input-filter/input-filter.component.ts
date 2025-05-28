@@ -114,7 +114,7 @@ export class InputFilterComponent implements OnInit {
         FK_FEDERACAO_BRASIL: formValues.federacao ? this.basicDataService.getFederacaoBrasilByName(formValues.federacao)?.id : undefined,
         DATA_CHEGADA: formValues.ano ?
           (formValues.mes ?
-            `${formValues.ano}-${(this.mesesList.find(x => x.mes === formValues.mes)?.id || 12).toString().padStart(2, '0')}-01` :
+            `${formValues.ano}-${(this.mesesList.find(x => x.mes === formValues.mes)?.id || 0).toString().padStart(2, '0')}-01` :
             `${formValues.ano}-12-01`) :
           undefined
       };
