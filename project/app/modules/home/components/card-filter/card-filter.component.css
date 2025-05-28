@@ -41,14 +41,15 @@
   color: #737373;
 }
 
-.filter-anchor {
-  cursor: pointer;
-}
-
-.filter-anchor-icon {
+.filter-action {
   height: 2rem;
   width: 2rem;
   max-width: initial;
+  cursor: pointer;
+}
+
+.btn-delete {
+  margin-right: 4rem;
 }
 
 .wrapper {

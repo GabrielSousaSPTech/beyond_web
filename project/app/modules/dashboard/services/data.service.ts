@@ -8,16 +8,17 @@ import { KpiVariacaoAno } from '../../../shared/models/kpi-variacao-ano.type';
 import { KpiVariacaoMes } from '../../../shared/models/kpi-variacao-mes.type';
 import { BehaviorSubject, catchError, Observable, switchMap, throwError } from 'rxjs';
 import { userFilter } from '../../../shared/models/user-filter.type';
+import { UserFiltersService } from '../../../core/services/user-filters/user-filters.service';
 
 @Injectable()
 export class DataService {
   private http = inject(HttpClient);
+  private filterService = inject(UserFiltersService);
 
-  private currentFilter = new BehaviorSubject<userFilter | null>(null);
-
-  public filterChanges$ = this.currentFilter.asObservable();
+  private currentFilter$ = this.filterService.activeFilter$;
 
   private baseUrl = '/appDashboard';
+
 
   private handleError(error: HttpErrorResponse) {
     return throwError(() => new Error('Erro ao carregar os dados: ' + error.message || 'Erro desconhecido'));
@@ -33,10 +34,6 @@ export class DataService {
     };
   }
 
-  public updateFilter(filter: userFilter) {
-    this.currentFilter.next(filter);
-  }
-  
   private makeRequest<T>(endpoint: string, filter?: userFilter | null): Observable<T[]> {
     const url = `${this.baseUrl}/${endpoint}`;
 
@@ -51,37 +48,37 @@ export class DataService {
   }
 
   public getBarChartAll(): Observable<BarChartAll[]> {
-    return this.filterChanges$.pipe(
+    return this.currentFilter$.pipe(
       switchMap(filter => this.makeRequest<BarChartAll>('graficoTendenciasPrincipal', filter))
     );
   }
 
   public getBarChartUF(): Observable<BarChartUF[]> {
-    return this.filterChanges$.pipe(
+    return this.currentFilter$.pipe(
       switchMap(filter => this.makeRequest<BarChartUF>('graficoTendenciasUF', filter))
     );
   }
 
   public getBarChartPais(): Observable<BarChartPais[]> {
-    return this.filterChanges$.pipe(
+    return this.currentFilter$.pipe(
       switchMap(filter => this.makeRequest<BarChartPais>('graficoTendenciasPais', filter))
     );
   }
 
   public getKpiTotal(): Observable<KpiTotal[]> {
-    return this.filterChanges$.pipe(
+    return this.currentFilter$.pipe(
       switchMap(filter => this.makeRequest<KpiTotal>('kpiTotal', filter))
     );
   }
 
   public getKpiVariacaoAno(): Observable<KpiVariacaoAno[]> {
-    return this.filterChanges$.pipe(
+    return this.currentFilter$.pipe(
       switchMap(filter => this.makeRequest<KpiVariacaoAno>('kpiVariacaoAno', filter))
     );
   }
 
   public getKpiVariacaoMes(): Observable<KpiVariacaoMes[]> {
-    return this.filterChanges$.pipe(
+    return this.currentFilter$.pipe(
       switchMap(filter => this.makeRequest<KpiVariacaoMes>('kpiVariacaoMes', filter))
     );
   }

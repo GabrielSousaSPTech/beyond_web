@@ -70,6 +70,11 @@ export class CardFilterComponent {
       sessionStorage.setItem('filter', JSON.stringify(this.filterList().find(f => f.ID_FILTRO == filterID)))
     }
   }
+
+  protected deleteFilter(filter: userFilter){
+    console.log("eu tentei")
+    this.cardFilterService.deleteUserFilter(filter.ID_FILTRO).subscribe();
+  }
 }
 
 

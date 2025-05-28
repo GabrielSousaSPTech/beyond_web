@@ -23,6 +23,7 @@ function updateFiltro(idFiltro, nome, data_chegada, fk_continente, fk_pais, fk_v
 }
 
 function deleteFiltro(idEvento){
+    console.log(idEvento)
     var instrucaoSql = `DELETE FROM TB_FILTRO_DASHBOARD WHERE ID_FILTRO = ?`
 
     return database.executar(instrucaoSql, [idEvento])

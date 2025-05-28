@@ -29,7 +29,7 @@
                 </app-select-filtered>
                 <app-select-filtered 
                     [inputData]="this.basicDataService.federacoesBrasil$" 
-                    [placeHolder]="'Chegadas'"
+                    [placeHolder]="'Portão de chegada'"
                     [searchTerm]="filterForm.get('federacao')?.value"
                     (valueChange)="filterForm.get('federacao')?.setValue($event)">
                 </app-select-filtered>
