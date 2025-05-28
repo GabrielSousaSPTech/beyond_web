@@ -7,13 +7,18 @@ function getBarChartAll(filtro) {
 
     let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
+
     console.log("O filtro é: " + filtro);
 
     console.log("YearClause é: " + yearClause);
 
-    console.log("Substring é: " + filtro.DATA_CHEGADA.substring(0, 4))
+    console.log("Substring é: " + filtro.DATA_CHEGADA.substring(5, 7))
 
     let filterOption = "";
+
+    let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
+
+    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -24,6 +29,7 @@ function getBarChartAll(filtro) {
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
     }
 
+    console.log("filterOption é :" + filterOption)
 
     var instrucaoSql = `
     SELECT 
@@ -61,6 +67,10 @@ function getBarChartUF(filtro) {
     let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
     let filterOption = "";
+
+    let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
+
+    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -101,6 +111,10 @@ function getBarChartPais(filtro) {
 
     let filterOption = "";
 
+    let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
+
+    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
@@ -140,6 +154,10 @@ function getKpiTotal(filtro) {
 
     let filterOption = "";
 
+    let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
+
+    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
@@ -176,6 +194,10 @@ function getKpiVariacaoAno(filtro) {
     console.log();
 
     let filterOption = "";
+
+    let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
+
+    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -230,6 +252,8 @@ function getKpiVariacaoMes(filtro) {
 
     let filterOption = "";
 
+
+
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
@@ -237,6 +261,14 @@ function getKpiVariacaoMes(filtro) {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
+    }
+
+    let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
+
+    if (monthClause != "00") {
+        filterOption += ` AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+    } else {
+        filterOption += ' AND MONTH(DATA_CHEGADA) = MONTH(CURDATE())'
     }
 
     var instrucaoSql = `
@@ -269,7 +301,7 @@ function getKpiVariacaoMes(filtro) {
             JOIN 
                 VIA v ON bd.FK_VIA = v.ID_VIA
             ${yearClause} 
-            ${filterOption} AND MONTH(DATA_CHEGADA) = MONTH(CURDATE())-- Mês atual
+            ${filterOption} 
             GROUP BY 
                 YEAR(DATA_CHEGADA), MONTH(DATA_CHEGADA)
     ) AS dados
@@ -289,7 +321,7 @@ function getGraficoHistorico(filtro) {
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
