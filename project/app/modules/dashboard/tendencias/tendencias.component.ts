@@ -104,17 +104,17 @@ export class TendenciasComponent implements OnInit {
   kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno().pipe(
     tap(data => this.anoVariacao.set(data[0]?.ano)),
     map(data => data[0]?.variacao_percentual ?
-      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
+      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `${data[0].variacao_percentual}%`)
       : '0.00%'),
   );
 
   kpiTotal$ = this.dataService.getKpiTotal().pipe(
-    map(data => data[0]?.TOTAL_CHEGADAS ? data[0].TOTAL_CHEGADAS.toString() : '0'),
+    map(data => data[0]?.TOTAL_CHEGADAS ? Number(data[0].TOTAL_CHEGADAS).toLocaleString('pt-BR') : '0'),
   );
 
   kpiVariacaoMes$ = this.dataService.getKpiVariacaoMes().pipe(
     map(data => data[0]?.variacao_percentual ?
-      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `-${data[0].variacao_percentual}%`)
+      (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `${data[0].variacao_percentual}%`)
       : '0.00%'),
   );
 
@@ -173,7 +173,7 @@ export class TendenciasComponent implements OnInit {
     this.filterService.activeFilter$.subscribe(filter=> {
       this.filterName.set(filter.NOME)
       let mes = this.getMesNome(Number(filter.DATA_CHEGADA!.substring(5,7)));
-      this.mes.set(mes ? mes : 'teste')
+      this.mes.set(mes ? mes : this.getMesNome(new Date().getMonth() + 1));
     });
   }
 }
