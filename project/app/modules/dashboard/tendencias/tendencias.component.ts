@@ -170,6 +170,10 @@ export class TendenciasComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
-    this.filterService.activeFilter$.subscribe(filter=>this.filterName.set(filter.NOME));
+    this.filterService.activeFilter$.subscribe(filter=> {
+      this.filterName.set(filter.NOME)
+      let mes = this.getMesNome(Number(filter.DATA_CHEGADA!.substring(5,7)));
+      this.mes.set(mes ? mes : 'teste')
+    });
   }
 }

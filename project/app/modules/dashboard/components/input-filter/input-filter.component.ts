@@ -104,6 +104,7 @@ export class InputFilterComponent implements OnInit {
     this.filterService.activeFilter$.pipe(
       take(1)
     ).subscribe(currentFilter => {
+      let mes = formValues.mes ? (this.mesesList.find(x => x.mes === formValues.mes)?.id || '00').toString().padStart(2, '0') : '00';
       const newFilter: userFilter = {
         ID_FILTRO: currentFilter?.ID_FILTRO || 0,
         FK_EMPRESA: Number(sessionStorage.getItem('EMPRESA_USUARIO')!),
@@ -112,11 +113,8 @@ export class InputFilterComponent implements OnInit {
         FK_VIA: formValues.via ? this.basicDataService.getViaByName(formValues.via)?.id : undefined,
         FK_PAIS: formValues.pais ? this.basicDataService.getPaisByName(formValues.pais)?.id : undefined,
         FK_FEDERACAO_BRASIL: formValues.federacao ? this.basicDataService.getFederacaoBrasilByName(formValues.federacao)?.id : undefined,
-        DATA_CHEGADA: formValues.ano ?
-          (formValues.mes ?
-            `${formValues.ano}-${(this.mesesList.find(x => x.mes === formValues.mes)?.id || 0).toString().padStart(2, '0')}-01` :
-            `${formValues.ano}-12-01`) :
-          undefined
+        DATA_CHEGADA: formValues.ano ? `${formValues.ano}-${mes}-01` : `${new Date().getFullYear()-1}-${mes}-01`
+          
       };
 
       if (!this.isFilterEqual(currentFilter, newFilter)) {
