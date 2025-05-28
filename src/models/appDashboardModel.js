@@ -8,7 +8,7 @@ function getBarChartAll(filtro) {
     let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
 
-    console.log("O filtro é: " + filtro);
+    console.log("O filtro é: " + Object.entries(filtro));
 
     console.log("YearClause é: " + yearClause);
 
@@ -17,8 +17,9 @@ function getBarChartAll(filtro) {
     let filterOption = "";
 
     let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
+    console.log("mes:", monthClause, monthClause == '')
 
-    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+    if (monthClause != "00" && monthClause != '') filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -70,7 +71,7 @@ function getBarChartUF(filtro) {
 
     let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
 
-    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+    if (monthClause != "00" && monthClause != '') filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -113,7 +114,7 @@ function getBarChartPais(filtro) {
 
     let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
 
-    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+    if (monthClause != "00" && monthClause != '') filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -156,7 +157,7 @@ function getKpiTotal(filtro) {
 
     let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
 
-    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+    if (monthClause != "00" && monthClause != '') filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -197,7 +198,7 @@ function getKpiVariacaoAno(filtro) {
 
     let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
 
-    if (monthClause != "00") filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
+    if (monthClause != "00" && monthClause != '') filterOption = `AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
@@ -265,7 +266,7 @@ function getKpiVariacaoMes(filtro) {
 
     let monthClause = filtro.DATA_CHEGADA.substring(5, 7)
 
-    if (monthClause != "00") {
+    if (monthClause != "00" && monthClause != '') {
         filterOption += ` AND MONTH(bd.DATA_CHEGADA) = ${monthClause}`;
     } else {
         filterOption += ' AND MONTH(DATA_CHEGADA) = MONTH(CURDATE())'
