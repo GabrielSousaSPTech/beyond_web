@@ -5,14 +5,20 @@ function getBarChartAll(filtro) {
     console.log("Filtro recebido bar all:", filtro);
 
 
-    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+
+    console.log("O filtro é: " + filtro);
+
+    console.log("YearClause é: " + yearClause);
+
+    console.log("Substring é: " + filtro.DATA_CHEGADA.substring(0, 4))
 
     let filterOption = "";
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
@@ -46,18 +52,20 @@ function getBarChartAll(filtro) {
     ANO, MES, CONTINENTE;
     `
 
+    console.log("Executando a instrução SQL:", instrucaoSql);
+
     return database.executar(instrucaoSql)
 }
 
 function getBarChartUF(filtro) {
-    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
     let filterOption = "";
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
@@ -89,14 +97,14 @@ function getBarChartUF(filtro) {
 }
 
 function getBarChartPais(filtro) {
-    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
     let filterOption = "";
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
@@ -128,14 +136,14 @@ function getBarChartPais(filtro) {
 }
 
 function getKpiTotal(filtro) {
-    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) = 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
 
     let filterOption = "";
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
@@ -163,7 +171,7 @@ function getKpiTotal(filtro) {
 
 function getKpiVariacaoAno(filtro) {
 
-    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? `WHERE YEAR(bd.DATA_CHEGADA) IN (${new Date().getFullYear() - 2}, ${new Date().getFullYear() - 1})` : `WHERE YEAR(bd.DATA_CHEGADA) IN (${Number(filtro.DATA_CHEGADA.substring(0, 4)) - 1}, ${Number(filtro.DATA_CHEGADA.substring(0, 4))})`;
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? `WHERE YEAR(bd.DATA_CHEGADA) IN (${new Date().getFullYear() - 2}, ${new Date().getFullYear() - 1})` : `WHERE YEAR(bd.DATA_CHEGADA) IN (${Number(filtro.DATA_CHEGADA.substring(0, 4)) - 1}, ${Number(filtro.DATA_CHEGADA.substring(0, 4))})`;
 
     console.log();
 
@@ -172,7 +180,7 @@ function getKpiVariacaoAno(filtro) {
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
@@ -215,9 +223,9 @@ function getKpiVariacaoAno(filtro) {
 }
 
 function getKpiVariacaoMes(filtro) {
-    let yearClause = filtro || filtro.DATA_CHEGADA == 'null' ? `WHERE YEAR(bd.DATA_CHEGADA) IN (${new Date().getFullYear() - 2}, ${new Date().getFullYear() - 1})` : `WHERE YEAR(bd.DATA_CHEGADA) IN (${Number(filtro.DATA_CHEGADA.substring(0, 4)) - 1}, ${Number(filtro.DATA_CHEGADA.substring(0, 4))})`;
+    let yearClause = filtro.DATA_CHEGADA == 'null' ? `WHERE YEAR(bd.DATA_CHEGADA) IN (${new Date().getFullYear() - 2}, ${new Date().getFullYear() - 1})` : `WHERE YEAR(bd.DATA_CHEGADA) IN (${Number(filtro.DATA_CHEGADA.substring(0, 4)) - 1}, ${Number(filtro.DATA_CHEGADA.substring(0, 4))})`;
 
-    let yearClause2 = filtro || filtro.DATA_CHEGADA == 'null' ? `WHERE ano = ${new Date().getFullYear() - 1}` : `WHERE ano = ${filtro.DATA_CHEGADA.substring(0, 4)}`;
+    let yearClause2 = filtro.DATA_CHEGADA == 'null' ? `WHERE ano = ${new Date().getFullYear() - 1}` : `WHERE ano = ${filtro.DATA_CHEGADA.substring(0, 4)}`;
 
 
     let filterOption = "";
@@ -225,7 +233,7 @@ function getKpiVariacaoMes(filtro) {
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if( valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
