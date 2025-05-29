@@ -32,4 +32,12 @@ router.delete("/delete/:idFuncionario", function (req, res) {
     usuarioController.deleteUsuario(req, res);
 });
 
+router.get("/analise/:fkEmpresa", function (req, res){
+    usuarioController.getUsuarioEmAnalise(req, res)
+})
+
+router.put("/autorizar/:idUsuario", function (req, res){
+    usuarioController.autorizarUsuario(req, res)
+})
+
 module.exports = router;

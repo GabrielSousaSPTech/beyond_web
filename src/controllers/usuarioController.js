@@ -133,11 +133,34 @@ function deleteUsuario(req, res) {
     });
 }
 
+function getUsuarioEmAnalise (req, res){
+    var idEmpresa = req.params.fkEmpresa;
+
+    usuarioModel.getUsuarioEmAnalise(idEmpresa).then(function (resultado){
+        res.status(200).json(resultado);
+    }).catch(function (erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function autorizarUsuario(req, res){
+    var idUsuario = req.params.idUsuario
+    var idPermissao = req.body.idPermissao
+
+    usuarioModel.autorizarUsuario(idUsuario, idPermissao).then(function (resultado){
+        res.status(200).json(resultado);
+    }).catch(function (erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     getUsuario,
     getByIdUsuario,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
+    getUsuarioEmAnalise,
+    autorizarUsuario
 }
