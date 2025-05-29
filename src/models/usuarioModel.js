@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function autenticar(email, senha) {
     var instrucaoSql = `
-        SELECT ID_FUNC, FK_EMPRESA, NOME,CPF, EMAIL, FOTO, TIPO, CARGO FROM TB_FUNCIONARIO WHERE email = ? AND senha = ? AND STATUS_CADASTRO = ?;
+        SELECT ID_FUNC, FK_EMPRESA, NOME,CPF, EMAIL, FOTO, FK_PERMISSAO FROM TB_FUNCIONARIO WHERE EMAIL = ? AND SENHA = ? AND STATUS_CADASTRO = ?;
     `;
     return database.executar(instrucaoSql, [email, senha, "ativo"]);
 }
@@ -11,8 +11,15 @@ function cadastrar(email, senha, empresa, nome, telefone) {
     
     var instrucaoSql = `
         INSERT INTO TB_FUNCIONARIO (FK_EMPRESA, NOME, EMAIL, SENHA, TEL, STATUS_CADASTRO) 
-        VALUES (?, ?, ?, ?, ?, ?);
+        VALUES (?, ?, ?, ?, ?, ?, ?);
     `;
+
+    //USE ESSE INSERT QUANDO ADICIONAR O CAMPO DE CPF NO FRONT
+// var instrucaoSql = `
+//         INSERT INTO TB_FUNCIONARIO (FK_EMPRESA, NOME, CPF, EMAIL, SENHA, TEL, STATUS_CADASTRO) 
+//         VALUES (?, ?, ?, ?, ?, ?, ?);
+//     `;
+
     return database.executar(instrucaoSql, [empresa, nome, email, senha, telefone, "analise"]);
 }
 
