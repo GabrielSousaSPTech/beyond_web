@@ -11,8 +11,8 @@ import { UserFiltersService } from '../../../../core/services/user-filters/user-
 @Component({
   selector: 'app-input-filter',
   imports: [SelectFilteredComponent, CommonModule, ReactiveFormsModule],
-  templateUrl: './input-filter.component.html',
-  styleUrl: './input-filter.component.css',
+  templateUrl: './tendencia-input-filter.component.html',
+  styleUrl: './tendencia-input-filter.component.css',
   providers: []
 })
 export class InputFilterComponent implements OnInit {

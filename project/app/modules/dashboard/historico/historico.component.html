@@ -4,43 +4,14 @@
     <app-card-kpi titulo="Ano de maior demanda"></app-card-kpi>
     <app-card-kpi titulo="Mês de maior demanda"></app-card-kpi>
   </div>
-  <div class="filtros">
-    <div class="group-A">
-      <div class="filter-group">
-        <label for="anoMes">Ano | Mês</label>
-        <select id="select-option">
-          <option></option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="continentePais">Continente | País</label>
-        <select id="select-option">
-          <option></option>
-        </select>
-      </div>
-    </div>
-    <div class="group-B">
-      <div class="filter-group">
-        <label for="viaAcesso">Via de acesso</label>
-        <select id="select-option">
-          <option></option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="portaoEntrada">Portão de entrada</label>
-        <select id="select-option">
-          <option></option>
-        </select>
-      </div>
-    </div>
-  </div>
+  <app-historico-input-filter></app-historico-input-filter>
 </div>
 <div class="grafico-card">
   <div class="grafico">
     <h2>Total de chegadas por ano e mês</h2>
     <div class="chart-placeholder">
       <!-- espaço para colocar o gráfico -->
-      <app-line-chart></app-line-chart>
+      <app-line-chart [chartData]="graphHistorico$"></app-line-chart>
     </div>
   </div>
 </div>

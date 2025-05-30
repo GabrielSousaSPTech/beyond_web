@@ -4,7 +4,7 @@ import { UserFiltersService } from '../../../../core/services/user-filters/user-
 import { userFilter } from '../../../../shared/models/user-filter.type';
 import { tap } from 'rxjs';
 import { BasicDataService } from '../../../../core/services/basicData/basicData.service';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../services/dataTendencia.service';
 import { ClickOutsideDirective } from '../../../../core/directives/clickOutside/clickOutside.directive';
 
 @Component({

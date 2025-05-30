@@ -3,8 +3,8 @@ import { HeaderTitleService } from '../../../core/services/header-title/header-t
 import { ComboChartAllComponent } from "../components/combo-chart-all/combo-chart-all.component";
 import { BarChartAllComponent } from "../components/bar-chart-all/bar-chart-all.component";
 import { CardKpiComponent } from "../components/card-kpi/card-kpi.component";
-import { InputFilterComponent } from "../components/input-filter/input-filter.component";
-import { DataService } from '../services/data.service';
+import { InputFilterComponent } from "../components/tendencia-input-filter/tendencia-input-filter.component";
+import { DataService } from '../services/dataTendencia.service';
 import { AsyncPipe } from '@angular/common';
 import { map, take, tap } from 'rxjs';
 import { BarChartAll } from '../../../shared/models/bar-chart-all.type';
