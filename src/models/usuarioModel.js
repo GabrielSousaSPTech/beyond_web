@@ -11,7 +11,7 @@ function cadastrar(email, senha, empresa, nome, telefone) {
     
     var instrucaoSql = `
         INSERT INTO TB_FUNCIONARIO (FK_EMPRESA, NOME, EMAIL, SENHA, TEL, STATUS_CADASTRO) 
-        VALUES (?, ?, ?, ?, ?, ?, ?);
+        VALUES (?, ?, ?, ?, ?, ?);
     `;
 
     //USE ESSE INSERT QUANDO ADICIONAR O CAMPO DE CPF NO FRONT
@@ -31,7 +31,10 @@ function confirmarCodigo(codigo) {
 }
 
 function getUsuario(fkEmpresa){
-    var instrucaoSql = `SELECT * FROM TB_FUNCIONARIO WHERE FK_EMPRESA = ? AND STATUS_CADASTRO = ?`
+    var instrucaoSql = `SELECT func.*, permissao.NOME as TIPO
+                        FROM TB_FUNCIONARIO func
+                        JOIN TB_PERMISSAO permissao ON func.FK_PERMISSAO = permissao.ID_PERMISSAO
+                        WHERE func.FK_EMPRESA = ? AND func.STATUS_CADASTRO = ?`
 
     return database.executar(instrucaoSql, [fkEmpresa, "ativo"])
 }

@@ -1,7 +1,8 @@
-export type userRegistered = {
-    id: number;
-    name: string;
-    tipoAcesso: string;
-    foto: string;
-    anoInicio: string;
+
+export type userRegisteredApi = {
+  ID_FUNC: number;
+  FK_PERMISSAO: number; 
+  NOME: string;
+  EMAIL: string;
+  TIPO: string;
 }

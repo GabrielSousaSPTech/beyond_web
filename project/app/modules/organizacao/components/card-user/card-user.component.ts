@@ -1,6 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CardUserService } from '../../services/card-user/card-user.service';
-import { userRegistered } from '../../../../shared/models/users-registered';
 
 @Component({
   selector: 'app-card-user',
@@ -10,9 +9,10 @@ import { userRegistered } from '../../../../shared/models/users-registered';
 })
 export class CardUserComponent {
   cardUserService = inject(CardUserService)
-  usersList = signal<Array<userRegistered>>([]);
+    usersList = this.cardUserService.getUsersActivity; 
   
-  ngOnInit():void {
-    this.usersList.set(this.cardUserService.getUsersRegistered())
-  }
+  ngOnInit(): void {
+  console.log('ngOnInit chamado');
+  this.cardUserService.getUsersRegistered();
+}
 }
