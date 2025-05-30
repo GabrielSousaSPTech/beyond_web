@@ -17,9 +17,11 @@ Este repositório é destinado ao projeto do segundo semestre de 2025/1. O objet
 - **ETL:** Apache POI.
 
 ##  📁 Repositórios Relacionados
-  - **Beyond_log**: Repositório que armazena o registro de logs do projeto
-      **Link:** https://github.com/GabrielSousaSPTech/beyond_ETL.git 
-
+  - **Beyond_ETL**: Repositório que armazena o registro de logs do projeto
+      **Link:** https://github.com/GabrielSousaSPTech/beyond_ETL.git
+  -**Beyond_setup**: Repositório de setup do projeto
+      **Link:** github.com/GabrielSousaSPTech/beyond_setup
+    
 
 ## 📞 Contato
 Caso tenha dúvidas ou sugestões, entre em contato com a equipe de desenvolvimento.
