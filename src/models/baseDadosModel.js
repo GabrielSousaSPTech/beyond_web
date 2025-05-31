@@ -1,6 +1,6 @@
 var database = require("../database/config")
 
-function getParametros(){
+function getParametros() {
     var instrucaoSql = ``
 
     return database.executar(instrucaoSql)
@@ -36,7 +36,7 @@ function getFederacaoBrasil() {
 
 function getAnos() {
     var instrucaoSql = `
-        select year(DATA_CHEGADA) as ano from TB_BASE_DADOS group by ano;
+        select year(DATA_CHEGADA) as ano from TB_BASE_DADOS group by ano ORDER BY ano DESC;
     `;
     return database.executar(instrucaoSql);
 }

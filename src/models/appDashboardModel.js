@@ -319,7 +319,12 @@ function getGraficoHistorico(filtro) {
 
     let yearClause = '';
 
-    if (filtro.ANOS != null && filtro.ANOS != 'null') {
+    console.log(filtro.ANOS)
+
+    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
+        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
+    } else {
+
         if (Array.isArray(filtro.ANOS)) {
             console.log(filtro.ANOS)
             console.log(filtro.ANOS.length)
@@ -334,10 +339,8 @@ function getGraficoHistorico(filtro) {
             }
             yearClause += ")"
         } else {
-            yearClause = `wHERE YEAR(bd.DATA_CHEGADA) = ${filtro.anos}`
+            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
         }
-    } else {
-        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
     }
 
     let filterOption = "";
@@ -347,7 +350,7 @@ function getGraficoHistorico(filtro) {
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if (valoresFilter[i][0] === 'anos') {
+        if (valoresFilter[i][0] === 'ANOS') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
