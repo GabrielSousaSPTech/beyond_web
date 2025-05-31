@@ -1,8 +1,8 @@
 <div class="Painel-de-controle-historico">
   <div class="kpis-cards">
-    <app-card-kpi titulo="Total de chegadas"></app-card-kpi>
-    <app-card-kpi titulo="Ano de maior demanda"></app-card-kpi>
-    <app-card-kpi titulo="Mês de maior demanda"></app-card-kpi>
+    <app-card-kpi titulo="Total de chegadas" [conteudoKpi]="kpiTotal$"></app-card-kpi>
+    <app-card-kpi [titulo]="`Ano de maior demanda - ${ano()}`" [conteudoKpi]="kpiAno$"></app-card-kpi>
+    <app-card-kpi [titulo]="`Mês de maior demanda - ${getMesNome(mes())}`" [conteudoKpi]="kpiMes$"></app-card-kpi>
   </div>
   <app-historico-input-filter></app-historico-input-filter>
 </div>
