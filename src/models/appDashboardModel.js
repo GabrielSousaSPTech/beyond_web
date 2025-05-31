@@ -127,25 +127,31 @@ function getBarChartPais(filtro) {
 
     const instrucaoSql = `
     SELECT
-    p.NOME_PAIS AS PAIS,
-        SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
-    FROM 
-        TB_BASE_DADOS bd
-    JOIN 
-        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
-    JOIN 
-        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
-    JOIN 
-        PAIS p ON bd.FK_PAIS = p.ID_PAIS
-    JOIN 
-        VIA v ON bd.FK_VIA = v.ID_VIA
-    ${yearClause} 
-    ${filterOption}
-    GROUP BY
-    p.NOME_PAIS
-    ORDER BY 
-        TOTAL_CHEGADAS DESC 
-    LIMIT 30; `;
+    PAIS,
+    TOTAL_CHEGADAS
+        FROM (
+        SELECT
+            p.NOME_PAIS AS PAIS,
+            SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS,
+            SUM(SUM(bd.CHEGADAS)) OVER (ORDER BY SUM(bd.CHEGADAS) DESC) AS RUNNING_TOTAL
+        FROM
+            TB_BASE_DADOS bd
+        JOIN
+            FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
+        JOIN
+            CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+        JOIN
+            PAIS p ON bd.FK_PAIS = p.ID_PAIS
+        JOIN
+            VIA v ON bd.FK_VIA = v.ID_VIA
+        ${yearClause} 
+        ${filterOption}
+        GROUP BY p.NOME_PAIS
+        ORDER BY TOTAL_CHEGADAS DESC
+        LIMIT 30
+    ) subquery;`;
+
+    console.log(instrucaoSql)
 
     return database.executar(instrucaoSql);
 }
@@ -169,21 +175,24 @@ function getKpiTotal(filtro) {
     }
 
     var instrucaoSql = `
-    SELECT
-    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
-    FROM 
-        TB_BASE_DADOS bd
-    JOIN 
-        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
-    JOIN 
-        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
-    JOIN 
-        PAIS p ON bd.FK_PAIS = p.ID_PAIS
-    JOIN 
-        VIA v ON bd.FK_VIA = v.ID_VIA
-    ${yearClause} 
-    ${filterOption}
+    SELECT TOTAL_CHEGADAS
+    FROM (
+        SELECT @total := @total + bd.CHEGADAS AS TOTAL_CHEGADAS
+        FROM (SELECT @total := 0) as total
+        CROSS JOIN TB_BASE_DADOS bd
+        JOIN FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
+        JOIN CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+        JOIN PAIS p ON bd.FK_PAIS = p.ID_PAIS
+        JOIN VIA v ON bd.FK_VIA = v.ID_VIA
+        ${yearClause} 
+        ${filterOption}
+        ORDER BY bd.ID_BASE_DADOS
+    ) subquery
+    ORDER BY TOTAL_CHEGADAS DESC
+    LIMIT 1;
     `
+
+    console.log(instrucaoSql)
 
     return database.executar(instrucaoSql)
 }
