@@ -41,6 +41,9 @@ export class HistoricoInputFilterComponent {
         FK_FEDERACAO_BRASIL: formValues.federacoes ? this.basicDataService.getFederacaoBrasilByName(formValues.federacoes)?.id : null
       } as lineFilterChart
       this.dataHistorico.setActiveFilter(filter);
+    } else {
+      const filter = {}
+      this.dataHistorico.setActiveFilter(filter)
     }
   }
  }
