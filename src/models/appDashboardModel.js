@@ -315,14 +315,39 @@ function getKpiVariacaoMes(filtro) {
 
 function getGraficoHistorico(filtro) {
 
-    let yearClause = filtro.DATA_CHEGADA == 'null' ? 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024' : `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.DATA_CHEGADA.substring(0, 4)}`; // Condição fixa
+    console.log('Esse é o filtro do Histórico: ', filtro)
+
+    let yearClause = '';
+
+    if (filtro.ANOS != null && filtro.ANOS != 'null') {
+        if (Array.isArray(filtro.ANOS)) {
+            console.log(filtro.ANOS)
+            console.log(filtro.ANOS.length)
+            for (let i = 0; i < filtro.ANOS.length; i++) {
+                console.log(filtro.ANOS[i])
+                if (i == 0) {
+                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                } else {
+                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                }
+
+            }
+            yearClause += ")"
+        } else {
+            yearClause = `wHERE YEAR(bd.DATA_CHEGADA) = ${filtro.anos}`
+        }
+    } else {
+        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
+    }
 
     let filterOption = "";
+
+
 
     const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
 
     for (let i = 0; i < valoresFilter.length; i++) {
-        if (valoresFilter[i][0] === 'DATA_CHEGADA') {
+        if (valoresFilter[i][0] === 'anos') {
             continue;
         }
         filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
@@ -352,7 +377,7 @@ function getGraficoHistorico(filtro) {
     ORDER BY 
         ANO, MES;
         `
-
+    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
     return database.executar(instrucaoSql)
 }
 
