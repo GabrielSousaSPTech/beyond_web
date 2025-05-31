@@ -8,7 +8,7 @@ function getParametros() {
 
 function getPais() {
     var instrucaoSql = `
-        SELECT ID_PAIS AS id, NOME_PAIS AS nome, FK_CONTINENTE as fk_continente FROM PAIS;
+        SELECT ID_PAIS AS id, NOME_PAIS AS nome, FK_CONTINENTE as fk_continente FROM PAIS order by nome;
     `;
     return database.executar(instrucaoSql);
 }

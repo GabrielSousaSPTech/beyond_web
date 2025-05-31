@@ -31,4 +31,16 @@ router.get("/graficoHistorico", function (req, res) {
     appDashboardController.getGraficoHistorico(req, res);
 });
 
+router.get("/kpiHistoricoTotal", function (req, res) {
+    appDashboardController.getKpiHistoricoTotal(req, res);
+});
+
+router.get("/kpiHistoricoAno", function (req, res) {
+    appDashboardController.getKpiHistoricoAno(req, res);
+});
+
+router.get("/kpiHistoricoMes", function (req, res) {
+    appDashboardController.getKpiHistoricoMes(req, res);
+});
+
 module.exports = router;

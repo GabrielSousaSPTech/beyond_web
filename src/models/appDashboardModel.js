@@ -393,6 +393,207 @@ function getGraficoHistorico(filtro) {
     return database.executar(instrucaoSql)
 }
 
+function getKpiHistoricoTotal(filtro) {
+
+    console.log('Esse é o filtro do Histórico: ', filtro)
+
+    let yearClause = '';
+
+    console.log(filtro.ANOS)
+
+    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
+        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
+    } else {
+
+        if (Array.isArray(filtro.ANOS)) {
+            console.log(filtro.ANOS)
+            console.log(filtro.ANOS.length)
+            for (let i = 0; i < filtro.ANOS.length; i++) {
+                console.log(filtro.ANOS[i])
+                if (i == 0) {
+                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                } else {
+                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                }
+
+            }
+            yearClause += ")"
+        } else {
+            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
+        }
+    }
+
+    let filterOption = "";
+
+
+
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if (valoresFilter[i][0] === 'ANOS') {
+            continue;
+        }
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
+    }
+
+    var instrucaoSql = `
+    SELECT 
+    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+    FROM 
+        TB_BASE_DADOS bd
+    JOIN 
+        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
+    JOIN 
+        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+    JOIN 
+        PAIS p ON bd.FK_PAIS = p.ID_PAIS
+    JOIN 
+        VIA v ON bd.FK_VIA = v.ID_VIA
+    ${yearClause}
+    ${filterOption} 
+        `
+    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
+function getKpiHistoricoAno(filtro) {
+
+    console.log('Esse é o filtro do Histórico: ', filtro)
+
+    let yearClause = '';
+
+    console.log(filtro.ANOS)
+
+    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
+        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
+    } else {
+
+        if (Array.isArray(filtro.ANOS)) {
+            console.log(filtro.ANOS)
+            console.log(filtro.ANOS.length)
+            for (let i = 0; i < filtro.ANOS.length; i++) {
+                console.log(filtro.ANOS[i])
+                if (i == 0) {
+                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                } else {
+                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                }
+
+            }
+            yearClause += ")"
+        } else {
+            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
+        }
+    }
+
+    let filterOption = "";
+
+
+
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if (valoresFilter[i][0] === 'ANOS') {
+            continue;
+        }
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
+    }
+
+    var instrucaoSql = `
+   SELECT  
+    YEAR(bd.DATA_CHEGADA) AS ANO,
+    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+    FROM  
+        TB_BASE_DADOS bd
+    JOIN  
+        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
+    JOIN  
+        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+    JOIN  
+        PAIS p ON bd.FK_PAIS = p.ID_PAIS
+    JOIN  
+        VIA v ON bd.FK_VIA = v.ID_VIA
+    ${yearClause}
+    ${filterOption}  
+    GROUP BY  
+        YEAR(bd.DATA_CHEGADA)
+    ORDER BY  
+        TOTAL_CHEGADAS DESC
+    LIMIT 1;
+        `
+    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
+function getKpiHistoricoMes(filtro) {
+
+    console.log('Esse é o filtro do Histórico: ', filtro)
+
+    let yearClause = '';
+
+    console.log(filtro.ANOS)
+
+    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
+        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
+    } else {
+
+        if (Array.isArray(filtro.ANOS)) {
+            console.log(filtro.ANOS)
+            console.log(filtro.ANOS.length)
+            for (let i = 0; i < filtro.ANOS.length; i++) {
+                console.log(filtro.ANOS[i])
+                if (i == 0) {
+                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                } else {
+                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
+                }
+
+            }
+            yearClause += ")"
+        } else {
+            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
+        }
+    }
+
+    let filterOption = "";
+
+
+
+    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
+
+    for (let i = 0; i < valoresFilter.length; i++) {
+        if (valoresFilter[i][0] === 'ANOS') {
+            continue;
+        }
+        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
+    }
+
+    var instrucaoSql = `
+    SELECT  
+        MONTH(bd.DATA_CHEGADA) AS MES,
+        SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+    FROM  
+        TB_BASE_DADOS bd
+    JOIN  
+        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
+    JOIN  
+        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+    JOIN  
+        PAIS p ON bd.FK_PAIS = p.ID_PAIS
+    JOIN  
+        VIA v ON bd.FK_VIA = v.ID_VIA
+    ${yearClause}
+    ${filterOption}  
+    GROUP BY  
+        MONTH(bd.DATA_CHEGADA)
+    ORDER BY  
+        TOTAL_CHEGADAS DESC
+    LIMIT 1;
+        `
+    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
 
 module.exports = {
     getBarChartAll,
@@ -401,5 +602,8 @@ module.exports = {
     getKpiTotal,
     getKpiVariacaoAno,
     getKpiVariacaoMes,
-    getGraficoHistorico
+    getGraficoHistorico,
+    getKpiHistoricoTotal,
+    getKpiHistoricoAno,
+    getKpiHistoricoMes
 }

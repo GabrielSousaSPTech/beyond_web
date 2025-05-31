@@ -56,6 +56,32 @@ function getGraficoHistorico(req, res) {
     });
 }
 
+function getKpiHistoricoTotal(req, res) {
+    appDashboardModel.getKpiHistoricoTotal(req.query).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function getKpiHistoricoAno(req, res) {
+    appDashboardModel.getKpiHistoricoAno(req.query).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function getKpiHistoricoMes(req, res) {
+    appDashboardModel.getKpiHistoricoMes(req.query).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
 module.exports = {
     getBarChartAll,
     getBarChartUF,
@@ -63,5 +89,8 @@ module.exports = {
     getKpiTotal,
     getKpiVariacaoAno,
     getKpiVariacaoMes,
-    getGraficoHistorico
+    getGraficoHistorico,
+    getKpiHistoricoTotal,
+    getKpiHistoricoAno,
+    getKpiHistoricoMes
 }
