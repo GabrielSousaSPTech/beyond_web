@@ -13,7 +13,8 @@
                 <app-select-filtered 
                     [inputData]="this.basicDataService.paises$" 
                     [placeHolder]="'Paises'"
-                    (valueChange)="filterForm.get('vias')?.setValue($event)"
+                    [searchTerm]="filterForm.get('paises')?.value"
+                    (valueChange)="filterForm.get('paises')?.setValue($event)"
                     >
                 </app-select-filtered>
             </div>
@@ -21,8 +22,8 @@
                 <app-select-filtered 
                     [inputData]="this.basicDataService.vias$"
                     [placeHolder]="'Vias'"
-                    [searchTerm]="filterForm.get('paises')?.value"
-                    (valueChange)="filterForm.get('paises')?.setValue($event)">
+                    [searchTerm]="filterForm.get('vias')?.value"
+                    (valueChange)="filterForm.get('vias')?.setValue($event)">
                 </app-select-filtered>
                 <app-select-filtered 
                     [inputData]="this.basicDataService.federacoesBrasil$" 

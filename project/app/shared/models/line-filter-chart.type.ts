@@ -1,6 +1,6 @@
 export type lineFilterChart = {
-    anos?: number[],
-    via?: string,
-    pais?: string,
-    federacoes?: string 
+    ANOS?: number[],
+    FK_VIA?: number,
+    FK_PAIS?: number,
+    FK_FEDERACAO_BRASIL?: number
 }

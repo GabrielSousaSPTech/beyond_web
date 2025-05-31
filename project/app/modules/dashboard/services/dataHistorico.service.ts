@@ -15,12 +15,12 @@ export class DataHistoricoService {
 
   constructor(){
     const filter = {
-      anos: undefined,
-      via: undefined,
-      pais: undefined,
-      chegada: undefined
-    }
-    this.activeLineFilterSubject = new BehaviorSubject<lineFilterChart>(filter as lineFilterChart)
+      ANOS: undefined,
+      FK_VIA: undefined,
+      FK_PAIS: undefined,
+      FK_FEDERACAO_BRASIL: undefined
+    } as lineFilterChart
+    this.activeLineFilterSubject = new BehaviorSubject<lineFilterChart>(filter);
     this.activeLineFilter$ = this.activeLineFilterSubject.asObservable();
   }
 

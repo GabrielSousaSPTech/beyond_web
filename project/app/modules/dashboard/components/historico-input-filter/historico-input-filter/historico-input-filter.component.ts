@@ -35,10 +35,10 @@ export class HistoricoInputFilterComponent {
   private handleFilterChanges(formValues: any) {
     if(Object.values(formValues).find(x => x != '') != undefined){
       const filter = {
-        anos: formValues.anos ? formValues.anos : null,
-        via: formValues.vias ? formValues.vias : null,
-        pais: formValues.paises ? formValues.paises : null,
-        federacao: formValues.federacoes ? formValues.federacoes : null
+        ANOS: formValues.anos ? formValues.anos : null,
+        FK_VIA: formValues.vias ? this.basicDataService.getViaByName(formValues.vias)?.id : null,
+        FK_PAIS: formValues.paises ? this.basicDataService.getPaisByName(formValues.paises)?.id : null,
+        FK_FEDERACAO_BRASIL: formValues.federacoes ? this.basicDataService.getFederacaoBrasilByName(formValues.federacoes)?.id : null
       } as lineFilterChart
       this.dataHistorico.setActiveFilter(filter);
     }
