@@ -1,17 +1,16 @@
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import {userRegisteredApi } from '../../../../shared/models/users-registered';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CardUserService {
   private http = inject(HttpClient);
 
+  private activeUserSubject: BehaviorSubject<userRegisteredApi> = new BehaviorSubject({} as userRegisteredApi)
+  public activeUser$ = this.activeUserSubject.asObservable();
 
-
-  getUsersActivity: WritableSignal<userRegisteredApi[]> = signal([] as userRegisteredApi[]);
-
+  public getUsersActivity: WritableSignal<userRegisteredApi[]> = signal([] as userRegisteredApi[]);
 
   getUsersRegistered(){
     console.log("Cheguei aqui")
@@ -25,13 +24,18 @@ export class CardUserService {
             NOME: event.NOME,
             FK_PERMISSAO: event.FK_PERMISSAO,
             EMAIL: event.EMAIL,
-            TIPO: event.TIPO
-          }
+            TIPO: event.TIPO,
+            TEL: event.TEL
+          } as userRegisteredApi
         }))
       },
       error: (error) =>{
         return error
       }
     })
+  }
+
+  setActiveUser(user: userRegisteredApi){
+    this.activeUserSubject.next(user);
   }
 }

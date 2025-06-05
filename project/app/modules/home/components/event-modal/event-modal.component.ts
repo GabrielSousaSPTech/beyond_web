@@ -2,18 +2,19 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { userEvent } from '../../../../shared/models/user-event.type';
 import { CardEventService } from '../../services/card-event/card-event.service';
-import { BaseModalComponent } from "../../../../shared/components/base-modal/base-modal.component";
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { BaseModalComponent } from '../../../../shared/components/base-modal/base-modal.component';
 
 @Component({
   selector: 'app-event-modal',
-  imports: [BaseModalComponent, CommonModule, ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, BaseModalComponent],
   templateUrl: './event-modal.component.html',
   styleUrl: './event-modal.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EventModalComponent {
+export class EventModalComponent extends BaseModalComponent {
   private cardEventService = inject(CardEventService)
   protected eventList = this.cardEventService.getUserEvents;
 
@@ -24,6 +25,7 @@ export class EventModalComponent {
   eventForm: FormGroup;
   
   constructor(private fb: FormBuilder){
+    super();
       this.eventForm = this.fb.group({
         name: ['', [
           Validators.required,
@@ -83,7 +85,7 @@ export class EventModalComponent {
           this.cardEventService.insertEvent(newEvent);
         }
   
-        this.closeModal();
+        this.onClose();
       }
     }
 
@@ -91,10 +93,12 @@ export class EventModalComponent {
       this.eventForm.reset();
     }
 
-    closeModal(): void {
-      this.cardEventService.isModalOpen.set(false);
-      this.cardEventService.isEditing.set(false);
-      this.eventForm.reset();
-    }
+    
+    override onClose(): void {
+    this.cardEventService.isModalOpen.set(false);
+    this.cardEventService.isEditing.set(false);
+    this.eventForm.reset();
+    this.closeModal.emit();
+  }
  }
 

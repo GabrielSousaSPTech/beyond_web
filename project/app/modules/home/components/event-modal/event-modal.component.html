@@ -1,7 +1,7 @@
 <app-base-modal 
   [isOpen]="openModal()"
   [title]="isEditing() ? 'Editar Evento' : 'Criar evento'"
-  (closeModal)="closeModal()">
+  (closeModal)="onClose()">
   <div modal-body>
     <form [formGroup]="eventForm">
       <div class="form-group">
@@ -32,7 +32,7 @@
   </div>
 
   <div modal-footer>
-    <button type="button" (click)="closeModal()" class="btn-cancel">Cancelar</button>
+    <button type="button" (click)="onClose()" class="btn-cancel">Cancelar</button>
     <button type="submit" (click)="saveEvent()" [disabled]="eventForm.invalid" class="btn-save">
       {{ isEditing() ? 'Salvar' : 'Criar evento!' }}
     </button>
