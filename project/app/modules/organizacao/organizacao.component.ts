@@ -5,9 +5,10 @@ import { CardAtividadesComponent } from './components/card-atividades/card-ativi
 import { CardUserComponent } from './components/card-user/card-user.component';
 import { organizacaoService } from './services/organizacao/Organizacao.service';
 import {Clipboard, ClipboardModule} from '@angular/cdk/clipboard';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-organizacao',
-  imports: [ContentSectionComponent, CardUserComponent, CardAtividadesComponent, ClipboardModule],
+  imports: [ContentSectionComponent, CardUserComponent, CardAtividadesComponent, ClipboardModule, FormsModule],
   templateUrl: './organizacao.component.html',
   styleUrl: './organizacao.component.css',
   providers: [organizacaoService, Clipboard]
@@ -23,9 +24,30 @@ export class OrganizacaoComponent implements OnInit{
         this.OrganizacaoService.dadosOrganizacao$.subscribe(data =>{
           this.dataOut.set(data);
         })
-
         this.OrganizacaoService.countMembros().subscribe(qtd=>{
           this.qtdMembros = qtd;
         })
       }
+      emailParaEnvio: string = '';
+  
+
+    enviar() {
+    if (!this.emailParaEnvio) {
+      console.warn('Email não preenchido');
+    return;
+  }
+
+    this.OrganizacaoService.enviarEmail(this.emailParaEnvio, this.dataOut().CHAVE_ATIVACAO).subscribe({
+    next: (res: any) => {
+      console.log('Email enviado com sucesso:', res);
+       this.emailParaEnvio = '';
+    },
+    error: (err: any) => {
+      console.error('Erro ao enviar email:', err);
+      this.emailParaEnvio = '';
+    }
+  });;
+}
+
+
 }

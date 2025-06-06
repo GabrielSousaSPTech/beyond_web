@@ -8,8 +8,8 @@
     <div class="email">
         <img src="assets/icons/actions/icon-email.svg">
         <form class="campo-email">
-            <input type="text" placeholder="Encaminhar para..">
-            <button id="btnEnviar" type="button" onclick="enviarEmail()">Enviar</button>
+            <input type="email" [(ngModel)]="emailParaEnvio" placeholder="Encaminhar para..">
+            <button id="btnEnviar" type="button" (click)="enviar(dataOut().CHAVE_ATIVACAO)">Enviar</button>
         </form>
     </div>
     <button id="btnSolicitacoes" type="button" onclick="verSolicitacoes()">
