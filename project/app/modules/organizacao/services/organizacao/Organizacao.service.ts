@@ -1,7 +1,7 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import {dadosOrganizacao } from '../../../../shared/models/organizacao';
+import { inject, Injectable} from '@angular/core';
+import {dadosOrganizacao, qtdMembros } from '../../../../shared/models/organizacao';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable(
 )
@@ -22,5 +22,9 @@ export class organizacaoService {
                 console.error(error)
             }
         })
+    }
+
+    countMembros(){
+        return this.http.get<qtdMembros[]>('/empresas/membros/'+sessionStorage.getItem("EMPRESA_USUARIO")).pipe(map(res => res[0].quantidade));
     }
 }

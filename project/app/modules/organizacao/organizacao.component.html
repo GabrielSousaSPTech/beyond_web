@@ -2,8 +2,8 @@
 <div class="invite-organizacao">
     <div class="container-codigo">
         <h1>Código da organização:</h1>
-        <h2 id="codigo-empresa">{{dataOut().CHAVE_ATIVACAO}}</h2>
-        <img src="assets/icons/actions/icon-copy.svg" [cdkCopyToClipboard]="'teste'" alt="icon-copiar">
+        <h2 id="codigo-empresa">******</h2>
+        <img src="assets/icons/actions/icon-copy.svg" [cdkCopyToClipboard]="dataOut().CHAVE_ATIVACAO" alt="icon-copiar">
     </div>
     <div class="email">
         <img src="assets/icons/actions/icon-email.svg">
@@ -18,7 +18,7 @@
 </div>
 <div class="cards">
     <app-content-section title="Usuários cadastrados">
-        <p class="qtd-users">N° de membros: 3</p>
+        <p class="qtd-users">N° de membros: {{qtdMembros}}</p>
         <app-card-user></app-card-user>
     </app-content-section>
     <app-content-section iconUrl="assets/icons/misc/icon-atividade.svg" title="Ultimas atividades" padding="none" [maxWidth]="'52rem'">
