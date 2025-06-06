@@ -25,7 +25,6 @@ function autenticar(req, res) {
                         empresa: resultadoAutenticar[0].FK_EMPRESA,
                         foto: resultadoAutenticar[0].FOTO,
                         tipo: resultadoAutenticar[0].TIPO,
-                        cargo: resultadoAutenticar[0].CARGO,
                         cpf: resultadoAutenticar[0].CPF
                         
                     });

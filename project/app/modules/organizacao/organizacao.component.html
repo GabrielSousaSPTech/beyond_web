@@ -2,8 +2,8 @@
 <div class="invite-organizacao">
     <div class="container-codigo">
         <h1>Código da organização:</h1>
-        <h2 id="codigo-empresa">#*****</h2>
-        <img src="assets/icons/actions/icon-copy.svg" alt="icon-copiar">
+        <h2 id="codigo-empresa">{{dataOut().CHAVE_ATIVACAO}}</h2>
+        <img src="assets/icons/actions/icon-copy.svg" [cdkCopyToClipboard]="'teste'" alt="icon-copiar">
     </div>
     <div class="email">
         <img src="assets/icons/actions/icon-email.svg">
