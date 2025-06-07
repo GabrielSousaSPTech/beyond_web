@@ -14,7 +14,8 @@
     </div>
     <button id="btnSolicitacoes" type="button" onclick="verSolicitacoes()">
         <img src="assets/icons/actions/icon-solicitacoes.svg">
-        Solicitações</button>
+        Solicitações
+    </button>
 </div>
 <div class="cards">
     <app-content-section title="Usuários cadastrados">
@@ -25,4 +26,5 @@
         <app-card-atividades></app-card-atividades>
     </app-content-section>
 </div>
+<app-user-model [openModal]="editUser" [title]="userName()"></app-user-model>
 </section>
