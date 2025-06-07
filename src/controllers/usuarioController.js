@@ -153,6 +153,17 @@ function autorizarUsuario(req, res){
     })
 }
 
+function getPermissoes(req, res) {
+        console.log("AQUI")
+    usuarioModel.getPermissoes().then(function(resultado){
+
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -161,5 +172,6 @@ module.exports = {
     updateUsuario,
     deleteUsuario,
     getUsuarioEmAnalise,
-    autorizarUsuario
+    autorizarUsuario,
+    getPermissoes
 }

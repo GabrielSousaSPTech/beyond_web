@@ -81,6 +81,11 @@ function autorizarUsuario(idFuncionario, idPermissao){
     return database.executar(instrucaoSql, ["ativo", idPermissao, idFuncionario])
 }
 
+function getPermissoes(){
+    var instrucaoSql = `SELECT * FROM TB_PERMISSAO;`
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -90,5 +95,6 @@ module.exports = {
     updateUsuario,
     deleteUsuario,
     getUsuarioEmAnalise,
-    autorizarUsuario
+    autorizarUsuario,
+    getPermissoes
 };
