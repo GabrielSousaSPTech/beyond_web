@@ -61,6 +61,13 @@
   color: #6c757d;
 }
 
+.btn-alterUser {
+  border-radius: 1rem;
+  background-color: #ffed87;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
 [modal-header] h2 {
   font-size: 2.4rem;
   font-weight: bold;
@@ -73,31 +80,30 @@
   margin-top: 2rem;
 }
 
-[modal-footer] .btn-cancel {
-  background-color: rgb(216, 32, 75);
-  color: white;
+[modal-footer] .btn {
   border-radius: 1rem;
   padding: 0.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+[modal-footer] .btn:disabled {
+  background-color: rgb(88, 88, 88);
+  cursor: not-allowed;
+}
+
+[modal-footer] .btn-cancel {
+  background-color: rgb(216, 32, 75);
+  color: white;
 }
 
 [modal-footer] .btn-cancel:hover {
   background-color: rgb(216, 32, 75, 0.8);
 }
 
-[modal-footer] .btn-save:disabled {
-  background-color: rgb(88, 88, 88);
-  cursor: not-allowed;
-}
-
 [modal-footer] .btn-save {
   background-color: var(--sead-green);
   color: white;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 [modal-footer] .btn-save:hover:not(:disabled) {

@@ -38,4 +38,26 @@ export class CardUserService {
   setActiveUser(user: userRegisteredApi){
     this.activeUserSubject.next(user);
   }
+
+  updateUser(user: any){
+    this.http.put(`/usuarios/edit/${user.ID_FUNC}`, user).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
+  }
+  
+  updateUserPermitions(userID: number, permissionFK: number){
+      this.http.put(`/autorizar/edit/${userID}`, permissionFK).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
+  }
 }

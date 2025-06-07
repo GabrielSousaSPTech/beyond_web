@@ -5,28 +5,20 @@
   <div modal-body>
     <form [formGroup]="userForm">
       <div class="form-group">
-        <label for="inp_email">Email: </label>
-        <input id="inp_email" formControlName="email" type="text" [disabled]="true">
-      </div>
-      <div class="form-group">
-        <label for="inp_telefone">Telefone: </label>
-        <input id="inp_telefone" formControlName="telefone" type="text" [disabled]="true">
-      </div>
-      <div class="form-group">
-        <label for="inp_tipo">Tipo: </label>
-        <input id="inp_tipo" formControlName="tipo" type="text" [disabled]="true">
-      </div>
-      <div class="form-group">
         <label for="selc_perm">Permissão: </label>
-        <select name="selc_perm" formControlName="perm">
-          <option value="Falta o back">falta o back</option>
-        </select>
+        <app-custom-select formControlName="perm" name="selc_perm" [options]="permissoes" [placeholder]="'aqui fica o placeholder'"></app-custom-select>
       </div>
     </form>
   </div>
 
   <div modal-footer>
-    <button type="button" (click)="onClose()" class="btn-cancel">Cancelar</button>
+    <button type="button" (click)="onClose()" class="btn btn-cancel">Cancelar</button>
+    @if (alterUser()) {
+      <button type="button" (click)="submit()" class="btn btn-save" [disabled]="userForm.pristine">Salvar alterações</button>
+    } @else {
+      <button type="button" (click)="updateUser()" class="btn btn-alterUser">Alterar Usuário</button>
+    }
+
   </div>
 </app-base-modal>
 
