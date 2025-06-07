@@ -13,11 +13,9 @@ export class CardUserService {
   public getUsersActivity: WritableSignal<userRegisteredApi[]> = signal([] as userRegisteredApi[]);
 
   getUsersRegistered(){
-    console.log("Cheguei aqui")
     this.http.get<userRegisteredApi[]>('/usuarios/all/'+sessionStorage.getItem("EMPRESA_USUARIO")).subscribe({
       
       next: (response) => {
-        console.log('Usuários recebidos:', response);
         this.getUsersActivity.set(response.map((event) =>{
           return {
             ID_FUNC: event.ID_FUNC,

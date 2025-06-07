@@ -25,7 +25,6 @@ function autenticar(req, res) {
                         empresa: resultadoAutenticar[0].FK_EMPRESA,
                         foto: resultadoAutenticar[0].FOTO,
                         tipo: resultadoAutenticar[0].TIPO,
-                        cargo: resultadoAutenticar[0].CARGO,
                         cpf: resultadoAutenticar[0].CPF
                         
                     });
@@ -154,6 +153,17 @@ function autorizarUsuario(req, res){
     })
 }
 
+function getPermissoes(req, res) {
+        console.log("AQUI")
+    usuarioModel.getPermissoes().then(function(resultado){
+
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -162,5 +172,6 @@ module.exports = {
     updateUsuario,
     deleteUsuario,
     getUsuarioEmAnalise,
-    autorizarUsuario
+    autorizarUsuario,
+    getPermissoes
 }

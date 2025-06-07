@@ -3,7 +3,9 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/usuarioController");
 
-//Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
+router.get("/permissoes", function(req, res){
+    usuarioController.getPermissoes(req, res)
+})
 router.post("/cadastrar", function (req, res) {
     console.log(req.body);
     usuarioController.cadastrar(req, res);
@@ -39,5 +41,7 @@ router.get("/analise/:fkEmpresa", function (req, res){
 router.put("/autorizar/:idUsuario", function (req, res){
     usuarioController.autorizarUsuario(req, res)
 })
+
+
 
 module.exports = router;

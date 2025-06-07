@@ -1,8 +1,11 @@
 var database = require("../database/config");
 
 function autenticar(email, senha) {
-    var instrucaoSql = `
-        SELECT ID_FUNC, FK_EMPRESA, NOME,CPF, EMAIL, FOTO, FK_PERMISSAO FROM TB_FUNCIONARIO WHERE EMAIL = ? AND SENHA = ? AND STATUS_CADASTRO = ?;
+    var instrucaoSql = ` 
+        SELECT func.*, permissao.NOME as TIPO
+                        FROM TB_FUNCIONARIO func
+                        JOIN TB_PERMISSAO permissao ON func.FK_PERMISSAO = permissao.ID_PERMISSAO
+        WHERE func.EMAIL = ? AND func.SENHA = ? AND func.STATUS_CADASTRO = ?;
     `;
     return database.executar(instrucaoSql, [email, senha, "ativo"]);
 }
@@ -78,6 +81,11 @@ function autorizarUsuario(idFuncionario, idPermissao){
     return database.executar(instrucaoSql, ["ativo", idPermissao, idFuncionario])
 }
 
+function getPermissoes(){
+    var instrucaoSql = `SELECT * FROM TB_PERMISSAO;`
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -87,5 +95,6 @@ module.exports = {
     updateUsuario,
     deleteUsuario,
     getUsuarioEmAnalise,
-    autorizarUsuario
+    autorizarUsuario,
+    getPermissoes
 };
