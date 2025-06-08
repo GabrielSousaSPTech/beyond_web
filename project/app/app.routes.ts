@@ -51,7 +51,7 @@ export const routes: Routes = [
         path: 'heatmap',
         pathMatch: 'full',
         loadComponent() {
-            return import('./modules/dashboard/heatmap/heatmap.component').then(
+            return import('./modules/dashboard/heatmap-brazil/heatmap.component').then(
                 m => m.HeatmapComponent
             );
         },
