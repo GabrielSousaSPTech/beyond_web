@@ -43,7 +43,14 @@ export class TendenciasComponent implements OnInit {
 
   mes = signal<string>(this.getMesNome(new Date().getMonth() + 1));
 
-  protected readonly anoVariacao = signal<number>(0);
+
+  protected readonly anoVariacao = signal<number|string>(0);
+  protected anoAntes(ano: (string|number)){
+    if(!Number.isNaN(Number(ano))){
+      return Number(ano) - 1;
+    }
+    return 0;
+  }
 
   onFilterChange(){
     if(sessionStorage.getItem('filter') && Object.keys(JSON.parse(sessionStorage.getItem('filter')!)).length > 0) {
@@ -102,7 +109,7 @@ export class TendenciasComponent implements OnInit {
   }
 
   kpiVariacaoAno$ = this.dataService.getKpiVariacaoAno().pipe(
-    tap(data => this.anoVariacao.set(data[0]?.ano)),
+    tap(data => this.anoVariacao.set(data[0]?.ano ? data[0]!.ano : "...")),
     map(data => data[0]?.variacao_percentual ?
       (data[0].variacao_percentual > 0 ? `+${data[0].variacao_percentual}%` : `${data[0].variacao_percentual}%`)
       : '0.00%'),

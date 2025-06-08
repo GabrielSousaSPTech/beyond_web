@@ -21,7 +21,7 @@ export class HistoricoComponent implements OnInit {
   private basicDataService = inject(BasicDataService);
   constructor(public headerTitleService: HeaderTitleService) { }
 
-  protected readonly ano = signal<number>(0);
+  protected readonly ano = signal<number|string>("...");
 
   protected readonly mes = signal<number>(0);
 
@@ -68,15 +68,18 @@ export class HistoricoComponent implements OnInit {
 
   graphHistorico$ = this.dataHistoricoService.getLineChartAll().pipe(this.graphRules)
 
-  kpiTotal$ = this.dataHistoricoService.getKpiHistoricoTotal().pipe(map(data => data[0]?.TOTAL_CHEGADAS ? Number(data[0].TOTAL_CHEGADAS).toLocaleString('pt-BR') : '0'));
+  kpiTotal$ = this.dataHistoricoService.getKpiHistoricoTotal().pipe(
+    map(data => data[0]?.TOTAL_CHEGADAS ? Number(data[0].TOTAL_CHEGADAS).toLocaleString('pt-BR') : '0')
+  );
 
 
   kpiAno$ = this.dataHistoricoService.getKpiHistoricoAno().pipe(
-    tap(data => this.ano.set(data[0]?.ANO)),
+    tap(data => this.ano.set(data[0]?.ANO ? data[0]!.ANO : "...")),
     map(data => data[0]?.TOTAL_CHEGADAS ? Number(data[0].TOTAL_CHEGADAS).toLocaleString('pt-BR') : '0')
   );
 
   getMesNome(mes: number): string {
+    if(mes == undefined || mes == null || mes == 0) return "...";
     const meses = [
       'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
       'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
@@ -85,7 +88,7 @@ export class HistoricoComponent implements OnInit {
   }
 
   kpiMes$ = this.dataHistoricoService.getKpiHistoricoMes().pipe(
-    tap(data => this.mes.set(data[0]?.MES)),
+    tap(data => this.mes.set(data[0]?.MES ? data[0]!.MES : 0)),
     map(data => data[0]?.TOTAL_CHEGADAS ? Number(data[0].TOTAL_CHEGADAS).toLocaleString('pt-BR') : '0')
   );
 

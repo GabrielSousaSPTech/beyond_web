@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { Observable } from 'rxjs';
 declare var google: any;
@@ -11,12 +11,19 @@ declare var google: any;
 })
 export class LineChartComponent {
   @Input() chartData!: Observable<any>;
+  protected noData = signal(false);
   ngOnInit(): void {
     google.charts.load('current', { 'packages': ['corechart'] });
 
     this.chartData.subscribe(data => {
       google.charts.setOnLoadCallback(() => {
-        this.drawChart(data);
+        if(data.length < 2){
+          this.noData.set(true);
+        } else {
+          this.noData.set(false);
+          this.drawChart(data);
+        }
+
       });
     });
   }

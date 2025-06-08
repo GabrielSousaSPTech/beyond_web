@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { Observable } from 'rxjs';
 
