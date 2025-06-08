@@ -15,7 +15,7 @@ router.post("/create", function(req, res){
     filtroController.insertFiltro(req, res);
 })
 
-router.put("/edit", function(req, res){
+router.put("/edit/:idFiltro", function(req, res){
     filtroController.updateFiltro(req,res);
 })
 

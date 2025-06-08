@@ -6,12 +6,29 @@ function insertFiltro(fkEmpresa, nome, data_chegada, fk_continente, fk_pais, fk_
 }
 
 function getFiltro(fkEmpresa){
-    var instrusaoSql = `SELECT * FROM TB_FILTRO_DASHBOARD WHERE FK_EMPRESA = ?`
+    var instrusaoSql = `SELECT 
+                            ID_FILTRO,
+                            NOME,
+                            DATA_CHEGADA,
+                            FK_CONTINENTE,
+                            FK_PAIS,
+                            FK_VIA,
+                            FK_FEDERACAO_BRASIL
+                        FROM TB_FILTRO_DASHBOARD 
+                        WHERE FK_EMPRESA = ?`
     return database.executar(instrusaoSql,[fkEmpresa])
 }
 
 function getByIdFiltro(idFiltro){
-    var instrusaoSql = `SELECT * FROM TB_FILTRO_DASHBOARD WHERE ID_FILTRO = ?`
+    var instrusaoSql = `SELECT 
+                            NOME,
+                            DATA_CHEGADA,
+                            FK_CONTINENTE,
+                            FK_PAIS,
+                            FK_VIA,
+                            FK_FEDERACAO_BRASIL
+                        FROM TB_FILTRO_DASHBOARD 
+                        WHERE ID_FILTRO = ?`
     return database.executar(instrusaoSql,[idFiltro])
 }
 

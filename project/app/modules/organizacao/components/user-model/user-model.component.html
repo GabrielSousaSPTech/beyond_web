@@ -1,0 +1,24 @@
+<app-base-modal 
+  [isOpen]="openModal()"
+  [title]="title"
+  (closeModal)="onClose()">
+  <div modal-body>
+    <form [formGroup]="userForm">
+      <div class="form-group">
+        <label for="selc_perm">Permissão: </label>
+        <app-custom-select formControlName="perm" name="selc_perm" [options]="permissoes" [placeholder]="'aqui fica o placeholder'"></app-custom-select>
+      </div>
+    </form>
+  </div>
+
+  <div modal-footer>
+    <button type="button" (click)="onClose()" class="btn btn-cancel">Cancelar</button>
+    @if (alterUser()) {
+      <button type="button" (click)="submit()" class="btn btn-save" [disabled]="userForm.pristine">Salvar alterações</button>
+    } @else {
+      <button type="button" (click)="updateUser()" class="btn btn-alterUser">Alterar Usuário</button>
+    }
+
+  </div>
+</app-base-modal>
+

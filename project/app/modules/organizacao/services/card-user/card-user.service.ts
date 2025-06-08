@@ -1,37 +1,61 @@
-import { Injectable } from '@angular/core';
-import { userActivity } from '../../../../shared/models/user-activity.type';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import {userRegisteredApi } from '../../../../shared/models/users-registered';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CardUserService {
+  private http = inject(HttpClient);
 
-  getUsersActivity() {
-    
-  }
+  private activeUserSubject: BehaviorSubject<userRegisteredApi> = new BehaviorSubject({} as userRegisteredApi)
+  public activeUser$ = this.activeUserSubject.asObservable();
+
+  public getUsersActivity: WritableSignal<userRegisteredApi[]> = signal([] as userRegisteredApi[]);
 
   getUsersRegistered(){
-    return [{
-      id: 0,
-      name: "Cláudio Frizzarini",
-      tipoAcesso: "Administrador",
-      foto: "/srcassets/organizacao/icon-user.svg",
-      anoInicio: "Desde 2025",
-    },
-    {
-      id: 0,
-      name: "Fernanda Caramico",
-      tipoAcesso: "Colaborador",
-      foto: "/srcassets/organizacao/icon-user.svg",
-      anoInicio: "Desde 2025",
-    },
-    {
-      id: 0,
-      name: "Gislayno Monteiro",
-      tipoAcesso: "Colaborador",
-      foto: "/srcassets/organizacao/icon-user.svg",
-      anoInicio: "Desde 2025",
-    }]
+    this.http.get<userRegisteredApi[]>('/usuarios/all/'+sessionStorage.getItem("EMPRESA_USUARIO")).subscribe({
+      
+      next: (response) => {
+        this.getUsersActivity.set(response.map((event) =>{
+          return {
+            ID_FUNC: event.ID_FUNC,
+            NOME: event.NOME,
+            FK_PERMISSAO: event.FK_PERMISSAO,
+            EMAIL: event.EMAIL,
+            TIPO: event.TIPO,
+            TEL: event.TEL
+          } as userRegisteredApi
+        }))
+      },
+      error: (error) =>{
+        return error
+      }
+    })
+  }
+
+  setActiveUser(user: userRegisteredApi){
+    this.activeUserSubject.next(user);
+  }
+
+  updateUser(user: any){
+    this.http.put(`/usuarios/edit/${user.ID_FUNC}`, user).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
+  }
+  
+  updateUserPermitions(userID: number, permissionFK: number){
+      this.http.put(`/autorizar/edit/${userID}`, permissionFK).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
   }
 }

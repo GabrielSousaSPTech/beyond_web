@@ -25,7 +25,6 @@ function autenticar(req, res) {
                         empresa: resultadoAutenticar[0].FK_EMPRESA,
                         foto: resultadoAutenticar[0].FOTO,
                         tipo: resultadoAutenticar[0].TIPO,
-                        cargo: resultadoAutenticar[0].CARGO,
                         cpf: resultadoAutenticar[0].CPF
                         
                     });
@@ -92,7 +91,110 @@ function cadastrar(req, res) {
         }
 }
 
+function getUsuario(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
+
+    usuarioModel.getUsuario(fkEmpresa).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function getByIdUsuario(req, res) {
+    var idFuncionario = req.params.idFuncionario;
+
+    usuarioModel.getByIdUsuario(idFuncionario).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function updateUsuario(req, res) {
+    var idFuncionario = req.params.idFuncionario;
+    var { nome, email, senha, tel } = req.body;
+
+    usuarioModel.updateUsuario(idFuncionario, nome, email, senha, tel).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function deleteUsuario(req, res) {
+    var idFuncionario = req.params.idFuncionario;
+
+    usuarioModel.deleteUsuario(idFuncionario).then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function getUsuarioEmAnalise (req, res){
+    var idEmpresa = req.params.fkEmpresa;
+
+    usuarioModel.getUsuarioEmAnalise(idEmpresa).then(function (resultado){
+        res.status(200).json(resultado);
+    }).catch(function (erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function autorizarUsuario(req, res){
+    var idUsuario = req.params.idUsuario
+    var idPermissao = req.body.idPermissao
+
+    usuarioModel.autorizarUsuario(idUsuario, idPermissao).then(function (resultado){
+        res.status(200).json(resultado);
+    }).catch(function (erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function getPermissoes(req, res) {
+        console.log("AQUI")
+    usuarioModel.getPermissoes().then(function(resultado){
+
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function updateSenha(req, res){
+    usuarioModel.updateSenha(req.params.idFuncionario, req.body.senhaNova).then(function(resultado){
+
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function getSenha(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+    usuarioModel.getSenha(idFuncionario)
+        .then(function (resultado) {
+            res.status(200).json(resultado);
+        })
+        .catch(function (erro) {
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    getUsuario,
+    getByIdUsuario,
+    updateUsuario,
+    deleteUsuario,
+    getUsuarioEmAnalise,
+    autorizarUsuario,
+    getPermissoes,
+    updateSenha,
+    getSenha
 }
