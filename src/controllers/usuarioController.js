@@ -164,6 +164,27 @@ function getPermissoes(req, res) {
     });
 }
 
+function updateSenha(req, res){
+    usuarioModel.updateSenha(req.params.idFuncionario, req.body.senhaNova).then(function(resultado){
+
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function getSenha(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+    usuarioModel.getSenha(idFuncionario)
+        .then(function (resultado) {
+            res.status(200).json(resultado);
+        })
+        .catch(function (erro) {
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -173,5 +194,7 @@ module.exports = {
     deleteUsuario,
     getUsuarioEmAnalise,
     autorizarUsuario,
-    getPermissoes
+    getPermissoes,
+    updateSenha,
+    getSenha
 }
