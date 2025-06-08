@@ -7,7 +7,7 @@
         <img src="assets/icons/misc/icon-user-template.svg" alt="Foto de perfil" />
       </div>
       <h2>{{userName}}</h2>
-      <h3>Administrador</h3>
+      <h3>{{nivelPermissao}}</h3>
 
       <div class="contact-info">
        
@@ -16,7 +16,8 @@
           <input type="text" id="telefone" placeholder="11 0000-0000" />
           
           <label for="email">Email:</label>
-          <input type="email" id="email" placeholder="email@exemplo.com" />
+          <input type="email" id="email" placeholder="email@exemplo.com" value="{{email}}" />
+
 
           <p class="alterar-senha-link">Alterar senha</p>
 

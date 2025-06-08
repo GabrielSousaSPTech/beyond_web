@@ -14,6 +14,7 @@ export class PupUpComponent {
 
   private userService = inject(UserService);
   username = this.userService.userName();
+  email = this.userService.email();
 
   logOut(){
     sessionStorage.clear();
