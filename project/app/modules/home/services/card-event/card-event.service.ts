@@ -38,7 +38,6 @@ export class CardEventService {
         descricao: event.DESCRICAO,
         cor: event.COR
     };
-    console.log('updateEvent payload:', payload);
 
     this.http.put<userEvent>(`/eventos/edit/${event.ID_EVENTOS}`, payload).subscribe({
         next: (response) => {

@@ -23,7 +23,6 @@ export class BarChartAllComponent implements OnInit {
   }
 
   drawChart(chartData: string[][]) {
-    console.log(chartData);
 
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Países');

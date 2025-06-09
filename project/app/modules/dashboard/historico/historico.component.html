@@ -1,0 +1,17 @@
+<div class="Painel-de-controle-historico">
+  <div class="kpis-cards">
+    <app-card-kpi titulo="Total de chegadas" [conteudoKpi]="kpiTotal$"></app-card-kpi>
+    <app-card-kpi [titulo]="`Ano de maior demanda - ${ano()}`" [conteudoKpi]="kpiAno$"></app-card-kpi>
+    <app-card-kpi [titulo]="`Mês de maior demanda - ${getMesNome(mes())}`" [conteudoKpi]="kpiMes$"></app-card-kpi>
+  </div>
+  <app-historico-input-filter></app-historico-input-filter>
+</div>
+<div class="grafico-card">
+  <div class="grafico">
+    <h2>Serie Histórica</h2>
+    <div class="chart-placeholder">
+      <!-- espaço para colocar o gráfico -->
+      <app-line-chart [chartData]="graphHistorico$"></app-line-chart>
+    </div>
+  </div>
+</div>

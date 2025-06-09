@@ -32,9 +32,18 @@ function getFederacaoBrasil(req, res){
     })
 }
 
+function getAno(req, res){
+    baseDadosModel.getAnos().then(function(resultado){
+        res.status(201).json(resultado)
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
 module.exports = {
     getPais,
     getContinente,
     getFederacaoBrasil,
-    getVia
+    getVia,
+    getAno
 }

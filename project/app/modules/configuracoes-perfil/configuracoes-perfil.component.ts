@@ -11,7 +11,9 @@ import { UserService } from '../../core/services/user/user.service';
 export class ConfiguracoesPerfilComponent implements OnInit {
   private userService = inject(UserService);
   userName = this.userService.userName();
-
+  email = this.userService.email();
+  nivelPermissao = this.userService.nivelPermissao();
+  
   constructor(public headerTitleService: HeaderTitleService) { }
 
   ngOnInit(): void {

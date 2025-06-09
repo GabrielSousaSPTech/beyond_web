@@ -1,6 +1,6 @@
 var database = require("../database/config")
 
-function getParametros(){
+function getParametros() {
     var instrucaoSql = ``
 
     return database.executar(instrucaoSql)
@@ -8,7 +8,7 @@ function getParametros(){
 
 function getPais() {
     var instrucaoSql = `
-        SELECT ID_PAIS AS id, NOME_PAIS AS nome FROM PAIS;
+        SELECT ID_PAIS AS id, NOME_PAIS AS nome, FK_CONTINENTE as fk_continente FROM PAIS order by nome;
     `;
     return database.executar(instrucaoSql);
 }
@@ -34,9 +34,17 @@ function getFederacaoBrasil() {
     return database.executar(instrucaoSql);
 }
 
+function getAnos() {
+    var instrucaoSql = `
+        select year(DATA_CHEGADA) as ano from TB_BASE_DADOS group by ano ORDER BY ano DESC;
+    `;
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     getPais,
     getContinente,
     getFederacaoBrasil,
-    getVia
+    getVia,
+    getAnos
 }

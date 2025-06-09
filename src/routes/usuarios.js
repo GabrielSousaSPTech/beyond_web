@@ -7,7 +7,6 @@ router.get("/permissoes", function(req, res){
     usuarioController.getPermissoes(req, res)
 })
 router.post("/cadastrar", function (req, res) {
-    console.log(req.body);
     usuarioController.cadastrar(req, res);
 })
 
@@ -41,6 +40,13 @@ router.get("/analise/:fkEmpresa", function (req, res){
 router.put("/autorizar/:idUsuario", function (req, res){
     usuarioController.autorizarUsuario(req, res)
 })
+
+router.put("/editSenha/:idFuncionario", function (req, res) {
+    usuarioController.updateSenha(req, res);
+});
+router.put("/getSenha/:idFuncionario", function (req, res) {
+    usuarioController.getSenha(req, res);
+});
 
 
 

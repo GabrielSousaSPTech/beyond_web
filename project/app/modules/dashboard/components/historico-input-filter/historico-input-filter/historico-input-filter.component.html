@@ -1,0 +1,36 @@
+<form [formGroup]="filterForm">
+    <div class="filtros">
+        <div class="grupo">
+                <app-select-filtered
+                    [inputData]="this.basicDataService.anos$" 
+                    [placeHolder]="'Anos'"
+                    [searchTerm]="filterForm.get('anos')?.value"
+                    (valueChange)="filterForm.get('anos')?.setValue($event)"
+                    [type]="'checkbox'"
+                    [msgCheckbox]="'Anos'">
+                    >
+                </app-select-filtered>
+                <app-select-filtered 
+                    [inputData]="this.basicDataService.paises$" 
+                    [placeHolder]="'Paises'"
+                    [searchTerm]="filterForm.get('paises')?.value"
+                    (valueChange)="filterForm.get('paises')?.setValue($event)"
+                    >
+                </app-select-filtered>
+            </div>
+            <div class="grupo">
+                <app-select-filtered 
+                    [inputData]="this.basicDataService.vias$"
+                    [placeHolder]="'Vias'"
+                    [searchTerm]="filterForm.get('vias')?.value"
+                    (valueChange)="filterForm.get('vias')?.setValue($event)">
+                </app-select-filtered>
+                <app-select-filtered 
+                    [inputData]="this.basicDataService.federacoesBrasil$" 
+                    [placeHolder]="'Portão de chegada'"
+                    [searchTerm]="filterForm.get('federacoes')?.value"
+                    (valueChange)="filterForm.get('federacoes')?.setValue($event)">
+                </app-select-filtered>
+            </div>
+    </div>
+</form>

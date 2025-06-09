@@ -2,8 +2,11 @@
 export type userRegisteredApi = {
   ID_FUNC: number,
   FK_PERMISSAO: number,
+  TIPO:string,
   NOME: string,
   EMAIL: string,
-  TIPO: string,
   TEL: string
+}
+export type senhaUser = {
+  SENHA:string
 }

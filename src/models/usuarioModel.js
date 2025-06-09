@@ -2,10 +2,24 @@ var database = require("../database/config");
 
 function autenticar(email, senha) {
     var instrucaoSql = ` 
-        SELECT func.*, permissao.NOME as TIPO
-                        FROM TB_FUNCIONARIO func
-                        JOIN TB_PERMISSAO permissao ON func.FK_PERMISSAO = permissao.ID_PERMISSAO
-        WHERE func.EMAIL = ? AND func.SENHA = ? AND func.STATUS_CADASTRO = ?;
+        SELECT  
+            func.ID_FUNC,
+            func.FK_EMPRESA,
+            func.NOME,
+            func.CPF,
+            func.EMAIL,
+            func.TEL,
+            func.FOTO,
+            func.STATUS_CADASTRO,
+            func.FK_PERMISSAO,
+            permissao.NOME as TIPO
+        FROM TB_FUNCIONARIO func
+        JOIN TB_PERMISSAO permissao
+            ON func.FK_PERMISSAO = permissao.ID_PERMISSAO
+        WHERE
+            func.EMAIL = ? AND
+            func.SENHA = ? AND
+            func.STATUS_CADASTRO = ?;
     `;
     return database.executar(instrucaoSql, [email, senha, "ativo"]);
 }
@@ -33,30 +47,72 @@ function confirmarCodigo(codigo) {
     return database.executar(instrucaoSql, [codigo]);
 }
 
-function getUsuario(fkEmpresa){
-    var instrucaoSql = `SELECT func.*, permissao.NOME as TIPO
-                        FROM TB_FUNCIONARIO func
-                        JOIN TB_PERMISSAO permissao ON func.FK_PERMISSAO = permissao.ID_PERMISSAO
-                        WHERE func.FK_EMPRESA = ? AND func.STATUS_CADASTRO = ?`
+function getUsuario(fkEmpresa) {
+    var instrucaoSql = `
+        SELECT 
+            func.ID_FUNC,
+            func.FK_EMPRESA,
+            func.NOME,
+            func.CPF,
+            func.EMAIL,
+            func.TEL,
+            func.FOTO,
+            func.STATUS_CADASTRO,
+            func.FK_PERMISSAO,
+            permissao.NOME as TIPO
+        FROM TB_FUNCIONARIO func
+        JOIN TB_PERMISSAO permissao ON func.FK_PERMISSAO = permissao.ID_PERMISSAO
+        WHERE func.FK_EMPRESA = ? AND func.STATUS_CADASTRO = ?
+    `;
 
-    return database.executar(instrucaoSql, [fkEmpresa, "ativo"])
+    return database.executar(instrucaoSql, [fkEmpresa, "ativo"]);
+}
+function getSenha(idFuncionario) {
+    var instrucaoSql = `
+        SELECT SENHA
+        FROM TB_FUNCIONARIO
+        WHERE ID_FUNC = ?
+    `;
+
+    return database.executar(instrucaoSql, [idFuncionario]);
 }
 
+
 function getByIdUsuario(idFuncionario){
-    var instrucaoSql = `SELECT * FROM TB_FUNCIONARIO WHERE ID_FUNC = ?;`
+    var instrucaoSql = `SELECT 
+                            func.ID_FUNC,
+                            func.FK_EMPRESA,
+                            func.NOME,
+                            func.CPF,
+                            func.EMAIL,
+                            func.TEL,
+                            func.FOTO,
+                            func.STATUS_CADASTRO,
+                            func.FK_PERMISSAO,
+                            permissao.NOME as TIPO
+                        FROM TB_FUNCIONARIO as func
+                        JOIN TB_PERMISSAO permissao ON func.FK_PERMISSAO = permissao.ID_PERMISSAO
+                        WHERE ID_FUNC = ?;`
 
     return database.executar(instrucaoSql, [idFuncionario])
 }
 
-function updateUsuario(idFuncionario, nome, email, senha, tel){
+function updateUsuario(idFuncionario, nome, email, tel){
     var instrucaoSql = `UPDATE TB_FUNCIONARIO
                         SET
                         NOME = ?,
                         EMAIL = ?,
-                        SENHA = ?,
                         TEL = ?
                         WHERE ID_FUNC = ?`
-    return database.executar(instrucaoSql, [nome, email, senha, tel, idFuncionario])
+    return database.executar(instrucaoSql, [nome, email, tel, idFuncionario])
+}
+
+function updateSenha(idFuncionario, senha){
+    var instrucaoSql = `UPDATE TB_FUNCIONARIO
+                        SET
+                        SENHA = ?
+                        WHERE ID_FUNC = ?`
+    return database.executar(instrucaoSql[idFuncionario, senha])
 }
 
 function deleteUsuario(idFuncionario){
@@ -97,5 +153,7 @@ module.exports = {
     deleteUsuario,
     getUsuarioEmAnalise,
     autorizarUsuario,
-    getPermissoes
+    getPermissoes,
+    updateSenha,
+    getSenha
 };
