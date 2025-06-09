@@ -113,9 +113,15 @@ function getByIdUsuario(req, res) {
 
 function updateUsuario(req, res) {
     var idFuncionario = req.params.idFuncionario;
-    var { nome, email, senha, tel } = req.body;
+    var { NOME,CPF, EMAIL, TEL } = req.body;
+    console.log("FUCK ANGULAR",req.body)
+    console.log("NOME ", NOME)
+    console.log("NOME ", CPF)
+    console.log("NOME ", EMAIL)
+    console.log("NOME ", TEL)
+    console.log("id ", req.params)
 
-    usuarioModel.updateUsuario(idFuncionario, nome, email, senha, tel).then(function (resultado) {
+    usuarioModel.updateUsuario(idFuncionario, NOME,CPF, EMAIL, TEL).then(function (resultado) {
         res.status(200).json(resultado);
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);

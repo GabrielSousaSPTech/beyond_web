@@ -5,7 +5,8 @@ export type userRegisteredApi = {
   TIPO:string,
   NOME: string,
   EMAIL: string,
-  TEL: string
+  TEL: string,
+  CPF: string,
 }
 export type senhaUser = {
   SENHA:string
