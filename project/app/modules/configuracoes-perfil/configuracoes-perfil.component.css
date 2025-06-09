@@ -23,7 +23,7 @@
   padding: 4rem 3rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   width: 45rem;
-  height: 60rem;
+  height: fit-content;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -131,7 +131,7 @@ button {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 10rem;
+  width: fit-content;
 }
 
 button:hover {

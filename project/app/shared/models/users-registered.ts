@@ -9,5 +9,13 @@ export type userRegisteredApi = {
   CPF: string,
 }
 export type senhaUser = {
-  SENHA:string
+  senhaAtual:string,
+  senhaNova:string,
+  confirmarSenha:string
+}
+
+export type UpdateSenhaResponse = {
+  sucesso: boolean;
+  message: string;
+  resultado?: any;
 }

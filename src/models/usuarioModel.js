@@ -113,7 +113,7 @@ function updateSenha(idFuncionario, senha){
                         SET
                         SENHA = ?
                         WHERE ID_FUNC = ?`
-    return database.executar(instrucaoSql[idFuncionario, senha])
+    return database.executar(instrucaoSql, [senha, idFuncionario])
 }
 
 function deleteUsuario(idFuncionario){

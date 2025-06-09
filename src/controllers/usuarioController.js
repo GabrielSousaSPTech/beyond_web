@@ -122,9 +122,13 @@ function updateUsuario(req, res) {
     console.log("id ", req.params)
 
     usuarioModel.updateUsuario(idFuncionario, NOME,CPF, EMAIL, TEL).then(function (resultado) {
-        res.status(200).json(resultado);
+        res.status(200).json({
+            sucesso: true,
+            resultado: resultado});
     }).catch(function (erro) {
-        res.status(500).json(erro.sqlMessage);
+        res.status(500).json({
+            sucesso: false,
+            resultado: erro.sqlMessage});
     });
 }
 
@@ -171,14 +175,41 @@ function getPermissoes(req, res) {
     });
 }
 
-function updateSenha(req, res){
-    usuarioModel.updateSenha(req.params.idFuncionario, req.body.senhaNova).then(function(resultado){
-
-        res.status(200).json(resultado);
-    }).catch(function(erro){
-
-        res.status(500).json(erro.sqlMessage);
-    });
+async function updateSenha(req, res) {
+    try {
+        const idFuncionario = req.params.idFuncionario;
+        
+        const resultado = await usuarioModel.getSenha(idFuncionario);
+        if (!resultado || resultado.length === 0) {
+            return res.status(404).json({ 
+                sucesso: false, 
+                message: 'Usuário não encontrado' 
+            });
+        }
+        
+        const senhaAtualBanco = resultado[0].SENHA;
+        if (String(senhaAtualBanco).trim() === String(req.body.senhaAtual).trim()) {
+            const resultadoUpdate = await usuarioModel.updateSenha(idFuncionario, req.body.senhaNova);
+            res.status(200).json({ 
+                sucesso: true, 
+                message: 'Senha atualizada com sucesso',
+                resultado: resultadoUpdate 
+            });
+            
+        } else {
+            res.status(400).json({ 
+                sucesso: false, 
+                message: 'Senha atual incorreta' 
+            });
+        }
+        
+    } catch (erro) {
+        res.status(500).json({ 
+            sucesso: false, 
+            message: 'Erro interno do servidor',
+            erro: erro.message 
+        });
+    }
 }
 
 function getSenha(req, res) {
