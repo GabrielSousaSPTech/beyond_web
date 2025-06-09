@@ -4,8 +4,9 @@ import { ContentSectionComponent} from '../../shared/components/content-section/
 import { CardAtividadesComponent } from './components/card-atividades/card-atividades.component';
 import { CardUserComponent } from './components/card-user/card-user.component';
 import { organizacaoService } from './services/organizacao/Organizacao.service';
-import {Clipboard, ClipboardModule} from '@angular/cdk/clipboard';
-import { FormsModule } from '@angular/forms';import { Observable, single } from 'rxjs';
+import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
+import { FormsModule } from '@angular/forms';
+import { Observable, single } from 'rxjs';
 import { userRegisteredApi } from '../../shared/models/users-registered';
 import { UserModelComponent } from "./components/user-model/user-model.component";
 import { CardUserService } from './services/card-user/card-user.service';

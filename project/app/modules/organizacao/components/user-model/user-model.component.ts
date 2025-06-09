@@ -5,7 +5,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CardUserService } from '../../services/card-user/card-user.service';
 import { Subscription } from 'rxjs';
 import { userRegisteredApi } from '../../../../shared/models/users-registered';
-import { CustomSelectComponent } from "../../../../shared/custom-select/custom-select.component";
+import { CustomSelectComponent } from "../../../../shared/components/custom-select/custom-select.component";
+import { permissao } from '../../../../shared/models/permissao.type';
 
 @Component({
   selector: 'app-user-model',
@@ -19,12 +20,8 @@ export class UserModelComponent extends BaseModalComponent {
   protected user: userRegisteredApi = {} as userRegisteredApi;
   protected alterUser: WritableSignal<Boolean> = signal(false);
   protected delUserConfirmation: WritableSignal<Boolean> = signal(false);
-
-  // coleque todas as permissões aqui puxando do back
-  permissoes = [
-    //{ value: 'insira o valor (fk)', label: 'insira como deve aparecer (tipo)' }
-    { value: 1, label: 'oi gabriel' } // retire isso
-  ]
+  private tempTitle = '';
+  protected permissoes: WritableSignal<permissao[]> = signal([] as permissao[]);
 
   @Input() openModal: WritableSignal<boolean> = signal(false);
   
@@ -36,15 +33,31 @@ export class UserModelComponent extends BaseModalComponent {
     })
     this.cardUserService.activeUser$.subscribe(data=>{
       this.user = data;
+      console.log("user ativado:",this.user)
       if(Object.values(data).length > 0){
+        console.log("dentro do for")
           this.userForm.patchValue({ 
           perm: this.user.FK_PERMISSAO
         })
       }
       this.userForm.markAsPristine();
       this.userForm.disable()
-      this.alterUser.set(false)
+      this.alterUser.set(false);
+      this.delUserConfirmation.set(false);
+      this.title = this.tempTitle;
+      this.tempTitle = '';
+      this.cardUserService.getPermissions().subscribe(data=>{this.permissoes.set(data)})
     })
+  }
+
+  permissoesTransformadas(){
+    return this.permissoes().map(x=> {
+        return {
+          value: x.ID_PERMISSAO,
+          label: x.NOME
+        }
+      }
+    )
   }
 
   submit(){
@@ -54,15 +67,34 @@ export class UserModelComponent extends BaseModalComponent {
 
   updateUser(){
     this.alterUser.set(true);
+    this.delUserConfirmation.set(false);
     this.userForm.enable()
   }
 
-  deleteUser(){
+  confirmDeleteUser(){
     this.delUserConfirmation.set(true)
-    // mostrar modal de delete
+    this.tempTitle = this.title;
+    this.title = `Você tem certeza quer deletar ${this.user.NOME}?`;
+  }
+
+  cancelDelete() {
+    this.delUserConfirmation.set(false);
+    this.title = this.tempTitle;
+    this.tempTitle = '';
+  }
+
+  deleteUser(){
+    this.cardUserService.deleteUser(this.user.ID_FUNC);
+    this.delUserConfirmation.set(false);
+    this.alterUser.set(false);
+    this.onClose();
+    this.cardUserService.getUsersRegistered();
   }
 
   override onClose(): void {
+    this.tempTitle = this.user.NOME;
+    this.delUserConfirmation.set(false);
+    this.alterUser.set(false);
     this.closeModal.emit()
     this.openModal.set(false);
   }

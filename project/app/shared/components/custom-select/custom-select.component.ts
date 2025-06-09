@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormGroup, Valida
       useExisting: forwardRef(() => CustomSelectComponent),
       multi: true
     }
-  ]
+  ],
 })
 export class CustomSelectComponent implements ControlValueAccessor {
   @Input() options: { value: any; label: string }[] = [];
@@ -32,6 +32,7 @@ export class CustomSelectComponent implements ControlValueAccessor {
     this.value = target.value;
     this.onChange(this.value);
     this.hasError = false;
+    console.log("dentro do select", event, target.value)
   }
 
   onBlur(): void {
@@ -39,6 +40,7 @@ export class CustomSelectComponent implements ControlValueAccessor {
   }
 
   writeValue(value: any): void {
+    console.log("write",value)
     this.value = value || '';
   }
 
