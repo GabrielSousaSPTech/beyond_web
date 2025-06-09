@@ -30,8 +30,41 @@ function confirmarCodigo(codigo) {
     return database.executar(instrucaoSql, [codigo]);
 }
 
+function getUsuario(fkEmpresa){
+    var instrucaoSql = `SELECT * FROM TB_FUNCIONARIO WHERE FK_EMPRESA = ?`
+
+    return database.executar(instrucaoSql, [fkEmpresa])
+}
+
+function getByIdUsuario(idFuncionario){
+    var instrucaoSql = `SELECT * FROM TB_FUNCIONARIO WHERE ID_FUNC = ?;`
+
+    return database.executar(instrucaoSql, [idFuncionario])
+}
+
+function updateUsuario(idFuncionario, nome, email, senha, tel){
+    var instrucaoSql = `UPDATE TB_FUNCIONARIO
+                        SET
+                        NOME = ?,
+                        EMAIL = ?,
+                        SENHA = ?,
+                        TEL = ?
+                        WHERE ID_FUNC = ?`
+    return database.executar(instrucaoSql, [nome, email, senha, tel, idFuncionario])
+}
+
+function deleteUsuario(idFuncionario){
+    var instrucaoSql = `DELETE FROM TB_FUNCIONARIO WHERE = ?`
+
+    return database.executar(instrucaoSql, [idFuncionario])
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    confirmarCodigo
+    confirmarCodigo,
+    getUsuario,
+    getByIdUsuario,
+    updateUsuario,
+    deleteUsuario
 };
