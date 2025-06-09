@@ -62,16 +62,35 @@
 }
 
 .btn-alterUser {
-  border-radius: 1rem;
   background-color: #ffed87;
-  padding: 0.5rem;
-  cursor: pointer;
 }
 
-[modal-header] h2 {
+::ng-deep .modal-header .close-button {
+  font-size: 2.2rem;
+  margin-left: 2rem;
+}
+
+::ng-deep .modal-header h2 {
   font-size: 2.4rem;
   font-weight: bold;
   color: var(--lake-green);
+}
+
+.btn-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 2rem 0;
+}
+
+.btn-cancel-delete {
+  background-color: #DC2626;
+  color: white;
+}
+
+.btn-delete-user {
+  background-color: #374151;
+  color: white;
 }
 
 [modal-footer] {
@@ -80,11 +99,17 @@
   margin-top: 2rem;
 }
 
-[modal-footer] .btn {
+[modal-footer] .btn,
+[modal-body] .btn {
   border-radius: 1rem;
   padding: 0.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+[modal-footer] .btn.btn-deleteUser {
+  background-color: rgb(216, 32, 75);
+  color: white;
 }
 
 [modal-footer] .btn:disabled {

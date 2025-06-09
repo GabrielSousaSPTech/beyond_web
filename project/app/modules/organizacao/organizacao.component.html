@@ -20,7 +20,7 @@
 <div class="cards">
     <app-content-section title="Usuários cadastrados">
         <p class="qtd-users">N° de membros: {{qtdMembros}}</p>
-        <app-card-user></app-card-user>
+        <app-card-user (openModel)="openUserModel($event)"></app-card-user>
     </app-content-section>
     <app-content-section iconUrl="assets/icons/misc/icon-atividade.svg" title="Ultimas atividades" padding="none" [maxWidth]="'52rem'">
         <app-card-atividades></app-card-atividades>

@@ -143,8 +143,9 @@ function getUsuarioEmAnalise (req, res){
 }
 
 function autorizarUsuario(req, res){
-    var idUsuario = req.params.idUsuario
-    var idPermissao = req.body.idPermissao
+    var idUsuario = req.params.idUsuario;
+    var idPermissao = req.body.idPermissao;
+    console.log("resultado: ",req.body,req.query,req.params)
 
     usuarioModel.autorizarUsuario(idUsuario, idPermissao).then(function (resultado){
         res.status(200).json(resultado);

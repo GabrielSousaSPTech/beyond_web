@@ -116,7 +116,7 @@ function updateSenha(idFuncionario, senha){
 }
 
 function deleteUsuario(idFuncionario){
-    var instrucaoSql = `DELETE FROM TB_FUNCIONARIO WHERE = ?`
+    var instrucaoSql = `DELETE FROM TB_FUNCIONARIO WHERE ID_FUNC = ?`
 
     return database.executar(instrucaoSql, [idFuncionario])
 }
@@ -128,6 +128,7 @@ function getUsuarioEmAnalise(fkEmpresa) {
 }
 
 function autorizarUsuario(idFuncionario, idPermissao){
+    console.log(idFuncionario, idPermissao)
     var instrucaoSql = `UPDATE TB_FUNCIONARIO
                         SET
                         STATUS_CADASTRO = ?,
