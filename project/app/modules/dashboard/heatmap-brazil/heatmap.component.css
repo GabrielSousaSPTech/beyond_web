@@ -1,0 +1,119 @@
+
+.heatmap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+    gap: 2rem;
+    font-family: Arial, sans-serif;
+}
+
+
+.mapa {
+    width: 60%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+.filtro {
+    width: 40%;
+    background-color: #EDF2F1;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.header-filtro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10rem;
+}
+
+
+.header-filtro-option {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.header-filtro-option h1 {
+    font-size: 1.5rem;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.select-ano {
+    height: 3rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+  .header-filtro button {
+    background-color: #3A4C41;
+    color: #DDE3E9;
+    border-radius: 2rem;
+    height: 3.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0 1.5rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.header-filtro button:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+} 
+
+
+.ranking-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ranking-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}  
+
+
+.ranking-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ranking-list li {
+    background-color: white;
+    height: 1.2rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+} 
+
+
