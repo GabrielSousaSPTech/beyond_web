@@ -18,14 +18,27 @@ export class ComboChartAllComponent {
   private dataView: any;
   private columns: any[] = [];
   private currentGraphData: string[][] = [];
+  protected noData = signal(false);
 
   ngOnInit(): void {
     google.charts.load('current', { 'packages': ['corechart'] });
     this.chartData.subscribe(data => {
       google.charts.setOnLoadCallback(() => {
-        this.drawChart(data);
+        if(data.length < 2){
+          this.noData.set(true);
+        } else {
+          this.noData.set(false);
+          this.drawChart(data);
+        }
       });
     });
+  }
+
+  displayGraph(bool: boolean){
+    if(bool){
+      return "visibility: hidden; height: 0;";
+    }
+    return "visibility: visible;";
   }
 
   private initializeColumns(graphData: string[][]) {
@@ -40,7 +53,6 @@ export class ComboChartAllComponent {
       visible: true
     });
 
-    // Data columns with modern, vibrant colors
     const defaultColors = [
       '#3B82F6', // Blue
       '#EF4444', // Red
