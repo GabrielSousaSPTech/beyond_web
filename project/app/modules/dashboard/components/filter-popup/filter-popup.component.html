@@ -1,0 +1,19 @@
+@if(visible()){
+<div class="filter-popup" (clickOutside)="closePopup()">
+        @if ((filterList$ | async)!.length == 0) {
+            <div class="no-filter-text">Sem filtros adicionados</div>
+        } @else {
+            @for (filter of filterList$ | async; track filter.ID_FILTRO) {
+            <div class="filter" (click)="useThisFilter(filter)">
+            <h3 class="filter-name">{{filter.NOME}}</h3>
+            <ul class="filter-text">
+                @for (filterOption of getFilterTransformedValues(filter); track $index) {
+                    <li>● {{filterOption}}</li>
+                }
+            </ul>
+            </div>
+        }
+    }
+</div>
+}
+

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputFilterComponent } from './input-filter.component';
+import { InputFilterComponent } from './tendencia-input-filter.component';
 
 describe('InputFilterComponent', () => {
   let component: InputFilterComponent;

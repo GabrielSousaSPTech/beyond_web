@@ -1,6 +1,7 @@
 type Pais = {
   id: number;
   nome: string;
+  fk_continente: number;
 }
 
 type Continente = {

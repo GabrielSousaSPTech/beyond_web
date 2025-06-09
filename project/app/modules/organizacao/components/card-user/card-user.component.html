@@ -1,17 +1,17 @@
 <div class="card-users-wrapper">
-@for(user of usersList(); track $index){
+@for(user of usersList | async ; track $index){
     <div class="card-users">
         <div class="user-info">
             <img id="icon-user" src="assets/icons/misc/icon-user-template.svg">
             <div class="informacoes-user">
-                <h2 class="user-name">{{user.name}}</h2>
-                <h3 class="user-acesso">{{user.tipoAcesso}}</h3>
-                <p>{{user.anoInicio}}</p>
+                <h2 class="user-name">{{user.NOME}}</h2>
+                <p>{{user.EMAIL}}</p>
+                <h3 class="user-acesso">{{user.TIPO}}</h3>
+                
             </div>
         </div>
         <div class="icons-config">
-            <img class="icon" src="assets/icons/actions/icon-userAccess-config.svg"><br>
-            <img class="icon" src="assets/icons/actions/icon-trash.svg">
+            <img class="icon" src="assets/icons/actions/icon-userAccess-config.svg" (click)="btnConfig(user)">
         </div>
     </div>
 }

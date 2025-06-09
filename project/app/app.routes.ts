@@ -33,8 +33,8 @@ export const routes: Routes = [
         path: 'historico',
         pathMatch: 'full',
         loadComponent() {
-            return import('./modules/dashboard/historico/painel-de-controle-historico.component').then(
-                m => m.PainelDeControleHistoricoComponent
+            return import('./modules/dashboard/historico/historico.component').then(
+                m => m.HistoricoComponent
             );
         },
     },
