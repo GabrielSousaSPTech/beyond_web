@@ -58,7 +58,6 @@
     justify-content: center;
 }
 
-/* Select */
 .select-ano {
     height: 3rem;
     border-radius: 0.5rem;
@@ -98,9 +97,9 @@
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #333;
-}  */
+}  
 
- Lista do ranking 
+
 .ranking-list {
     list-style: none;
     padding: 0;
