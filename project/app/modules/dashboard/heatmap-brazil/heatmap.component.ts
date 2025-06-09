@@ -28,8 +28,6 @@ export class HeatmapComponent implements OnInit {
       this.titulo.set("Países de Origem dos Turistas no Brasil")
       this.botaoHeatMap.set("Ver Turismo por Estado")
       this.ranking.set("Ranking países de origem")
-
-
     }
   }
 
