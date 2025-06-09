@@ -97,14 +97,15 @@ function getByIdUsuario(idFuncionario){
     return database.executar(instrucaoSql, [idFuncionario])
 }
 
-function updateUsuario(idFuncionario, nome, email, tel){
+function updateUsuario(idFuncionario, nome, cpf, email, tel){
     var instrucaoSql = `UPDATE TB_FUNCIONARIO
                         SET
                         NOME = ?,
+                        CPF = ?,
                         EMAIL = ?,
                         TEL = ?
                         WHERE ID_FUNC = ?`
-    return database.executar(instrucaoSql, [nome, email, tel, idFuncionario])
+    return database.executar(instrucaoSql, [nome,cpf, email, tel, idFuncionario])
 }
 
 function updateSenha(idFuncionario, senha){

@@ -9,7 +9,7 @@
       <button class="user" (click)="togglePopup()">
         <img src="{{userImg()}}" class="user-img" />
         <div class="container-username-function">
-          <p class="username">{{username}}</p>
+          <p class="username">{{username | titlecase}}</p>
         </div>
         <img src="assets/icons/actions/icon-arrow-down.svg" class="arrow-icon" />
       </button>

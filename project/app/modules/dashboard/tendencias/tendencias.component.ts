@@ -44,12 +44,12 @@ export class TendenciasComponent implements OnInit {
   mes = signal<string>(this.getMesNome(new Date().getMonth() + 1));
 
 
-  protected readonly anoVariacao = signal<number|string>(0);
+  protected readonly anoVariacao = signal<number|string>("...");
   protected anoAntes(ano: (string|number)){
     if(!Number.isNaN(Number(ano))){
-      return Number(ano) - 1;
+      return `${Number(ano) - 1}`;
     }
-    return 0;
+    return "...";
   }
 
   onFilterChange(){

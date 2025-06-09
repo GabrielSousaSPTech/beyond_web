@@ -2,11 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { HeaderTitleService } from '../../core/services/header-title/header-title.service';
 import { PupUpComponent } from './components/pup-up/pup-up.component';
 import { UserService } from '../../core/services/user/user.service';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [PupUpComponent],
+  imports: [PupUpComponent, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
