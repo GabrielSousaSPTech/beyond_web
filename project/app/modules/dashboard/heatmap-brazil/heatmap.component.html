@@ -1,7 +1,7 @@
 <div class="heatmap">
   <div class="mapa">
     <h1 class="titulo">{{titulo()}}</h1>
-    <div style="display: flex; justify-content: center">
+    <div class="geo-wrapper">
       @if (mapaBrasilMostrar()) {
         <app-geo-chart-brazil></app-geo-chart-brazil>
       } @else {

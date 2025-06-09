@@ -6,6 +6,7 @@
     padding: 2rem;
     gap: 2rem;
     font-family: Arial, sans-serif;
+    min-height: calc(100vh - 8rem);
 }
 
 
@@ -97,7 +98,7 @@
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #333;
-}  
+}
 
 
 .ranking-list {
@@ -116,4 +117,9 @@
     overflow: hidden;
 } 
 
+.geo-wrapper {
+    display: flex; 
+    justify-content: center;
+    height: 100%;
+}
 

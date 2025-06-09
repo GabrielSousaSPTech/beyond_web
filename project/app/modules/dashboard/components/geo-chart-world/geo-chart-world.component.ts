@@ -121,8 +121,8 @@ export class GeoChartWorldComponent {
       /* displayMode: 'text', */
       region: 'world',
       colorAxis: { colors: ['#aec7e8', '#1f77b4'] },
-      height: 800,
-      width: 570,
+      height: 600,
+      width: 700
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('geoChartWorld_div'));
