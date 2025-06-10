@@ -60,10 +60,16 @@ export class UserModelComponent extends BaseModalComponent {
     )
   }
 
-  submit(){
-    const formValues = this.userForm.value;
-    this.cardUserService.updateUserPermitions(this.user.ID_FUNC, formValues.perm);
-  }
+  submit() {
+  const formValues = this.userForm.value;
+  this.cardUserService.updateUserPermitions(this.user.ID_FUNC, formValues.perm).subscribe({
+    next: () => {
+      this.alterUser.set(false);
+      this.userForm.disable();
+    },
+    error: (error) => console.error('Error updating user permissions:', error)
+  });
+}
 
   updateUser(){
     this.alterUser.set(true);
@@ -83,13 +89,17 @@ export class UserModelComponent extends BaseModalComponent {
     this.tempTitle = '';
   }
 
-  deleteUser(){
-    this.cardUserService.deleteUser(this.user.ID_FUNC);
-    this.delUserConfirmation.set(false);
-    this.alterUser.set(false);
-    this.onClose();
-    this.cardUserService.getUsersRegistered();
-  }
+  deleteUser() {
+  this.cardUserService.deleteUser(this.user.ID_FUNC).subscribe({
+    next: () => {
+      this.delUserConfirmation.set(false);
+      this.alterUser.set(false);
+      this.onClose();
+      this.cardUserService.getUsersRegistered();
+    },
+    error: (error) => console.error('Error deleting user:', error)
+  });
+}
 
   override onClose(): void {
     this.tempTitle = this.user.NOME;

@@ -12,10 +12,15 @@
             <button id="btnEnviar" type="button" (click)="enviar()">Enviar</button>
         </form>
     </div>
-    <button id="btnSolicitacoes" type="button" onclick="verSolicitacoes()">
-        <img src="assets/icons/actions/icon-solicitacoes.svg">
-        Solicitações
-    </button>
+    <div class="solicitacoes-wrapper">
+        <button id="btnSolicitacoes" type="button" (click)="openSolicitacoesPupup()">
+            <img src="assets/icons/actions/icon-solicitacoes.svg">
+            Solicitações
+        </button>
+        @if(solicicoesPopup()){
+            <app-solicitacoes-popup></app-solicitacoes-popup>
+        }
+    </div>
 </div>
 <div class="cards">
     <app-content-section title="Usuários cadastrados">
