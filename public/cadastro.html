@@ -49,6 +49,7 @@
   var telefoneVar;
   var nomeVar;
   var emailVar;
+  var cpfVar; // Esta variável estava sendo declarada mas não capturada corretamente
   var confirmacaoEmailVar;
   var senhaVar;
   var confirmacaoSenhaVar;
@@ -56,6 +57,7 @@
   var sliderIndex = 0;
 
   var telefoneMask;
+  var cpfMask; // Adicionada variável para máscara do CPF
   var emailMask;
   var emailConfirmacaoMask;
 
@@ -86,45 +88,79 @@
                             <p>Telefone</p>
                             <input id="input_telefone" type="text" placeholder="(xx) xxxxx-xxxx">
                         </div>
+                        <div class="input-wrapper">
+                            <p>Cpf</p>
+                            <input id="input_cpf" type="text" placeholder="000.000.000-00">
+                        </div>
                     </div>
                     <div class="btn-wrapper" style="flex-direction: row; justify-content: space-between;">
                         <button onclick="sliderBack()" class="btn-green"> < </button>
                         <button onclick="sliderNext()" class="btn-green"> > </button>
                     </div>`;
+      
+      // Aplicar máscaras após criar os elementos
       var telefone = document.getElementById("input_telefone");
-      var maskOptions = {
+      var cpf = document.getElementById("input_cpf");
+      
+      var maskOptionsTelefone = {
         mask: [
           "(00) 0000-0000",
           "(00) 00000-0000",
         ]
       };
-      telefoneMask = IMask(telefone, maskOptions);
+
+      var maskOptionsCpf = {
+        mask: "000.000.000-00"
+      };
+
+      telefoneMask = IMask(telefone, maskOptionsTelefone);
+      cpfMask = IMask(cpf, maskOptionsCpf);
       return;
     }
+    
     if (sliderIndex == 1) {
       nomeVar = document.getElementById("input_nome").value.trim();
-
       telefoneVar = telefoneMask.unmaskedValue;
+      cpfVar = cpfMask.unmaskedValue; // CORREÇÃO: Capturar o CPF aqui
 
+      // Validações
       if (nomeVar == "" || nomeVar == undefined) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo nome";
         return;
-      } if (
-        telefoneVar == "" ||
-        telefoneVar == undefined
-        
-      ) {
+      } 
+      
+      if (telefoneVar == "" || telefoneVar == undefined) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo telefone";
         return;
       }
 
-      if(telefoneVar.length < 11){
+      if(telefoneVar.length < 10){
         document.getElementById("mensagem_erro").innerHTML =
-          "Telefone deve conter no mínimo 11 dígitos";
+          "Telefone deve conter no mínimo 10 dígitos";
         return;
       }
+
+      if (cpfVar == "" || cpfVar == undefined) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "Preencha o campo CPF";
+        return;
+      }
+
+      if(cpfVar.length != 11){
+        document.getElementById("mensagem_erro").innerHTML =
+          "CPF deve conter exatamente 11 dígitos";
+        return;
+      }
+
+      // Validação básica de CPF
+      if (!validarCPF(cpfVar)) {
+        document.getElementById("mensagem_erro").innerHTML =
+          "CPF inválido";
+        return;
+      }
+
       sliderIndex += 1;
       oldHTML.push(form_cadastro.innerHTML);
       form_cadastro.innerHTML = `
@@ -134,10 +170,6 @@
                     <div class="input-wrapper">
                         <p>Email</p>
                         <input id="input_email" type="email">
-                    </div>
-                    <div class="input-wrapper">
-                        <p>Confirmação de email</p>
-                        <input id="input_confirmacaoEmail" type="email">
                     </div>
                     <div class="input-wrapper">
                         <p>Senha</p>
@@ -154,16 +186,13 @@
                 </div>`;
       return;
     }
+    
     if (sliderIndex == 2) {
       emailVar = document.getElementById("input_email").value.trim();
-      confirmacaoEmailVar = document.getElementById("input_confirmacaoEmail").value.trim();
       senhaVar = document.getElementById("input_senha").value.trim();
       confirmacaoSenhaVar = document.getElementById("input_confirmacaoSenha").value.trim();
 
-      if (
-        emailVar == "" ||
-        emailVar == undefined
-      ) {
+      if (emailVar == "" || emailVar == undefined) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo email";
         return;
@@ -174,20 +203,8 @@
           "Email inválido";
         return;
       }
-      
-      if (
-        confirmacaoEmailVar == "" ||
-        confirmacaoEmailVar == undefined
-      ) {
-        document.getElementById("mensagem_erro").innerHTML =
-          "Preencha o campo confirmação de email";
-        return false;
-      }
 
-       if (
-        senhaVar == "" ||
-        senhaVar == undefined
-      ) {
+      if (senhaVar == "" || senhaVar == undefined) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo senha";
         return;
@@ -199,18 +216,9 @@
         return;
       }
 
-      if (
-        confirmacaoSenhaVar == "" ||
-        confirmacaoSenhaVar == undefined
-      ) {
+      if (confirmacaoSenhaVar == "" || confirmacaoSenhaVar == undefined) {
         document.getElementById("mensagem_erro").innerHTML =
           "Preencha o campo confirmação de senha";
-        return;
-      }
-      
-      if (emailVar != confirmacaoEmailVar) {
-        document.getElementById("mensagem_erro").innerHTML =
-          "E-mails não coincidem";
         return;
       }
       
@@ -235,10 +243,46 @@
     }
   }
 
+  // Função para validar CPF
+  function validarCPF(cpf) {
+    if (cpf.length !== 11) return false;
+    
+    // Verifica se todos os dígitos são iguais
+    if (/^(\d)\1{10}$/.test(cpf)) return false;
+    
+    // Validação dos dígitos verificadores
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let resto = 11 - (soma % 11);
+    let digito1 = resto < 2 ? 0 : resto;
+    
+    if (digito1 !== parseInt(cpf.charAt(9))) return false;
+    
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = 11 - (soma % 11);
+    let digito2 = resto < 2 ? 0 : resto;
+    
+    return digito2 === parseInt(cpf.charAt(10));
+  }
+
   function cadastrar() {
     if (sliderIndex != 3) {
       return false;
     }
+
+    console.log('Dados a serem enviados:', {
+      nome: nomeVar,
+      email: emailVar,
+      senha: senhaVar,
+      empresa: codigoEmpresa,
+      telefone: telefoneVar,
+      cpf: cpfVar // Agora não será mais undefined
+    });
 
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -251,6 +295,7 @@
         senhaServer: senhaVar,
         empresaCodeServer: codigoEmpresa,
         telefoneServer: telefoneVar,
+        cpfServer: cpfVar // Corrigido: agora tem valor
       }),
     })
       .then(function (resposta) {

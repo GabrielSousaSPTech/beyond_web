@@ -27,6 +27,7 @@ export class OrganizacaoComponent implements OnInit{
   constructor(public headerTitleService: HeaderTitleService) { }
     OrganizacaoService = inject(organizacaoService)
     dataOut: WritableSignal<any> = signal({});
+    
     qtdMembros = 0;
       ngOnInit(): void {
         this.headerTitleService.setTitle('Controle de Acesso');

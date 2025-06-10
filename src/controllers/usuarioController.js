@@ -48,6 +48,8 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var telefone = req.body.telefoneServer;
+    var cpf = req.body.cpfServer;
+    console.log("CPF: ", cpf)
 
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -66,7 +68,7 @@ function cadastrar(req, res) {
                 if (resultadoCodigo.length == 0) {
                     res.status(403).send("Código inválido!");
                 } else if (resultadoCodigo.length == 1) {
-                    usuarioModel.cadastrar(`${email}`, `${senha}`, resultadoCodigo[0].ID_EMPRESA, `${nome}`, `${telefone}`)
+                    usuarioModel.cadastrar(`${email}`, `${senha}`, resultadoCodigo[0].ID_EMPRESA, `${nome}`, `${telefone}`, `${cpf}`)
                         .then(
                             function (resultado) {
                                 res.json(resultado);
