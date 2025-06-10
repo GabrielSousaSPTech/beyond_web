@@ -2,8 +2,9 @@
   <div class="mapa">
     <h1 class="titulo">{{titulo()}}</h1>
     <div style="display: flex; justify-content: center">
+
       @if (mapaBrasilMostrar()) {
-      <app-geo-chart-brazil [chartData]="barChartUF$"></app-geo-chart-brazil>
+      <app-geo-chart-brazil [chartData]="barChartUF$" [enableBarChart]="!mapaBrasilMostrar()"></app-geo-chart-brazil>
       } @else {
       <app-geo-chart-world [chartData]="geoChartPais$"></app-geo-chart-world>
       }
@@ -14,12 +15,8 @@
     <div class="header-filtro">
       <div class="header-filtro-option">
         <h1>Visualizar dados de:</h1>
-        <select class="select-ano">
-          <option value="#"></option>
-          <option value="2025">2025</option>
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
-        </select>
+        <app-input-filter #inputFilter (filterChange)="onFilterChange()"></app-input-filter>
+        <app-filter-popup [visible]="showPopUpFilter"></app-filter-popup>
       </div>
       <button (click)="trocarHeatMap()">{{botaoHeatMap()}}</button>
     </div>
@@ -27,11 +24,11 @@
     <div class="ranking-card">
       <h2>{{ranking()}}</h2>
       <div class="ranking-list">
-        @if (mapaBrasilMostrar()) {
-        <app-bar-chart-all [chartData]="barChartUF$"></app-bar-chart-all>
-        } @else {
-        <app-bar-chart-all [chartData]="barChartPais$"></app-bar-chart-all>
-        }
+
+        <app-bar-chart-all [chartData]="tipoRanking$"></app-bar-chart-all>
+
+
+
 
       </div>
     </div>

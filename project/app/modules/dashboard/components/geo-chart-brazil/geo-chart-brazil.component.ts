@@ -1,4 +1,4 @@
-import { Component, Input, input, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, input, OnInit, signal } from '@angular/core';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { Observable } from 'rxjs';
 declare var google: any;
@@ -7,11 +7,13 @@ declare var google: any;
   selector: 'app-geo-chart-brazil',
   imports: [],
   templateUrl: './geo-chart-brazil.component.html',
-  styleUrl: './geo-chart-brazil.component.css'
+  styleUrl: './geo-chart-brazil.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeoChartBrazilComponent implements OnInit {
   @Input() chartData!: Observable<any>;
   protected noData = signal(false);
+  @Input() enableBarChart: boolean = false;
   ngOnInit(): void {
 
     google.charts.load('current', { 'packages': ['geochart'] });
@@ -29,6 +31,13 @@ export class GeoChartBrazilComponent implements OnInit {
     });
   }
 
+  displayGraph(bool: boolean) {
+    if (bool) {
+      return "visibility: hidden; height: 0;";
+    }
+    return "visibility: visible;";
+  }
+
   drawChart(chartData: string[][]) {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Países');
@@ -40,8 +49,9 @@ export class GeoChartBrazilComponent implements OnInit {
       region: 'BR', // Define a região como Brasil.
       resolution: 'provinces', // Mostra estados em vez de países.
       colorAxis: { colors: ['#aec7e8', '#1f77b4'] }, // Define as cores do gradiente.
-      'width': 595,
-      'height': 800
+      legend: 'none',
+      'width': 1000,
+      'height': 600
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('chart_div_Map'));

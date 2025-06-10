@@ -1,4 +1,4 @@
-import { Component, Input, input, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, input, OnInit, signal } from '@angular/core';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { Observable } from 'rxjs';
 declare var google: any;
@@ -7,7 +7,8 @@ declare var google: any;
   selector: 'app-geo-chart-world',
   imports: [],
   templateUrl: './geo-chart-world.component.html',
-  styleUrl: './geo-chart-world.component.css'
+  styleUrl: './geo-chart-world.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeoChartWorldComponent implements OnInit {
   @Input() chartData!: Observable<any>;
@@ -38,11 +39,13 @@ export class GeoChartWorldComponent implements OnInit {
 
 
     var options = {
-      /* displayMode: 'text', */
       region: 'world',
-      colorAxis: { colors: ['#aec7e8', '#1f77b4'] },
-      height: 800,
-      width: 570,
+      colorAxis: {
+        colors: ['#aec7e8', '#1f77b4']
+      },
+      legend: 'none',
+      height: 600,
+      width: 1050
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('geoChartWorld_div'));
