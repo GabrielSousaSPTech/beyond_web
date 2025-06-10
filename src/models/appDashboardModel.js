@@ -322,276 +322,313 @@ function getKpiVariacaoMes(filtro) {
     return database.executar(instrucaoSql)
 }
 
-function getGraficoHistorico(filtro) {
+function getGraficoHistorico(filtro = {}) {
+    console.log('Filtro recebido:', filtro);
 
-    console.log('Esse é o filtro do Histórico: ', filtro)
+    // Configurações
+    const ANO_MIN = 1989;
+    const ANO_MAX = 2024;
+    const ANOS_PADRAO = 5;
 
-    let yearClause = '';
+    let whereConditions = [];
 
-    console.log(filtro.ANOS)
+    // Processar anos
+    if (!filtro.ANOS || filtro.ANOS === 'null' || filtro.ANOS === null) {
+        // Últimos 5 anos (2020-2024)
+        whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+    } else if (Array.isArray(filtro.ANOS)) {
+        // Array de anos - validar e limitar
+        const anosValidos = filtro.ANOS
+            .map(ano => parseInt(ano))
+            .filter(ano => !isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX)
+            .slice(0, 10); // Máximo 10 anos
 
-    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
-        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
-    } else {
-
-        if (Array.isArray(filtro.ANOS)) {
-            console.log(filtro.ANOS)
-            console.log(filtro.ANOS.length)
-            for (let i = 0; i < filtro.ANOS.length; i++) {
-                console.log(filtro.ANOS[i])
-                if (i == 0) {
-                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                } else {
-                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                }
-
-            }
-            yearClause += ")"
+        if (anosValidos.length > 0) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) IN (${anosValidos.join(',')})`);
         } else {
-            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+        }
+    } else {
+        // Ano único
+        const ano = parseInt(filtro.ANOS);
+        if (!isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) = ${ano}`);
+        } else {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) = ${ANO_MAX}`);
         }
     }
 
-    let filterOption = "";
+    // Processar outros filtros
+    const camposValidos = ['FK_CONTINENTE', 'FK_PAIS', 'FK_VIA', 'FK_FEDERACAO_BRASIL'];
 
-
-
-    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
-
-    for (let i = 0; i < valoresFilter.length; i++) {
-        if (valoresFilter[i][0] === 'ANOS') {
-            continue;
+    camposValidos.forEach(campo => {
+        const valor = filtro[campo];
+        if (valor && valor !== 'null' && valor !== null && valor !== '') {
+            const valorNum = parseInt(valor);
+            if (!isNaN(valorNum) && valorNum > 0) {
+                whereConditions.push(`bd.${campo} = ${valorNum}`);
+            }
         }
-        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
-    }
+    });
 
-    var instrucaoSql = `
-    SELECT 
-    YEAR(bd.DATA_CHEGADA) AS ANO,
-    MONTH(bd.DATA_CHEGADA) AS MES,
-    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
-    FROM 
-        TB_BASE_DADOS bd
-    JOIN 
-        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
-    JOIN 
-        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
-    JOIN 
-        PAIS p ON bd.FK_PAIS = p.ID_PAIS
-    JOIN 
-        VIA v ON bd.FK_VIA = v.ID_VIA
-    ${yearClause}
-    ${filterOption} 
-    GROUP BY 
-        YEAR(bd.DATA_CHEGADA),
-        MONTH(bd.DATA_CHEGADA),
-        c.NOME
-    ORDER BY 
-        ANO, MES;
-        `
-    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
-    return database.executar(instrucaoSql)
+    // Montar query
+    const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
+
+    const sql = `
+        SELECT 
+            YEAR(bd.DATA_CHEGADA) AS ANO,
+            MONTH(bd.DATA_CHEGADA) AS MES,
+            c.NOME AS CONTINENTE,
+            SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+        FROM 
+            TB_BASE_DADOS bd
+        INNER JOIN 
+            CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
+        ${whereClause}
+        GROUP BY 
+            YEAR(bd.DATA_CHEGADA),
+            MONTH(bd.DATA_CHEGADA),
+            c.NOME
+        ORDER BY 
+            ANO, MES
+        LIMIT 5000;
+    `;
+
+    console.log('SQL executado:', sql.replace(/\s+/g, ' ').trim());
+
+    // Executar com tratamento de erro
+    try {
+        return database.executar(sql);
+    } catch (error) {
+        console.error('Erro na consulta histórico:', error.message);
+        throw new Error(`Erro ao buscar dados históricos: ${error.message}`);
+    }
 }
 
-function getKpiHistoricoTotal(filtro) {
+function getKpiHistoricoTotal(filtro = {}) {
+    console.log('Filtro recebido KPI Total:', filtro);
 
-    console.log('Esse é o filtro do Histórico: ', filtro)
+    // Configurações
+    const ANO_MIN = 1989;
+    const ANO_MAX = 2024;
+    const ANOS_PADRAO = 5;
 
-    let yearClause = '';
+    let whereConditions = [];
 
-    console.log(filtro.ANOS)
+    // Processar anos
+    if (!filtro.ANOS || filtro.ANOS === 'null' || filtro.ANOS === null) {
+        // Últimos 5 anos (2020-2024)
+        whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+    } else if (Array.isArray(filtro.ANOS)) {
+        // Array de anos - validar e limitar
+        const anosValidos = filtro.ANOS
+            .map(ano => parseInt(ano))
+            .filter(ano => !isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX)
+            .slice(0, 10); // Máximo 10 anos
 
-    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
-        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
-    } else {
-
-        if (Array.isArray(filtro.ANOS)) {
-            console.log(filtro.ANOS)
-            console.log(filtro.ANOS.length)
-            for (let i = 0; i < filtro.ANOS.length; i++) {
-                console.log(filtro.ANOS[i])
-                if (i == 0) {
-                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                } else {
-                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                }
-
-            }
-            yearClause += ")"
+        if (anosValidos.length > 0) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) IN (${anosValidos.join(',')})`);
         } else {
-            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+        }
+    } else {
+        // Ano único
+        const ano = parseInt(filtro.ANOS);
+        if (!isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) = ${ano}`);
+        } else {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
         }
     }
 
-    let filterOption = "";
+    // Processar outros filtros
+    const camposValidos = ['FK_CONTINENTE', 'FK_PAIS', 'FK_VIA', 'FK_FEDERACAO_BRASIL'];
 
-
-
-    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
-
-    for (let i = 0; i < valoresFilter.length; i++) {
-        if (valoresFilter[i][0] === 'ANOS') {
-            continue;
+    camposValidos.forEach(campo => {
+        const valor = filtro[campo];
+        if (valor && valor !== 'null' && valor !== null && valor !== '') {
+            const valorNum = parseInt(valor);
+            if (!isNaN(valorNum) && valorNum > 0) {
+                whereConditions.push(`bd.${campo} = ${valorNum}`);
+            }
         }
-        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
-    }
+    });
 
-    var instrucaoSql = `
-    SELECT 
-    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
-    FROM 
-        TB_BASE_DADOS bd
-    JOIN 
-        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
-    JOIN 
-        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
-    JOIN 
-        PAIS p ON bd.FK_PAIS = p.ID_PAIS
-    JOIN 
-        VIA v ON bd.FK_VIA = v.ID_VIA
-    ${yearClause}
-    ${filterOption} 
-        `
-    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
-    return database.executar(instrucaoSql)
+    // Montar query
+    const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
+
+    const sql = `
+        SELECT 
+            SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+        FROM 
+            TB_BASE_DADOS bd
+        ${whereClause}
+        LIMIT 1;
+    `;
+
+    console.log('SQL KPI Total executado:', sql.replace(/\s+/g, ' ').trim());
+
+    // Executar com tratamento de erro
+    try {
+        return database.executar(sql);
+    } catch (error) {
+        console.error('Erro na consulta KPI Total:', error.message);
+        throw new Error(`Erro ao buscar KPI total: ${error.message}`);
+    }
 }
 
-function getKpiHistoricoAno(filtro) {
+function getKpiHistoricoAno(filtro = {}) {
+    console.log('Filtro recebido KPI Ano:', filtro);
 
-    console.log('Esse é o filtro do Histórico: ', filtro)
+    // Configurações
+    const ANO_MIN = 1989;
+    const ANO_MAX = 2024;
+    const ANOS_PADRAO = 5;
 
-    let yearClause = '';
+    let whereConditions = [];
 
-    console.log(filtro.ANOS)
+    // Processar anos
+    if (!filtro.ANOS || filtro.ANOS === 'null' || filtro.ANOS === null) {
+        // Últimos 5 anos (2020-2024)
+        whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+    } else if (Array.isArray(filtro.ANOS)) {
+        // Array de anos - validar e limitar
+        const anosValidos = filtro.ANOS
+            .map(ano => parseInt(ano))
+            .filter(ano => !isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX)
+            .slice(0, 10); // Máximo 10 anos
 
-    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
-        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
-    } else {
-
-        if (Array.isArray(filtro.ANOS)) {
-            console.log(filtro.ANOS)
-            console.log(filtro.ANOS.length)
-            for (let i = 0; i < filtro.ANOS.length; i++) {
-                console.log(filtro.ANOS[i])
-                if (i == 0) {
-                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                } else {
-                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                }
-
-            }
-            yearClause += ")"
+        if (anosValidos.length > 0) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) IN (${anosValidos.join(',')})`);
         } else {
-            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+        }
+    } else {
+        // Ano único
+        const ano = parseInt(filtro.ANOS);
+        if (!isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) = ${ano}`);
+        } else {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
         }
     }
 
-    let filterOption = "";
+    // Processar outros filtros
+    const camposValidos = ['FK_CONTINENTE', 'FK_PAIS', 'FK_VIA', 'FK_FEDERACAO_BRASIL'];
 
-
-
-    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
-
-    for (let i = 0; i < valoresFilter.length; i++) {
-        if (valoresFilter[i][0] === 'ANOS') {
-            continue;
+    camposValidos.forEach(campo => {
+        const valor = filtro[campo];
+        if (valor && valor !== 'null' && valor !== null && valor !== '') {
+            const valorNum = parseInt(valor);
+            if (!isNaN(valorNum) && valorNum > 0) {
+                whereConditions.push(`bd.${campo} = ${valorNum}`);
+            }
         }
-        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
-    }
+    });
 
-    var instrucaoSql = `
-   SELECT  
-    YEAR(bd.DATA_CHEGADA) AS ANO,
-    SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
-    FROM  
-        TB_BASE_DADOS bd
-    JOIN  
-        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
-    JOIN  
-        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
-    JOIN  
-        PAIS p ON bd.FK_PAIS = p.ID_PAIS
-    JOIN  
-        VIA v ON bd.FK_VIA = v.ID_VIA
-    ${yearClause}
-    ${filterOption}  
-    GROUP BY  
-        YEAR(bd.DATA_CHEGADA)
-    ORDER BY  
-        TOTAL_CHEGADAS DESC
-    LIMIT 1;
-        `
-    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
-    return database.executar(instrucaoSql)
+    // Montar query
+    const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
+
+    const sql = `
+        SELECT  
+            YEAR(bd.DATA_CHEGADA) AS ANO,
+            SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+        FROM  
+            TB_BASE_DADOS bd
+        ${whereClause}
+        GROUP BY  
+            YEAR(bd.DATA_CHEGADA)
+        ORDER BY  
+            TOTAL_CHEGADAS DESC
+        LIMIT 1;
+    `;
+
+    console.log('SQL KPI Ano executado:', sql.replace(/\s+/g, ' ').trim());
+
+    // Executar com tratamento de erro
+    try {
+        return database.executar(sql);
+    } catch (error) {
+        console.error('Erro na consulta KPI Ano:', error.message);
+        throw new Error(`Erro ao buscar KPI por ano: ${error.message}`);
+    }
 }
 
-function getKpiHistoricoMes(filtro) {
+function getKpiHistoricoMes(filtro = {}) {
+    console.log('Filtro recebido KPI Mês:', filtro);
 
-    console.log('Esse é o filtro do Histórico: ', filtro)
+    // Configurações
+    const ANO_MIN = 1989;
+    const ANO_MAX = 2024;
+    const ANOS_PADRAO = 5;
 
-    let yearClause = '';
+    let whereConditions = [];
 
-    console.log(filtro.ANOS)
+    // Processar anos
+    if (!filtro.ANOS || filtro.ANOS === 'null' || filtro.ANOS === null) {
+        // Últimos 5 anos (2020-2024)
+        whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+    } else if (Array.isArray(filtro.ANOS)) {
+        // Array de anos - validar e limitar
+        const anosValidos = filtro.ANOS
+            .map(ano => parseInt(ano))
+            .filter(ano => !isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX)
+            .slice(0, 10); // Máximo 10 anos
 
-    if (filtro.ANOS == undefined || filtro.ANOS == 'null') {
-        yearClause = 'WHERE YEAR(bd.DATA_CHEGADA) <= 2024';
-    } else {
-
-        if (Array.isArray(filtro.ANOS)) {
-            console.log(filtro.ANOS)
-            console.log(filtro.ANOS.length)
-            for (let i = 0; i < filtro.ANOS.length; i++) {
-                console.log(filtro.ANOS[i])
-                if (i == 0) {
-                    yearClause = `WHERE (YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                } else {
-                    yearClause += ` OR YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS[i]}`
-                }
-
-            }
-            yearClause += ")"
+        if (anosValidos.length > 0) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) IN (${anosValidos.join(',')})`);
         } else {
-            yearClause = `WHERE YEAR(bd.DATA_CHEGADA) = ${filtro.ANOS}`
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
+        }
+    } else {
+        // Ano único
+        const ano = parseInt(filtro.ANOS);
+        if (!isNaN(ano) && ano >= ANO_MIN && ano <= ANO_MAX) {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) = ${ano}`);
+        } else {
+            whereConditions.push(`YEAR(bd.DATA_CHEGADA) BETWEEN ${ANO_MAX - ANOS_PADRAO + 1} AND ${ANO_MAX}`);
         }
     }
 
-    let filterOption = "";
+    // Processar outros filtros
+    const camposValidos = ['FK_CONTINENTE', 'FK_PAIS', 'FK_VIA', 'FK_FEDERACAO_BRASIL'];
 
-
-
-    const valoresFilter = Object.entries(filtro).filter(fk => fk[1] != 'null');
-
-    for (let i = 0; i < valoresFilter.length; i++) {
-        if (valoresFilter[i][0] === 'ANOS') {
-            continue;
+    camposValidos.forEach(campo => {
+        const valor = filtro[campo];
+        if (valor && valor !== 'null' && valor !== null && valor !== '') {
+            const valorNum = parseInt(valor);
+            if (!isNaN(valorNum) && valorNum > 0) {
+                whereConditions.push(`bd.${campo} = ${valorNum}`);
+            }
         }
-        filterOption += ` AND bd.${valoresFilter[i][0]} = ${valoresFilter[i][1]}`
-    }
+    });
 
-    var instrucaoSql = `
-    SELECT  
-        MONTH(bd.DATA_CHEGADA) AS MES,
-        SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
-    FROM  
-        TB_BASE_DADOS bd
-    JOIN  
-        FEDERACAO_BRASIL fb ON bd.FK_FEDERACAO_BRASIL = fb.ID_FEDERACAO_BRASIL
-    JOIN  
-        CONTINENTE c ON bd.FK_CONTINENTE = c.ID_CONTINENTE
-    JOIN  
-        PAIS p ON bd.FK_PAIS = p.ID_PAIS
-    JOIN  
-        VIA v ON bd.FK_VIA = v.ID_VIA
-    ${yearClause}
-    ${filterOption}  
-    GROUP BY  
-        MONTH(bd.DATA_CHEGADA)
-    ORDER BY  
-        TOTAL_CHEGADAS DESC
-    LIMIT 1;
-        `
-    console.log('Esse é o sqlHistorico: ' + instrucaoSql)
-    return database.executar(instrucaoSql)
+    // Montar query
+    const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
+
+    const sql = `
+        SELECT  
+            MONTH(bd.DATA_CHEGADA) AS MES,
+            SUM(bd.CHEGADAS) AS TOTAL_CHEGADAS
+        FROM  
+            TB_BASE_DADOS bd
+        ${whereClause}
+        GROUP BY  
+            MONTH(bd.DATA_CHEGADA)
+        ORDER BY  
+            TOTAL_CHEGADAS DESC
+        LIMIT 1;
+    `;
+
+    console.log('SQL KPI Mês executado:', sql.replace(/\s+/g, ' ').trim());
+
+    // Executar com tratamento de erro
+    try {
+        return database.executar(sql);
+    } catch (error) {
+        console.error('Erro na consulta KPI Mês:', error.message);
+        throw new Error(`Erro ao buscar KPI por mês: ${error.message}`);
+    }
 }
 
 
