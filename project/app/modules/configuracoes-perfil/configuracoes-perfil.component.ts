@@ -60,7 +60,8 @@ selectedFile: File | null = null;
       this.interacaoUsuario.set('')
     }
   }
-submitForm() {     
+submitForm() {
+  console.log("ochi") 
   let user = this.usuario;     
   user.EMAIL = this.userForm.value.email;     
   user.TEL = this.userForm.value.telefone;     

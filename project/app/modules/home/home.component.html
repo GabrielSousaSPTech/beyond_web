@@ -1,6 +1,6 @@
 <div class="container">
     <div class="grid">
-        <app-content-section iconUrl="assets/icons/misc/icon-calendar.svg" title="Eventos" [btnEvent]="true" (btnEventClick)="eventService.addEvent()">
+        <app-content-section iconUrl="assets/icons/misc/icon-calendar.svg" title="Eventos" [btnEvent]="userService.nivelPermissao() == 'Privilegiado'" (btnEventClick)="eventService.addEvent()">
             <app-card-event #cardEvent></app-card-event>
         </app-content-section>
         <app-content-section iconUrl="assets/icons/misc/icon-filtro.svg" title="Filtros" [maxWidth]="'70rem'">
