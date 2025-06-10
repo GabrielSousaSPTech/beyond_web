@@ -18,6 +18,20 @@
             "username": "root",
             "database": "beyond_db",
             "askForPassword": true
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "18.205.88.137",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "ec2",
+            "database": "beyond_db",
+            "username": "root",
+            "askForPassword": true
         }
     ]
 }

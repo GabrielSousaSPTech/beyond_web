@@ -15,14 +15,14 @@ const transporter = nodemailer.createTransport({
 
 async function sendEmail(to, codigo) {
   return transporter.sendMail({
-    from: process.env.EMAIL_USER,
+    from: 'gabriel.sousa@sptech.school',
     to,
     subject: 'Bem-vindo! Aqui está a chave de ativação da sua organização',
     html: `
     <div style="font-family: Outfit; color: #333;">
-      <h2>🚀 Sua organização foi criada com sucesso!</h2>
+      <h2>🚀 Entre em nosso site com a sua organização!</h2>
       <p>Olá,</p>
-      <p>Use o código abaixo para ativar sua organização no sistema:</p>
+      <p>Use o código abaixo para se cadastrar em nosso sistema como parte de sua organização:</p>
       <h1 style="color: #3E5744;">${codigo}</h1>
       <p>Copie esse código e cole na tela de ativação.</p>
       <br>
