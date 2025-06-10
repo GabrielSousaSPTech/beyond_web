@@ -111,6 +111,15 @@ export class OrganizacaoComponent implements OnInit {
     }
   }
 
+  statusNotificacao(){
+    const novoValor = this.notificacaoCheck() == 1 ? 0 : 1;
+
+    this.SlackNotificacaoService.postinfoSlack((novoValor));
+    
+    this.notificacaoCheck.set(novoValor);
+    console.log(novoValor)
+  }
+
   emailParaEnvio: string = "";
 
   enviar() {
