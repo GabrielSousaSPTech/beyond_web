@@ -89,6 +89,8 @@ submitForm() {
 }
 
 
+
+
   submitFormSenha() {
     if ((this.formSenha.value.novaSenha != null && this.formSenha.value.confirmarSenha != null)) {
       if (this.formSenha.value.novaSenha != this.formSenha.value.senhaAtual) {
@@ -139,12 +141,12 @@ submitForm() {
     if (file) {
       this.selectedFile = file;
       
-      // Criar preview da imagem e trocar imediatamente na tela
+     
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.previewUrl = e.target.result;
         
-        // Trocar a imagem na tela IMEDIATAMENTE
+        
         const imgElement = document.querySelector('.profile-picture img') as HTMLImageElement;
         if (imgElement) {
           imgElement.src = e.target.result;
@@ -157,8 +159,17 @@ submitForm() {
     }
   }
 
+  getFotoUsuario(): string {
+  const foto = String(this.usuario?.FOTO || '').trim();
+
+  return foto !== ''
+    ? `/assets/usuarios/${foto}`
+    : 'assets/icons/misc/icon-user-template.svg';
+}
+
   ngOnInit(): void {
     this.headerTitleService.setTitle('Configurações');
     this.estadoFormulario.set(true)
+    this.getFotoUsuario();
   }
 }

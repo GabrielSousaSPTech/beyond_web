@@ -6,8 +6,7 @@
       <div class="profile-picture-container">
 
         <div class="profile-picture">
-          <img src="/assets/usuarios/{{usuario.FOTO}}" alt="Foto de perfil" />
-          
+          <img id="icon-user" [src]="getFotoUsuario()" alt="Foto de perfil" />
         <div class="photo-overlay" (click)="fileInput.click()">
           <div class="camera-icon">
            <i class="bi bi-camera" style="font-size: 24px; color: white;"></i>
