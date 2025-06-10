@@ -228,6 +228,27 @@ function getSenha(req, res) {
         .catch(e => res.status(500).json(e.sqlMessage));
 }
 
+function updateImagemUsuario(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+    
+    if (!req.file) {
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Nenhum arquivo foi enviado"
+        });
+    }
+    
+    const nomeArquivo = req.file.filename;
+    
+    usuarioModel.updateImagemUsuario(idFuncionario, nomeArquivo)
+        .then(function (resultado) {
+            res.status(200).json(resultado);
+        })
+        .catch(function (erro) {
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 
 module.exports = {
     autenticar,
