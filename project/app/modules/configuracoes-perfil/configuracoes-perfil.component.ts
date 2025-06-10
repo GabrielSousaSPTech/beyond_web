@@ -31,6 +31,8 @@ selectedFile: File | null = null;
   formSenha: FormGroup
 
   foto: any = "";
+  nome: any = "";
+  tipo: any = "";
 
   constructor(public headerTitleService: HeaderTitleService, private fb: FormBuilder) {
     this.usuario = this.userService.usuario()
@@ -55,6 +57,8 @@ selectedFile: File | null = null;
         cpf: user.CPF,
       })
       this.foto = user.FOTO
+      this.nome = user.NOME
+      this.tipo = user.TIPO
     })
 
 
