@@ -1,5 +1,6 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UserService } from '../../core/services/user/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  adminLevel = input("admin")
+  private userService = inject(UserService);
+  adminLevel = this.userService.nivelPermissao();
 
   showOptions = signal(false);
   private leaveTimeout: any;

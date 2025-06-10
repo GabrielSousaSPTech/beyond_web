@@ -40,12 +40,9 @@ export class GeoChartWorldComponent implements OnInit {
 
     var options = {
       region: 'world',
-      colorAxis: {
-        colors: ['#aec7e8', '#1f77b4']
-      },
-      legend: 'none',
+      colorAxis: { colors: ['#aec7e8', '#1f77b4'] },
       height: 600,
-      width: 1050
+      width: 700
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('geoChartWorld_div'));

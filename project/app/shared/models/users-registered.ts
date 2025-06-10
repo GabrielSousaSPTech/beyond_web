@@ -7,7 +7,22 @@ export type userRegisteredApi = {
   EMAIL: string,
   TEL: string,
   CPF: string,
+  FOTO: string
 }
 export type senhaUser = {
-  SENHA:string
+  senhaAtual:string,
+  senhaNova:string,
+  confirmarSenha:string
+}
+
+export type UpdateSenhaResponse = {
+  sucesso: boolean;
+  message: string;
+  resultado?: any;
+}
+
+export type ImageUploadResponse = {
+  sucesso: boolean;
+  message?: string;
+  path?: string; 
 }

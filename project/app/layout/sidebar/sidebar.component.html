@@ -35,7 +35,7 @@
                         <p class="nav-text">Mapa de calor turismo</p>
                 </div>
             </li>
-            @if (adminLevel() == "admin") {
+            @if (adminLevel == "Privilegiado" ) {
                 <li routerLink="/organizacao" routerLinkActive="active-route" [routerLinkActiveOptions]="{ exact: true }">
                     <div class="icon-text">
                         <svg class="icon-admin icon" width="59" height="60" viewBox="0 0 59 60" fill="none" xmlns="http://www.w3.org/2000/svg">

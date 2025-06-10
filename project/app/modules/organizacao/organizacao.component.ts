@@ -10,24 +10,33 @@ import { Observable, single } from 'rxjs';
 import { userRegisteredApi } from '../../shared/models/users-registered';
 import { UserModelComponent } from "./components/user-model/user-model.component";
 import { CardUserService } from './services/card-user/card-user.service';
+import { SolicitacoesPopupComponent } from "./components/solicitacoes-popup/solicitacoes-popup.component";
+import { UserService } from '../../core/services/user/user.service';
+
 
 @Component({
   selector: 'app-organizacao',
-  imports: [ContentSectionComponent, CardUserComponent, CardAtividadesComponent, ClipboardModule, FormsModule, UserModelComponent],
+  imports: [ContentSectionComponent, CardUserComponent, CardAtividadesComponent, ClipboardModule, FormsModule, UserModelComponent, SolicitacoesPopupComponent],
   templateUrl: './organizacao.component.html',
   styleUrl: './organizacao.component.css',
   providers: [organizacaoService, Clipboard, CardUserService]
 })
 export class OrganizacaoComponent implements OnInit{
+  protected userService = inject(UserService);
   protected cardUserService = inject(CardUserService);
 
   protected editUser: WritableSignal<boolean> = signal(false);
+  protected solicicoesPopup: WritableSignal<boolean> = signal(false);
   protected userName: WritableSignal<string> = signal('')
 
-  constructor(public headerTitleService: HeaderTitleService) { }
+  constructor(public headerTitleService: HeaderTitleService) {
+    if(this.userService.nivelPermissao() != "Privilegiado"){
+      window.history.back();
+    }
+  }
     OrganizacaoService = inject(organizacaoService)
     dataOut: WritableSignal<any> = signal({});
-    qtdMembros = 0;
+    qtdMembros: number = 0;
       ngOnInit(): void {
         this.headerTitleService.setTitle('Controle de Acesso');
         this.cardUserService.activeUser$.subscribe(data=>{
@@ -37,10 +46,12 @@ export class OrganizacaoComponent implements OnInit{
         this.OrganizacaoService.dadosOrganizacao$.subscribe(data =>{
           this.dataOut.set(data);
         })
-        this.OrganizacaoService.countMembros().subscribe(qtd=>{
-          this.qtdMembros = qtd;
-        })
+        this.OrganizacaoService.countMembros();
+        this.OrganizacaoService.countMembro$.subscribe((qtd: any) => {
+          this.qtdMembros = qtd.quantidade;
+        });
       }
+      
       emailParaEnvio: string = '';
 
       enviar() {
@@ -63,5 +74,13 @@ export class OrganizacaoComponent implements OnInit{
       openUserModel(user: userRegisteredApi){
         this.cardUserService.setActiveUser(user);
         this.editUser.set(true);
+      }
+
+      openSolicitacoesPupup(){
+        if(this.solicicoesPopup()){
+          this.solicicoesPopup.set(false);
+        } else {
+          this.solicicoesPopup.set(true);
+        }
       }
 }

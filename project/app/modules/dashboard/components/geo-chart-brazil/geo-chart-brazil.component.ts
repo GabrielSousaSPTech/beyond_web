@@ -46,12 +46,13 @@ export class GeoChartBrazilComponent implements OnInit {
 
 
     var options = {
-      region: 'BR', // Define a região como Brasil.
-      resolution: 'provinces', // Mostra estados em vez de países.
+      region: 'BR',
+      displayMode: 'regions',
+      resolution: 'provinces',
+      datalessRegionColor: 'transparent', // Mostra estados em vez de países.
       colorAxis: { colors: ['#aec7e8', '#1f77b4'] }, // Define as cores do gradiente.
-      legend: 'none',
-      'width': 1000,
-      'height': 600
+      height: 600,
+      width: 700
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('chart_div_Map'));
