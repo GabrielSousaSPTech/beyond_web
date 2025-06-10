@@ -1,12 +1,15 @@
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import {userRegisteredApi } from '../../../../shared/models/users-registered';
+import { userRegisteredApi } from '../../../../shared/models/users-registered';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { permissao } from '../../../../shared/models/permissao.type';
+import { userSolicitacao } from '../../../../shared/models/user-solicitacao.type';
+import { organizacaoService } from '../organizacao/Organizacao.service';
 
 @Injectable()
 export class CardUserService {
   private http = inject(HttpClient);
+  private OrganizacaoService = inject(organizacaoService); // Assuming this is the service for organization-related operations
   private baseUrl = "/usuarios/"
 
   private activeUserSubject: BehaviorSubject<userRegisteredApi> = new BehaviorSubject({} as userRegisteredApi)
@@ -17,18 +20,30 @@ export class CardUserService {
   private getUsersRegistedSubject: BehaviorSubject<userRegisteredApi[]> = new BehaviorSubject([] as userRegisteredApi[])
   public getUsersRegisted$ = this.getUsersRegistedSubject.asObservable();
 
-  getUsersRegistered(){
-     this.makeRequest('all/' + sessionStorage.getItem("EMPRESA_USUARIO")).subscribe(
-      users =>
-      this.getUsersRegistedSubject.next(users as userRegisteredApi[])
-    )
+  private getUsersSolicitacaoSubject: BehaviorSubject<userSolicitacao[]> = new BehaviorSubject([] as userSolicitacao[])
+  public getUsersSolicitacao$ = this.getUsersSolicitacaoSubject.asObservable();
+
+  getUsersRegistered() {
+      this.makeRequest('all/' + sessionStorage.getItem("EMPRESA_USUARIO")).subscribe(
+        users => {
+          this.getUsersRegistedSubject.next(users as userRegisteredApi[]);
+        }
+      );
   }
 
-  setActiveUser(user: userRegisteredApi){
+  getUsersSolicitacao() {
+    this.makeRequest('analise/' + sessionStorage.getItem("EMPRESA_USUARIO")).subscribe(
+      users => {
+        this.getUsersSolicitacaoSubject.next(users as userSolicitacao[]);
+      }
+    );
+  }
+
+  setActiveUser(user: userRegisteredApi) {
     this.activeUserSubject.next(user);
   }
 
-  updateUser(user: any){
+  updateUser(user: any) {
     this.http.put(`/usuarios/edit/${user.ID_FUNC}`, user).subscribe({
       next: (response) => {
         console.log(response);
@@ -38,32 +53,42 @@ export class CardUserService {
       }
     })
   }
-  
-  updateUserPermitions(userID: number, permissionFK: number){
-      this.http.put(`/usuarios/autorizar/${userID}`, {idPermissao: permissionFK}).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.getUsersRegistered()
-      },
-      error: (error) => {
-        console.error(error)
-      }
-    })
-  }
 
-  deleteUser(userID: number){
-    this.http.delete(`/usuarios/delete/${userID}`).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.getUsersRegistered()
-      },
-      error: (error) => {
-        console.error(error)
-      }
-    })
-  }
+private updateSolicitacoes(userID: number): void {
+  const currentSolicitations = this.getUsersSolicitacaoSubject.value;
+  console.log('Current solicitations:', currentSolicitations);
+  const updatedSolicitations = currentSolicitations.filter(user => user.ID_FUNC !== userID);
+  this.getUsersSolicitacaoSubject.next(updatedSolicitations);
+}
 
-  getPermissions(){
+updateUserPermitions(userID: number, permissionFK: number): Observable<any> {
+  return this.http.put(`/usuarios/autorizar/${userID}`, { idPermissao: permissionFK }).pipe(
+    map(response => {
+      this.updateSolicitacoes(userID);
+      this.getUsersRegistered();
+      this.OrganizacaoService.countMembros();
+      return response;
+    })
+  );
+}
+
+deleteUser(userID: number): Observable<any> {
+  return this.http.delete(`/usuarios/delete/${userID}`).pipe(
+    map(response => {
+      const currentSolicitations = this.getUsersSolicitacaoSubject.value;
+      const updatedSolicitations = currentSolicitations.filter(user => user.ID_FUNC !== userID);
+      this.getUsersSolicitacaoSubject.next(updatedSolicitations);
+      this.OrganizacaoService.countMembros();
+      return response;
+    }),
+    catchError(error => {
+      console.error('Error deleting user:', error);
+      return throwError(() => error);
+    })
+  );
+}
+
+  getPermissions() {
     return this.makeRequest<permissao>('permissoes')
   }
 

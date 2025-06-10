@@ -1,0 +1,30 @@
+<div class="popup-wrapper">
+    <div class="popup-header">
+        <h3 class="popup-title">
+            Solicitações de Acesso
+        </h3>
+    </div>
+    <div class="popup-body">
+        @if(!users() || users().length === 0) {
+            <div class="no-solicitacoes">
+                <p>Não há solicitações pendentes.</p>
+            </div>
+        } @else {
+            <div class="solicitacoes-count">
+                <p>Total de solicitações: {{users().length}}</p>
+            </div>
+        }
+        @for (solicitacao of users(); track solicitacao) {
+            <div class="solicitacao-card">
+                <div class="text">
+                    <h3>{{solicitacao.NOME}}</h3>
+                    <h3>{{solicitacao.EMAIL}}</h3>
+                </div>
+                <div class="control">
+                    <button class="btn" (click)="acceptUserSolicitacao(solicitacao.ID_FUNC)"><i class="bi bi-check2 accept"></i></button>
+                    <button class="btn" (click)="refuseUserSolicitacao(solicitacao.ID_FUNC)"><i class="bi bi-x refuse"></i></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

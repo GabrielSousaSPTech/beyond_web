@@ -1,5 +1,5 @@
 <div class="card-users-wrapper">
-@for(user of usersList | async ; track $index){
+@for(user of usersList() ; track $index){
     <div class="card-users">
         <div class="user-info">
             <img id="icon-user" src="assets/icons/misc/icon-user-template.svg">

@@ -12,6 +12,9 @@ export class organizacaoService {
     private dadosOrganizacaoSubject = new BehaviorSubject<dadosOrganizacao>({} as dadosOrganizacao);
     public dadosOrganizacao$ = this.dadosOrganizacaoSubject.asObservable();
 
+    private countMembroSubject = new BehaviorSubject<qtdMembros>({} as qtdMembros);
+    public countMembro$ = this.countMembroSubject.asObservable();
+
     getDadosEmpresa() {
         this.http.get<dadosOrganizacao[]>('/empresas/' + sessionStorage.getItem("EMPRESA_USUARIO")).subscribe({
 
@@ -25,7 +28,15 @@ export class organizacaoService {
     }
 
     countMembros() {
-        return this.http.get<qtdMembros[]>('/empresas/membros/' + sessionStorage.getItem("EMPRESA_USUARIO")).pipe(map(res => res[0].quantidade));
+        this.http.get<qtdMembros[]>('/empresas/membros/' + sessionStorage.getItem("EMPRESA_USUARIO")).subscribe({
+
+            next: (response) => {
+                this.countMembroSubject.next(response[0])
+            },
+            error: (error) => {
+                console.error(error)
+            }
+        })
     }
 
     enviarEmail(para: string, codigo: string) {
