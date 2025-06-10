@@ -36,6 +36,7 @@ function updateFiltro(idFiltro, nome, data_chegada, fk_continente, fk_pais, fk_v
     var instrucaoSql = `UPDATE TB_FILTRO_DASHBOARD
                         SET NOME = ?, DATA_CHEGADA = ?, FK_CONTINENTE = ?, FK_PAIS = ?, FK_VIA = ?, FK_FEDERACAO_BRASIL = ?
                         WHERE ID_FILTRO = ?`
+                        console.log("ABACAXI",database.executar(instrucaoSql, [nome, data_chegada, fk_continente, fk_pais, fk_via,fk_federacao_brasil, idFiltro]))
     return database.executar(instrucaoSql, [nome, data_chegada, fk_continente, fk_pais, fk_via,fk_federacao_brasil, idFiltro])                
 }
 

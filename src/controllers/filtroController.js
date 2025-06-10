@@ -24,11 +24,18 @@ function getByIdFiltro(req, res) {
 function insertFiltro(req, res) {
     const fkEmpresa = req.body.FK_EMPRESA
     const nome = req.body.NOME
-    const data_chegada = req.body.DATA_CHEGADA
+    let data_chegada = req.body.DATA_CHEGADA
     const fk_continente = req.body.FK_CONTINENTE
     const fk_pais = req.body.FK_PAIS
     const fk_via = req.body.FK_VIA
     const fk_federacao_brasil = req.body.FK_FEDERACAO_BRASIL
+
+    const lastYear = new Date().getFullYear() - 1;
+    const lastYearDate = `${lastYear}-00-01`;
+
+    if (data_chegada == null || data_chegada == undefined || data_chegada == '' || data_chegada == lastYearDate) {
+        data_chegada = null;
+    }
 
     filtroModel.insertFiltro(fkEmpresa, nome, data_chegada, fk_continente, fk_pais, fk_via, fk_federacao_brasil).then(function (resultado) {
         res.status(201).json(resultado);
@@ -37,15 +44,26 @@ function insertFiltro(req, res) {
     })
 }
 
-function updateFiltro(req, res) {
+function updateFiltro(req, res) {   
+    console.log("Rota de edição de filtro chamada");
     const fkEmpresa = req.body.FK_EMPRESA
     const nome = req.body.NOME
-    const data_chegada = req.body.DATA_CHEGADA
+    let data_chegada = req.body.DATA_CHEGADA
     const fk_continente = req.body.FK_CONTINENTE
     const fk_pais = req.body.FK_PAIS
     const fk_via = req.body.FK_VIA
     const fk_federacao_brasil = req.body.FK_FEDERACAO_BRASIL
     const idFiltro = req.body.ID_FILTRO
+
+    const lastYear = new Date().getFullYear() - 1;
+    const lastYearDate = `${lastYear}-00-01`;
+
+    if (data_chegada == null || data_chegada == undefined || data_chegada == '' || data_chegada == lastYearDate) {
+        data_chegada = null;
+    }
+
+    console.log("Dados recebidos para atualização:", fkEmpresa, nome, data_chegada, fk_continente, fk_pais, fk_via, fk_federacao_brasil, idFiltro);
+
 
     filtroModel.updateFiltro(idFiltro, nome, data_chegada, fk_continente, fk_pais, fk_via, fk_federacao_brasil).then(function (resultado) {
         res.status(201).json(resultado);

@@ -65,6 +65,7 @@ export class UserFiltersService {
   }
 
   public addUserFilter(userFilter: userFilter) {
+    console.log('Adding user filter:', userFilter);
     return this.http.post<userFilter>(`${this.baseUrl}/create`, userFilter)
       .pipe(
         catchError(this.handleError),
@@ -73,7 +74,7 @@ export class UserFiltersService {
   }
 
   public updateUserFilter(userFilter: userFilter) {
-    return this.http.put<userFilter>(`${this.baseUrl}/edit`, userFilter)
+    return this.http.put<userFilter>(`${this.baseUrl}/edit/`+userFilter.ID_FILTRO, userFilter)
       .pipe(
         catchError(this.handleError),
         tap(() => this.loadFilters())

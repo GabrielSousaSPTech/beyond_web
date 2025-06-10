@@ -96,7 +96,7 @@ export class InputFilterComponent implements OnInit {
       ano: filter.DATA_CHEGADA ? filter.DATA_CHEGADA.substring(0, 4) : "",
       pais: filter.FK_PAIS ? this.basicDataService.getPaisById(filter.FK_PAIS)!.nome : '',
       federacao: filter.FK_FEDERACAO_BRASIL ? this.basicDataService.getFederacaoBrasilById(filter.FK_FEDERACAO_BRASIL!)!.nome : '',
-      mes: filter.DATA_CHEGADA ? this.mesesList.find(x => x.id == Number(filter.DATA_CHEGADA!.substring(5, 7)))?.mes : ""
+      mes: filter.DATA_CHEGADA && filter.DATA_CHEGADA != null ? this.mesesList.find(x => x.id == Number(filter.DATA_CHEGADA!.substring(5, 7)))?.mes : ""
     });
   }
 

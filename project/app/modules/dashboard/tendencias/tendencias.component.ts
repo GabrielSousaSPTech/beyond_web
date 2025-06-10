@@ -179,7 +179,7 @@ export class TendenciasComponent implements OnInit {
     this.headerTitleService.setTitle('Tendências de Chegadas de Turistas');
     this.filterService.activeFilter$.subscribe(filter=> {
       this.filterName.set(filter.NOME)
-      let mes = this.getMesNome(Number(filter.DATA_CHEGADA!.substring(5,7)));
+      let mes = this.getMesNome(filter.DATA_CHEGADA ? Number(filter.DATA_CHEGADA!.substring(5,7)) : 0);
       this.mes.set(mes ? mes : this.getMesNome(new Date().getMonth() + 1));
     });
   }
