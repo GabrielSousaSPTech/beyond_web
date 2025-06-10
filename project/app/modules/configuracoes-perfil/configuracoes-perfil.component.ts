@@ -24,16 +24,21 @@ selectedFile: File | null = null;
   userName = this.userService.userName();
   email = this.userService.email();
   nivelPermissao = this.userService.nivelPermissao();
-  usuario = this.userService.usuario();
+  usuario: any;
   senha = this.userService.senha();
   public interacaoUsuario: WritableSignal<string> = signal('');
   userForm: FormGroup;
   formSenha: FormGroup
+
+  foto: any = "";
+
   constructor(public headerTitleService: HeaderTitleService, private fb: FormBuilder) {
+    this.usuario = this.userService.usuario()
+    console.log("user",this.usuario)
     this.userForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
-      // foto: ['',[Validators.required]],
+       foto: [''],
       cpf: ['', [Validators.required]]
     })
 
@@ -43,11 +48,16 @@ selectedFile: File | null = null;
       confirmarSenha: ['', [Validators.required]]
     })
 
-    this.userForm.patchValue({
-      email: this.usuario.EMAIL,
-      telefone: this.usuario.TEL,
-      cpf: this.usuario.CPF
+    this.userService.usuario$.subscribe(user => {
+      this.userForm.patchValue({
+        email: user.EMAIL,
+        telefone: user.TEL,
+        cpf: user.CPF,
+      })
+      this.foto = user.FOTO
     })
+
+
   }
   alterarForm() {
     if (this.estadoFormulario()) {
@@ -182,7 +192,7 @@ submitForm() {
   }
 
   getFotoUsuario(): string {
-  const foto = String(this.usuario?.FOTO || '').trim();
+  const foto = String(this.foto || '').trim();
 
   return foto !== ''
     ? `/assets/usuarios/${foto}`
