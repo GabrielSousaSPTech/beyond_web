@@ -29,6 +29,9 @@ img {
 
 html {
     font-size: 62.5%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .container {
@@ -37,3 +40,4 @@ html {
     margin: 0 auto;
     padding: 0 1.5rem;
 }
+

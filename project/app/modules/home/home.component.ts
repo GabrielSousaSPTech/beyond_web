@@ -9,6 +9,7 @@ import { CardEventService } from './services/card-event/card-event.service';
 import { UserFiltersService } from '../../core/services/user-filters/user-filters.service';
 import { DatePipe } from '@angular/common';
 import { BasicDataService } from '../../core/services/basicData/basicData.service';
+import { UserService } from '../../core/services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ import { BasicDataService } from '../../core/services/basicData/basicData.servic
 })
 
 export class HomeComponent implements OnInit{
+  userService = inject(UserService);
   eventService = inject(CardEventService);
   constructor(public headerTitleService: HeaderTitleService) { }
 

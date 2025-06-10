@@ -1,0 +1,44 @@
+<form [formGroup]="filterForm">
+        <div class="campos-filtro">
+            <div class="grupo">
+                <app-select-filtered
+                    [inputData]="this.basicDataService.continentes$" 
+                    [placeHolder]="'Continentes'"
+                    [searchTerm]="filterForm.get('continente')?.value"
+                    (valueChange)="filterForm.get('continente')?.setValue($event)">
+                </app-select-filtered>
+                <app-select-filtered 
+                    [inputData]="this.basicDataService.vias$" 
+                    [placeHolder]="'Vias'"
+                    [searchTerm]="filterForm.get('via')?.value"
+                    (valueChange)="filterForm.get('via')?.setValue($event)">
+                </app-select-filtered>
+                <app-select-filtered 
+                    [inputData]="this.basicDataService.anos$" 
+                    [placeHolder]="'Ano'"
+                    [searchTerm]="filterForm.get('ano')?.value"
+                    (valueChange)="filterForm.get('ano')?.setValue($event)">
+                </app-select-filtered>
+            </div>
+            <div class="grupo">
+                <app-select-filtered 
+                    [inputData]="this.paisesFiltered$"
+                    [placeHolder]="'Paises'"
+                    [searchTerm]="filterForm.get('pais')?.value"
+                    (valueChange)="filterForm.get('pais')?.setValue($event)">
+                </app-select-filtered>
+                <app-select-filtered 
+                    [inputData]="this.basicDataService.federacoesBrasil$" 
+                    [placeHolder]="'Portão de chegada'"
+                    [searchTerm]="filterForm.get('federacao')?.value"
+                    (valueChange)="filterForm.get('federacao')?.setValue($event)">
+                </app-select-filtered>
+                <app-select-filtered 
+                    [inputData]="this.meses$" 
+                    [placeHolder]="'Mes'"
+                    [searchTerm]="filterForm.get('mes')?.value"
+                    (valueChange)="filterForm.get('mes')?.setValue($event)">
+                </app-select-filtered>
+            </div>
+        </div>
+</form>

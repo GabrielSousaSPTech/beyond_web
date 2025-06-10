@@ -304,3 +304,8 @@
     font-weight: 600;
     padding-bottom: 2rem;
 }
+
+.solicitacoes-wrapper {
+    position: relative;
+}
+

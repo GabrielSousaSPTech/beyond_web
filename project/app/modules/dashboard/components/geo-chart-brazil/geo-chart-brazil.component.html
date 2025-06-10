@@ -1,1 +1,4 @@
-<div id="chart_div_Map"></div>
+<div id="chart_div_Map" [style]="displayGraph(noData() || enableBarChart)"></div>
+@if(noData()){
+<div class="noData">Dados insuficientes para a criação do gráfico</div>
+}

@@ -4,3 +4,6 @@ package-lock.json
 public/dashboard
 /.angular/cache
 .github
+.env
+.env.dev
+public/assets/usuarios/

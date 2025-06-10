@@ -1,0 +1,38 @@
+<div class="search-container" (clickOutside)="clickedOutside()">
+    <img src="assets/icons/actions/icon-cancel-white.svg" alt="Limpar" class="btn-limpar" (click)="clearSearchTerm()">
+      <input 
+        type="text" 
+        (input)="filterOptions()"
+        (click)="showAllOptions()"
+        [placeholder]="placeHolder"
+        class="search-input"
+        [(ngModel)]="searchTerm"
+      />
+      @if(showDropdown() && filteredOptions.length > 0){
+        <div class="dropdown">
+              @switch (type) {
+                @case ('select') {
+                  @for (option of filteredOptions; track option){
+                    <div 
+                      class="dropdown-item"
+                      (click)="selectOption(option)"
+                      >
+                      {{ option }}
+                    </div>
+                  }
+                }
+                @case ('checkbox') {
+                    @for (option of filteredOptions; track option){
+                    <div class="checkbox" (click)="selectMultipleOptions({id: $index, value: option})">
+                      <input type="checkbox" [checked]="multipleOptions.has(option)">
+                      <p class="label">{{option}}</p>
+                    </div>
+                  }
+                }
+                @default {
+                  <div>Tipo desconhecido</div>
+                }
+            }
+        </div>
+      }
+    </div>

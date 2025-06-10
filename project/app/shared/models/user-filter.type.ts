@@ -6,5 +6,5 @@ export type userFilter = {
     FK_CONTINENTE?: number,
     FK_PAIS?: number,
     FK_VIA?: number,
-    FK_FEDERACAO?: number,
+    FK_FEDERACAO_BRASIL?: number,
 }

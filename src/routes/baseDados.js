@@ -19,4 +19,8 @@ router.get("/federacoes", function(req, res){
     baseDadosController.getFederacaoBrasil(req, res);
 });
 
+router.get("/anos", function(req, res){
+    baseDadosController.getAno(req, res);
+});
+
 module.exports = router;

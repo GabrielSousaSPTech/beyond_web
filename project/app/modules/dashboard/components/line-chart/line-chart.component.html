@@ -1,1 +1,5 @@
-<div id="chart_div_Line"></div>
+@if(!noData()){
+    <div id="chart_div_Line"></div>
+} @else {
+    <div class="noData">Dados insuficientes para a criação do gráfico</div>
+}
