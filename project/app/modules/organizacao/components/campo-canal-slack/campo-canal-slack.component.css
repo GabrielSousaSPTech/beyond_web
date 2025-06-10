@@ -1,0 +1,39 @@
+.campo-canal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 20rem;
+    gap: 2rem;
+    font-size: 2rem;
+    padding: 1rem;
+    color: #bec3cb;
+    border: 2px solid #BEC3CB;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px #0000001a;
+}
+
+.input-slack{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.input-slack #id-canal{
+    width: 10rem;
+}
+
+.btn-limpar {
+    height: 2rem;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.input-slack input:hover + .btn-limpar,
+.btn-limpar:hover {
+    opacity: 1;
+    z-index: 1;
+}
