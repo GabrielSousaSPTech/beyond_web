@@ -6,4 +6,4 @@ public/dashboard
 .github
 .env
 .env.dev
-/assets/usuarios/
+public/assets/usuarios/
