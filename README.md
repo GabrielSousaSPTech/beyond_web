@@ -19,7 +19,7 @@ Este repositório é destinado ao projeto do segundo semestre de 2025/1. O objet
 ##  📁 Repositórios Relacionados
   - **Beyond_ETL**: Repositório que armazena o registro de logs do projeto
       **Link:** https://github.com/GabrielSousaSPTech/beyond_ETL.git
-  -**Beyond_setup**: Repositório de setup do projeto
+  - **Beyond_setup**: Repositório de setup do projeto
       **Link:** https://github.com/GabrielSousaSPTech/beyond_setup.git
     
 
