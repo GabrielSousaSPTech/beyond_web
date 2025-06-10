@@ -12,13 +12,22 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   private userService = inject(UserService);
-  userImg   = signal("assets/icons/misc/icon-user-template.svg")
+
+  userImg = signal("assets/icons/misc/icon-user-template.svg")
   username  = this.userService.userName();
   userFunction = signal("User function")
   isPopupVisible = signal(false);
   private hasMouseEntered = signal(false);
+  foto: any = ''
+  constructor(public headerTitleService: HeaderTitleService) {
+    this.userService.usuario$.subscribe(data=>{
+      this.foto = data.FOTO
+      this.userImg.set(this.foto ? "/assets/usuarios/"+this.foto : "assets/icons/misc/icon-user-template.svg")
+      console.log(this.userImg())
+    })
+  }
 
-  constructor(public headerTitleService: HeaderTitleService) { }
+  
 
   togglePopup() {
     this.isPopupVisible.update(value => !value);

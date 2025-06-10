@@ -11,6 +11,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ConfiguracoesPerfilComponent implements OnInit {
 
+
+selectedFile: File | null = null;
+  previewUrl: string | null = null;
+
+
   estadoFormulario: WritableSignal<boolean> = signal(true);
 
   private userService = inject(UserService);
@@ -55,7 +60,10 @@ submitForm() {
   let user = this.usuario;     
   user.EMAIL = this.userForm.value.email;     
   user.TEL = this.userForm.value.telefone;     
-  user.CPF = this.userForm.value.cpf;     
+  user.CPF = this.userForm.value.cpf;  
+  user.FOTO = this.userForm.value.foto;
+
+  
   
   this.userService.updateUsuario(user).subscribe({
     next: (response) => {
@@ -122,6 +130,30 @@ submitForm() {
       }
     } else {
       this.interacaoUsuario.set('Preencha os campos')
+    }
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    
+    if (file) {
+      this.selectedFile = file;
+      
+      // Criar preview da imagem e trocar imediatamente na tela
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewUrl = e.target.result;
+        
+        // Trocar a imagem na tela IMEDIATAMENTE
+        const imgElement = document.querySelector('.profile-picture img') as HTMLImageElement;
+        if (imgElement) {
+          imgElement.src = e.target.result;
+        }
+      };
+      reader.readAsDataURL(file);
+      
+      // Salvar arquivo (opcional - pode ser feito depois)
+      // this.saveFile(file);
     }
   }
 

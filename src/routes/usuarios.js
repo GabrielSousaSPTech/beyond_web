@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-
+const upload = require('../services/imagemServices');
 var usuarioController = require("../controllers/usuarioController");
-
+var imagemServices = require("../services/imagemServices")
 router.get("/permissoes", function(req, res){
     usuarioController.getPermissoes(req, res)
 })
@@ -43,6 +43,10 @@ router.put("/autorizar/:idUsuario", function (req, res){
 
 router.put("/editSenha/:idFuncionario", function (req, res) {
     usuarioController.updateSenha(req, res);
+});
+
+router.put("/image/:idFuncionario", upload.single('foto'), function(req, res){
+    usuarioController.updateImagemUsuario(req, res);
 });
 
 

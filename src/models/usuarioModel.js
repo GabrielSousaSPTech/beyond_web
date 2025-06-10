@@ -138,6 +138,15 @@ function getPermissoes(){
     return database.executar(instrucaoSql)
 }
 
+function updateImagemUsuario(idFuncionario, nomeArquivo) {
+    var instrucaoSql = `
+        UPDATE TB_FUNCIONARIO 
+        SET FOTO = ? 
+        WHERE ID_FUNC = ?;
+    `   
+    return database.executar(instrucaoSql, [nomeArquivo, idFuncionario]);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -150,5 +159,6 @@ module.exports = {
     autorizarUsuario,
     getPermissoes,
     updateSenha,
-    getSenha
+    getSenha,
+    updateImagemUsuario
 };
