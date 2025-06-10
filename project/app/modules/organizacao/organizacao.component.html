@@ -1,35 +1,91 @@
 <section class="organizacao">
-<div class="invite-organizacao">
-    <div class="container-codigo">
+  <div class="header-secundario">
+    <div class="invite-organizacao">
+      <div class="container-codigo">
         <h1>Código da organização:</h1>
         <h2 id="codigo-empresa">******</h2>
-        <img src="assets/icons/actions/icon-copy.svg" [cdkCopyToClipboard]="dataOut().CHAVE_ATIVACAO" alt="icon-copiar">
-    </div>
-    <div class="email">
-        <img src="assets/icons/actions/icon-email.svg">
+        <img
+          src="assets/icons/actions/icon-copy.svg"
+          [cdkCopyToClipboard]="dataOut().CHAVE_ATIVACAO"
+          alt="icon-copiar"
+        />
+      </div>
+      <div class="email">
+        <img src="assets/icons/actions/icon-email.svg" />
         <form class="campo-email">
-            <input type="email" [(ngModel)]="emailParaEnvio" placeholder="Encaminhar para..">
-            <button id="btnEnviar" type="button" (click)="enviar()">Enviar</button>
+          <input
+            type="email"
+            [(ngModel)]="emailParaEnvio"
+            placeholder="Encaminhar para.."
+          />
+          <button id="btnEnviar" type="button" (click)="enviar()">
+            Enviar
+          </button>
         </form>
-    </div>
-    <div class="solicitacoes-wrapper">
-        <button id="btnSolicitacoes" type="button" (click)="openSolicitacoesPupup()">
-            <img src="assets/icons/actions/icon-solicitacoes.svg">
-            Solicitações
+      </div>
+      <div class="slack-notificacoes">
+        <button id="btnNotificacoes" type="button" (click)="btnSlack()">
+          <img src="assets/icons/misc/icon-slack.svg" /> | Configurar
+          notificações
+        </button>
+
+        @if (slackConfig()) {
+        <div class="popUp">
+          <div id="titulo-popUp">
+            <p>Configurações de Notificações</p>
+          </div>
+          <div class="popUp-config">
+            <div id="estado-notificacao">
+              <h1>Ativar notificações</h1>
+              <input
+                id="btn-notificacao"
+                type="checkbox"
+                [checked]="notificacaoCheck() == 1"
+                (change)="statusNotificacao()"
+              />
+            </div>
+            <div id="canal-slack">
+              <h2>Canal para envio:</h2>
+              <app-campo-canal-slack></app-campo-canal-slack>
+            </div>
+          </div>
+          <div id="btns-alteracoes">
+            <button (click)="salvarAlteracoes()" id="btn-salvar">
+              Salvar alterações
+            </button>
+            <button (click)="btnSlack()" id="btn-cancelar">Cancelar</button>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="solicitacoes-wrapper">
+        <button
+          id="btnSolicitacoes"
+          type="button"
+          (click)="openSolicitacoesPupup()"
+        >
+          <img src="assets/icons/actions/icon-solicitacoes.svg" />
+          Solicitações
         </button>
         @if(solicicoesPopup()){
-            <app-solicitacoes-popup></app-solicitacoes-popup>
+        <app-solicitacoes-popup></app-solicitacoes-popup>
         }
+      </div>
     </div>
-</div>
-<div class="cards">
+  </div>
+  <div class="cards">
     <app-content-section title="Usuários cadastrados">
-        <p class="qtd-users">N° de membros: {{qtdMembros}}</p>
-        <app-card-user (openModel)="openUserModel($event)"></app-card-user>
+      <p class="qtd-users">N° de membros: {{ qtdMembros }}</p>
+      <app-card-user (openModel)="openUserModel($event)"></app-card-user>
     </app-content-section>
-    <app-content-section iconUrl="assets/icons/misc/icon-atividade.svg" title="Ultimas atividades" padding="none" [maxWidth]="'52rem'">
-        <app-card-atividades></app-card-atividades>
+    <app-content-section
+      iconUrl="assets/icons/misc/icon-atividade.svg"
+      title="Ultimas atividades"
+      padding="none"
+      [maxWidth]="'52rem'"
+    >
+      <app-card-atividades></app-card-atividades>
     </app-content-section>
-</div>
-<app-user-model [openModal]="editUser" [title]="userName()"></app-user-model>
+  </div>
+  <app-user-model [openModal]="editUser" [title]="userName()"></app-user-model>
 </section>

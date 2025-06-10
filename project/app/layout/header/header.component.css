@@ -45,7 +45,7 @@ nav {
 
 .user {
     display: flex;
-    background-color: var(--light-gray);
+    background-color: #ffff;
     border-radius: 3.8rem;
     align-items: center;
     padding: 0.5rem 1.5rem 0.5rem 0.8rem;
