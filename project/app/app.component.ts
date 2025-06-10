@@ -16,6 +16,10 @@ export class AppComponent {
   userService = inject(UserService)
   constructor () {
     this.userService.getUsuario()
-    
+    this.userService.usuario$.subscribe((user) => {
+      if (!user.NOME) {
+        window.history.back();
+      }
+    })
   }
 }
