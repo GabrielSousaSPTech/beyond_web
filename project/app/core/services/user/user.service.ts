@@ -1,6 +1,6 @@
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { userRegisteredApi, senhaUser, UpdateSenhaResponse } from '../../../shared/models/users-registered';
+import { userRegisteredApi, senhaUser, UpdateSenhaResponse, ImageUploadResponse } from '../../../shared/models/users-registered';
 import { response } from 'express';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 @Injectable(
@@ -53,21 +53,19 @@ updateSenha(idUsuario: any, senha: any): Observable<UpdateSenhaResponse> {
       })
     );
 }
-// updateSenha() {
-//   this.http.get<senhaUser>('/usuarios/editSenha/'+ sessionStorage.getItem("ID_USUARIO")).subscribe({
-//     next: (response) => {
-//       const senha = response as senhaUser;
-//       console.log("ODEIO ANGULAR",senha)
-//        this.senha.set(senha)
-//     },
-//     error: (error) => {
-//       console.error('Erro ao carregar senha:', error);
 
-//     }
-//   });
-// }
+  updateUserImage(idFuncionario: number, formData: FormData): Observable<ImageUploadResponse> {
+    
+    return this.http.put<ImageUploadResponse>(`/usuarios/image/${idFuncionario}`, formData)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Erro ao fazer upload da imagem:', error);
+          return throwError(() => error);
+        })
+      );
+  }
+
   constructor() {
     this.getUsuario();
-    // this.updateSenha();
    }
 }

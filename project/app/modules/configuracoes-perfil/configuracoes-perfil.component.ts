@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HeaderTitleService } from '../../core/services/header-title/header-title.service';
 import { UserService } from '../../core/services/user/user.service';
 import { CommonModule } from '@angular/common';
+import { lastValueFrom } from 'rxjs';
+import { ImageUploadResponse, userRegisteredApi } from '../../shared/models/users-registered';
 @Component({
   selector: 'app-configuracoes-perfil',
   imports: [ReactiveFormsModule, CommonModule],
@@ -49,11 +51,13 @@ selectedFile: File | null = null;
   }
   alterarForm() {
     if (this.estadoFormulario()) {
-      console.log("TROCANDO PRA FALSE")
+  
       this.estadoFormulario.set(false)
+      this.interacaoUsuario.set('')
     } else {
-      console.log("TROCANDO PRA TRUE")
+      
       this.estadoFormulario.set(true)
+      this.interacaoUsuario.set('')
     }
   }
 submitForm() {     
@@ -61,10 +65,7 @@ submitForm() {
   user.EMAIL = this.userForm.value.email;     
   user.TEL = this.userForm.value.telefone;     
   user.CPF = this.userForm.value.cpf;  
-  user.FOTO = this.userForm.value.foto;
 
-  
-  
   this.userService.updateUsuario(user).subscribe({
     next: (response) => {
       if (response.sucesso) {
@@ -87,6 +88,7 @@ submitForm() {
     }
   });
 }
+
 
 
 
@@ -154,8 +156,27 @@ submitForm() {
       };
       reader.readAsDataURL(file);
       
-      // Salvar arquivo (opcional - pode ser feito depois)
-      // this.saveFile(file);
+      this.uploadProfileImage(file);
+    }
+  }
+
+ async uploadProfileImage(file: File): Promise<void> {
+    const formData = new FormData();
+    formData.append('foto', file, file.name);
+
+    const idFuncionario = this.userService.usuario().ID_FUNC;
+
+
+    try {
+      const response: ImageUploadResponse = await lastValueFrom(this.userService.updateUserImage(idFuncionario, formData));
+        
+        const updatedUser: userRegisteredApi = { ...this.userService.usuario() };
+        updatedUser.FOTO = response.path || '';
+        this.interacaoUsuario.set('Foto de perfil atualizada com sucesso!');
+    } catch (error: any) {
+      
+      this.interacaoUsuario.set('Erro ao enviar a foto. Verifique a conexão ou tente novamente mais tarde.');
+      console.error('Erro ao fazer upload da imagem:', error);
     }
   }
 

@@ -20,3 +20,9 @@ export type UpdateSenhaResponse = {
   message: string;
   resultado?: any;
 }
+
+export type ImageUploadResponse = {
+  sucesso: boolean;
+  message?: string;
+  path?: string; 
+}
