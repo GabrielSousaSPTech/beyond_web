@@ -17,6 +17,11 @@
   padding: 2rem;
 }
 
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .card {
   background-color: #f0f4fa;
   border-radius: 3rem;
@@ -120,7 +125,7 @@ button {
   width: fit-content;
 }
 
-button:hover {
+button:not(:disabled):hover {
   background-color: #3a5fe0;
 }
 

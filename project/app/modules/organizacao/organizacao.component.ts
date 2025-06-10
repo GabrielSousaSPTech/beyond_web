@@ -11,6 +11,7 @@ import { userRegisteredApi } from '../../shared/models/users-registered';
 import { UserModelComponent } from "./components/user-model/user-model.component";
 import { CardUserService } from './services/card-user/card-user.service';
 import { SolicitacoesPopupComponent } from "./components/solicitacoes-popup/solicitacoes-popup.component";
+import { UserService } from '../../core/services/user/user.service';
 
 
 @Component({
@@ -21,13 +22,18 @@ import { SolicitacoesPopupComponent } from "./components/solicitacoes-popup/soli
   providers: [organizacaoService, Clipboard, CardUserService]
 })
 export class OrganizacaoComponent implements OnInit{
+  protected userService = inject(UserService);
   protected cardUserService = inject(CardUserService);
 
   protected editUser: WritableSignal<boolean> = signal(false);
   protected solicicoesPopup: WritableSignal<boolean> = signal(false);
   protected userName: WritableSignal<string> = signal('')
 
-  constructor(public headerTitleService: HeaderTitleService) { }
+  constructor(public headerTitleService: HeaderTitleService) {
+    if(this.userService.nivelPermissao() != "Privilegiado"){
+      window.history.back();
+    }
+  }
     OrganizacaoService = inject(organizacaoService)
     dataOut: WritableSignal<any> = signal({});
     qtdMembros: number = 0;

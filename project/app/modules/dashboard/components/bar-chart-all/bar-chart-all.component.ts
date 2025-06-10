@@ -12,6 +12,7 @@ declare var google: any;
 export class BarChartAllComponent implements OnInit {
   @Input() chartData!: Observable<any>;
   protected noData = signal(false);
+  @Input() enableBarChart: boolean = false;
   ngOnInit(): void {
 
     google.charts.load('current', { 'packages': ['corechart'] });
@@ -19,7 +20,7 @@ export class BarChartAllComponent implements OnInit {
     this.chartData.subscribe(data => {
       google.charts.setOnLoadCallback(() => {
         console.log(data)
-        if(data.length < 2){
+        if (data.length < 2) {
           this.noData.set(true);
         } else {
           this.noData.set(false);
@@ -29,8 +30,8 @@ export class BarChartAllComponent implements OnInit {
     });
   }
 
-  displayGraph(bool: boolean){
-    if(bool){
+  displayGraph(bool: boolean) {
+    if (bool) {
       return "visibility: hidden; height: 0;";
     }
     return "visibility: visible;";

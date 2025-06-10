@@ -1,12 +1,11 @@
 <div class="card-activity-wrapper">
     @for(user of userActivityList(); track $index){
         <div class="atividade-registro">
-            <div [className]="'tipo-atividade ' + getAtividadeColorClass(user.tipo)"></div>
-            <h1 id="descricao">{{user.descricao}}</h1>
+            <div [className]="'tipo-atividade ' + getAtividadeColorClass(user.CATEGORIA)"></div>
+            <h1 id="descricao">{{user.DESCRICAO}}</h1>
              |
             <div class="ocorrencia-atividade">
-                <p>{{user.dataRegistro}}</p>
-                <p>{{user.horaRegistro}}</p>
+                <p>{{user.DATA_HORA | date:'yyyy-MM-dd HH:mm:ss' }}</p>
             </div>
         </div>
     }

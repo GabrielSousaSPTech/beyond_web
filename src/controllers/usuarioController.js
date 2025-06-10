@@ -79,6 +79,8 @@ function updateUsuario(req, res) {
     const idFuncionario = req.params.idFuncionario;
     const { NOME, CPF, EMAIL, TEL, FK_EMPRESA } = req.body;
 
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
     usuarioModel.updateUsuario(idFuncionario, NOME, CPF, EMAIL, TEL)
         .then(resultado => {
             logModel.registrarLog(
@@ -97,20 +99,60 @@ function updateUsuario(req, res) {
 
 function autorizarUsuario(req, res) {
     const idUsuario = req.params.idUsuario;
-    const { idPermissao, idEmpresa, nomeUsuario } = req.body;
+    const {idPermissao} = req.body;
+    
+    usuarioModel.getByIdUsuario(idUsuario)
+        .then(usuario => {
+            if (!usuario || usuario.length === 0) {
+                return res.status(404).json({ mensagem: 'Usuário não encontrado' });
+            }
+            
+            const usuarioInfo = usuario[0];
+            const nomeUsuario = usuarioInfo.NOME;
+            const idEmpresa = usuarioInfo.FK_EMPRESA;
+            const statusOriginal = usuarioInfo.STATUS_CADASTRO;
+            
+            usuarioModel.autorizarUsuario(idUsuario, idPermissao)
+                .then(resultado => {
+                    usuarioModel.getPermissoes()
+                        .then(permissoes => {
+                            const permissao = permissoes.find(p => p.ID_PERMISSAO === Number(idPermissao));
+                            if (!permissao) {
+                                return res.status(404).json({ mensagem: 'Permissão não encontrada' });
+                            }
+                            
 
-    usuarioModel.autorizarUsuario(idUsuario, idPermissao)
-        .then(resultado => {
-            logModel.registrarLog(
-                idUsuario,
-                idEmpresa,
-                'AUTORIZAR',
-                `Usuário ${nomeUsuario} teve permissão alterada para ${idPermissao}`
-            ).catch(err => console.error("Erro no log de autorização:", err));
-
-            res.status(200).json(resultado);
+                            let msg;
+                            if (statusOriginal === 'analise') {
+                                msg = `Usuário ${nomeUsuario} foi autorizado com a permissão: ${permissao.NOME} e seu status de cadastro foi alterado para ativo.`;
+                            } else {
+                                msg = `Usuário ${nomeUsuario} teve sua permissão alterada para: ${permissao.NOME}`;
+                            }
+                            
+                            logModel.registrarLog(
+                                idUsuario,
+                                idEmpresa,
+                                'AUTORIZAR',
+                                msg
+                            ).catch(err => console.error("Erro no log de autorização:", err));
+                            
+                            res.status(200).json();
+                            console.log(`Usuário ${nomeUsuario} autorizado com permissão: ${permissao.NOME}`);
+                        })
+                        .catch(err => {
+                            console.error("Erro nas permissões:", err);
+                            res.status(500).json({ sucesso: false, mensagem: 'Erro ao buscar permissões', erro: err.sqlMessage });
+                        });
+                })
+                .catch(erro => {
+                    console.error("Erro ao autorizar usuário:", erro);
+                    res.status(500).json({ sucesso: false, mensagem: 'Erro ao autorizar usuário', erro: erro.sqlMessage });
+                });
         })
-        .catch(erro => res.status(500).json(erro.sqlMessage));
+        .catch(err => {
+            console.error("Erro ao buscar usuário:", err);
+            res.status(500).json({ sucesso: false, mensagem: 'Erro ao buscar usuário', erro: err.sqlMessage });
+        });
 }
 
 async function updateSenha(req, res) {
@@ -134,21 +176,27 @@ async function updateSenha(req, res) {
         if (String(senhaAtualBanco).trim() === String(senhaAtual).trim()) {
             const resultadoUpdate = await usuarioModel.updateSenha(idFuncionario, senhaNova);
 
-            await logModel.registrarLog(
-                idFuncionario,
-                fkEmpresa,
-                'UPDATE_SENHA',
-                `Usuário ID ${idFuncionario} alterou sua senha`
-            ).catch(err => {
-                console.error("Erro no log de senha:", err);
-            });
+            usuarioModel.getByIdUsuario(idFuncionario)
+                .then(usuario => {
+                    if (!usuario || usuario.length === 0) {
+                        return res.status(404).json({ mensagem: 'Usuário não encontrado' });
+                    }
 
-            res.status(200).json({ 
-                sucesso: true, 
-                message: 'Senha atualizada com sucesso',
-                resultado: resultadoUpdate 
-            });
+                    const nomeUsuario = usuario[0].NOME;
 
+                    logModel.registrarLog(
+                        idFuncionario,
+                        fkEmpresa,
+                        'UPDATE_SENHA',
+                        `Usuário ${nomeUsuario} alterou sua senha`
+                    ).catch(err => console.error("Erro no log de senha:", err));
+                    res.status(200).json({ 
+                        sucesso: true, 
+                        message: 'Senha atualizada com sucesso',
+                        resultado: resultadoUpdate 
+                    });
+                })
+                .catch(err => console.error("Erro ao buscar usuário:", err));
         } else {
             res.status(400).json({ 
                 sucesso: false, 

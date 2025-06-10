@@ -1,17 +1,16 @@
-const db = require('../database/config.js');
+var logModel = require("../models/logModel");
 
 function registrarLog(idFunc, idEmpresa, categoria, descricao) {
-    const sql = `
-        INSERT INTO TB_LOG (FK_FUNC, FK_EMPRESA, CATEGORIA, DESCRICAO)
-        VALUES (?, ?, ?, ?)
-    `;
-    db.query(sql, [idFunc, idEmpresa, categoria, descricao], (err, result) => {
-        if (err) {
-            console.error('Erro ao registrar log:', err);
-        } else {
-            console.log('✅ Log registrado: ' + descricao);
-        }
-    });
+    logModel.registrarLog(idFunc, idEmpresa, categoria, descricao)
+        .then(r => res.status(200).json(r))
+        .catch(e => res.status(500).json(e.sqlMessage));
+    
 }
 
-module.exports = { registrarLog };
+function getLogsByFkEmpresa(req, res) {
+    logModel.getLogsByFkEmpresa(req.params.idEmpresa)
+        .then(r => res.status(200).json(r))
+        .catch(e => res.status(500).json(e.sqlMessage));
+}
+
+module.exports = { registrarLog, getLogsByFkEmpresa };

@@ -25,6 +25,7 @@ router.get("/:idFuncionario", function (req, res) {
 });
 
 router.put("/edit/:idFuncionario", function (req, res) {
+    console.log("Rota de edição de usuário chamada");
     usuarioController.updateUsuario(req, res);
 });
 
