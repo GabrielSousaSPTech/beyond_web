@@ -24,20 +24,14 @@ function autenticar(email, senha) {
     return database.executar(instrucaoSql, [email, senha, "ativo"]);
 }
 
-function cadastrar(email, senha, empresa, nome, telefone) {
+function cadastrar(email, senha, empresa, nome, telefone, cpf) {
     
     var instrucaoSql = `
-        INSERT INTO TB_FUNCIONARIO (FK_EMPRESA, NOME, EMAIL, SENHA, TEL, STATUS_CADASTRO) 
-        VALUES (?, ?, ?, ?, ?, ?);
+        INSERT INTO TB_FUNCIONARIO (FK_EMPRESA, NOME, CPF, EMAIL, SENHA, TEL, STATUS_CADASTRO) 
+        VALUES (?, ?, ?, ?, ?, ?, ?);
     `;
 
-    //USE ESSE INSERT QUANDO ADICIONAR O CAMPO DE CPF NO FRONT
-// var instrucaoSql = `
-//         INSERT INTO TB_FUNCIONARIO (FK_EMPRESA, NOME, CPF, EMAIL, SENHA, TEL, STATUS_CADASTRO) 
-//         VALUES (?, ?, ?, ?, ?, ?, ?);
-//     `;
-
-    return database.executar(instrucaoSql, [empresa, nome, email, senha, telefone, "analise"]);
+    return database.executar(instrucaoSql, [empresa, nome, cpf, email, senha, telefone, "analise"]);
 }
 
 function confirmarCodigo(codigo) {
@@ -113,7 +107,7 @@ function updateSenha(idFuncionario, senha){
                         SET
                         SENHA = ?
                         WHERE ID_FUNC = ?`
-    return database.executar(instrucaoSql[idFuncionario, senha])
+    return database.executar(instrucaoSql, [senha, idFuncionario])
 }
 
 function deleteUsuario(idFuncionario){

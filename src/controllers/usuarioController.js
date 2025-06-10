@@ -48,6 +48,8 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var telefone = req.body.telefoneServer;
+    var cpf = req.body.cpfServer;
+    console.log("CPF: ", cpf)
 
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -66,7 +68,7 @@ function cadastrar(req, res) {
                 if (resultadoCodigo.length == 0) {
                     res.status(403).send("Código inválido!");
                 } else if (resultadoCodigo.length == 1) {
-                    usuarioModel.cadastrar(`${email}`, `${senha}`, resultadoCodigo[0].ID_EMPRESA, `${nome}`, `${telefone}`)
+                    usuarioModel.cadastrar(`${email}`, `${senha}`, resultadoCodigo[0].ID_EMPRESA, `${nome}`, `${telefone}`, `${cpf}`)
                         .then(
                             function (resultado) {
                                 res.json(resultado);
@@ -122,9 +124,13 @@ function updateUsuario(req, res) {
     console.log("id ", req.params)
 
     usuarioModel.updateUsuario(idFuncionario, NOME,CPF, EMAIL, TEL).then(function (resultado) {
-        res.status(200).json(resultado);
+        res.status(200).json({
+            sucesso: true,
+            resultado: resultado});
     }).catch(function (erro) {
-        res.status(500).json(erro.sqlMessage);
+        res.status(500).json({
+            sucesso: false,
+            resultado: erro.sqlMessage});
     });
 }
 
@@ -171,14 +177,41 @@ function getPermissoes(req, res) {
     });
 }
 
-function updateSenha(req, res){
-    usuarioModel.updateSenha(req.params.idFuncionario, req.body.senhaNova).then(function(resultado){
-
-        res.status(200).json(resultado);
-    }).catch(function(erro){
-
-        res.status(500).json(erro.sqlMessage);
-    });
+async function updateSenha(req, res) {
+    try {
+        const idFuncionario = req.params.idFuncionario;
+        
+        const resultado = await usuarioModel.getSenha(idFuncionario);
+        if (!resultado || resultado.length === 0) {
+            return res.status(404).json({ 
+                sucesso: false, 
+                message: 'Usuário não encontrado' 
+            });
+        }
+        
+        const senhaAtualBanco = resultado[0].SENHA;
+        if (String(senhaAtualBanco).trim() === String(req.body.senhaAtual).trim()) {
+            const resultadoUpdate = await usuarioModel.updateSenha(idFuncionario, req.body.senhaNova);
+            res.status(200).json({ 
+                sucesso: true, 
+                message: 'Senha atualizada com sucesso',
+                resultado: resultadoUpdate 
+            });
+            
+        } else {
+            res.status(400).json({ 
+                sucesso: false, 
+                message: 'Senha atual incorreta' 
+            });
+        }
+        
+    } catch (erro) {
+        res.status(500).json({ 
+            sucesso: false, 
+            message: 'Erro interno do servidor',
+            erro: erro.message 
+        });
+    }
 }
 
 function getSenha(req, res) {

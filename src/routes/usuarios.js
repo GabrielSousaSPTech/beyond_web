@@ -44,9 +44,6 @@ router.put("/autorizar/:idUsuario", function (req, res){
 router.put("/editSenha/:idFuncionario", function (req, res) {
     usuarioController.updateSenha(req, res);
 });
-router.put("/getSenha/:idFuncionario", function (req, res) {
-    usuarioController.getSenha(req, res);
-});
 
 
 
