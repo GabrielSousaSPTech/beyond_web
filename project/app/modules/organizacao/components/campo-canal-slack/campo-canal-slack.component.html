@@ -1,0 +1,7 @@
+<div class="campo-canal">
+    <img src="assets/icons/misc/icon-slack.svg">
+    <div class="input-slack" id="input-slack">
+        <input type="text" #inputCanal placeholder="Id do canal" (input)="atualizarCanal($event)" [value]="canalSlack()" id="id-canal">
+        <img src="assets/icons/actions/icon-trash.svg" alt="Limpar" class="btn-limpar" (click)="limpar()">
+    </div>
+</div>

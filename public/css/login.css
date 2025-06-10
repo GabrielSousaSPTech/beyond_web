@@ -64,6 +64,7 @@ body {
     width: 100%;
     max-width: 46rem;
     gap: 2.6rem;
+    margin-bottom: 4%;
 }
 
 .section-login .login-wrapper .form .input-wrapper {

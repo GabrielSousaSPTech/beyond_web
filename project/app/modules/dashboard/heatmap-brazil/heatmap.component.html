@@ -1,0 +1,35 @@
+<div class="heatmap">
+  <div class="mapa">
+    <h1 class="titulo">{{titulo()}}</h1>
+    <div class="geo-wrapper">
+      @if (mapaBrasilMostrar()) {
+      <app-geo-chart-brazil [chartData]="barChartUF$" [enableBarChart]="!mapaBrasilMostrar()"></app-geo-chart-brazil>
+      } @else {
+      <app-geo-chart-world [chartData]="geoChartPais$"></app-geo-chart-world>
+      }
+    </div>
+  </div>
+
+  <div class="filtro">
+    <div class="header-filtro">
+      <div class="header-filtro-option">
+        <h1>Visualizar dados de:</h1>
+        <app-input-filter #inputFilter (filterChange)="onFilterChange()"></app-input-filter>
+        <app-filter-popup [visible]="showPopUpFilter"></app-filter-popup>
+      </div>
+      <button (click)="trocarHeatMap()">{{botaoHeatMap()}}</button>
+    </div>
+
+    <div class="ranking-card">
+      <h2>{{ranking()}}</h2>
+      <div class="ranking-list">
+
+        <app-bar-chart-all [chartData]="tipoRanking$"></app-bar-chart-all>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

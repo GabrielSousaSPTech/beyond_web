@@ -17,6 +17,10 @@ var eventoRouter = require("./src/routes/evento");
 var filtroRouter = require("./src/routes/filtro");
 var baseDadosRouter = require("./src/routes/baseDados");
 var appDashboardRouter = require("./src/routes/appDashboard");
+var empresaRouter = require("./src/routes/empresa");
+var emailRouter = require("./src/routes/email");
+var logsRouter = require("./src/routes/log");
+var slackRouter = require("./src/routes/slack");
 var app = express();
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
@@ -38,6 +42,10 @@ app.use("/", indexRouter);
 app.use("/filtro", filtroRouter);
 app.use("/basedados", baseDadosRouter);
 app.use("/appDashboard", appDashboardRouter);
+app.use("/empresas", empresaRouter);
+app.use("/email", emailRouter);
+app.use("/log", logsRouter);
+app.use("/slack", slackRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

@@ -11,8 +11,11 @@
                     }
                 </ul>
             </div>
+            <div class="btn-delete" (click)="deleteFilter(filter)">
+                <img src="assets/icons/actions/icon-trash.svg" class="filter-action">
+            </div>
             <a class="filter-anchor">
-                <img routerLink="/tendencias" src="assets/icons/actions/icon-filterCard-anchor.svg" class="filter-anchor-icon" (click)="useFilter(filter.ID_FILTRO)">
+                <img routerLink="/tendencias" src="assets/icons/actions/icon-filterCard-anchor.svg" class="filter-action filter-anchor-icon" (click)="useFilter(filter.ID_FILTRO)">
             </a>
         </div>
     }
