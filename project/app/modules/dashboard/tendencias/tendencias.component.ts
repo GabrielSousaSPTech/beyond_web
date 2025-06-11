@@ -12,6 +12,7 @@ import { BasicDataService } from '../../../core/services/basicData/basicData.ser
 import { userFilter } from '../../../shared/models/user-filter.type';
 import { UserFiltersService } from '../../../core/services/user-filters/user-filters.service';
 import { FilterPopupComponent } from "../components/filter-popup/filter-popup.component";
+import { UserService } from '../../../core/services/user/user.service';
 
 @Component({
   selector: 'app-tendencias',
@@ -23,8 +24,10 @@ import { FilterPopupComponent } from "../components/filter-popup/filter-popup.co
 export class TendenciasComponent implements OnInit {
   dataService = inject(DataService);
   filterService = inject(UserFiltersService);
+  userService = inject(UserService);
 
   protected showPopUpFilter = signal(false);
+  protected showFilterButtons: WritableSignal<boolean> = signal(false);
 
   popUp(){
     if(this.showPopUpFilter()){
@@ -181,6 +184,10 @@ export class TendenciasComponent implements OnInit {
       this.filterName.set(filter.NOME)
       let mes = this.getMesNome(filter.DATA_CHEGADA ? Number(filter.DATA_CHEGADA!.substring(5,7)) : 0);
       this.mes.set(mes ? mes : this.getMesNome(new Date().getMonth() + 1));
+    });
+    this.userService.usuario$.subscribe(user => {
+      console.log(user && (user.TIPO === 'Privilegiado' || user.TIPO === 'Controle Geral' || user.TIPO === 'Controle de Filtros'));
+      this.showFilterButtons.set(user && (user.TIPO === 'Privilegiado' || user.TIPO === 'Controle Geral' || user.TIPO === 'Controle de Filtros'));
     });
   }
 }

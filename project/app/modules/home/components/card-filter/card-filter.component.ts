@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { userFilter } from '../../../../shared/models/user-filter.type';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { UserFiltersService } from '../../../../core/services/user-filters/user-filters.service';
@@ -7,6 +7,7 @@ import { BasicDataService } from '../../../../core/services/basicData/basicData.
 import { tap } from 'rxjs';
 import { LoaderComponent } from "../../../../shared/components/loader/loader/loader.component";
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../../../core/services/user/user.service';
 @Component({
   selector: 'app-card-filter',
   imports: [DragDropModule, LoaderComponent, RouterLink],
@@ -18,9 +19,11 @@ export class CardFilterComponent {
   private cardFilterService = inject(UserFiltersService)
   private datePipe = inject(DatePipe);
   private basicDataService = inject(BasicDataService);
+  private userService = inject(UserService);
 
   protected filterList = signal<userFilter[]>([]);
   protected isLoading = signal(true);
+  protected showButtons: WritableSignal<boolean> = signal(false);
 
   constructor() {
     this.cardFilterService.getUserFilters()
@@ -30,6 +33,9 @@ export class CardFilterComponent {
       .subscribe(data => {
         this.filterList.set(data);
       });
+    this.userService.usuario$.subscribe(user => {
+      this.showButtons.set(user && (user.TIPO === 'Privilegiado' || user.TIPO === 'Controle Geral' || user.TIPO === 'Controle de Filtros'));
+    });
   }
 
   drop(event: CdkDragDrop<userFilter[]>) {
@@ -72,7 +78,6 @@ export class CardFilterComponent {
   }
 
   protected deleteFilter(filter: userFilter){
-    console.log("eu tentei")
     this.cardFilterService.deleteUserFilter(filter.ID_FILTRO).subscribe();
   }
 }

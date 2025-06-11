@@ -17,10 +17,11 @@
              (keyup)="onFilterNameChange($event)"
              >
             <div class="icons-header">
-                <div id="favoritar"><img class="icon" src="assets/icons/actions/icon-star.svg" (click)="salvar()"></div>
-                <div id="excluir"><img class="icon" src="assets/icons/actions/icon-trash.svg" (click)="excluir()"></div>
-                <div id="expandir"><img class="icon" src="assets/icons/actions/icon-filter-popup.svg" (click)="popUp()">
-                </div>
+                @if(showFilterButtons()){
+                    <div id="favoritar"><img class="icon" src="assets/icons/actions/icon-star.svg" (click)="salvar()"></div>
+                    <div id="excluir"><img class="icon" src="assets/icons/actions/icon-trash.svg" (click)="excluir()"></div>
+                }
+                <div id="expandir"><img class="icon" src="assets/icons/actions/icon-filter-popup.svg" (click)="popUp()"></div>
             </div>
         </div>
         <app-input-filter #inputFilter (filterChange)="onFilterChange()"></app-input-filter>

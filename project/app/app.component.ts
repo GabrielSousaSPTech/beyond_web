@@ -17,7 +17,7 @@ export class AppComponent {
   constructor () {
     this.userService.getUsuario()
     this.userService.usuario$.subscribe((user) => {
-      if(!sessionStorage.getItem('ID_USUARIO')){
+      if(!sessionStorage.getItem('ID_USUARIO')) {
         window.history.back();
       }
       

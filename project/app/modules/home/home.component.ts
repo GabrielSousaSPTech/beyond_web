@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal, } from '@angular/core';
 import { HeaderTitleService } from '../../core/services/header-title/header-title.service';
 import { ContentSectionComponent } from "../../shared/components/content-section/content-section.component";
 import { CardEventComponent } from "./components/card-event/card-event.component";
@@ -22,9 +22,15 @@ import { UserService } from '../../core/services/user/user.service';
 export class HomeComponent implements OnInit{
   userService = inject(UserService);
   eventService = inject(CardEventService);
+  showEditButton: WritableSignal<boolean> = signal(false);
   constructor(public headerTitleService: HeaderTitleService) { }
 
   ngOnInit(): void {
     this.headerTitleService.setTitle('Pagina Principal');
+    this.userService.usuario$.subscribe(user => {
+      this.showEditButton.set(user && (user.TIPO === 'Privilegiado' || user.TIPO === 'Controle Geral' || user.TIPO === 'Controle de Eventos'));
+      console.log(this.showEditButton());
+    });
   }
+
 }

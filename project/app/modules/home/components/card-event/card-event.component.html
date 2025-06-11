@@ -9,17 +9,20 @@
                 </div>
                 <div class="date-and-options">
                     <div class="top">
-                        <div class="dot-status"></div>
+                        <span class="date-end">{{getDateObject(event.DATA_INICIO) | date: "dd/MM/yyyy"}}</span>
+                        <p>-</p>
                         <span class="date-end">{{getDateObject(event.DATA_TERMINO) | date: "dd/MM/yyyy"}}</span>
                     </div>
-                    <div class="buttons">
-                        <button class="icon-edit btn-icon" (click)="editEvent(event)">
-                            <img src="assets/icons/actions/icon-edit.svg" alt="">
-                        </button>
-                        <button class="icon-trash btn-icon">
-                            <img src="assets/icons/actions/icon-trash.svg" (click)="deleteEvent(event)">
-                        </button>
-                    </div>
+                    @if(showButtons()){
+                        <div class="buttons">
+                            <button class="icon-edit btn-icon" (click)="editEvent(event)">
+                                <img src="assets/icons/actions/icon-edit.svg" alt="">
+                            </button>
+                            <button class="icon-trash btn-icon">
+                                <img src="assets/icons/actions/icon-trash.svg" (click)="deleteEvent(event)">
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

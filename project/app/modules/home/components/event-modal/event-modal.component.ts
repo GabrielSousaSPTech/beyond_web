@@ -43,6 +43,12 @@ export class EventModalComponent extends BaseModalComponent {
           Validators.minLength(10),
           Validators.maxLength(10)]],
         id_eventos: [0]
+      }, {
+        validators: (group: FormGroup) => {
+          const inicio = group.get('dataInicio')?.value;
+          const termino = group.get('dataTermino')?.value;
+          return inicio && termino && inicio > termino ? { dateRange: true } : null;
+        }
       });
 
       this.subscription = this.cardEventService.eventUpdates$.subscribe(
